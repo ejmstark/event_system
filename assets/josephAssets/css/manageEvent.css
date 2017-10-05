@@ -1,0 +1,42 @@
+.description {
+    width: 100%;
+    height: 300px;
+    border: 1px solid grey;
+    padding: 0px 10px;
+}
+
+.eventName {
+    width: 100%;
+    height: 50px;
+    border: 1px solid grey;
+}
+
+.select-field {
+    display: inline-block;
+    width: 100%;
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.select-field > select {
+    float: left;
+    padding-left: 10px;
+    width: 20%;
+    height: 50px;
+    margin-top: 7px;
+}
+
+.additionalDetails {
+    margin-left: 12px;
+    width: 60%;
+    height: 30px;
+    border: 1px solid grey;
+    padding: 0px 10px;
+}
+
+.orgLocationInput {
+    width: 275px;
+    height: 27px;
+    margin: 5px;
+    font-size: 12px;
+}

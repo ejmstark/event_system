@@ -1,0 +1,96 @@
+html, body
+{
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	height: 100%;
+
+	font-family: Roboto;
+}
+
+@media only screen and (max-device-width:999px) {}
+
+/*section {
+	position: relative;
+	margin: 0 -9999rem;
+	padding: 5.25rem 9999rem;
+    height: 100%;
+	text-align: center;
+}*/
+
+/*#welcomeSection {
+    background-color: #2c3e50;
+    color: white;
+}
+
+#aboutSection {
+    background-color: #34495e;
+    color: white;
+}
+
+#aboutSection p {
+    padding: 0 120px;
+}
+
+#skillsSection {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.sectionImg {
+    position: relative;
+    margin: 0 -9999rem;
+    padding: 5.25rem 9999rem;
+    height: 100%;
+    text-align: center;
+}*/
+
+img {
+    padding: 5px;
+}
+
+#fullpage {
+    height: 100vh;
+}
+
+#fullpage section {
+    /*position: relative;*/
+	margin: 0 -9999rem;
+	padding: 5.25rem 9999rem;
+    height: 100vh;
+	text-align: center;
+    overflow: hidden;
+}
+
+#fullpage section:nth-child(1) {
+    background-color: #2c3e50;
+    color: white;
+}
+
+#fullpage section:nth-child(2) {
+    background-color: #34495e;
+    color: white;
+}
+
+#fullpage section:nth-child(2) p {
+    padding: 0 120px;
+}
+
+#fullpage section:nth-child(3) {
+    background-color: #95a5a6;
+    color: white;
+}
+
+/*body::after 
+{
+	background: linear-gradient( rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85) ), url(../img/LoginBg.jpg);
+	content: "";
+	background-size: cover;
+	opacity: 1;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: -1;
+}*/
