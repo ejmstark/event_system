@@ -20,5 +20,4 @@ Puhon 2nd Sem, MVP sa ron
 Acknowledgement
 ***************
 
-Thanks to God, our families, relatives, and friends who supported us to the end
-#GregTheCarry
+Thanks to God, our families, relatives, and friends who supported us to the end. 
