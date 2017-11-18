@@ -2,19 +2,19 @@
 What is EventSystem
 ###################
 
-It is a web-based application for setting events.
+It is a non-profit and project of our team. A web-based application for setting events, creating events, and joining events.
 
 *******************
 Release Information
 *******************
 
-Puhon 2nd Sem
+After 2nd sem, the website is under construction.
 
 **************************
 Changelog and New Features
 **************************
 
-Puhon 2nd Sem, MVP sa ron
+Currently working on tasks and adding changes to the system.
 
 ***************
 Acknowledgement
