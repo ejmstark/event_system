@@ -2,7 +2,7 @@
 What is EventSystem
 ###################
 
-It is a non-profit and project of our team. A web-based application for setting events, creating events, and joining events.
+It is a non-profit project of our team. A web-based application for setting events, creating events, and joining events.
 
 *******************
 Release Information
