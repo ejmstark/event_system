@@ -9,12 +9,11 @@ class CAdmin extends CI_Controller {
 		// $this->load->model('MAdminUsers');
 		$this->load->model('MUserInfo');
 		$this->load->model('MEventInfo');
-		$this->load->model('MReports');
 		// $this->load->model('MUserInfo');
 	}
 
 		
-	
+		
 	public function index()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -94,6 +93,44 @@ class CAdmin extends CI_Controller {
 		
 		$data = array('user_type' => 'Regular');
 		$result= $this->MUserInfo->read_where($data);
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+	//view all searched user
+	public function searchUsers(){
+		$user_module = new MUserInfo();
+		
+		$data = array('user_type' => 'Regular');
+		//$result= $this->MUserInfo->read_where($data);
+		
+
+		$con=mysqli_connect('localhost','root','','event_db');
+
+		// mysqli_select_db('event_db');
+		$search_val = $_POST['search_val'];
+		$search_options = "user_name";
+		//$search_val = false;
+		// if(isset($_POST['search_val'])){
+		// 	//$search_val = $_POST['search_val'];
+		// 	$search_val = $_POST['search_val'];
+			
+		// }else{
+		// 	$search_val = "";
+		// }
+		// if(isset($search_val)){
+		// 	echo '<b>Results for: <b>'.'<b>'. $search_val;
+		// }
+		$query="SELECT account_id, user_type, user_name, first_name, middle_initial, last_name, email, gender, contact_no, load_amt, date_account_created, user_status FROM user_account WHERE $search_options LIKE '%$search_val%'";
+		if(!$query){
+			echo 'MySQL Error: '. mysqli_error();
+			exit;
+		}
+		$result = array('user_type' => 'Regular');
+		$result=mysqli_query($con,$query);
+
 		if($result){
 			return $result;
 		}else{
@@ -227,6 +264,13 @@ class CAdmin extends CI_Controller {
 
 	public function viewUserAccountMgt() {
 		$data2['users']=$this->readAllUsers();
+		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('admin/vUserAccountMgt', $data2);
+	}
+	//Roald Code
+	//this function will show the search results coming from viewUserAccountMgt()
+	public function viewSearchUserAccountMgt() {
+		$data2['users']=$this->searchUsers();
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 	}

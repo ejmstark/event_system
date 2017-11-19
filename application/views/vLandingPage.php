@@ -45,11 +45,11 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
                     </div>
 
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
                     </div>
                     
 
@@ -84,14 +84,14 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                            <form action="" class=" form-inline">
+                            <form action="<?php echo site_url();?>/user/cUser/search" class=" form-inline">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Key word">
                                 </div>
                                 <div class="form-group">                                     
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> -Category- </option>
+                                    <select name="basic" class="">
+                                        <!-- <option> -Category- </option>-->
                                         <option>Concerts</option>
                                         <option>Workshops</option>
                                         <option>Other</option>  
