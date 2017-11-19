@@ -9,11 +9,12 @@ class CAdmin extends CI_Controller {
 		// $this->load->model('MAdminUsers');
 		$this->load->model('MUserInfo');
 		$this->load->model('MEventInfo');
+		$this->load->model('MReports');
 		// $this->load->model('MUserInfo');
 	}
 
 		
-		
+	
 	public function index()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -23,8 +24,20 @@ class CAdmin extends CI_Controller {
                         </script>';
 
         $data2['row']=$this->readAllEvents();
+         $data3['users']=$this->getUserCount();
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vAdmin', $data2);
+		$this->load->view('admin/vReport', $data3);
+	}
+
+	public function getUserCount(){
+		$result = $this->MReports->getUserCountMonthly("2017");
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+		
 	}
 
 	// view all events
@@ -64,7 +77,7 @@ class CAdmin extends CI_Controller {
 		$event_module = new MEventInfo();
 
 		$data = array('event_id' => $id);
-		$results = $this->MEventInfo->read_where($data);
+		$results = $this->MUserInfo->read_where($data);
 
 		if($results){
 			$response = $event_module-> updateEventStatus($id, "Rejected");
