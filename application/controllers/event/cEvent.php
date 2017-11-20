@@ -31,7 +31,8 @@ class cEvent extends CI_Controller {
 			$data['start_time'] = $_POST['startTime'];
 			$data['end_date'] = $_POST['endDate'];
 			$data['end_time'] = $_POST['endTime'];
-			$result = $this->load->view('vCreateEvent',$data,TRUE);
+			//$result = $this->load->view('vCreateEvent',$data,TRUE);
+			$this->viewCreateEvent();
 			echo $result;
 		}
 		
@@ -44,13 +45,13 @@ class cEvent extends CI_Controller {
 		$this->data['custom_js']= '<script type="text/javascript">
                               	$("#user").addClass("active");
                         </script>';
-		$this->load->view('vCreateEvent');
-		// $this->load->view('imports/vHeader.php');
-		// // $this->load->view('event/vEvent.php');
-		// //$this->load->view('googlemap.php');
-		// $this->load->view('imports/vFooter',$this->data);
+
+        $this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('vNewEvent');
+		$this->load->view('imports/vFooterLandingPage');
 		
 	}
+
 	public function viewEvents()
 	{
 		$data['events'] = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
