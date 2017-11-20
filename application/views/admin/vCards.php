@@ -111,9 +111,9 @@
                       <!-- <td class="col-2"><input class="form-control" type="number" name="quantity"> -->
                     <td>
                       <span class="input-group-btn">
-                       <button class="btn btn-secondary col-1 cardsbtn" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
-                       <input type="text" class="form-control col-sm-3 qtyinput" placeholder="Quantity" aria-label="Quantity">
-                       <button class="btn btn-secondary col-1 cardsbtn" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                       <button class="btn btn-secondary col-1 cardsbtn unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty1" placeholder="Quantity" aria-label="Quantity">
+                       <button class="btn btn-secondary col-1 cardsbtn unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span>
                       
                     
@@ -123,9 +123,9 @@
                       <td>&#x20B1; 200</td> 
                       <td>
                         <span class="input-group-btn">
-                       <button class="btn btn-secondary col-1" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                       <input type="text" class="form-control col-sm-3 qtyinput" placeholder="Quantity" aria-label="Quantity">
-                       <button class="btn btn-secondary col-1" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                       <button class="btn btn-secondary col-1 dosM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty2" placeholder="Quantity" aria-label="Quantity">
+                       <button class="btn btn-secondary col-1 dosP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span>
                       </td>
 
@@ -133,17 +133,17 @@
                     <tr>
                       <td>&#x20B1; 500</td>
                       <td><span class="input-group-btn">
-                       <button class="btn btn-secondary col-1" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                       <input type="text" class="form-control col-sm-3 qtyinput" placeholder="Quantity" aria-label="Quantity">
-                       <button class="btn btn-secondary col-1" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                       <button class="btn btn-secondary col-1 tresM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty3" placeholder="Quantity" aria-label="Quantity">
+                       <button class="btn btn-secondary col-1 tresP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span></td>
                     </tr>
                     <tr>
                       <td>&#x20B1; 1000</td>
                       <td><span class="input-group-btn">
-                       <button class="btn btn-secondary col-1" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                       <input type="text" class="form-control col-sm-3 qtyinput" placeholder="Quantity" aria-label="Quantity">
-                       <button class="btn btn-secondary col-1" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                       <button class="btn btn-secondary col-1 kwatroM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty4" placeholder="Quantity" aria-label="Quantity">
+                       <button class="btn btn-secondary col-1 kwatroP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span></td>
                     </tr>
                       
@@ -166,5 +166,96 @@
     <footer class="a-event-footer">
 
     </footer>
+
+    <script type="text/javascript">
+var value = 0 ;
+  $( document ).ready(function() {
+    $(".qtyinput").val(value);
+
+
+    
+    $('.qtyinput').on('input', function (event) { 
+      this.value = this.value.replace(/[^0-9]/g, '');
+      if (this.value == "" ) {
+        this.value = 0;
+      }
+    });
+
+    $( ".unaM" ).click(function() {
+      if ($("#qty1").val() <= 0) {
+        // alert('Error!');
+      } else {
+        var get = $("#qty1").val();
+        get -= 1;
+        $("#qty1").val(get); 
+      }
+    });
+
+    $( ".unaP" ).click(function() {
+      var get = parseInt($("#qty1").val());
+      if (get <= 1000) {
+        get += 1;
+        $("#qty1").val(get); 
+      }
+      
+    });
+
+     $( ".dosM" ).click(function() {
+      if ($("#qty2").val() <= 0) {
+        // alert('Error!');
+      } else {
+        var get = $("#qty2").val();
+        get -= 1;
+        $("#qty2").val(get); 
+      }
+    });
+
+    $( ".dosP" ).click(function() {
+      var get = parseInt($("#qty2").val());
+      if (get <= 1000) {
+        get += 1;
+        $("#qty2").val(get);
+      } 
+    });
+
+     $( ".tresM" ).click(function() {
+      if ($("#qty3").val() <= 0) {
+        // alert('Error!');
+      } else {
+        var get = $("#qty3").val();
+        get -= 1;
+        $("#qty1").val(get); 
+      }
+    });
+
+    $( ".tresP" ).click(function() {
+      var get = parseInt($("#qty3").val());
+      if (get <= 1000) {
+        get += 1;
+        $("#qty3").val(get);
+      }  
+    });
+
+     $( ".kwatroM" ).click(function() {
+      if ($("#qty4").val() <= 0) {
+        // alert('Error!');
+      } else {
+        var get = $("#qty4").val();
+        get -= 1;
+        $("#qty4").val(get); 
+      }
+    });
+
+    $( ".kwatroP" ).click(function() {
+      var get = parseInt($("#qty4").val());
+      if (get < 1000) {
+        get += 1;
+        $("#qty4").val(get);
+      } 
+    });
+
+
+  });
+</script>
   </body>
 </html>
