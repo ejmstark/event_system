@@ -44,13 +44,13 @@ class cEvent extends CI_Controller {
 		$this->data['custom_js']= '<script type="text/javascript">
                               	$("#user").addClass("active");
                         </script>';
-		$this->load->view('vCreateEvent');
-		// $this->load->view('imports/vHeader.php');
-		// // $this->load->view('event/vEvent.php');
-		// //$this->load->view('googlemap.php');
-		// $this->load->view('imports/vFooter',$this->data);
+
+        $this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('vNewEvent');
+		$this->load->view('imports/vFooterLandingPage');
 		
 	}
+
 	public function viewEvents()
 	{
 		$data['events'] = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
