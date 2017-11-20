@@ -1,8 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class cCalendar extends CI_Controller {
-
 	function __construct() {
 		parent::__construct();
 	 	$this->load->model('calendar/MCalendar');
@@ -79,7 +77,6 @@ class cCalendar extends CI_Controller {
 			redirect($_SERVER['HTTP_REFERER']);
 		}
 	}
-
 	public function ajaxUpdate()
 	{
 		if (isset($_POST['Event'][0]) && isset($_POST['Event'][1]) && isset($_POST['Event'][2])){
@@ -301,7 +298,6 @@ class cCalendar extends CI_Controller {
 
 			}
 		}
-
 		if($this->MCalendar->update($id,$data)){
 			echo "OK";
 		}else{
