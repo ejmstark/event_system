@@ -23,12 +23,6 @@ class CAdmin extends CI_Controller {
                               });
                         </script>';
 
-<<<<<<< Updated upstream
-        $data2['row']=$this->readAllEvents();
-         $data3['users']=$this->getUserCount();
-		$this->load->view('imports/vHeaderAdmin');
-		$this->load->view('admin/vAdmin', $data2);
-=======
 
     $result_data=$this->readAllEvents();
 		//////////////////////////////////////////////////////////////////////////////
@@ -49,7 +43,6 @@ class CAdmin extends CI_Controller {
    		$data3['users']=$this->getUserCount();
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vAdmin', $data2);;
->>>>>>> Stashed changes
 	}
 
 	public function getUserCount(){

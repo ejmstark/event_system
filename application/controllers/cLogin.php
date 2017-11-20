@@ -60,10 +60,7 @@ class CLogin extends CI_Controller {
 
 	public function viewDashBoard(){
 		$this->session->userdata['userSession'] = json_decode(json_encode($this->session->userdata['userSession']));
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 		if($this->session->userdata['userSession']->userLevel != "Regular"  ){
 					redirect('admin/cAdmin');
 			}
