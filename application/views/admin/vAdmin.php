@@ -26,7 +26,7 @@
           </div>
 
           <div class="lower-sbar">
-            
+
             <li class="active-li"><a href="<?php echo site_url();?>/admin/cAdmin"><i class="fa fa-list-alt" aria-hidden="true"></i>Events</a></li>
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt"><i class="fa fa-calendar" aria-hidden="true"></i>User Account</a></li>
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAdminAccountMgt"><i class="fa fa-user-secret" aria-hidden="true"></i>Admin Account </a></li>
@@ -57,8 +57,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                        
+                        <?php
+
 
                                   if($row!=FALSE){
                                     foreach ($row as $object) {
@@ -74,14 +74,14 @@
                                   <a href='".site_url()."/admin/cAdmin/rejectEvent/".$object->event_id."'>
                                   <button  type='button' class='btn btn-danger'>REJECT</button></a>
                                   </td>
-                                             </tr>";  
+                                             </tr>";
                             }else {
                               echo " <td>
                                   You have ".$object->event_status." this event.
                                   </td>
-                                             </tr>";  
+                                             </tr>";
                             }
-                          } 
+                          }
                                   }
                                 ?>
                     </tbody>
