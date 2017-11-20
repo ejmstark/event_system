@@ -23,10 +23,33 @@ class CAdmin extends CI_Controller {
                               });
                         </script>';
 
+<<<<<<< Updated upstream
         $data2['row']=$this->readAllEvents();
          $data3['users']=$this->getUserCount();
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vAdmin', $data2);
+=======
+
+    $result_data=$this->readAllEvents();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->event_id = $value->event_id;
+				$arrObj->event_date_start = $value->event_date_start;
+				$arrObj->event_date_end = $value->event_date_end;
+				$arrObj->event_name = $value->event_name;
+				$arrObj->no_tickets_total = $value->no_tickets_total;
+				$arrObj->event_status = $value->event_status;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data2['row'] = $array;
+   		$data3['users']=$this->getUserCount();
+		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('admin/vAdmin', $data2);;
+>>>>>>> Stashed changes
 	}
 
 	public function getUserCount(){
@@ -246,5 +269,10 @@ class CAdmin extends CI_Controller {
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vReport');
 	}
+
+	public function generateCard() {
+		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('admin/vCards');
+	}	
 
 }
