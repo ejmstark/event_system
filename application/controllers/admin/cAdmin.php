@@ -13,8 +13,8 @@ class CAdmin extends CI_Controller {
 		// $this->load->model('MUserInfo');
 	}
 
-		
-	
+
+
 	public function index()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -40,9 +40,10 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data2['row'] = $array;
+
    		$data3['users']=$this->getUserCount();
 		$this->load->view('imports/vHeaderAdmin');
-		$this->load->view('admin/vAdmin', $data2);;
+		$this->load->view('admin/vAdmin', $data2);
 	}
 
 	public function getUserCount(){
@@ -52,8 +53,9 @@ class CAdmin extends CI_Controller {
 		}else{
 			return false;
 		}
-		
+
 	}
+
 
 	// view all events
 	public function readAllEvents(){
@@ -102,11 +104,11 @@ class CAdmin extends CI_Controller {
  			}
 		}
 	}
-	
+
 	// view all users
 	public function readAllUsers(){
 		$user_module = new MUserInfo();
-		
+
 		$data = array('user_type' => 'Regular');
 		$result= $this->MUserInfo->read_where($data);
 		if($result){
@@ -115,7 +117,7 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
-	
+
 	public function Ban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -131,11 +133,11 @@ class CAdmin extends CI_Controller {
 				}else if($frm=="user"){
 					redirect('admin/cAdmin/viewUserAccountMgt');
 				}
- 				
+
  			}
 		}
 	}
-	
+
 	public function Unban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -154,11 +156,11 @@ class CAdmin extends CI_Controller {
  			}
 		}
 	}
-	
+
 	// view all admin
 	public function readAllAdmin(){
 		$user_module = new MUserInfo();
-		
+
 		$data = array('user_type !=' => 'Regular');
 		$result = $this->MUserInfo->read_where($data);
 		if($result){
@@ -167,11 +169,11 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
-	
+
 	// view all Superadmin
 	public function readAllSuperAdmin(){
 		$user_module = new MUserInfo();
-		
+
 		$data = array('user_type' => 'Superadmin');
 		$result= $this->MUserInfo->read_where($data);
 		if($result){
@@ -180,7 +182,7 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
-	
+
 	public function Admin($id){
 		$user_module = new MUserInfo();
 
@@ -195,7 +197,7 @@ class CAdmin extends CI_Controller {
  			}
 		}
 	}
-	
+
 	public function SuperAdmin($id){
 		$user_module = new MUserInfo();
 
@@ -217,17 +219,17 @@ class CAdmin extends CI_Controller {
 
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
-		$data = array('user_name' => $this->input->post('uname'), 
+		$data = array('user_name' => $this->input->post('uname'),
 					  'password' => $this->input->post('password'),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
 					  'email' => $this->input->post('email'),
 					  'birthdate' => $this->input->post('bdate'),
-					  'gender' => $this->input->post('gender'),					  
+					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' =>  $this->input->post('userType'),
-					  'date_account_created' => $now->format('Y-m-d H:i:s')	
+					  'date_account_created' => $now->format('Y-m-d H:i:s')
 					);
 
 		$result = $user->insert($data);
@@ -241,13 +243,56 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewUserAccountMgt() {
-		$data2['users']=$this->readAllUsers();
+		$result_data=$this->readAllUsers();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->account_id = $value->account_id;
+				$arrObj->user_name = $value->user_name;
+				$arrObj->first_name = $value->first_name;
+				$arrObj->middle_initial = $value->middle_initial;
+				$arrObj->last_name = $value->last_name;
+				$arrObj->email= $value->email;
+				$arrObj->contact_no= $value->contact_no;
+				$arrObj->birthdate= $value->birthdate;
+				$arrObj->date_account_created = $value->date_account_created;
+				$arrObj->gender = $value->gender;
+				$arrObj->user_type = $value->user_type;
+				$arrObj->user_status = $value->user_status;
+				$arrObj->load_amt = $value->load_amt;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE////////////////////////////////////////////////////
+		$data2['users']=$array;
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 	}
 
 	public function viewAdminAccountMgt() {
-		$data2['admin']=$this->readAllAdmin();
+		$result_data=$this->readAllAdmin();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->account_id = $value->account_id;
+				$arrObj->user_name = $value->user_name;
+				$arrObj->first_name = $value->first_name;
+				$arrObj->middle_initial = $value->middle_initial;
+				$arrObj->last_name = $value->last_name;
+				$arrObj->email= $value->email;
+				$arrObj->contact_no= $value->contact_no;
+				$arrObj->birthdate= $value->birthdate;
+				$arrObj->date_account_created = $value->date_account_created;
+				$arrObj->gender = $value->gender;
+				$arrObj->user_type = $value->user_type;
+				$arrObj->user_status = $value->user_status;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data2['admin']=$array;
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vAdminAccountMgt', $data2);
 	}
@@ -259,6 +304,7 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewReport() {
+
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vReport');
 	}

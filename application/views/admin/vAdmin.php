@@ -30,6 +30,7 @@
           </div>
 
           <div class="lower-sbar">
+
             <li  class="active-li"><a href="<?php echo site_url();?>/admin/cAdmin">
               <p>
                <div class="d-block d-sm-block d-md-none">
@@ -107,8 +108,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                        
+                        <?php
+
 
                                   if($row!=FALSE){
                                     foreach ($row as $object) {
@@ -124,14 +125,14 @@
                                   <a href='".site_url()."/admin/cAdmin/rejectEvent/".$object->event_id."'>
                                   <button  type='button' class='btn btn-danger'>REJECT</button></a>
                                   </td>
-                                             </tr>";  
+                                             </tr>";
                             }else {
                               echo " <td>
                                   You have ".$object->event_status." this event.
                                   </td>
-                                             </tr>";  
+                                             </tr>";
                             }
-                          } 
+                          }
                                   }
                                 ?>
                     </tbody>
