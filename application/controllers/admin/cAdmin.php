@@ -56,6 +56,7 @@ class CAdmin extends CI_Controller {
 
 	}
 
+
 	// view all events
 	public function readAllEvents(){
 		$result= $this->MEventInfo->read_all();

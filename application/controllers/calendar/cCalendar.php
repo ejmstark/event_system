@@ -31,7 +31,7 @@ class cCalendar extends CI_Controller {
 				$arrObj->event_date_start = $value->event_date_start;
 				$arrObj->event_date_end = $value->event_date_end;
 				$arrObj->event_name = $value->event_name;
-				$arrObj->event_isActive = $value->event_isActive;
+				//$arrObj->event_isActive = $value->event_isActive;
 				$arrObj->date_created = $value->date_created;
 				$arrObj->color = $value->color;
 				$array[] = $arrObj;
