@@ -22,7 +22,7 @@ class CLogin extends CI_Controller {
 
 // 	 	$this->load->library('../controllers/CInitialize');
 
-	 	
+
 
 	}
 
@@ -34,11 +34,11 @@ class CLogin extends CI_Controller {
 
 	}
 
-	
+
 
 	public function userLogin()
 
-	{	
+	{
 
 
 
@@ -48,7 +48,7 @@ class CLogin extends CI_Controller {
 
 		$user->setUser_password($this->input->post('Password'));
 
-		
+
 
 
 
@@ -60,7 +60,7 @@ class CLogin extends CI_Controller {
 
 		$result = $user->attemptLogin();
 
-		
+
 
 		if ($result) {
 
@@ -78,7 +78,7 @@ class CLogin extends CI_Controller {
 
 			}
 
-			
+
 
 		} else {
 
@@ -88,7 +88,7 @@ class CLogin extends CI_Controller {
 
 		}
 
-		
+
 
 	}
 
@@ -100,7 +100,7 @@ class CLogin extends CI_Controller {
 
       foreach ($result as $row) {
 
-        $sessionData = array('userID' => $row->account_id, 
+        $sessionData = array('userID' => $row->account_id,
 
                              'userLogName' => $row->user_name,
 
@@ -140,7 +140,20 @@ class CLogin extends CI_Controller {
 
 		$data['users'] = $this->MUser->getAllUsers();
 
-		$data['events'] = $this->MEvent->getAllApprovedEvents();
+		$result_data = $this->MEvent->getAllApprovedEvents();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->event_id = $value->event_id;
+				$arrObj->event_name = $value->event_name;
+				$arrObj->dateStart = $value->dateStart;
+				$arrObj->event_category = $value->event_category;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['events'] = $array;
 
 		$this->data['custom_js']= '<script type="text/javascript">
 
@@ -154,7 +167,7 @@ class CLogin extends CI_Controller {
 
 		$this->load->view('imports/vHeaderLandingPage');
 
-		$this->load->view('vLandingPage',$data);		
+		$this->load->view('vLandingPage',$data);
 
 		$this->load->view('imports/vFooterLandingPage',$this->data);
 
@@ -204,9 +217,8 @@ class CLogin extends CI_Controller {
 
 
 
-	
+
 
 }
 
 ?>
-
