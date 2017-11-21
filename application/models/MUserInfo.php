@@ -14,7 +14,7 @@
 		private $contact_no;
 		private $load_amt;
 		private $date_created;
-		
+
 		const DB_TABLE = "user_account";
     	const DB_TABLE_PK = "account_id";
 
@@ -64,7 +64,7 @@
 		public function getDateCreated(){
 			return $this->date_created;
 		}
-		
+
 
 		public function setAccount_id($account_id){
 			$this->account_id = $account_id;
@@ -108,17 +108,16 @@
 		public function setDateCreated($date_created){
 			$this->date_created = $date_created;
 		}
-		
+
 		//End of class getters and setters.
-		
+
 		public function updateUserStatus($id, $status)
 		{
 			$data = array('user_status' => $status );
 
 			return $this->update($id,$data);
-
 		}
-		
+
 		public function updateUserType($id, $type)
 		{
 			$data = array('user_type' => $type );
@@ -126,6 +125,12 @@
 			return $this->update($id,$data);
 
 		}
-		
+
+		public function updateUpgradedBy($id,$toUpgrade)
+		{
+			$data = array('upgraded_by' => $toUpgrade);
+
+			return $this->update($id, $data);
+		}
 	}
 ?>
