@@ -28,21 +28,11 @@
                 <link href="<?php echo base_url('assets/nikkiAssets/css/normalize.css')?>" rel="stylesheet" />
                 <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
 
-        <link rel="stylesheet" href="<?php echo base_url('assets/josephAssets/css/styleCreateEvent.css')?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/josephAssets/css/font-awesome.css')?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/josephAssets/css/font-awesome.min.css')?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/josephAssets/css/bootstrap.css')?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/josephAssets/css/bootstrap.min.css')?>">
 
-        <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> \-->
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css"')?>">
-        <script src="<?php echo base_url('assets/josephAssets/js/jquery-3.2.1.js')?>"></script>
-        <script src="<?php echo base_url('assets/josephAssets/js/bootstrap-datepicker.js')?>"></script>
-        <script src="<?php echo base_url('assets/josephAssets/js/bootstrap-timepicker.js')?>"></script>
-
-    <script src="<?php echo base_url('assets/jsKyleAssets/jquery.js')?>" rel="stylesheet" /> </script>
-    <link href="<?php echo base_url('assets/cssKyleAssets/bootstrap.min.css')?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/cssKyleAssets/fullcalendar.css')?>" rel="stylesheet" />
+                <script src="<?php echo base_url('assets/jsKyleAssets/jquery.js')?>" rel="stylesheet" /> </script>
+             <!--    <link href="<?php echo base_url('assets/cssKyleAssets/bootstrap.min.css')?>" rel="stylesheet" /> -->
+                <link href="<?php echo base_url('assets/cssKyleAssets/fullcalendar.css')?>" rel="stylesheet" />
+                
 
     <style>
     body {

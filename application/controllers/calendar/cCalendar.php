@@ -23,23 +23,23 @@ class cCalendar extends CI_Controller {
                               	$("#cal").addClass("active");
                               });
                         </script>';
-												$result_data = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
-												//////////////////////////////////////////////////////////////////////////////
-												//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-												/////////////////////////////////////////////////////////////////////////////
-												foreach ($result_data as $value) {
-														$arrObj = new stdClass;
-														$arrObj->event_id = $value->event_id;
-														$arrObj->event_date_start = $value->event_date_start;
-														$arrObj->event_date_end = $value->event_date_end;
-														$arrObj->event_name = $value->event_name;
-														//$arrObj->event_isActive = $value->event_isActive;
-														$arrObj->date_created = $value->date_created;
-														$arrObj->color = $value->color;
-														$array[] = $arrObj;
-												}
-												$data['event_data'] = $array;
-												////////////STOPS HERE///////////////////////////////////////////////////
+		$result_data = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->event_id = $value->event_id;
+				$arrObj->event_date_start = $value->event_date_start;
+				$arrObj->event_date_end = $value->event_date_end;
+				$arrObj->event_name = $value->event_name;
+				//$arrObj->event_isActive = $value->event_isActive;
+				$arrObj->date_created = $value->date_created;
+				$arrObj->color = $value->color;
+				$array[] = $arrObj;
+		}
+		$data['event_data'] = $array;
+		////////////STOPS HERE///////////////////////////////////////////////////
 		$this->load->helper('url');
 		$this->load->view('imports/vHeaderCalendarPage');
 		$this->load->view('calendar/vCalendar',$data);

@@ -510,7 +510,7 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek'
+                right: 'month'
             },
             defaultDate: "<?php date_default_timezone_set('UTC'); echo date('d/M/Y'); ?>",
             editable: false,
