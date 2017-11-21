@@ -513,7 +513,7 @@
                 right: 'month,agendaWeek'
             },
             defaultDate: "<?php date_default_timezone_set('UTC'); echo date('d/M/Y'); ?>",
-            editable: true,
+            editable: false,
             eventLimit: true, // allow "more" link when too many events
             selectable: true,
             displayEventTime: true,
@@ -527,27 +527,34 @@
                     var endDate = moment(end).format('MM/DD/YYYY');
                     var startTime = moment(start).format('h:mm a');
                     var endTime = moment(end).format('h:mm a');
+                    var currentDate = moment().format('MM/DD/YYYY');
+
+
                     
-                    var dataSet = "startDate="+startDate+"&startTime="+startTime+"&endDate="+endDate+"&endTime="+endTime;
-                    $.ajax({
-                        type: "POST",
-                        url: '<?php echo site_url()?>/event/cEvent/viewCreateFromCalendar',
-                        data: dataSet,
-                        cache: false,
-                        success: function(result){
-                            // if(result=="error"){
-                                // $('#ModalEdit').html(result);
-                                // $('#ModalEdit').modal('show');
-                            // }else{
-                                // alert("Error");
-                            // }                
-                            //alert(result);
-                            $('body').html(result);
-                        },
-                        error: function(jqXHR, errorThrown){
-                            console.log(errorThrown);
-                        }
-                    });
+                    if(startDate<currentDate){
+                        $('#errmodal').modal('show');
+                    }else{
+                        var dataSet = "startDate="+startDate+"&startTime="+startTime+"&endDate="+endDate+"&endTime="+endTime;
+                        $.ajax({
+                            type: "POST",
+                            url: '<?php echo site_url()?>/event/cEvent/viewCreateFromCalendar',
+                            data: dataSet,
+                            cache: false,
+                            success: function(result){
+                                // if(result=="error"){
+                                    // $('#ModalEdit').html(result);
+                                    // $('#ModalEdit').modal('show');
+                                // }else{
+                                    // alert("Error");
+                                // }                
+                                //alert(result);
+                                $('body').html(result);
+                            },
+                            error: function(jqXHR, errorThrown){
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
             },
  
             eventDrop: function(event, delta, revertFunc) { // 
@@ -625,6 +632,23 @@
         }
     });
 </script>
+
+<div class="modal fade bd-example-modal-sm" id="errmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: red;">
+        <h2 style="color: white;">ERROR!</h2>
+      </div>
+      <div class="modal-body">
+        <h2><strong>Cannot add events on past dates!</strong></h2>
+        <h3>Please choose a different date.</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it.</button>
+      </div>
+    </div>
+  </div>
+</div>
 
         <!-- Footer area-->
         <div class="footer-area">
