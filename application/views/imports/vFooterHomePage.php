@@ -1,4 +1,4 @@
-	
+	<!-- 
 		<footer>
 			<div class = "col-sm-12 footer-content">
 				<div class = "col-sm-6 footer-left">
@@ -16,9 +16,7 @@
 					University of San Carlos - Department of Computer and Information Sciences
 				</div>
 			</div>
-		</footer>
-			
-			
+		</footer> -->	
 	</body>
 </html>
 
