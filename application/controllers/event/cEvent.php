@@ -31,7 +31,7 @@ class cEvent extends CI_Controller {
 			$data['start_time'] = $_POST['startTime'];
 			$data['end_date'] = $_POST['endDate'];
 			$data['end_time'] = $_POST['endTime'];
-			$result = $this->load->view('vCreateEvent',$data,TRUE);
+			$result = $this->load->view('vEventForCalendar',$data,TRUE);
 			//$this->viewCreateEvent();
 			echo $result;
 		}

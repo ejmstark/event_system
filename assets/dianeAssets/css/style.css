@@ -3,6 +3,11 @@ body {
     overflow-x: hidden;
 }
 
+@font-face {
+    font-family: Oswald Regular Regular;
+    src: url('../fonts/Oslwald-Regular.ttf');
+}
+
 /*overlay add button*/
 .fixedbutton {
   content: url('../img/btnAdd_Black.png');
