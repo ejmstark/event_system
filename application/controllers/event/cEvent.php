@@ -86,7 +86,8 @@ class cEvent extends CI_Controller {
 		// }else{
 			
 		// }
-		$data = array_merge($data1,$data2,$data3); 
+		$data = array_merge($data1,$data2,$data3);
+		$data['id'] = $this->session->userdata['userSession']->userID;
 		$data['going']= $this->MEvent->getGoingToEvent($id);
 		$data['user']= $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 		if($this->error != ""){
@@ -285,6 +286,15 @@ class cEvent extends CI_Controller {
 			$this->load->view('imports/vFooter');
 
 		// $this->output->set_content_type('application/json')->set_output(json_encode($result));
+		}
+
+		public function editEvent($id){
+			$v['ev'] = $this->MUser->getEventDetails($id)->row();
+			$v['ti'] = $this->MUser->getTicketDetails($id)->result();
+
+			$this->load->view('imports/vHeaderSignUpPage');
+			$this->load->view('user/vEditEvent', $v);
+			$this->load->view('imports/vFooterLandingPage');
 		}
 }
 ?>

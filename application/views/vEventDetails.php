@@ -136,6 +136,10 @@ foreach($going as $g){
                                 </span>
 
                             </div>
+                            
+                            <?php foreach($events as $x){ if($id == $x->user_id){ ?>
+                                <a href="<?php echo site_url('event/cEvent/editEvent/'.$e->event_id);?>"><div>Edit event</div></a>
+                            <?php }} ?>
                             <!-- .property-meta -->
 
                             <div class="section">
