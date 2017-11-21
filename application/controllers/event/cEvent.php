@@ -19,13 +19,13 @@ class cEvent extends CI_Controller {
 
 	public function index()
 	{
-		
+
 	}
-	
+
 		//This function gets the date from the Calendar Module and sends in to the VCreateEvent.php
 	public function viewCreateFromCalendar(){
-		
-		
+
+
 		if(isset($_POST['startDate']) && isset($_POST['startTime']) && isset($_POST['endDate']) && isset($_POST['endTime']) ){
 			$data['start_date'] = $_POST['startDate'];
 			$data['start_time'] = $_POST['startTime'];
@@ -35,12 +35,12 @@ class cEvent extends CI_Controller {
 			//$this->viewCreateEvent();
 			echo $result;
 		}
-		
-		
-		
+
+
+
 	}
-	
-	public function viewCreateEvent() 
+
+	public function viewCreateEvent()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
                               	$("#user").addClass("active");
@@ -49,24 +49,66 @@ class cEvent extends CI_Controller {
         $this->load->view('imports/vHeaderSignUpPage');
 		$this->load->view('vNewEvent');
 		$this->load->view('imports/vFooterLandingPage');
-		
+
 	}
 
 	public function viewEvents()
 	{
-		$data['events'] = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
-		$data['user'] = $this->MUser->read($this->session->userdata['userSession']->userID);
-		$data['hist'] = $this->MEventInfo->getTransHistory($this->session->userdata['userSession']->userID);
-		$this->load->view('imports/vHeaderLandingPage');		
+		$result_data = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->event_id = $value->event_id;
+				$arrObj->event_date_start = $value->event_date_start;
+				$arrObj->event_name = $value->event_name;
+				$arrObj->dateStart = $value->dateStart;
+				$arrObj->event_details = $value->event_details;
+				$arrObj->event_status = $value->event_status;
+				$arrObj->event_venue = $value->event_venue;
+				$arrObj->event_category = $value->event_category;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['events']  = $array;
+
+		$result_data = $this->MUser->read($this->session->userdata['userSession']->userID);
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->load_amt = $value->load_amt;
+				$array1[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['user']   = $array1;
+
+		$result_data = $this->MEventInfo->getTransHistory($this->session->userdata['userSession']->userID);
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->Event = $value->Event;
+				$arrObj->Paid = $value->Paid;
+				$arrObj->DatePaid = $value->DatePaid;
+				$array2[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['hist']   = $array2;
+
+		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEvents',$data);
-		$this->load->view('imports/vFooterLandingPage');	
+		$this->load->view('imports/vFooterLandingPage');
 	}
 	public function displayEventDetails($id)
 	{
-		
+
 		$uid = null; //to get organize name
 		$eid = null;
-		
+
 		$data1 ['events'] = $this->MEvent->loadEventDetails($id);
 		$gID = $this->MEvent->loadEventDetails($id);
 
@@ -82,11 +124,11 @@ class cEvent extends CI_Controller {
 
 		// $data4['tixStat'] = $this->MTicketType->getTicketStatus($eid);
 		// if(isset($data4['tixStat'])){
-		// 	$data = array_merge($data1,$data2,$data3,$data4); 
+		// 	$data = array_merge($data1,$data2,$data3,$data4);
 		// }else{
-			
+
 		// }
-		$data = array_merge($data1,$data2,$data3); 
+		$data = array_merge($data1,$data2,$data3);
 		$data['going']= $this->MEvent->getGoingToEvent($id);
 		$data['user']= $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 		if($this->error != ""){
@@ -99,7 +141,7 @@ class cEvent extends CI_Controller {
 		 // print_r($data);
 		}
 
-		$this->load->view('imports/vHeaderLandingPage');		
+		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
 
@@ -118,19 +160,19 @@ class cEvent extends CI_Controller {
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
-				$result = $res[0]->load_amt - $res1[0]->price; 
+				$result = $res[0]->load_amt - $res1[0]->price;
 
 				if($result >= 0){
 					$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
-			
-					$data = array('date_sold' => $now->format('Y-m-d H:i:s'), 
+
+					$data = array('date_sold' => $now->format('Y-m-d H:i:s'),
 					  'user_id' => $this->session->userdata['userSession']->userID ,
 					  'ticket_type_id' => $tId
 	 				  );
 					$res = $this->MTicket->insert($data);
-					
-					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));	
+
+					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
 					$this->success = "Bought ticket for ".$res1[0]->price;
 					// $this->displayEventDetails($eid);
 					redirect('event/cEvent/displayEventDetails/'.$eid);
@@ -138,15 +180,15 @@ class cEvent extends CI_Controller {
 					$this->error = "Insufficient balance!";
 					$this->displayEventDetails($eid);
 				}
-				
+
 			}
-			
+
 			// echo $this->MTicket->db->last_query();
-		
+
 			// $this->load->view('imports/vHeader');
-			
+
 			// $this->load->view('imports/vFooter');
-			
+
 			# code...
 		}
 	public function createEvent(){
@@ -221,7 +263,7 @@ class cEvent extends CI_Controller {
 	public function deleteEvent($id){
 		$this->load->model('events/mEvent','event');
 
-		
+
 		// $event_id = $this->input>post('event_id');
 
 		$result = $this->event->deleteEvent($id);
@@ -251,7 +293,7 @@ class cEvent extends CI_Controller {
 		//code for tests purposes
 		/*
 		$event_id = 18;
-		$event_date_start = '2017-10-01 12:12:12';	
+		$event_date_start = '2017-10-01 12:12:12';
 		$event_date_end = '2017-10-01 12:12:12';
 		$no_tickets_total = 15;
 		$event_status = 'Approved';
