@@ -519,21 +519,30 @@
             displayEventTime: true,
             timeFormat: 'hh:mm a:',
             selectHelper: true,
-            select: function(start, end) {
-                // $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-                // $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
-                // $('#ModalAdd').modal('show');
+           select: function(start, end) {
                     var startDate = moment(start).format('MM/DD/YYYY');
                     var endDate = moment(end).format('MM/DD/YYYY');
                     var startTime = moment(start).format('h:mm a');
                     var endTime = moment(end).format('h:mm a');
                     var currentDate = moment().format('MM/DD/YYYY');
 
+                    var date = currentDate.split("/");
+                    var start = startDate.split("/");
 
-                    
-                    if(startDate<currentDate){
-                        $('#errmodal').modal('show');
-                    }else{
+                    var flag = true;
+
+                    if(start[2] <= date[2] ){
+                        if(start[0] <= date[0]){
+                                if(start[1]< date[1]){
+                                     $('#errmodal').modal('show');
+                                    flag = false;
+                                }
+                        }
+                       
+                    }
+
+
+                    if(flag){
                         var dataSet = "startDate="+startDate+"&startTime="+startTime+"&endDate="+endDate+"&endTime="+endTime;
                         $.ajax({
                             type: "POST",
@@ -541,13 +550,6 @@
                             data: dataSet,
                             cache: false,
                             success: function(result){
-                                // if(result=="error"){
-                                    // $('#ModalEdit').html(result);
-                                    // $('#ModalEdit').modal('show');
-                                // }else{
-                                    // alert("Error");
-                                // }                
-                                //alert(result);
                                 $('body').html(result);
                             },
                             error: function(jqXHR, errorThrown){
