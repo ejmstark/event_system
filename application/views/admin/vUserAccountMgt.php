@@ -94,11 +94,7 @@
               <form action="<?php echo site_url();?>/admin/cAdmin/viewSearchUserAccountMgt" class=" form-inline" method="POST">
                 <b>Search: </b>
                 <input name="search_val" type="text"></input>
-                <select>
-                  <option value="user_name" >User Name</option>
-                  <option value="email" >Email</option>
-                  <option value="contact_no" >Contact Number</option>
-                </select>
+                
                 <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
               </form>
               <h3><center>User Management<center></h3>

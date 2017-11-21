@@ -119,38 +119,15 @@ class CAdmin extends CI_Controller {
 	//view all searched user
 	public function searchUsers(){
 		$user_module = new MUserInfo();
-		
-		$data = array('user_type' => 'Regular');
-		//$result= $this->MUserInfo->read_where($data);
-		
-
-		$con=mysqli_connect('localhost','root','','event_db');
-
-		// mysqli_select_db('event_db');
-		$search_val = $_POST['search_val'];
-		$search_options = "user_name";
-		//$search_val = false;
-		// if(isset($_POST['search_val'])){
-		// 	//$search_val = $_POST['search_val'];
-		// 	$search_val = $_POST['search_val'];
-			
-		// }else{
-		// 	$search_val = "";
-		// }
-		// if(isset($search_val)){
-		// 	echo '<b>Results for: <b>'.'<b>'. $search_val;
-		// }
-		$query="SELECT account_id, user_type, user_name, first_name, middle_initial, last_name, email, gender, contact_no, load_amt, date_account_created, user_status FROM user_account WHERE $search_options LIKE '%$search_val%'";
-		if(!$query){
-			echo 'MySQL Error: '. mysqli_error();
-			exit;
-		}
-		$result = array('user_type' => 'Regular');
-		$result=mysqli_query($con,$query);
-
-		if($result){
-			return $result;
-		}else{
+		if(isset($_POST['search_val'])){
+			$data = array('user_name' => $_POST['search_val']);
+			$result= $this->MUserInfo->read_where($data);
+			if($result){
+				return $result;
+			}else{
+				return false;
+			}
+		} else {
 			return false;
 		}
 	}
@@ -309,7 +286,31 @@ class CAdmin extends CI_Controller {
 	//Roald Code
 	//this function will show the search results coming from viewUserAccountMgt()
 	public function viewSearchUserAccountMgt() {
-		$data2['users']=$this->searchUsers();
+		$result_data=$this->searchUsers();
+		if($result_data != false){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
+			$data2['users']=$array;
+			
+		} else {
+			$data2['users']=array();
+		}
+		
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 	}
