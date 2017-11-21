@@ -37,9 +37,9 @@
                   <center> <i class="fa fa-list-alt" aria-hidden="true"></i> </center>
                 </div>
                <span class= "d-none d-sm-none d-md-inline">
-                  <i class="fa fa-list-alt" aria-hidden="true"></i> 
-                  Events 
-                </span> 
+                  <i class="fa fa-list-alt" aria-hidden="true"></i>
+                  Events
+                </span>
               </a></li></p>
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt">
               <p>

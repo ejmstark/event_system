@@ -1,4 +1,4 @@
-<?php 
+<?php
 if(isset($events) ){
     $bought = FALSE;
     // print_r($events);
@@ -11,9 +11,9 @@ foreach($going as $g){
         $bought = TRUE;
 
     }
-    
-} 
-// if($isset($tixStat)){foreach ( as $ts) { }} 
+
+}
+// if($isset($tixStat)){foreach ( as $ts) { }}
     }?>
     <body>
 
@@ -21,7 +21,7 @@ foreach($going as $g){
             <div id="status">&nbsp;</div>
         </div>
         <!-- Body content -->
-    
+
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -43,11 +43,11 @@ foreach($going as $g){
                     <div class="button navbar-right">
                         <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
                     </div>
-                    
+
 
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                        
+
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
@@ -57,11 +57,11 @@ foreach($going as $g){
         </nav>
         <!-- End of nav bar -->
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">EVENT DETAILS</h1>               
+                        <h1 class="page-title">EVENT DETAILS</h1>
                     </div>
                 </div>
             </div>
@@ -70,36 +70,36 @@ foreach($going as $g){
 
         <!-- property area -->
         <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
-            <div class="container">   
+            <div class="container">
 
                 <div class="clearfix padding-top-40" >
 
                     <div class="col-md-8 single-property-content prp-style-1 ">
                         <div class="row">
-                            <div class="light-slide-item">            
+                            <div class="light-slide-item">
                                 <div class="clearfix">
                                     <div class="favorite-and-print">
                                         <a class="add-to-fav" href="#login-modal" data-toggle="modal">
                                             <i class="fa fa-star-o"></i>
                                         </a>
                                         <a class="printer-icon " href="javascript:window.print()">
-                                            <i class="fa fa-print"></i> 
+                                            <i class="fa fa-print"></i>
                                         </a>
-                                    </div> 
+                                    </div>
 
                                     <ul id="image-gallery" class="gallery list-unstyled cS-hidden" >
-                                        <li data-thumb="assets/img/property-1/property1.jpg"> 
+                                        <li data-thumb="assets/img/property-1/property1.jpg">
                                             <img src="assets/img/property-1/property1.jpg" />
                                         </li>
-                                        <li data-thumb="assets/img/property-1/property2.jpg"> 
+                                        <li data-thumb="assets/img/property-1/property2.jpg">
                                             <img src="assets/img/property-1/property3.jpg" />
                                         </li>
-                                        <li data-thumb="assets/img/property-1/property3.jpg"> 
+                                        <li data-thumb="assets/img/property-1/property3.jpg">
                                             <img src="assets/img/property-1/property3.jpg" />
                                         </li>
-                                        <li data-thumb="assets/img/property-1/property4.jpg"> 
+                                        <li data-thumb="assets/img/property-1/property4.jpg">
                                             <img src="assets/img/property-1/property4.jpg" />
-                                        </li>                                         
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -122,14 +122,14 @@ foreach($going as $g){
                         <?php }?>
 
                         <div class="single-property-wrapper">
-                            <div class="single-property-header">                                         
+                            <div class="single-property-header">
                                 <h1 class="property-title pull-left"><?php echo $e->event_name; ?></h1>
                                 <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
                                 <span class="property-price pull-right"><?php echo $e->event_status; ?></span>
                                 <?php } ?>
                             </div>
 
-                            <div class="property-meta entry-meta clearfix ">   
+                            <div class="property-meta entry-meta clearfix ">
                                 <span class="property-info-entry">
                                     <span class="property-info-label">Ticket Sale Status</span>
                                     <span class="property-info-value"><?php echo $e->event_status; ?></span>
@@ -171,22 +171,22 @@ foreach($going as $g){
                                     </li>  -->
 
                                 </ul>
-                            </div>  
+                            </div>
                             <!-- End additional-details area  -->
                         <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
-                            <div class="section property-share"> 
-                                <h4 class="s-property-title">Users who are going:</h4> 
+                            <div class="section property-share">
+                                <h4 class="s-property-title">Users who are going:</h4>
                                 <div class="roperty-social">
-                                    <ul>                     
-                                    <?php foreach($going as $g){?>              
+                                    <ul>
+                                    <?php foreach($going as $g){?>
                                         <li><?php echo $g->first_name." ".$g->middle_initial." ".$g->last_name;?></li><br>
-                                        <?php }?>                           
+                                        <?php }?>
                                     </ul>
                                 </div>
                             </div>
                         <?php }?>
                             <!-- End video area  -->
-                            
+
                         </div>
                     </div>
 
@@ -206,7 +206,7 @@ foreach($going as $g){
                                             <div class="col-xs-8 col-sm-8 ">
                                                 <h3 class="dealer-name">
                                                     <a href=""><?php echo $o->first_name." ".$o->middle_initial." ".$o->last_name;?></a>
-                                                    <span>Organizers</span>        
+                                                    <span>Organizers</span>
                                                 </h3>
                                                 <div class="dealer-social-media">
                                                     <a class="twitter" target="_blank" href="">
@@ -217,14 +217,14 @@ foreach($going as $g){
                                                     </a>
                                                     <a class="instagram" target="_blank" href="">
                                                         <i class="fa fa-instagram"></i>
-                                                    </a>       
+                                                    </a>
                                                 </div>
 
                                             </div>
                                         </div>
 
                                         <div class="clear">
-                                            <ul class="dealer-contacts">                                       
+                                            <ul class="dealer-contacts">
                                                 <li><i class="pe-7s-map-marker strong"> </i> University of San Carlos</li>
                                                 <li><i class="pe-7s-mail strong"> </i> <?php echo $o->email;?></li>
                                                 <li><i class="pe-7s-call strong"> </i> <?php echo $o->contact_no;?></li>
@@ -232,7 +232,7 @@ foreach($going as $g){
                                             <div class="text-center">
                                             <?php if($e->event_status == "Approved"){?>
                                                 <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button>
-                                                <!-- <a href="<?php echo site_url();?>/event/cEvent/going/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" >Going</button></a> -->                                            <?php }?>   
+                                                <!-- <a href="<?php echo site_url();?>/event/cEvent/going/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" >Going</button></a> -->                                            <?php }?>
                                             </div>
 
                                         </div>
@@ -262,20 +262,20 @@ foreach($going as $g){
                                                  <form method="post" action="<?php echo site_url();?>/event/cEvent/buyTicket">
                                                      <input type="text" name="eId" value="<?php echo $e->event_id;?>">
                                                      <input type="text" name="tId" value="<?php echo $t->ticket_type_id;?>">
-                                                     
+
                                                  </form> -->
-                                                 
+
                                                  <?php if(!$bought){?>
-                                                   <a href="<?php echo site_url();?>/event/cEvent/buyTicket/<?php echo $t->ticket_type_id;?>/<?php echo $e->event_id;?>"><input hidden class="val" value="<?php echo $t->price;?>"> 
+                                                   <a href="<?php echo site_url();?>/event/cEvent/buyTicket/<?php echo $t->ticket_type_id;?>/<?php echo $e->event_id;?>"><input hidden class="val" value="<?php echo $t->price;?>">
                                                 <button   class="buy navbar-btn nav-button wow bounceInRight login animated" >Buy</button></a>
                                                 <?php }?>
-                                                
-                                                </span>                                            <?php }?>  
+
+                                                </span>                                            <?php }?>
                                                 <!--<span>&nbsp;&nbsp;&nbsp; Sold:
-                                                 <?php $ts->cnt?>                                                   
-                                                </span> --> 
+                                                 <?php $ts->cnt?>
+                                                </span> -->
                                                 <!-- <script>
-   $(document).on('click', 'button.buy', function () { 
+   $(document).on('click', 'button.buy', function () {
         alert("asdasdasd");
         var val =$("this").closest('input.val').getVal();
         var cVal = $(document).closest('.cVal').getVal();
@@ -288,7 +288,7 @@ foreach($going as $g){
 
                                     </ul>
                                 </div>
-                            </div>                          
+                            </div>
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                                 <div class="panel-heading">
@@ -304,7 +304,7 @@ foreach($going as $g){
                                 <h3 class="panel-title">Search</h3>
                             </div> -->
                             <!-- <div class="panel-body search-widget">
-                                <form action="" class=" form-inline"> 
+                                <form action="" class=" form-inline">
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -335,83 +335,83 @@ foreach($going as $g){
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <label for="price-range">Price range (P):</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="10000" data-slider-step="5" 
+                                                <input type="text" class="span2" value="" data-slider-min="0"
+                                                       data-slider-max="10000" data-slider-step="5"
                                                        data-slider-value="[0,1000]" id="price-range" ><br />
-                                                <b class="pull-left color">P0.00</b> 
-                                                <b class="pull-right color">P10,000.00</b>                                       
-                                            </div>                                      
+                                                <b class="pull-left color">P0.00</b>
+                                                <b class="pull-right color">P10,000.00</b>
+                                            </div>
                                         </div>
-                                    </fieldset>                                
+                                    </fieldset>
 
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox" checked> Workshops</label>
-                                                </div> 
+                                                </div>
                                             </div>
 
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox"> Parties</label>
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset class="padding-5">
                                         <div class="row">
-                                            <div class="col-xs-6"> 
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox" checked> Food Bazaar</label>
                                                 </div>
-                                            </div>  
-                                            <div class="col-xs-6"> 
+                                            </div>
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox" checked> Fashion Shows</label>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset class="padding-5">
                                         <div class="row">
-                                            <div class="col-xs-6"> 
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label><input type="checkbox"> Concerts </label>
                                                 </div>
-                                            </div>  
-                                            <div class="col-xs-6"> 
+                                            </div>
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox"> Exhibits</label>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset class="padding-5">
                                         <div class="row">
-                                            <div class="col-xs-6"> 
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label>  <input type="checkbox" checked> Sports Event </label>
                                                 </div>
-                                            </div>  
-                                            <div class="col-xs-6"> 
+                                            </div>
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label>  <input type="checkbox"> Others </label>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset >
                                         <div class="row">
-                                            <div class="col-xs-12">  
+                                            <div class="col-xs-12">
                                                 <input class="button btn largesearch-btn" value="Search" type="submit">
-                                            </div>  
+                                            </div>
                                         </div>
-                                    </fieldset>                                     
+                                    </fieldset>
                                 </form>
                             </div> -->
 
@@ -437,10 +437,10 @@ foreach($going as $g){
 
                                <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                               
+
                             </div>
                         </div>
-                    
+
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
@@ -462,14 +462,14 @@ foreach($going as $g){
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                            <ul>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
