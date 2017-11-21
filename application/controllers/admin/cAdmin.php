@@ -40,10 +40,10 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data2['row'] = $array;
-    $data3['users']=$this->getUserCount();
+
+   		$data3['users']=$this->getUserCount();
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vAdmin', $data2);
-		$this->load->view('admin/vReport', $data3);
 	}
 
 	public function getUserCount(){
@@ -308,5 +308,10 @@ class CAdmin extends CI_Controller {
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vReport');
 	}
+
+	public function generateCard() {
+		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('admin/vCards');
+	}	
 
 }

@@ -128,8 +128,6 @@ class CLogin extends CI_Controller {
 
 		$this->session->userdata['userSession'] = json_decode(json_encode($this->session->userdata['userSession']));
 
-		print_r($this->session->userdata['userSession'] = json_decode(json_encode($this->session->userdata['userSession'])));
-
 		if($this->session->userdata['userSession']->userLevel != "Regular"  ){
 
 					redirect('admin/CAdmin');
