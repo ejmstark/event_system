@@ -1,8 +1,6 @@
  <body>
 
-        <div id="preloader">
-            <div id="status">&nbsp;</div>
-        </div>
+       
         <!-- Body content -->
 
         <nav class="navbar navbar-default ">
