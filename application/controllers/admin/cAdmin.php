@@ -9,6 +9,7 @@ class CAdmin extends CI_Controller {
 		// $this->load->model('MAdminUsers');
 		$this->load->model('MUserInfo');
 		$this->load->model('MEventInfo');
+		$this->load->model('MReports');
 		// $this->load->model('MUserInfo');
 	}
 
