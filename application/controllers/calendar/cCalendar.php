@@ -1,10 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 class cCalendar extends CI_Controller {
+
 	function __construct() {
 		parent::__construct();
 	 	$this->load->model('calendar/MCalendar');
-	 	$this->load->model('user/MUser');
+		$this->load->model('user/MUser');
 	 	$this->load->model('user/MEvent');
 	}
 
@@ -39,9 +41,9 @@ class cCalendar extends CI_Controller {
 		$data['event_data'] = $array;
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$this->load->helper('url');
-		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('imports/vHeaderCalendarPage');
 		$this->load->view('calendar/vCalendar',$data);
-		$this->load->view('imports/vFooterLandingPage',$this->data);
+		$this->load->view('imports/vFooterCalendarPage',$this->data);
 	}
 
 	public function AddEvent()
@@ -77,6 +79,7 @@ class cCalendar extends CI_Controller {
 			redirect($_SERVER['HTTP_REFERER']);
 		}
 	}
+
 	public function ajaxUpdate()
 	{
 		if (isset($_POST['Event'][0]) && isset($_POST['Event'][1]) && isset($_POST['Event'][2])){
@@ -298,6 +301,7 @@ class cCalendar extends CI_Controller {
 
 			}
 		}
+
 		if($this->MCalendar->update($id,$data)){
 			echo "OK";
 		}else{
