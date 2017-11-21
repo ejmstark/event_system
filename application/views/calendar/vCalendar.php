@@ -5,6 +5,33 @@
         </div>
         <!-- Body content -->
 
+
+
+        <div class="header-connect">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-8  col-xs-12">
+                        <!-- <div class="header-half header-call">
+                            <p>
+                                <span><i class="pe-7s-call"></i> +1 234 567 7890</span>
+                                <span><i class="pe-7s-mail"></i> your@company.com</span>
+                            </p>
+                        </div> -->
+                    </div>
+                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
+                        <div class="header-half header-social">
+                            <ul class="list-inline">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>       
+        <!--End top header -->
+
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -486,7 +513,7 @@
                 right: 'month,agendaWeek'
             },
             defaultDate: "<?php date_default_timezone_set('UTC'); echo date('d/M/Y'); ?>",
-            editable: true,
+            editable: false,
             eventLimit: true, // allow "more" link when too many events
             selectable: true,
             displayEventTime: true,
@@ -500,27 +527,34 @@
                     var endDate = moment(end).format('MM/DD/YYYY');
                     var startTime = moment(start).format('h:mm a');
                     var endTime = moment(end).format('h:mm a');
+                    var currentDate = moment().format('MM/DD/YYYY');
+
+
                     
-                    var dataSet = "startDate="+startDate+"&startTime="+startTime+"&endDate="+endDate+"&endTime="+endTime;
-                    $.ajax({
-                        type: "POST",
-                        url: '<?php echo site_url()?>/event/cEvent/viewCreateFromCalendar',
-                        data: dataSet,
-                        cache: false,
-                        success: function(result){
-                            // if(result=="error"){
-                                // $('#ModalEdit').html(result);
-                                // $('#ModalEdit').modal('show');
-                            // }else{
-                                // alert("Error");
-                            // }                
-                            //alert(result);
-                            $('body').html(result);
-                        },
-                        error: function(jqXHR, errorThrown){
-                            console.log(errorThrown);
-                        }
-                    });
+                    if(startDate<currentDate){
+                        $('#errmodal').modal('show');
+                    }else{
+                        var dataSet = "startDate="+startDate+"&startTime="+startTime+"&endDate="+endDate+"&endTime="+endTime;
+                        $.ajax({
+                            type: "POST",
+                            url: '<?php echo site_url()?>/event/cEvent/viewCreateFromCalendar',
+                            data: dataSet,
+                            cache: false,
+                            success: function(result){
+                                // if(result=="error"){
+                                    // $('#ModalEdit').html(result);
+                                    // $('#ModalEdit').modal('show');
+                                // }else{
+                                    // alert("Error");
+                                // }                
+                                //alert(result);
+                                $('body').html(result);
+                            },
+                            error: function(jqXHR, errorThrown){
+                                console.log(errorThrown);
+                            }
+                        });
+                    }
             },
  
             eventDrop: function(event, delta, revertFunc) { // 
@@ -599,6 +633,23 @@
     });
 </script>
 
+<div class="modal fade bd-example-modal-sm" id="errmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: red;">
+        <h2 style="color: white;">ERROR!</h2>
+      </div>
+      <div class="modal-body">
+        <h2><strong>Cannot add events on past dates!</strong></h2>
+        <h3>Please choose a different date.</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it.</button>
+      </div>
+    </div>
+  </div>
+</div>
+
         <!-- Footer area-->
         <div class="footer-area">
 
@@ -611,9 +662,13 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
-                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                               
+                                <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
+                                <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
+                                <ul class="footer-adress">
+                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
+                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
+                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                </ul>
                             </div>
                         </div>
                     
@@ -621,11 +676,27 @@
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
                                 <div class="footer-title-line"></div>
-                                 <ul class="footer-adress">
-                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
-                                </ul>
+                                <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
+                                <form>
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" placeholder="E-mail ... ">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
+                                        </span>
+                                    </div>
+                                    <!-- /input-group -->
+                                </form> 
+
+                                <div class="social pull-right"> 
+                                    <ul>
+                                        <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
+                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
+                                    </ul> 
+                                </div>
                             </div>
                         </div>
 
