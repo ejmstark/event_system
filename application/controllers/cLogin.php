@@ -22,7 +22,7 @@ class CLogin extends CI_Controller {
 
 // 	 	$this->load->library('../controllers/CInitialize');
 
-	 	
+
 
 	}
 
@@ -34,11 +34,11 @@ class CLogin extends CI_Controller {
 
 	}
 
-	
+
 
 	public function userLogin()
 
-	{	
+	{
 
 
 
@@ -48,7 +48,7 @@ class CLogin extends CI_Controller {
 
 		$user->setUser_password($this->input->post('Password'));
 
-		
+
 
 
 
@@ -60,7 +60,7 @@ class CLogin extends CI_Controller {
 
 		$result = $user->attemptLogin();
 
-		
+
 
 		if ($result) {
 
@@ -78,7 +78,7 @@ class CLogin extends CI_Controller {
 
 			}
 
-			
+
 
 		} else {
 
@@ -88,7 +88,7 @@ class CLogin extends CI_Controller {
 
 		}
 
-		
+
 
 	}
 
@@ -100,7 +100,7 @@ class CLogin extends CI_Controller {
 
       foreach ($result as $row) {
 
-        $sessionData = array('userID' => $row->account_id, 
+        $sessionData = array('userID' => $row->account_id,
 
                              'userLogName' => $row->user_name,
 
@@ -110,6 +110,7 @@ class CLogin extends CI_Controller {
 
                              'userLevel' => $row->user_type,
 
+							 'userSuperior' => $row->upgraded_by,
                       );
 
 
@@ -154,7 +155,7 @@ class CLogin extends CI_Controller {
 
 		$this->load->view('imports/vHeaderLandingPage');
 
-		$this->load->view('vLandingPage',$data);		
+		$this->load->view('vLandingPage',$data);
 
 		$this->load->view('imports/vFooterLandingPage',$this->data);
 
@@ -204,9 +205,8 @@ class CLogin extends CI_Controller {
 
 
 
-	
+
 
 }
 
 ?>
-
