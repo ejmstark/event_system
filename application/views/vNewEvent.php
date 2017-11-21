@@ -135,19 +135,6 @@
                                     <input type="text" class="form-control" name="event_details" required="">
                                 </div>
 
-    
-    
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-     
-   
-      
-
-
                                 <br>
                                 <h2>Ticket Details : </h2> 
                                  <div class="ticketContainer">
