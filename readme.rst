@@ -28,7 +28,6 @@ System Requirements:
 
 Below is the list of software tools and their corresponding version, accompanied by the usage for the deployment process.
 
-Software Tool	Version	Usage
 CodeIgniter	3.1.6 or higher	This provides the framework of the system using Php.
 
 FileZilla	3.28.0 or higher	Uploading the website to the chosen domain.
