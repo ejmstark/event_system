@@ -306,7 +306,6 @@ class CAdmin extends CI_Controller {
 					$array[] = $arrObj;
 			}
 			$data2['users']=$array;
-			
 		} else {
 			$data2['users']=array();
 		}
