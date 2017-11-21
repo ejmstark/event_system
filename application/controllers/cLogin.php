@@ -141,7 +141,20 @@ class CLogin extends CI_Controller {
 
 		$data['users'] = $this->MUser->getAllUsers();
 
-		$data['events'] = $this->MEvent->getAllApprovedEvents();
+		$result_data = $this->MEvent->getAllApprovedEvents();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->event_id = $value->event_id;
+				$arrObj->event_name = $value->event_name;
+				$arrObj->dateStart = $value->dateStart;
+				$arrObj->event_category = $value->event_category;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['events'] = $array;
 
 		$this->data['custom_js']= '<script type="text/javascript">
 

@@ -301,19 +301,54 @@ class CAdmin extends CI_Controller {
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data2['admin']=$array;
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
-		
+
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vAdminAccountMgt', $data2);
 	}
 
 	public function viewFinance() {
-
+		$result_data = array();//Replace with query
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				 $arrObj = new stdClass;
+				//Only interface filtering
+				//$arrObj->price
+				//$arrObj->ticket_count
+				 $array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		//$data['data']=$array;
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vFinance');
 	}
 
 	public function viewReport() {
-
+		$result_data = array();//
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				 $arrObj = new stdClass;
+				//Only interface filtering
+				// $arrObj->account_id = $value->account_id;
+				// $arrObj->user_name = $value->user_name;
+				// $arrObj->first_name = $value->first_name;
+				// $arrObj->middle_initial = $value->middle_initial;
+				// $arrObj->last_name = $value->last_name;
+				// $arrObj->email= $value->email;
+				// $arrObj->contact_no= $value->contact_no;
+				// $arrObj->birthdate= $value->birthdate;
+				// $arrObj->date_account_created = $value->date_account_created;
+				// $arrObj->gender = $value->gender;
+				// $arrObj->user_type = $value->user_type;
+				// $arrObj->user_status = $value->user_status;
+				// $arrObj->load_amt = $value->load_amt;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		//$data['data']=$array;
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vReport');
 	}
