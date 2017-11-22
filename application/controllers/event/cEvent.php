@@ -40,6 +40,35 @@ class cEvent extends CI_Controller {
 
 	}
 
+	public function viewEditFromCalendar(){
+	
+	
+		$data1['start'] = $_POST['start'];
+		$data1['end'] = $_POST['end'];
+		$data1['title'] = $_POST['title'];
+		$data1['details'] = $_POST['details'];
+		$data1['category'] = $_POST['category'];
+		$data1['venue'] = $_POST['venue'];
+
+		$id = $_POST['id'];
+		
+		$tid = $this->MEvent->joinEventTicketType($id);
+
+
+		$data2['ticket_info'] = null;
+		if($tid){
+			$data2['ticket_info'] = $tid;
+		}
+       
+
+        $data = array_merge($data1, $data2);
+
+		$result = $this->load->view('vEditEvent',$data,TRUE);
+		//$this->viewCreateEvent();
+		echo $result;
+		
+	}
+
 	public function viewCreateEvent()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
