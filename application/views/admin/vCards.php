@@ -96,7 +96,7 @@
         <div class="admin-wrapper">
           <div class="row justify-content-end">
             <div class="col-10">
-              <form class="form inline">
+              <form id="gForm" class="form inline" method="POST" action="<?php echo site_url('finance/cCard/card'); ?>">
                 <h3><center>Generate Card</center></h3><br><br>
                 <table class="table table-responsive table-sm">
                   <thead>
@@ -112,7 +112,7 @@
                     <td>
                       <span class="input-group-btn">
                        <button class="btn btn-secondary col-1 cardsbtn unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
-                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty1" placeholder="Quantity" aria-label="Quantity">
+                       <input type="text" name="qty1" class="form-control col-sm-3 qtyinput" id="qty1" placeholder="Quantity" aria-label="Quantity">
                        <button class="btn btn-secondary col-1 cardsbtn unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span>
                       
@@ -124,7 +124,7 @@
                       <td>
                         <span class="input-group-btn">
                        <button class="btn btn-secondary col-1 dosM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty2" placeholder="Quantity" aria-label="Quantity">
+                       <input type="text" name="qty2" class="form-control col-sm-3 qtyinput" id="qty2" placeholder="Quantity" aria-label="Quantity">
                        <button class="btn btn-secondary col-1 dosP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span>
                       </td>
@@ -134,7 +134,7 @@
                       <td>&#x20B1; 500</td>
                       <td><span class="input-group-btn">
                        <button class="btn btn-secondary col-1 tresM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty3" placeholder="Quantity" aria-label="Quantity">
+                       <input type="text" name="qty3" class="form-control col-sm-3 qtyinput" id="qty3" placeholder="Quantity" aria-label="Quantity">
                        <button class="btn btn-secondary col-1 tresP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span></td>
                     </tr>
@@ -142,17 +142,15 @@
                       <td>&#x20B1; 1000</td>
                       <td><span class="input-group-btn">
                        <button class="btn btn-secondary col-1 kwatroM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                       <input type="text" class="form-control col-sm-3 qtyinput" id="qty4" placeholder="Quantity" aria-label="Quantity">
+                       <input type="text" name="qty4" class="form-control col-sm-3 qtyinput" id="qty4" placeholder="Quantity" aria-label="Quantity">
                        <button class="btn btn-secondary col-1 kwatroP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                       </span></td>
-                    </tr>
-                      
-                     
+                    </tr>   
                   </tbody>
                 </table>
 
-                <center><button class="btn btn-success" type="button"><strong>GENERATE</strong></button></center>
-             
+                <center><button id="generate" class="btn btn-success" type="submit"><strong>GENERATE</strong></button></center>
+             </form>
             </div>
           </div>
         </div>
@@ -254,7 +252,24 @@ var value = 0 ;
       } 
     });
 
+      $(document).on('submit',"#gForm",function(e){
+        e.preventDefault();
+        var _url = $(this).attr('action');
 
+
+        $.ajax({
+          url: _url,
+          method:"POST",
+          data: $(this).serialize(),
+          success: function(){ 
+                    alert("sucess");
+                    $(':input').val(0);
+                  },
+          error: function(){
+                    alert("error!");
+                  }
+        });
+      });
   });
 </script>
   </body>
