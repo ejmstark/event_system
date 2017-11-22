@@ -126,25 +126,25 @@
     
         
         
-                    <div class='input-group date' id='datetimepicker1'>
+                    <!--<div class='input-group date' id='datetimepicker1'>
                         <input type='text' class="form-control" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                    </div>
+                    </div>-->
          
-       
+                    <h2>Ticket Details : </h2> 
           
     
     
                                     <br>
-
+                                    <?php $x = 1; ?>
                                     <?php foreach($ti as $t) { ?>
-                                        <h2>Ticket Details : </h2> 
+                                        
                                      <div class="ticketContainer">
                                         <span>TICKET TYPE </span> <br>
                                         <div class="select-field">
-                                             <input type="text" value="<?php echo $t->ticket_name;?>" class="form-control" required="" name="ticketType1" placeholder="Ticket type"> 
+                                             <input type="text" value="<?php echo $t->ticket_name;?>" class="form-control" required="" name="<?php echo 'ticketType'.$x; ?>" placeholder="Ticket type"> 
                                            <!--  <select name="ticketType">
                                                 <option value="">Free</option>
                                                 <option value="">VIP</option>
@@ -154,20 +154,22 @@
                                     <div class="ticketContainer">
                                         <span>NUMBER OF TICKETS</span>
                                         <div class="select-field">  
-                                            <input type="number" value="<?php echo $t->ticket_count;?>" class="form-control" min="1" required="" name="no_tickets_total1" placeholder="Ticket count"> 
+                                            <input type="number" value="<?php echo $t->ticket_count;?>" class="form-control" min="1" required="" name="<?php echo 'no_tickets_total'.$x; ?>" placeholder="Ticket count"> 
                                         </div>
                                     </div>
                                     <div class="ticketContainer">
                                         <span>PRICE OF TICKET</span>
                                         <div class="select-field">  
-                                            <input type="number" value="<?php echo $t->price;?>" class="form-control" min="0" required="" name="price_tickets_total1" placeholder="Ticket price"> 
+                                            <input type="number" value="<?php echo $t->price;?>" class="form-control" min="0" required="" name="<?php echo 'price_tickets_total'.$x; ?>" placeholder="Ticket price"> 
                                         </div>
                                     </div>
-                                       
-    
+                                        
+                                    
                                     <br><br>
-                                    <?php } ?>
-    
+                                    <?php $x++; } ?>
+                                    
+                                    <input type="text" name="foreachloop" value="<?php echo $x-1;?>" hidden>
+
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default" value="Create Event"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit</button>
                                     </div>
