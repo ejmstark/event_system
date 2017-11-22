@@ -460,4 +460,23 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
+
+	public function numEvents($startDate, $endDate){
+		$result = $this->MReports->numEvents($startDate, $endDate);
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+	
+
+	public function getActiveUsers($startDate, $endDate){
+		$result = $this->MReports->countUsers($startDate, $endDate);
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
 }

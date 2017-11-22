@@ -94,11 +94,40 @@
                 <h3><center>Reports<center></h3><br>
                   <h5><center>Registered Users</center></h5>
                   
-                
+                  <!----- REPORTS CHART --> 
                   <canvas id="line-chart" width="600" height="200"></canvas>
 
+                  <!--- jesus part -->
+                    <?php
+                      $result =$this->MReports->numEvents('2017-08-01 01:00:00', '2017-09-01 01:00:00');
+                      
+                      echo "<br>Number of approved events for month of Aug: ".$result."<br>";
 
-                  <!-- query = SELECT * FROM `user_account` WHERE `user_type` = 'Regular' AND `user_status` = 'Active' AND `date_account_created` BETWEEN '2017-10-01 00:00:00.000000' AND '2017-10-31 00:00:00.000000'-->
+                      $result =$this->MReports->numEvents('2017-09-01 01:00:00', '2017-10-01 01:00:00');
+                      
+                      echo "<br>Number of approved events for month of Sept: ".$result."<br>";
+
+                      $result =$this->MReports->numEvents('2017-10-01 01:00:00', '2017-11-01 01:00:00');
+                   
+                      echo "<br>Number of approved events for month of Oct: ".$result."<br>";
+                      
+                      $result =$this->MReports->numEvents('2017-11-01 01:00:00', '2017-12-01 01:00:00');
+                      
+                      echo "<br>Number of approved events for month of Nov: ".$result."<br>";
+
+                      $result =$this->MReports->numEvents('2017-12-01 01:00:00', '2018-01-01 01:00:00');
+                      
+                      echo "<br>Number of approved events for month of Dec: ".$result."<br>";
+
+
+
+
+                      $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
+                      
+                          
+                      echo "<br>Num of active users for month of Oct: ".$result;
+
+                  ?>
             </div>
           </div>
         </div>

@@ -11,9 +11,30 @@
 			$query = $this->db->query($statement);
 
 			return $query->result_array();
-
-
 		}
+
+		public function numEvents($startDate, $endDate){
+			$query = "SELECT `event_name` 
+					  FROM `event_info` 
+					  WHERE  `event_status` = 'APPROVED' AND `date_created` BETWEEN '$startDate' AND '$endDate'";
+			$result = $this->db->query($query);
+			
+			$return = $result->num_rows();
+			return $return;
+			
+		}
+		
+		public function countUsers($startDate, $endDate){
+			$query = "SELECT DISTINCT `user_id` 
+					  FROM `ticket`
+					  WHERE date_sold BETWEEN '$startDate' AND '$endDate'";
+			$result = $this->db->query($query);
+	
+			$return = $result->num_rows();
+			return $return;
+		}
+
+		
 
 	}
 ?>
