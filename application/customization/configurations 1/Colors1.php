@@ -2,7 +2,9 @@
   class Colors1{
     // Declare constants of colors. One will make those NAVBAR_BASE_COLOR stuff
     // and the other will set values for them.
-	public $colors; //Colors is an array that will hold the hex values of colors in the color palette*/
+	public $colors = array("#ffeb3b", "#fbc02d", "#f4511e", "#d81b60", "#ad1457", "#4a148c", "#000000"); 
+	//Colors is an array that will hold the hex values of colors in the color palette*/
+	
 	/*
 	1.) Purple-yellow (mood)
 	#ffeb3b
