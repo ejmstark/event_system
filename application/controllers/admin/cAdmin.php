@@ -13,8 +13,6 @@ class CAdmin extends CI_Controller {
 		// $this->load->model('MUserInfo');
 	}
 
-
-
 	public function index()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -122,6 +120,22 @@ class CAdmin extends CI_Controller {
 		}
 	}
 
+	//view all searched user
+	public function searchUsers(){
+		$user_module = new MUserInfo();
+		if(isset($_POST['search_val'])){
+			$data = array('user_name' => $_POST['search_val']);
+			$result= $this->MUserInfo->read_where($data);
+			if($result){
+				return $result;
+			}else{
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	public function Ban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -282,6 +296,36 @@ class CAdmin extends CI_Controller {
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 	}
+	//Roald Code
+	//this function will show the search results coming from viewUserAccountMgt()
+	public function viewSearchUserAccountMgt() {
+		$result_data=$this->searchUsers();
+		if($result_data != false){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
+			$data2['users']=$array;
+		} else {
+			$data2['users']=array();
+		}
+		
+		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('admin/vUserAccountMgt', $data2);
+	}
 
 	public function viewAdminAccountMgt() {
 		$result_data=$this->readAllAdmin();
@@ -426,6 +470,25 @@ class CAdmin extends CI_Controller {
 		$data = array('account_id' => $this->session->userdata['userSession']->userID);
 		$result= $this->MUserInfo->read_where($data);
 
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+
+	public function numEvents($startDate, $endDate){
+		$result = $this->MReports->numEvents($startDate, $endDate);
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+	
+
+	public function getActiveUsers($startDate, $endDate){
+		$result = $this->MReports->countUsers($startDate, $endDate);
 		if($result){
 			return $result;
 		}else{
