@@ -28,17 +28,21 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->event_id = $value->event_id;
-				$arrObj->event_date_start = $value->event_date_start;
-				$arrObj->event_date_end = $value->event_date_end;
-				$arrObj->event_name = $value->event_name;
-				$arrObj->no_tickets_total = $value->no_tickets_total;
-				$arrObj->event_status = $value->event_status;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->no_tickets_total = $value->no_tickets_total;
+					$arrObj->event_status = $value->event_status;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
+
 		$data2['row'] = $array;
 
    		$data3['users']=$this->getUserCount();
@@ -253,22 +257,25 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->account_id = $value->account_id;
-				$arrObj->user_name = $value->user_name;
-				$arrObj->first_name = $value->first_name;
-				$arrObj->middle_initial = $value->middle_initial;
-				$arrObj->last_name = $value->last_name;
-				$arrObj->email= $value->email;
-				$arrObj->contact_no= $value->contact_no;
-				$arrObj->birthdate= $value->birthdate;
-				$arrObj->date_account_created = $value->date_account_created;
-				$arrObj->gender = $value->gender;
-				$arrObj->user_type = $value->user_type;
-				$arrObj->user_status = $value->user_status;
-				$arrObj->load_amt = $value->load_amt;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data2['users']=$array;
@@ -281,22 +288,25 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->account_id = $value->account_id;
-				$arrObj->user_name = $value->user_name;
-				$arrObj->first_name = $value->first_name;
-				$arrObj->middle_initial = $value->middle_initial;
-				$arrObj->last_name = $value->last_name;
-				$arrObj->email= $value->email;
-				$arrObj->contact_no= $value->contact_no;
-				$arrObj->birthdate= $value->birthdate;
-				$arrObj->date_account_created = $value->date_account_created;
-				$arrObj->gender = $value->gender;
-				$arrObj->user_type = $value->user_type;
-				$arrObj->user_status = $value->user_status;
-				$arrObj->upgraded_by = $value->upgraded_by;//Added by admin module
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->upgraded_by = $value->upgradedBy;//Added by admin module
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data2['admin']=$array;
@@ -311,12 +321,15 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				 $arrObj = new stdClass;
-				//Only interface filtering
-				//$arrObj->price
-				//$arrObj->ticket_count
-				 $array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					 $arrObj = new stdClass;
+					//Only interface filtering
+					//$arrObj->price
+					//$arrObj->ticket_count
+					 $array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
@@ -329,23 +342,26 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				 $arrObj = new stdClass;
-				//Only interface filtering
-				// $arrObj->account_id = $value->account_id;
-				// $arrObj->user_name = $value->user_name;
-				// $arrObj->first_name = $value->first_name;
-				// $arrObj->middle_initial = $value->middle_initial;
-				// $arrObj->last_name = $value->last_name;
-				// $arrObj->email= $value->email;
-				// $arrObj->contact_no= $value->contact_no;
-				// $arrObj->birthdate= $value->birthdate;
-				// $arrObj->date_account_created = $value->date_account_created;
-				// $arrObj->gender = $value->gender;
-				// $arrObj->user_type = $value->user_type;
-				// $arrObj->user_status = $value->user_status;
-				// $arrObj->load_amt = $value->load_amt;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					 $arrObj = new stdClass;
+					//Only interface filtering
+					// $arrObj->account_id = $value->account_id;
+					// $arrObj->user_name = $value->user_name;
+					// $arrObj->first_name = $value->first_name;
+					// $arrObj->middle_initial = $value->middle_initial;
+					// $arrObj->last_name = $value->last_name;
+					// $arrObj->email= $value->email;
+					// $arrObj->contact_no= $value->contact_no;
+					// $arrObj->birthdate= $value->birthdate;
+					// $arrObj->date_account_created = $value->date_account_created;
+					// $arrObj->gender = $value->gender;
+					// $arrObj->user_type = $value->user_type;
+					// $arrObj->user_status = $value->user_status;
+					// $arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
