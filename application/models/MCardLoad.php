@@ -1,8 +1,8 @@
 <?php
 	class MCardLoad extends MY_model {
 
-		const DB_TABLE = "card_load";
-    	const DB_TABLE_PK = "card_id";
+		const DB_TABLE = "card";
+    	const DB_TABLE_PK = "cardId";
 
     	public function __construct(){
 
