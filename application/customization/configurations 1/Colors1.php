@@ -2,6 +2,55 @@
   class Colors1{
     // Declare constants of colors. One will make those NAVBAR_BASE_COLOR stuff
     // and the other will set values for them.
+	public $colors; //Colors is an array that will hold the hex values of colors in the color palette*/
+	/*
+	1.) Purple-yellow (mood)
+	#ffeb3b
+	#fbc02d
+	#f4511e
+	#d81b60
+	#ad1457
+	#4a148c
+	#000000
+
+	2.) Black-yellow
+	#fcf3cf
+	#f7dc6f
+	#f4d03f
+	#f9e79f
+	#ec7063
+	#1b2631
+	#000000
+
+	3.) Purple-yellow(Dusk)
+	#fff176
+	#ab47bc
+	#9c27b0
+	#ec407a
+	#5b2c6f
+	#4a235a
+	#000000
+
+	4.)Blue-Red
+	#f44336
+	#fff59d
+	#fff176
+	#c5e1a5
+	#29b6f6
+	#154360
+	#000000
+
+	5.)Blue
+	HEX
+
+	#a1fcf7
+	#2effe3
+	#29b6f6
+	#0097a7
+	#01579b
+	#154360
+	#000000
+	*/
 
   	//INDEX PAGE
     public const INDEX_PAGE_EVENT_NAME_COLOR = #000000;

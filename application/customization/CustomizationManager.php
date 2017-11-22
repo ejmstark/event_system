@@ -14,23 +14,17 @@
 
     // Load the colors from the Colors1.php file in the selected configuration.
     // Call this from within SetTheme method.
-    public function LoadColors(string configName){
-        if("configurations 1" == configName){
-            $colors = new Colors1();
-        }else if("configurations 2" == configName){
-            //config 2 color class instantiation
-        }else{
-            //for default color class instantiation
-        }
+    public function configColor(string configName){
+        return $color = new Colors1();
     }
 
     // Call this from within SetTheme method.
-    public function LoadImages(string configName){
+    public function configImage(string configName){
 
     }
 
     // Call this from within SetTheme method.
-    public function LoadLanguages(string configName){
+    public function configLanguage(string configName){
 
     }
   }
