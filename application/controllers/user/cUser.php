@@ -24,6 +24,7 @@ class cUser extends CI_Controller {
 			$cardNew = $u[0]->load_amt + $card[0]->card_amount;
 			
 			$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
+
 			if($res){
 				$res1 = $this->MCardLoad->update($code, array('card_active' => '0'));
 				redirect("event/cEvent/viewEvents");
@@ -73,12 +74,28 @@ class cUser extends CI_Controller {
 					  'user_type' => 'Regular',
 					  'date_account_created' => $now->format('Y-m-d H:i:s')	
 					);
+	
+		
+		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
+		$res1 = $this->MUser->read_where(array('email' => $data['email']));
 
-		$result = $user->insert($data);
+    	if($res){
+    			redirect('user/cUser/viewSignUp');
+				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
-		if($result){
+		}else if($res1){
+				redirect('user/cUser/viewSignUp');
+				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+				
+		}else{
+
+			$result = $user->insert($data);
+
+			if($result){
 			//$this->index();
 			redirect('event/cEvent/viewEvents');
+		}
+
 		}
 
 		# code...
@@ -124,9 +141,7 @@ class cUser extends CI_Controller {
 
 	public function search(){
 		$data['events'] = $this->MEvent->getAllEvents();
-		
-		$this->load->view('imports/vHeaderLandingPage');
-		//$this->load->view('imports/vHeader');
+		$this->load->view('imports/vHeader');
 		$this->load->view('user/vSearch.php');
 		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
