@@ -23,6 +23,17 @@
 			return $return;
 			
 		}
+
+
+		public function numEventPerMonth($year){
+			$query = "SELECT COUNT(*) as EventCount FROM `event_info` WHERE `event_status` = 'APPROVED' AND YEAR(`date_created`) = '2017'";
+			$result = $this->db->query($query);
+
+
+			console.log($result);
+			return $result->result_array();
+
+		}
 		
 		public function countUsers($startDate, $endDate){
 			$query = "SELECT DISTINCT `user_id` 
@@ -34,7 +45,7 @@
 			return $return;
 		}
 
-		
+
 
 	}
 ?>
