@@ -181,21 +181,21 @@
                 <div class="form-group" >
                 	<label for="" class="col-8 control-label">First name:</label>
                 	<div class="col-8">
-                		<input class="form-control" type="text" name="fname" required="">
+                		<input class="form-control" pattern="[a-zA-Z]+"  type="text" name="fname" required="">
                 	</div>
                 </div>
 
                 <div class="form-group" >
                 	<label for="" class="col-8 control-label">Middle Initial:</label>
                 	<div class="col-8">
-                		<input class="form-control" type="text" name="miname" required="">
+                		<input class="form-control" pattern="[a-zA-Z]+"  type="text" name="miname" required="">
                 	</div>
                 </div>
 
                 <div class="form-group" >
                 	<label for="" class="col-8 control-label">Last name:</label>
                 	<div class="col-8">
-                		<input class="form-control" type="text" name="lname" required="">
+                		<input class="form-control" pattern="[a-zA-Z]+"  type="text" name="lname" required="">
                 	</div>
                 </div>
 
@@ -217,10 +217,9 @@
                 	<label for="" class="col-8 control-label">Gender:</label>
                 	<div class="col-8">
                   <select class="form-control" name="gender" required=""> <br>
-                    <option selected="" value="Male">Select Gender</option>
-                    <option value="Male">male</option>
-                    <option value="Female">female</option>
-                    <option value="Other">other</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
                   </select>
                 	</div>
                 </div>
@@ -229,7 +228,6 @@
                 	<label for="" class="col-8 control-label">User type:</label>
                 	<div class="col-8">
                   <select class="form-control" name="userType" required=""> <br>
-                    <option selected="" value="Admin">Select User Type</option>
                     <option value="Admin">Admin</option>
                     <option value="Superadmin">Super Admin</option>
                   </select>
@@ -239,21 +237,21 @@
                 <div class="form-group" >
                 	<label for="" class="col-8 control-label">Contact no:</label>
                 	<div class="col-8">
-                		<input class="form-control" type="number" min="11" name="contact" required="">
+                		<input class="form-control"  type="text"  name="contact" required="">
                 	</div>
                 </div>
 
                 <div class="form-group" >
                 	<label for="" class="col-8 control-label">Username:</label>
                 	<div class="col-8">
-                		<input class="form-control" type="text" name="uname" required="">
+                		<input class="form-control" type="text" minlength="6" pattern="[a-zA-Z0-9]+" name="uname" required="">
                 	</div>
                 </div>
 
                 <div class="form-group" >
                 	<label for="" class="col-8 control-label">Password:</label>
                 	<div class="col-8">
-                		<input class="form-control" type="password" name="password" required="">
+                		<input class="form-control" minlength="8" pattern="[a-zA-Z0-9]+" type="password" name="password" required="">
                 	</div>
                 </div>
 

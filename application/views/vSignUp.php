@@ -98,7 +98,6 @@
                                 <div class="form-group">
                                     <label for="email">Gender</label>
                                     <select class="form-control" name="gender">
-                                        <option selected="" value="Male">Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>

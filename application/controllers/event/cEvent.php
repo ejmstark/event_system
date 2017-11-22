@@ -86,7 +86,15 @@ class cEvent extends CI_Controller {
 		// }else{
 			
 		// }
-		$data = array_merge($data1,$data2,$data3); 
+		$sess_id = $this->session->userdata('userSession');
+
+   		if(!empty($sess_id)){
+   			
+		var_dump($this->session->userdata());
+		$sess_id = $this->session->userdata('userSession');
+
+   		if(!empty($sess_id)){
+			$data = array_merge($data1,$data2,$data3); 
 		$data['going']= $this->MEvent->getGoingToEvent($id);
 		$data['user']= $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 		if($this->error != ""){
@@ -98,11 +106,13 @@ class cEvent extends CI_Controller {
 			$data['successMsg']= $this->success;
 		 // print_r($data);
 		}
-
 		$this->load->view('imports/vHeaderLandingPage');		
 		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
-
+		}else{
+			redirect("cLogin");
+		}
+		
 
 		// $this->load->view('imports/vHeader');
 		// $this->load->view('user/vEventRegistration', $data);
