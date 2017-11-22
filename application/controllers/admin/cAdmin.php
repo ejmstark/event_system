@@ -207,8 +207,11 @@ class CAdmin extends CI_Controller {
 			$response = $user_module-> updateUserType($id, "Admin");
 
 			if ($response) {
- 				redirect('admin/cAdmin/viewAdminAccountMgt');
- 			}
+				$response2 = $user_module->updateUpgradedBy($id,NULL);
+				if($response2){
+ 					redirect('admin/cAdmin/viewAdminAccountMgt');
+				}
+			}
 		}
 	}
 
@@ -222,7 +225,10 @@ class CAdmin extends CI_Controller {
 			$response = $user_module-> updateUserType($id, "Superadmin");
 
 			if ($response) {
- 				redirect('admin/cAdmin/viewAdminAccountMgt');
+				$response2 = $user_module->updateUpgradedBy($id,$this->session->userdata['userSession']->userID);
+				if($response2){
+ 					redirect('admin/cAdmin/viewAdminAccountMgt');
+				}
  			}
 		}
 	}
@@ -333,22 +339,60 @@ class CAdmin extends CI_Controller {
 				$arrObj->gender = $value->gender;
 				$arrObj->user_type = $value->user_type;
 				$arrObj->user_status = $value->user_status;
+				$arrObj->upgraded_by = $value->upgraded_by;//Added by admin module
 				$array[] = $arrObj;
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data2['admin']=$array;
+		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
+
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vAdminAccountMgt', $data2);
 	}
 
 	public function viewFinance() {
-
+		$result_data = array();//Replace with query
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				 $arrObj = new stdClass;
+				//Only interface filtering
+				//$arrObj->price
+				//$arrObj->ticket_count
+				 $array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		//$data['data']=$array;
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vFinance');
 	}
 
 	public function viewReport() {
-
+		$result_data = array();//
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				 $arrObj = new stdClass;
+				//Only interface filtering
+				// $arrObj->account_id = $value->account_id;
+				// $arrObj->user_name = $value->user_name;
+				// $arrObj->first_name = $value->first_name;
+				// $arrObj->middle_initial = $value->middle_initial;
+				// $arrObj->last_name = $value->last_name;
+				// $arrObj->email= $value->email;
+				// $arrObj->contact_no= $value->contact_no;
+				// $arrObj->birthdate= $value->birthdate;
+				// $arrObj->date_account_created = $value->date_account_created;
+				// $arrObj->gender = $value->gender;
+				// $arrObj->user_type = $value->user_type;
+				// $arrObj->user_status = $value->user_status;
+				// $arrObj->load_amt = $value->load_amt;
+				$array[] = $arrObj;
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		//$data['data']=$array;
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vReport');
 	}
@@ -356,6 +400,64 @@ class CAdmin extends CI_Controller {
 	public function generateCard() {
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vCards');
-	}	
+	}
 
+	public function updateAdmin() {
+		$user = new MUserInfo();
+
+		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+
+		$data = array('user_name' => $this->input->post('uuname'),
+					  'password' => $this->input->post('upassword'),
+					  'first_name' => $this->input->post('ufname'),
+					  'last_name' => $this->input->post('ulname'),
+					  'middle_initial' => $this->input->post('uminame'),
+					  'email' => $this->input->post('uemail'),
+					  'birthdate' => $this->input->post('ubdate'),
+					  'gender' => $this->input->post('ugender'),
+					  'contact_no' => $this->input->post('ucontact'),
+					  'user_type' =>  $this->input->post('uuserType'),
+					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					);
+
+		$result = $user->update($this->session->userdata['userSession']->userID, $data);
+
+		if($result){
+			//$this->index();
+			redirect('admin/cAdmin/viewAdminAccountMgt');
+		}
+	}
+
+	public function Delete($id,$frm){
+		$user_module = new MUserInfo();
+
+		$data = array('account_id' => $id);
+		$results = $this->MUserInfo->read_where($data);
+
+		if($results){
+			$response = $user_module-> updateUserStatus($id, "Deleted");
+
+			if ($response) {
+				if($frm=="admin"){
+					redirect('cLogin/userLogout');
+				}else if($frm=="user"){
+					redirect('cLogin/userLogout');
+				}
+
+ 			}
+		}
+	}
+
+	public function readOwnAdminAccount() {
+		$user_module = new MUserInfo();
+
+		$data = array('account_id' => $this->session->userdata['userSession']->userID);
+		$result= $this->MUserInfo->read_where($data);
+
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
 }

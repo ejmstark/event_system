@@ -9,11 +9,24 @@ class CInitialize extends CI_Controller {
 	}
 
 	public function index()
-	{	
+	{
 		if ($this->session->userdata('userSession')) {
 			redirect('cLogin/viewDashBoard');
 		} else {
-			$data['events'] = $this->MEvent->getAllApprovedEvents();
+			$result_data = $this->MEvent->getAllApprovedEvents();
+			//////////////////////////////////////////////////////////////////////////////
+			//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+			/////////////////////////////////////////////////////////////////////////////
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->dateStart = $value->dateStart;
+					$arrObj->event_category = $value->event_category;
+					$array[] = $arrObj;
+			}
+			////////////STOPS HERE///////////////////////////////////////////////////
+			$data['events'] = $array;
 			$this->load->view('imports/vHeaderHomepage');
 			$this->load->view('vHomepage',$data);
 			$this->load->view('imports/vFooterHomepage');

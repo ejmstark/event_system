@@ -1,36 +1,7 @@
  <body>
 
-        <div id="preloader">
-            <div id="status">&nbsp;</div>
-        </div>
+       
         <!-- Body content -->
-
-
-
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <!-- <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> +1 234 567 7890</span>
-                                <span><i class="pe-7s-mail"></i> your@company.com</span>
-                            </p>
-                        </div> -->
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>       
-        <!--End top header -->
 
         <nav class="navbar navbar-default ">
             <div class="container">
@@ -510,7 +481,7 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek'
+                right: 'month'
             },
             defaultDate: "<?php date_default_timezone_set('UTC'); echo date('d/M/Y'); ?>",
             editable: false,
@@ -519,21 +490,30 @@
             displayEventTime: true,
             timeFormat: 'hh:mm a:',
             selectHelper: true,
-            select: function(start, end) {
-                // $('#ModalAdd #start').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
-                // $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
-                // $('#ModalAdd').modal('show');
+           select: function(start, end) {
                     var startDate = moment(start).format('MM/DD/YYYY');
                     var endDate = moment(end).format('MM/DD/YYYY');
                     var startTime = moment(start).format('h:mm a');
                     var endTime = moment(end).format('h:mm a');
                     var currentDate = moment().format('MM/DD/YYYY');
 
+                    var date = currentDate.split("/");
+                    var start = startDate.split("/");
 
-                    
-                    if(startDate<currentDate){
-                        $('#errmodal').modal('show');
-                    }else{
+                    var flag = true;
+
+                    if(start[2] <= date[2] ){
+                        if(start[0] <= date[0]){
+                                if(start[1]< date[1]){
+                                     $('#errmodal').modal('show');
+                                    flag = false;
+                                }
+                        }
+                       
+                    }
+
+
+                    if(flag){
                         var dataSet = "startDate="+startDate+"&startTime="+startTime+"&endDate="+endDate+"&endTime="+endTime;
                         $.ajax({
                             type: "POST",
@@ -541,13 +521,6 @@
                             data: dataSet,
                             cache: false,
                             success: function(result){
-                                // if(result=="error"){
-                                    // $('#ModalEdit').html(result);
-                                    // $('#ModalEdit').modal('show');
-                                // }else{
-                                    // alert("Error");
-                                // }                
-                                //alert(result);
                                 $('body').html(result);
                             },
                             error: function(jqXHR, errorThrown){
@@ -650,7 +623,7 @@
   </div>
 </div>
 
-        <!-- Footer area-->
+         <!-- Footer area-->
         <div class="footer-area">
 
             <div class=" footer">
@@ -662,13 +635,9 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                                <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
-                                <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
-                                <ul class="footer-adress">
-                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
-                                </ul>
+                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
+                                
                             </div>
                         </div>
                     
@@ -676,27 +645,11 @@
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
                                 <div class="footer-title-line"></div>
-                                <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
+                                <ul class="footer-adress">
+                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
+                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
+                                </ul>
 
-                                <form>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </form> 
-
-                                <div class="social pull-right"> 
-                                    <ul>
-                                        <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul> 
-                                </div>
                             </div>
                         </div>
 
@@ -723,5 +676,7 @@
 
         </div>
           
+
+
        
    
