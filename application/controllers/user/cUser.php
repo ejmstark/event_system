@@ -80,11 +80,14 @@ class cUser extends CI_Controller {
 		$res1 = $this->MUser->read_where(array('email' => $data['email']));
 
     	if($res){
-    			redirect('user/cUser/viewSignUp');
+    			$this->session->set_flashdata('error_msg','Username taken');
+    			$this->viewSignUp();
+    			// redirect('user/cUser/viewSignUp',"refresh");
 				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
 		}else if($res1){
-				redirect('user/cUser/viewSignUp');
+			$this->session->set_flashdata('error_msg','Email taken');
+				$this->viewSignUp();
 				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
 				
 		}else{

@@ -71,6 +71,12 @@
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
                             <h2>New account : </h2> 
+                            <?php if ($this->session->flashdata('error_msg')): ?>
+                                <div class="alert alert-danger" style="margin-top: 15px;">
+                                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                                    <?php echo $this->session->flashdata('error_msg'); ?>
+                                </div>
+                            <?php endif ?>
                             <form action="<?php echo site_url();?>/user/cUser/signup" method="post">
                                 <div class="form-group">
                                     <label for="name">First Name</label>
