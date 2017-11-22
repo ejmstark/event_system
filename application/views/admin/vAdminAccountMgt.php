@@ -237,7 +237,7 @@
                 <div class="form-group" >
                 	<label for="" class="col-8 control-label">Contact no:</label>
                 	<div class="col-8">
-                		<input class="form-control"  type="text"  name="contact" required="">
+                		<input class="form-control" pattern="^(09)\d{9}$"  type="text"  name="contact" required="">
                 	</div>
                 </div>
 
