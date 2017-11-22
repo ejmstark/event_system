@@ -44,6 +44,12 @@
             <div class="col-10">
               <h3><center>Admin Management<center></h3>
               <button class="btn btn-outline-primary" style="margin-bottom:25px;" type="button" name="button" data-toggle="modal" data-target="#addAdmin">Add Admin</button>
+              <?php if ($this->session->flashdata('error_msg')): ?>
+                                <div class="alert alert-danger" style="margin-top: 15px;">
+                                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                                    <?php echo $this->session->flashdata('error_msg'); ?>
+                                </div>
+                            <?php endif ?>
               <table class="table table-hover">
                 <thead class="">
                     <tr>

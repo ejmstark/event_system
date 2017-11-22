@@ -10,6 +10,7 @@ class CAdmin extends CI_Controller {
 		$this->load->model('MUserInfo');
 		$this->load->model('MEventInfo');
 		$this->load->model('MReports');
+		$this->load->model('MUser');
 		// $this->load->model('MUserInfo');
 	}
 
@@ -256,11 +257,31 @@ class CAdmin extends CI_Controller {
 					  'date_account_created' => $now->format('Y-m-d H:i:s')
 					);
 
-		$result = $user->insert($data);
+		
 
-		if($result){
-			//$this->index();
-			redirect('admin/cAdmin/viewAdminAccountMgt');
+		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
+		$res1 = $this->MUser->read_where(array('email' => $data['email']));
+
+    	if($res){
+    			$this->session->set_flashdata('error_msg','Username taken');
+    			$this->viewAdminAccountMgt();
+    			// redirect('user/cUser/viewSignUp',"refresh");
+				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
+
+		}else if($res1){
+			$this->session->set_flashdata('error_msg','Email taken');
+				$this->viewAdminAccountMgt();
+				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+				
+		}else{
+
+			$result = $user->insert($data);
+
+				
+			if($result){
+				//$this->index();
+				redirect('admin/cAdmin/viewAdminAccountMgt');
+			}
 		}
 
 		# code...
