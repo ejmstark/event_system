@@ -24,7 +24,6 @@ class cUser extends CI_Controller {
 			$cardNew = $u[0]->load_amt + $card[0]->card_amount;
 			
 			$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
-
 			if($res){
 				$res1 = $this->MCardLoad->update($code, array('card_active' => '0'));
 				redirect("event/cEvent/viewEvents");
@@ -125,7 +124,9 @@ class cUser extends CI_Controller {
 
 	public function search(){
 		$data['events'] = $this->MEvent->getAllEvents();
-		$this->load->view('imports/vHeader');
+		
+		$this->load->view('imports/vHeaderLandingPage');
+		//$this->load->view('imports/vHeader');
 		$this->load->view('user/vSearch.php');
 		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');

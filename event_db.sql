@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2017 at 02:53 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Nov 22, 2017 at 12:13 PM
+-- Server version: 10.1.24-MariaDB
+-- PHP Version: 7.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -26,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `card_load`
 --
 
-CREATE TABLE IF NOT EXISTS `card_load` (
+CREATE TABLE `card_load` (
   `card_id` int(11) NOT NULL,
   `card_code` varchar(20) NOT NULL,
   `card_amount` float NOT NULL DEFAULT '0',
@@ -41,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `card_load` (
 -- Table structure for table `event_info`
 --
 
-CREATE TABLE IF NOT EXISTS `event_info` (
+CREATE TABLE `event_info` (
   `event_id` int(11) NOT NULL,
   `event_date_start` datetime NOT NULL,
   `event_date_end` datetime NOT NULL,
@@ -64,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `event_info` (
 -- Table structure for table `ticket`
 --
 
-CREATE TABLE IF NOT EXISTS `ticket` (
+CREATE TABLE `ticket` (
   `ticket_id` int(11) NOT NULL,
   `date_sold` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -77,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 -- Table structure for table `ticket_type`
 --
 
-CREATE TABLE IF NOT EXISTS `ticket_type` (
+CREATE TABLE `ticket_type` (
   `ticket_type_id` int(11) NOT NULL,
   `ticket_name` varchar(50) DEFAULT NULL,
   `price` float NOT NULL,
@@ -91,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `ticket_type` (
 -- Table structure for table `user_account`
 --
 
-CREATE TABLE IF NOT EXISTS `user_account` (
+CREATE TABLE `user_account` (
   `account_id` int(11) NOT NULL,
   `user_name` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -116,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `user_account` (
 -- Table structure for table `user_event_preference`
 --
 
-CREATE TABLE IF NOT EXISTS `user_event_preference` (
+CREATE TABLE `user_event_preference` (
   `user_event_preference_id` int(11) NOT NULL,
   `preference_date` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -160,7 +162,9 @@ ALTER TABLE `ticket_type`
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
-  ADD PRIMARY KEY (`account_id`);
+  ADD PRIMARY KEY (`account_id`),
+  ADD UNIQUE KEY `user_name` (`user_name`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `user_event_preference`
@@ -239,6 +243,7 @@ ALTER TABLE `ticket_type`
 ALTER TABLE `user_event_preference`
   ADD CONSTRAINT `user_event_preference_fk1` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`account_id`),
   ADD CONSTRAINT `user_event_preference_fk2` FOREIGN KEY (`event_id`) REFERENCES `event_info` (`event_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

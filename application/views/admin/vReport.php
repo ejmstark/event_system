@@ -94,11 +94,29 @@
                 <h3><center>Reports<center></h3><br>
                   <h5><center>Registered Users</center></h5>
                   
-                
+                  <!----- REPORTS CHART --> 
                   <canvas id="line-chart" width="600" height="200"></canvas>
 
+                  <?php  $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
+                    
+                      echo "<br>Num of active users for month of Oct: ".$result;?>
+                  
+                  <br> 
+                  <br>
+                  <h5><center>APPROVED EVENTS</center></h5>
+                  <canvas id="line-chart2" width="600" height="200"></canvas>
+                  <!--- jesus part -->
+                    <?php                   
+                      echo "<br>Number of approved events for month of Oct: ".$result."<br>";
+                      
+                      $result =$this->MReports->numEvents('2017-11-01 01:00:00', '2017-12-01 01:00:00');
+                      
+                      echo "<br>Number of approved events for month of Nov: ".$result."<br>";
 
-                  <!-- query = SELECT * FROM `user_account` WHERE `user_type` = 'Regular' AND `user_status` = 'Active' AND `date_account_created` BETWEEN '2017-10-01 00:00:00.000000' AND '2017-10-31 00:00:00.000000'-->
+                      $result =$this->MReports->numEvents('2017-12-01 01:00:00', '2018-01-01 01:00:00');
+                      
+                      echo "<br>Number of approved events for month of Dec: ".$result."<br>";
+                  ?>
             </div>
           </div>
         </div>
@@ -114,76 +132,135 @@
   </body>
 </html>
     
-                  <script>
-                    var labels;
-                   var num;
-                   var chart;
-                   
-                    $(document).ready(function(){
-                       Chart.defaults.global.legend.display = false;
-                       chart = new Chart(document.getElementById("line-chart"), {
-                              type: 'line',
-                              data: {
-                                labels: [],
-                                datasets: [{ 
-                                    data: num,
-                                    borderColor: "#3e95cd"
-                                  }
-                                ]
-                              },
-                              options: {
+              <script>
+               var labels;
+               var num;
+               var chart1, chart2;
 
-                                title: {
-                                  display: true,
-                                  text: 'Year 2017'
-                                }
-                              }
-                          });
-                       
-                       setTimeout(function(){
-                           getData();
-                      },200);
-                    });
-                    
-                 function getData(){
-                  
-                   $.ajax({
-                          url:"../../../getUserMonthly.php",
-                          method:"GET",
-                          dataType:"text json",
+                $(document).ready(function(){
+                   Chart.defaults.global.legend.display = false;
+                   chart = new Chart(document.getElementById("line-chart"), {
+                          type: 'line',
                           data: {
-                            years:"2017"
+                            labels: [],
+                            datasets: [{ 
+                                data: num,
+                                borderColor: "#3e95cd"
+                              }
+                            ]
                           },
-                          success: function(data){
-                            var display = Array();
-                            var newlabel = Array();
-                            var i =1;
-                            display[0] = 0;
-                             newlabel[0]=" ";
-                            console.log("data:" + data);
-                            $(data).each(function(key,val){
-                                newlabel[i] = val[1];
-                                display[i++] = parseInt(val[0]);
-                            });
-                            console.log(display);
-                            num =display;
-                            labels = newlabel;
-                              
-                            updateChart();                         
-                          },
-                          complete: function(){
+                          options: {
 
-                             
+                            title: {
+                              display: true,
+                              text: 'Year 2017'
+                            }
                           }
+                      });
+
+                   setTimeout(function(){
+                       getData();
+                  },200);
+
+                   chart2 = new Chart(document.getElementById("line-chart2"), {
+                          type: 'line',
+                          data: {
+                            labels: [],
+                            datasets: [{ 
+                                data: num,
+                                borderColor: "#3e95cd"
+                              }
+                            ]
+                          },
+                          options: {
+
+                            title: {
+                              display: true,
+                              text: 'Year 2017'
+                            }
+                          }
+                      });                   
+                   setTimeout(function(){
+                       getEventsData();
+                  },200);
+                });
+
+                
+             function getData(){
+               $.ajax({
+                      url:"../../../getUserMonthly.php",
+                      method:"GET",
+                      dataType:"text json",
+                      data: {
+                        years:"2017"
+                      },
+                      success: function(data){
+                        var display = Array();
+                        var newlabel = Array();
+                        var i =1;
+                        display[0] = 0;
+                        newlabel[0]=" ";
+                        $(data).each(function(key,val){
+                            newlabel[i] = val[1];
+                            display[i++] = parseInt(val[0]);
                         });
+                        num =display;
+                        labels = newlabel;
+                          
+                        updateChart();                         
+                      },
+                      complete: function(){
 
-                 }
-                 function updateChart(){
-                  console.log(num); 
-                    chart.data.datasets[0].data = num;
-                    chart.data.labels = labels; 
-                    chart.update(2000); 
-                 }
+                         
+                      }
+                    });
+
+             }
 
 
-                  </script>
+             function getEventsData(){
+               $.ajax({
+                      url:"../../../getEvents.php",
+                      method:"GET",
+                      dataType:"text json",
+                      data: {
+                        years:"2017"
+                      },
+                      success: function(data){
+                        var display = Array();
+                        var newlabel = Array();
+                        var i =1;
+                        display[0] = 0;
+                        newlabel[0]=" ";
+
+                        $(data).each(function(key,val){
+                            newlabel[i] = val[1];
+                            display[i++] = parseInt(val[0]);
+                        });
+                        num =display;
+                        labels = newlabel;
+                          
+                        updateChart2();                         
+                      },
+                      complete: function(){
+
+                         
+                      }
+                    });
+
+             }
+
+             function updateChart(){
+                chart.data.datasets[0].data = num;
+                chart.data.labels = labels; 
+                chart.update(2000); 
+             }
+
+             function updateChart2(){
+                chart2.data.datasets[0].data = num;
+                chart2.data.labels = labels; 
+                chart2.update(2000); 
+             }
+
+
+              </script>

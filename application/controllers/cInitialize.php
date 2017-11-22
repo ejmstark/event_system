@@ -14,16 +14,19 @@ class CInitialize extends CI_Controller {
 			redirect('cLogin/viewDashBoard');
 		} else {
 			$result_data = $this->MEvent->getAllApprovedEvents();
+			$array = array();
 			//////////////////////////////////////////////////////////////////////////////
 			//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 			/////////////////////////////////////////////////////////////////////////////
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->dateStart = $value->dateStart;
-					$arrObj->event_category = $value->event_category;
-					$array[] = $arrObj;
+			if($result_data){
+				foreach ($result_data as $value) {
+						$arrObj = new stdClass;
+						$arrObj->event_id = $value->event_id;
+						$arrObj->event_name = $value->event_name;
+						$arrObj->dateStart = $value->dateStart;
+						$arrObj->event_category = $value->event_category;
+						$array[] = $arrObj;
+				}
 			}
 			////////////STOPS HERE///////////////////////////////////////////////////
 			$data['events'] = $array;

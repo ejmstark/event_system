@@ -42,6 +42,17 @@
 
 			return $query->result();
 		}
+		public function joinEventTicketType($id)
+		{
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('ticket_type as t', $this::DB_TABLE.'.event_id = t.event_id');
+			$this->db->where( array($this::DB_TABLE.'.event_id' => $id, ));
+
+			$query = $this->db->get();
+			 return $query->result();
+			# code...
+		}
 		public function Performance()
 		{
 			$select = array('event_info.event_name as Event_Name' , 'count(*) as Total_No_Of_Attendees');

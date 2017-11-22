@@ -40,6 +40,35 @@ class cEvent extends CI_Controller {
 
 	}
 
+	public function viewEditFromCalendar(){
+	
+	
+		$data1['start'] = $_POST['start'];
+		$data1['end'] = $_POST['end'];
+		$data1['title'] = $_POST['title'];
+		$data1['details'] = $_POST['details'];
+		$data1['category'] = $_POST['category'];
+		$data1['venue'] = $_POST['venue'];
+
+		$id = $_POST['id'];
+		
+		$tid = $this->MEvent->joinEventTicketType($id);
+
+
+		$data2['ticket_info'] = null;
+		if($tid){
+			$data2['ticket_info'] = $tid;
+		}
+       
+
+        $data = array_merge($data1, $data2);
+
+		$result = $this->load->view('vEditEvent',$data,TRUE);
+		//$this->viewCreateEvent();
+		echo $result;
+		
+	}
+
 	public function viewCreateEvent()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -58,17 +87,20 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->event_id = $value->event_id;
-				$arrObj->event_date_start = $value->event_date_start;
-				$arrObj->event_name = $value->event_name;
-				$arrObj->dateStart = $value->dateStart;
-				$arrObj->event_details = $value->event_details;
-				$arrObj->event_status = $value->event_status;
-				$arrObj->event_venue = $value->event_venue;
-				$arrObj->event_category = $value->event_category;
-				$array[] = $arrObj;
+		$array = $array1 = $array2 = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->dateStart = $value->dateStart;
+					$arrObj->event_details = $value->event_details;
+					$arrObj->event_status = $value->event_status;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->event_category = $value->event_category;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data['events']  = $array;
@@ -77,10 +109,12 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->load_amt = $value->load_amt;
-				$array1[] = $arrObj;
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->load_amt = $value->load_amt;
+					$array1[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data['user']   = $array1;
@@ -89,12 +123,15 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->Event = $value->Event;
-				$arrObj->Paid = $value->Paid;
-				$arrObj->DatePaid = $value->DatePaid;
-				$array1[] = $arrObj;
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->Event = $value->Event;
+					$arrObj->Paid = $value->Paid;
+					$arrObj->DatePaid = $value->DatePaid;
+					$array2[] = $arrObj;
+			}
+
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data['hist']   = $array1;
@@ -114,18 +151,20 @@ class cEvent extends CI_Controller {
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
 		$array = $array1 = $array2 = $array3 = $array4 = array();
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->event_id = $value->event_id;
-				$arrObj->event_date_start = $value->event_date_start;
-				$arrObj->event_name = $value->event_name;
-				$arrObj->event_date_end = $value->event_date_end;
-				$arrObj->event_details = $value->event_details;
-				$arrObj->event_status = $value->event_status;
-				$arrObj->event_venue = $value->event_venue;
-				$arrObj->event_category = $value->event_category;
-				$arrObj->user_id = $value->user_id;
-				$array[] = $arrObj;
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_details = $value->event_details;
+					$arrObj->event_status = $value->event_status;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->event_category = $value->event_category;
+					$arrObj->user_id = $value->user_id;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data1 ['events']  = $array;
@@ -142,22 +181,24 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->account_id = $value->account_id;
-				$arrObj->user_name = $value->user_name;
-				$arrObj->first_name = $value->first_name;
-				$arrObj->middle_initial = $value->middle_initial;
-				$arrObj->last_name = $value->last_name;
-				$arrObj->email= $value->email;
-				$arrObj->contact_no= $value->contact_no;
-				$arrObj->birthdate= $value->birthdate;
-				$arrObj->date_account_created = $value->date_account_created;
-				$arrObj->gender = $value->gender;
-				$arrObj->user_type = $value->user_type;
-				$arrObj->user_status = $value->user_status;
-				$arrObj->load_amt = $value->load_amt;
-				$array1[] = $arrObj;
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->load_amt = $value->load_amt;
+					$array1[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data2['organizer'] = $array1;
@@ -166,12 +207,14 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->ticket_name = $value->ticket_name;
-				$arrObj->price = $value->price;
-				$arrObj->ticket_type_id = $value->ticket_type_id;
-				$array2[] = $arrObj;
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->ticket_name = $value->ticket_name;
+					$arrObj->price = $value->price;
+					$arrObj->ticket_type_id = $value->ticket_type_id;
+					$array2[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data3['types'] = $array2;
@@ -187,13 +230,15 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->account_id = $value->account_id;
-				$arrObj->first_name = $value->first_name;
-				$arrObj->middle_initial = $value->middle_initial;
-				$arrObj->last_name = $value->last_name;
-				$array3[] = $arrObj;
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$array3[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data['going'] = $array3;
@@ -202,22 +247,24 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->account_id = $value->account_id;
-				$arrObj->user_name = $value->user_name;
-				$arrObj->first_name = $value->first_name;
-				$arrObj->middle_initial = $value->middle_initial;
-				$arrObj->last_name = $value->last_name;
-				$arrObj->email= $value->email;
-				$arrObj->contact_no= $value->contact_no;
-				$arrObj->birthdate= $value->birthdate;
-				$arrObj->date_account_created = $value->date_account_created;
-				$arrObj->gender = $value->gender;
-				$arrObj->user_type = $value->user_type;
-				$arrObj->user_status = $value->user_status;
-				$arrObj->load_amt = $value->load_amt;
-				$array4[] = $arrObj;
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->load_amt = $value->load_amt;
+					$array4[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data['user'] = $array4;

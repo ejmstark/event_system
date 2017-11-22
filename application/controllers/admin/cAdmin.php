@@ -13,8 +13,6 @@ class CAdmin extends CI_Controller {
 		// $this->load->model('MUserInfo');
 	}
 
-
-
 	public function index()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -28,17 +26,21 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->event_id = $value->event_id;
-				$arrObj->event_date_start = $value->event_date_start;
-				$arrObj->event_date_end = $value->event_date_end;
-				$arrObj->event_name = $value->event_name;
-				$arrObj->no_tickets_total = $value->no_tickets_total;
-				$arrObj->event_status = $value->event_status;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->no_tickets_total = $value->no_tickets_total;
+					$arrObj->event_status = $value->event_status;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
+
 		$data2['row'] = $array;
 
    		$data3['users']=$this->getUserCount();
@@ -118,6 +120,22 @@ class CAdmin extends CI_Controller {
 		}
 	}
 
+	//view all searched user
+	public function searchUsers(){
+		$user_module = new MUserInfo();
+		if(isset($_POST['search_val'])){
+			$data = array('user_name' => $_POST['search_val']);
+			$result= $this->MUserInfo->read_where($data);
+			if($result){
+				return $result;
+			}else{
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	public function Ban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -253,25 +271,58 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->account_id = $value->account_id;
-				$arrObj->user_name = $value->user_name;
-				$arrObj->first_name = $value->first_name;
-				$arrObj->middle_initial = $value->middle_initial;
-				$arrObj->last_name = $value->last_name;
-				$arrObj->email= $value->email;
-				$arrObj->contact_no= $value->contact_no;
-				$arrObj->birthdate= $value->birthdate;
-				$arrObj->date_account_created = $value->date_account_created;
-				$arrObj->gender = $value->gender;
-				$arrObj->user_type = $value->user_type;
-				$arrObj->user_status = $value->user_status;
-				$arrObj->load_amt = $value->load_amt;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data2['users']=$array;
+		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('admin/vUserAccountMgt', $data2);
+	}
+	//Roald Code
+	//this function will show the search results coming from viewUserAccountMgt()
+	public function viewSearchUserAccountMgt() {
+		$result_data=$this->searchUsers();
+		if($result_data != false){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
+			$data2['users']=$array;
+		} else {
+			$data2['users']=array();
+		}
+		
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 	}
@@ -281,22 +332,25 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->account_id = $value->account_id;
-				$arrObj->user_name = $value->user_name;
-				$arrObj->first_name = $value->first_name;
-				$arrObj->middle_initial = $value->middle_initial;
-				$arrObj->last_name = $value->last_name;
-				$arrObj->email= $value->email;
-				$arrObj->contact_no= $value->contact_no;
-				$arrObj->birthdate= $value->birthdate;
-				$arrObj->date_account_created = $value->date_account_created;
-				$arrObj->gender = $value->gender;
-				$arrObj->user_type = $value->user_type;
-				$arrObj->user_status = $value->user_status;
-				$arrObj->upgraded_by = $value->upgraded_by;//Added by admin module
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->upgraded_by = $value->upgradedBy;//Added by admin module
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data2['admin']=$array;
@@ -311,12 +365,15 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				 $arrObj = new stdClass;
-				//Only interface filtering
-				//$arrObj->price
-				//$arrObj->ticket_count
-				 $array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					 $arrObj = new stdClass;
+					//Only interface filtering
+					//$arrObj->price
+					//$arrObj->ticket_count
+					 $array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
@@ -329,23 +386,26 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				 $arrObj = new stdClass;
-				//Only interface filtering
-				// $arrObj->account_id = $value->account_id;
-				// $arrObj->user_name = $value->user_name;
-				// $arrObj->first_name = $value->first_name;
-				// $arrObj->middle_initial = $value->middle_initial;
-				// $arrObj->last_name = $value->last_name;
-				// $arrObj->email= $value->email;
-				// $arrObj->contact_no= $value->contact_no;
-				// $arrObj->birthdate= $value->birthdate;
-				// $arrObj->date_account_created = $value->date_account_created;
-				// $arrObj->gender = $value->gender;
-				// $arrObj->user_type = $value->user_type;
-				// $arrObj->user_status = $value->user_status;
-				// $arrObj->load_amt = $value->load_amt;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					 $arrObj = new stdClass;
+					//Only interface filtering
+					// $arrObj->account_id = $value->account_id;
+					// $arrObj->user_name = $value->user_name;
+					// $arrObj->first_name = $value->first_name;
+					// $arrObj->middle_initial = $value->middle_initial;
+					// $arrObj->last_name = $value->last_name;
+					// $arrObj->email= $value->email;
+					// $arrObj->contact_no= $value->contact_no;
+					// $arrObj->birthdate= $value->birthdate;
+					// $arrObj->date_account_created = $value->date_account_created;
+					// $arrObj->gender = $value->gender;
+					// $arrObj->user_type = $value->user_type;
+					// $arrObj->user_status = $value->user_status;
+					// $arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
@@ -410,6 +470,25 @@ class CAdmin extends CI_Controller {
 		$data = array('account_id' => $this->session->userdata['userSession']->userID);
 		$result= $this->MUserInfo->read_where($data);
 
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+
+	public function numEvents($startDate, $endDate){
+		$result = $this->MReports->numEvents($startDate, $endDate);
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+	
+
+	public function getActiveUsers($startDate, $endDate){
+		$result = $this->MReports->countUsers($startDate, $endDate);
 		if($result){
 			return $result;
 		}else{
