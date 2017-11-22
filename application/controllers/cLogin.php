@@ -111,7 +111,6 @@ class CLogin extends CI_Controller {
                              'userLevel' => $row->user_type,
 
 							 'userSuperior' => $row->upgradedBy
-
                       );
 
 

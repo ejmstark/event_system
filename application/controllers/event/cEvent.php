@@ -131,9 +131,10 @@ class cEvent extends CI_Controller {
 					$arrObj->DatePaid = $value->DatePaid;
 					$array2[] = $arrObj;
 			}
+
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
-		$data['hist']   = $array2;
+		$data['hist']   = $array1;
 
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEvents',$data);
