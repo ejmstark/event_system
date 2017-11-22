@@ -62,7 +62,8 @@
                         <div class="box-for overflow">
                             <div class="col-md-12 col-xs-12 register-blocks">
                                 <h2>Event Details : </h2> 
-                                <form action="<?php echo site_url();?>/event/cEvent/createEvent " method="post">
+                                <form action="<?php echo site_url();?>/event/cEvent/updateEvent " method="post">
+                                    <input type="text" name="event_id" value="<?php echo $ev->event_id;?>" hidden>
                                     <div class="form-group">
                                         <label for="name">Event Title</label>
                                         <input type="text" value="<?php echo $ev->event_name;?>" class="form-control" name="event_name" required="">
@@ -74,7 +75,7 @@
     
                                     <div class="form-group">
                                         <label for="name">STARTS</label>
-                                        <input  class="form-control" type="text"  value="<?php echo $ev->event_date_start;?>" name="dateStart" id="datetimepicker1" required="">
+                                        <input  class="form-control" type="text"  value="<?php echo $ev->event_date_start;?>" name="event_date_start" id="datetimepicker1" required="">
     
                                         <script>
                                             $("#datetimepicker1").datetimepicker();
@@ -90,7 +91,7 @@
                                     
                                     <div class="form-group">
                                         <label for="name">ENDS</label>
-                                        <input  class="form-control" type="text" value="<?php echo $ev->event_date_end;?>" name="dateEnd" id="datetimepicker2" required="">
+                                        <input  class="form-control" type="text" value="<?php echo $ev->event_date_end;?>" name="event_date_end" id="datetimepicker2" required="">
     
                                         <script>
                                             $("#datetimepicker2").datetimepicker();
@@ -167,8 +168,6 @@
                                     
                                     <br><br>
                                     <?php $x++; } ?>
-                                    
-                                    <input type="text" name="foreachloop" value="<?php echo $x-1;?>" hidden>
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default" value="Create Event"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit</button>

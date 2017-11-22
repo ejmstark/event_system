@@ -145,6 +145,20 @@
                                                             echo $event->event_name;
                                                     }
                                                     ?></a></h5>
+                                                    <?php
+                                                        $date1 = new DateTime($event->dateStart);
+                                                            $date2 = new DateTime(date("Y-m-d h:i:s"));
+                                                            
+                                                            if($date1 == $date2){
+                                                                echo "<h5>Happening now!</h5>";
+                                                            }else if($date1 < $date2){
+                                                                    echo "<h5>Expired</h5>";
+                                                            }else{
+                                                                    $interval = $date2->diff($date1);
+                                                                echo "<h5>" . $interval->days . " day/s to go</h5>";
+                                                            }
+                                                                                                                
+                                                    ?>
                                                         <div class="dot-hr"></div>
                                                         <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
                                                         <span class="proerty-price pull-right"></span>

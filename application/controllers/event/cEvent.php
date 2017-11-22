@@ -242,8 +242,6 @@ class cEvent extends CI_Controller {
 		$event_id = $this->input->post('event_id');
 		$event_date_start = $this->input->post('event_date_start');
 		$event_date_end = $this->input->post('event_date_end');
-		$no_tickets_total = $this->input->post('no_tickets_total');
-		$event_status = $this->input->post('event_status');
 		$event_name = $this->input->post('event_name');
 		$event_details = $this->input->post('event_details');
 		$event_category = $this->input->post('event_category');
@@ -265,14 +263,18 @@ class cEvent extends CI_Controller {
 
 		$data = array('event_date_start'=>$event_date_start,
 					  'event_date_end'=>$event_date_end,
-					  'no_tickets_total'=>$no_tickets_total,
-					  'event_status'=>$event_status,
 					  'event_name'=>$event_name,
 					  'event_details'=>$event_details,
 					  'event_category'=>$event_category,
 					  'event_venue'=>$event_venue);
 
-		$this->event->updateEvent($event_id,$data);
+		$v = $this->MUser->updateSpecificEvent($event_id,$data);
+
+		if($v){
+			redirect('cLogin', 'refresh');
+		}else{
+			echo "Error...";
+		}
 		}
 
 
