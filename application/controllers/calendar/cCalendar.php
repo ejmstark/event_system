@@ -6,35 +6,51 @@ class cCalendar extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 	 	$this->load->model('calendar/MCalendar');
-	 	$this->load->model('user/MUser');
+		$this->load->model('user/MUser');
 	 	$this->load->model('user/MEvent');
 	}
-	
+
 	public function index()
 	{
 		$this->displayCalendar();
 	}
-	
+
 	public function displayCalendar()
-	{		
+	{
 		$data['user'] = $this->MUser->read($this->session->userdata['userSession']->userID);
 		$this->data['custom_js']= '<script type="text/javascript">
                               $(function(){
                               	$("#cal").addClass("active");
                               });
                         </script>';
-		$data['event_data'] = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
+		$result_data = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		foreach ($result_data as $value) {
+				$arrObj = new stdClass;
+				$arrObj->event_id = $value->event_id;
+				$arrObj->event_date_start = $value->event_date_start;
+				$arrObj->event_date_end = $value->event_date_end;
+				$arrObj->event_name = $value->event_name;
+				//$arrObj->event_isActive = $value->event_isActive;
+				$arrObj->date_created = $value->date_created;
+				$arrObj->color = $value->color;
+				$array[] = $arrObj;
+		}
+		$data['event_data'] = $array;
+		////////////STOPS HERE///////////////////////////////////////////////////
 		$this->load->helper('url');
-		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('imports/vHeaderCalendarPage');
 		$this->load->view('calendar/vCalendar',$data);
-		$this->load->view('imports/vFooterLandingPage',$this->data);
+		$this->load->view('imports/vFooterCalendarPage',$this->data);
 	}
-	
+
 	public function AddEvent()
 	{
 		if (isset($_POST['title']) && isset($_POST['event_detail']) && isset($_POST['start']) && isset($_POST['end']) && isset($_POST['event_category']) && isset($_POST['event_venue']) && isset($_POST['event_ticket_price']) && isset($_POST['event_ticket_type']) && isset($_POST['event_ticket_total_no']) && isset($_POST['event_ticket_discount'])
 		){
-	
+
 			$title = $_POST['title'];
 			$event_detail = $_POST['event_detail'];
 			$start = $_POST['start'];
@@ -46,7 +62,7 @@ class cCalendar extends CI_Controller {
 			$event_ticket_total_no= $_POST['event_ticket_total_no'];
 			$event_ticket_discount= $_POST['event_ticket_discount'];
 			$color=$_POST['color'];
-			
+
 			$data = array(
 				'event_date_start'=>$start,
 				'event_date_end'=>$end,
@@ -67,7 +83,7 @@ class cCalendar extends CI_Controller {
 	public function ajaxUpdate()
 	{
 		if (isset($_POST['Event'][0]) && isset($_POST['Event'][1]) && isset($_POST['Event'][2])){
-	
+
 			$id = $_POST['Event'][0];
 			$start = $_POST['Event'][1];
 			$end = $_POST['Event'][2];
@@ -77,15 +93,15 @@ class cCalendar extends CI_Controller {
 			);
 			if($this->MCalendar->update($id,$data)){
 				echo "OK";
-				
+
 			}else{
 				echo "Error";
-			}			
+			}
 		}
 		redirect($_SERVER['HTTP_REFERER']);
-		
+
 	}
-	
+
 	public function displayEventUpdate()
 	{
 		if (isset($_POST['title']) && isset($_POST['id'])){
@@ -121,11 +137,11 @@ class cCalendar extends CI_Controller {
 									  <option value="">Choose</option>
 									  <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
 									  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-									  <option style="color:#008000;" value="#008000">&#9724; Green</option>						  
+									  <option style="color:#008000;" value="#008000">&#9724; Green</option>
 									  <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
 									  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
 									  <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
-									  <option style="color:#000;" value="#000">&#9724; Black</option>  
+									  <option style="color:#000;" value="#000">&#9724; Black</option>
 									</select>
 								</div>
 							  </div>
@@ -189,14 +205,14 @@ class cCalendar extends CI_Controller {
 								  <input type="text"  value="" name="event_ticket_type" class="form-control" id="event_ticket_type" placeholder="Ticket Type (optional)">
 								</div>
 							</div>
-			
+
 							<div class="form-group">
 								<label for="event_ticket_total_no" class="col-sm-2 control-label">Total Number</label>
 								<div class="col-sm-10">
 								  <input type="number" value="'.$row->no_tickets_total.'" name="event_ticket_total_no" class="form-control" id="event_ticket_total_no" placeholder="Ticket Total Number" required="true">
 								</div>
 							</div>
-			
+
 							<div class="form-group">
 								<label for="event_ticket_discount" class="col-sm-2 control-label">Discount</label>
 								<div class="col-sm-10">
@@ -220,12 +236,12 @@ class cCalendar extends CI_Controller {
 			}
 		}
 	}
-	
+
 	public function ajaxUpdateAndDelete()
 	{
 		$data;
 		$id;
-		
+
 		if($_POST['action']=='update'){
 			if (isset($_POST['title']) && isset($_POST['id']) && isset($_POST['event_detail']) && isset($_POST['start']) && isset($_POST['end']) && isset($_POST['event_category']) && isset($_POST['event_venue']) && isset($_POST['event_ticket_price']) && isset($_POST['event_ticket_type']) && isset($_POST['event_ticket_total_no']) && isset($_POST['event_ticket_discount'])
 			){
@@ -240,7 +256,7 @@ class cCalendar extends CI_Controller {
 				$event_ticket_type =$_POST['event_ticket_type'];
 				$event_ticket_total_no= $_POST['event_ticket_total_no'];
 				$event_ticket_discount= $_POST['event_ticket_discount'];
-	
+
 				$data = array(
 					'event_date_start'=>$start,
 					'event_date_end'=>$end,
@@ -251,26 +267,26 @@ class cCalendar extends CI_Controller {
 					'event_venue'=>$event_venue,
 					'user_id'=>3
 				);
-				
-				
-			
+
+
+
 			}
 		}else{
 			if (isset($_POST['id'])){
-		
-			
+
+
 				$id = $_POST['id'];
-				
+
 				$data = array(
 					'event_status'=>"Rejected"
 				);
-				
+
 				// echo "Delete".$id;
-				// die();	
-	
+				// die();
+
 				//$sql = "UPDATE `register_event` SET petition_status='Inactive' WHERE petition_id=".$id." ";
-	
-				
+
+
 				// $sql = "DELETE FROM events WHERE id = $id";
 				// $query = $bdd->prepare( $sql );
 				// if ($query == false) {
@@ -282,7 +298,7 @@ class cCalendar extends CI_Controller {
 				//  print_r($query->errorInfo());
 				//  die ('Erreur execute');
 				// }
-			
+
 			}
 		}
 
@@ -291,7 +307,7 @@ class cCalendar extends CI_Controller {
 		}else{
 			echo "Error";
 		}
-		
+
 		redirect($_SERVER['HTTP_REFERER']);
 	}
 }
