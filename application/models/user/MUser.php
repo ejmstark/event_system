@@ -57,11 +57,33 @@
 			# code...
 		}
 
+		public function getEventDetails($id){
+			// $id is the id of the event
+			$this->db->select('event_id, event_name, event_venue, event_date_start, event_date_end, event_category, event_details');
+			$this->db->from('event_info');
+			$this->db->where('event_info.event_id', $id);
+
+			return $this->db->get();
+		}
+
+		public function getTicketDetails($id){
+			$this->db->select('ticket_name, price, ticket_count');
+			$this->db->from('ticket_type');
+			$this->db->where('event_id', $id);
+
+			return $this->db->get();
+		}
+
 		public function getAllUsers(){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
 			return $query;			             
+		}
+
+		public function updateSpecificEvent($id, $data){
+			$this->db->where('event_id', $id);
+			return $this->db->update('event_info', $data);
 		}
 
 		public function getAccount_id(){
