@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2017 at 02:53 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Nov 25, 2017 at 12:12 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.5.38
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,10 +23,24 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `announcement`
+--
+
+CREATE TABLE `announcement` (
+  `announcementID` int(11) NOT NULL,
+  `announcementDetails` varchar(500) NOT NULL,
+  `announcementStatus` enum('OnGoing','Finished') NOT NULL,
+  `postedBy` int(11) NOT NULL,
+  `datePosted` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `card_load`
 --
 
-CREATE TABLE IF NOT EXISTS `card_load` (
+CREATE TABLE `card_load` (
   `card_id` int(11) NOT NULL,
   `card_code` varchar(20) NOT NULL,
   `card_amount` float NOT NULL DEFAULT '0',
@@ -41,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `card_load` (
 -- Table structure for table `event_info`
 --
 
-CREATE TABLE IF NOT EXISTS `event_info` (
+CREATE TABLE `event_info` (
   `event_id` int(11) NOT NULL,
   `event_date_start` datetime NOT NULL,
   `event_date_end` datetime NOT NULL,
@@ -61,10 +75,23 @@ CREATE TABLE IF NOT EXISTS `event_info` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notification`
+--
+
+CREATE TABLE `notification` (
+  `notif_id` int(11) NOT NULL,
+  `user_fky` int(11) NOT NULL,
+  `event_fky` int(11) NOT NULL,
+  `notif_status` enum('Read','Unread') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ticket`
 --
 
-CREATE TABLE IF NOT EXISTS `ticket` (
+CREATE TABLE `ticket` (
   `ticket_id` int(11) NOT NULL,
   `date_sold` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -77,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
 -- Table structure for table `ticket_type`
 --
 
-CREATE TABLE IF NOT EXISTS `ticket_type` (
+CREATE TABLE `ticket_type` (
   `ticket_type_id` int(11) NOT NULL,
   `ticket_name` varchar(50) DEFAULT NULL,
   `price` float NOT NULL,
@@ -91,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `ticket_type` (
 -- Table structure for table `user_account`
 --
 
-CREATE TABLE IF NOT EXISTS `user_account` (
+CREATE TABLE `user_account` (
   `account_id` int(11) NOT NULL,
   `user_name` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
@@ -116,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `user_account` (
 -- Table structure for table `user_event_preference`
 --
 
-CREATE TABLE IF NOT EXISTS `user_event_preference` (
+CREATE TABLE `user_event_preference` (
   `user_event_preference_id` int(11) NOT NULL,
   `preference_date` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -126,6 +153,12 @@ CREATE TABLE IF NOT EXISTS `user_event_preference` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `announcement`
+--
+ALTER TABLE `announcement`
+  ADD PRIMARY KEY (`announcementID`);
 
 --
 -- Indexes for table `card_load`
@@ -140,6 +173,14 @@ ALTER TABLE `card_load`
 ALTER TABLE `event_info`
   ADD PRIMARY KEY (`event_id`),
   ADD KEY `event_info_fk` (`user_id`);
+
+--
+-- Indexes for table `notification`
+--
+ALTER TABLE `notification`
+  ADD PRIMARY KEY (`notif_id`),
+  ADD KEY `user_fky` (`user_fky`),
+  ADD KEY `event_fky` (`event_fky`);
 
 --
 -- Indexes for table `ticket`
@@ -175,6 +216,11 @@ ALTER TABLE `user_event_preference`
 --
 
 --
+-- AUTO_INCREMENT for table `announcement`
+--
+ALTER TABLE `announcement`
+  MODIFY `announcementID` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `card_load`
 --
 ALTER TABLE `card_load`
@@ -184,6 +230,11 @@ ALTER TABLE `card_load`
 --
 ALTER TABLE `event_info`
   MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `notification`
+--
+ALTER TABLE `notification`
+  MODIFY `notif_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `ticket`
 --
@@ -209,6 +260,12 @@ ALTER TABLE `user_event_preference`
 --
 
 --
+-- Constraints for table `announcement`
+--
+ALTER TABLE `announcement`
+  ADD CONSTRAINT `announcement_ibfk_1` FOREIGN KEY (`announcementID`) REFERENCES `user_account` (`account_id`);
+
+--
 -- Constraints for table `card_load`
 --
 ALTER TABLE `card_load`
@@ -219,6 +276,13 @@ ALTER TABLE `card_load`
 --
 ALTER TABLE `event_info`
   ADD CONSTRAINT `event_info_fk` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`account_id`);
+
+--
+-- Constraints for table `notification`
+--
+ALTER TABLE `notification`
+  ADD CONSTRAINT `event_for` FOREIGN KEY (`event_fky`) REFERENCES `event_info` (`event_id`),
+  ADD CONSTRAINT `user_for` FOREIGN KEY (`user_fky`) REFERENCES `user_account` (`account_id`);
 
 --
 -- Constraints for table `ticket`
