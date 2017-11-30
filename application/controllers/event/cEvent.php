@@ -131,9 +131,10 @@ class cEvent extends CI_Controller {
 					$arrObj->DatePaid = $value->DatePaid;
 					$array2[] = $arrObj;
 			}
+
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
-		$data['hist']   = $array2;
+		$data['hist']   = $array1;
 
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEvents',$data);
@@ -224,7 +225,6 @@ class cEvent extends CI_Controller {
 		// }else{
 
 		// }
-<<<<<<< HEAD
 		$data = array_merge($data1,$data2,$data3);
 		$result_data= $this->MEvent->getGoingToEvent($id);
 		//////////////////////////////////////////////////////////////////////////////
@@ -268,20 +268,7 @@ class cEvent extends CI_Controller {
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data['user'] = $array4;
-
-=======
-		$sess_id = $this->session->userdata('userSession');
-
-   		if(!empty($sess_id)){
-   			
-		var_dump($this->session->userdata());
-		$sess_id = $this->session->userdata('userSession');
-
-   		if(!empty($sess_id)){
-			$data = array_merge($data1,$data2,$data3); 
-		$data['going']= $this->MEvent->getGoingToEvent($id);
-		$data['user']= $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
->>>>>>> ce545b1d6f1008a2dc35ae20b1130414a8920f10
+		$data['id'] = $this->session->userdata['userSession']->userID;
 		if($this->error != ""){
 			$data['errorMsg']= $this->error;
 		 // print_r($data);
@@ -291,18 +278,11 @@ class cEvent extends CI_Controller {
 			$data['successMsg']= $this->success;
 		 // print_r($data);
 		}
-<<<<<<< HEAD
 
 		$this->load->view('imports/vHeaderLandingPage');
-=======
-		$this->load->view('imports/vHeaderLandingPage');		
->>>>>>> ce545b1d6f1008a2dc35ae20b1130414a8920f10
 		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
-		}else{
-			redirect("cLogin");
-		}
-		
+
 
 		// $this->load->view('imports/vHeader');
 		// $this->load->view('user/vEventRegistration', $data);
@@ -441,8 +421,6 @@ class cEvent extends CI_Controller {
 		$event_id = $this->input->post('event_id');
 		$event_date_start = $this->input->post('event_date_start');
 		$event_date_end = $this->input->post('event_date_end');
-		$no_tickets_total = $this->input->post('no_tickets_total');
-		$event_status = $this->input->post('event_status');
 		$event_name = $this->input->post('event_name');
 		$event_details = $this->input->post('event_details');
 		$event_category = $this->input->post('event_category');
@@ -464,15 +442,19 @@ class cEvent extends CI_Controller {
 
 		$data = array('event_date_start'=>$event_date_start,
 					  'event_date_end'=>$event_date_end,
-					  'no_tickets_total'=>$no_tickets_total,
-					  'event_status'=>$event_status,
 					  'event_name'=>$event_name,
 					  'event_details'=>$event_details,
 					  'event_category'=>$event_category,
 					  'event_venue'=>$event_venue);
 
-		$this->event->updateEvent($event_id,$data);
+		$v = $this->MUser->updateSpecificEvent($event_id,$data);
+
+		if($v){
+			redirect('cLogin', 'refresh');
+		}else{
+			echo "Error...";
 		}
+	}
 
 
 		public function upcomingEvents(){
@@ -485,6 +467,15 @@ class cEvent extends CI_Controller {
 			$this->load->view('imports/vFooter');
 
 		// $this->output->set_content_type('application/json')->set_output(json_encode($result));
+		}
+
+		public function editEvent($id){
+			$v['ev'] = $this->MUser->getEventDetails($id)->row();
+			$v['ti'] = $this->MUser->getTicketDetails($id)->result();
+
+			$this->load->view('imports/vHeaderSignUpPage');
+			$this->load->view('user/vEditEvent', $v);
+			$this->load->view('imports/vFooterLandingPage');
 		}
 }
 ?>

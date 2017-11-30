@@ -10,28 +10,30 @@ class cUser extends CI_Controller {
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
       $this->load->library('session');
-     $this->data = null;
+      $this->data = null;
   	}
 
   	public function redeemCode(){
 		
 		$code = $this->input->post('ccode');
-		$card = $this->MCardLoad->read_where( array('card_code' => $code ));
-		if($card != 0){
-			$card = json_decode(json_encode($card));
-			echo $card[0]->card_amount;
-			$u =  $this->MUser->read($this->session->userdata['userSession']->userID);
-			$cardNew = $u[0]->load_amt + $card[0]->card_amount;
-			
-			$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
+		echo "Code ID: ".$code;
+		$card = $this->MCardLoad->read_where(array('cardCode'=> $code));
 
-			if($res){
-				$res1 = $this->MCardLoad->update($code, array('card_active' => '0'));
-				redirect("event/cEvent/viewEvents");
-			}
-		}else{
-			redirect("event/cEvent/viewEvents");
-		}
+		if($card){
+			$card = json_decode(json_encode($card));
+			$u =  $this->MUser->read($this->session->userdata['userSession']->userID);
+			if($card[0]->cardStatus==1){
+				$cardNew = $u[0]->load_amt + $card[0]->cardAmount;
+				$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
+
+				if($res){
+					$code = $card[0]->cardId;
+					$res1 = $this->MCardLoad->update($code, array('cardStatus'=>0));
+				}				
+			}		
+		}  
+
+		redirect("event/cEvent/viewEvents");
 	}
 	public function index()
 	{
@@ -146,7 +148,9 @@ class cUser extends CI_Controller {
 
 	public function search(){
 		$data['events'] = $this->MEvent->getAllEvents();
-		$this->load->view('imports/vHeader');
+		
+		$this->load->view('imports/vHeaderLandingPage');
+		//$this->load->view('imports/vHeader');
 		$this->load->view('user/vSearch.php');
 		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
