@@ -268,7 +268,7 @@ class cEvent extends CI_Controller {
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data['user'] = $array4;
-
+		$data['id'] = $this->session->userdata['userSession']->userID;
 		if($this->error != ""){
 			$data['errorMsg']= $this->error;
 		 // print_r($data);
