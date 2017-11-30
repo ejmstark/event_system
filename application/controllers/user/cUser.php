@@ -10,7 +10,7 @@ class cUser extends CI_Controller {
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
       $this->load->library('session');
-     	
+     $this->data = null;
   	}
 
   	public function redeemCode(){
@@ -81,12 +81,14 @@ class cUser extends CI_Controller {
 
     	if($res){
     			$this->session->set_flashdata('error_msg','Username taken');
+    			$this->data = $data;
     			$this->viewSignUp();
     			// redirect('user/cUser/viewSignUp',"refresh");
 				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
 		}else if($res1){
 			$this->session->set_flashdata('error_msg','Email taken');
+			$this->data = $data;
 				$this->viewSignUp();
 				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
 				
@@ -150,9 +152,16 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vFooter');
 	}
 	public function viewSignUp()
-	{
+	{	
+		if(!$this->data){
 		$this->load->view('imports/vHeaderSignUpPage');
 		$this->load->view('vSignUp');
 		$this->load->view('imports/vFooterLandingPage');
+		}else{
+			$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('vSignUp',$this->data);
+		$this->load->view('imports/vFooterLandingPage');
+		}
+		
 	}
 }
