@@ -115,11 +115,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Username</label>
-                                    <input type="text" minlength="6" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+                                    <input type="text" minlength="6" required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
