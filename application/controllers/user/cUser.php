@@ -10,7 +10,7 @@ class cUser extends CI_Controller {
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
       $this->load->library('session');
-     	
+      $this->data = null;
   	}
 
   	public function redeemCode(){
@@ -76,12 +76,33 @@ class cUser extends CI_Controller {
 					  'user_type' => 'Regular',
 					  'date_account_created' => $now->format('Y-m-d H:i:s')	
 					);
+	
+		
+		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
+		$res1 = $this->MUser->read_where(array('email' => $data['email']));
 
-		$result = $user->insert($data);
+    	if($res){
+    			$this->session->set_flashdata('error_msg','Username taken');
+    			$this->data = $data;
+    			$this->viewSignUp();
+    			// redirect('user/cUser/viewSignUp',"refresh");
+				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
-		if($result){
+		}else if($res1){
+			$this->session->set_flashdata('error_msg','Email taken');
+			$this->data = $data;
+				$this->viewSignUp();
+				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+				
+		}else{
+
+			$result = $user->insert($data);
+
+			if($result){
 			//$this->index();
 			redirect('event/cEvent/viewEvents');
+		}
+
 		}
 
 		# code...
@@ -135,9 +156,16 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vFooter');
 	}
 	public function viewSignUp()
-	{
+	{	
+		if(!$this->data){
 		$this->load->view('imports/vHeaderSignUpPage');
 		$this->load->view('vSignUp');
 		$this->load->view('imports/vFooterLandingPage');
+		}else{
+			$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('vSignUp',$this->data);
+		$this->load->view('imports/vFooterLandingPage');
+		}
+		
 	}
 }
