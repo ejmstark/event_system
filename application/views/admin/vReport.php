@@ -25,16 +25,16 @@
           </div>
 
           <div class="lower-sbar">
-            
+
             <li><a href="<?php echo site_url();?>/admin/cAdmin">
               <p>
                <div class="d-block d-sm-block d-md-none">
                   <center> <i class="fa fa-list-alt" aria-hidden="true"></i> </center>
                 </div>
                <span class= "d-none d-sm-none d-md-inline">
-                  <i class="fa fa-list-alt" aria-hidden="true"></i> 
-                  Events 
-                </span> 
+                  <i class="fa fa-list-alt" aria-hidden="true"></i>
+                  Events
+                </span>
               </a></li></p>
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt">
               <p>
@@ -93,28 +93,28 @@
             <div class="col-10">
                 <h3><center>Reports<center></h3><br>
                   <h5><center>Registered Users</center></h5>
-                  
-                  <!----- REPORTS CHART --> 
+
+                  <!----- REPORTS CHART -->
                   <canvas id="line-chart" width="600" height="200"></canvas>
 
                   <?php  $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
-                    
+
                       echo "<br>Num of active users for month of Oct: ".$result;?>
-                  
-                  <br> 
+
+                  <br>
                   <br>
                   <h5><center>APPROVED EVENTS</center></h5>
                   <canvas id="line-chart2" width="600" height="200"></canvas>
                   <!--- jesus part -->
-                    <?php                   
+                    <?php
                       echo "<br>Number of approved events for month of Oct: ".$result."<br>";
-                      
+
                       $result =$this->MReports->numEvents('2017-11-01 01:00:00', '2017-12-01 01:00:00');
-                      
+
                       echo "<br>Number of approved events for month of Nov: ".$result."<br>";
 
                       $result =$this->MReports->numEvents('2017-12-01 01:00:00', '2018-01-01 01:00:00');
-                      
+
                       echo "<br>Number of approved events for month of Dec: ".$result."<br>";
                   ?>
             </div>
@@ -131,7 +131,7 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   </body>
 </html>
-    
+
               <script>
                var labels;
                var num;
@@ -143,7 +143,7 @@
                           type: 'line',
                           data: {
                             labels: [],
-                            datasets: [{ 
+                            datasets: [{
                                 data: num,
                                 borderColor: "#3e95cd"
                               }
@@ -166,7 +166,7 @@
                           type: 'line',
                           data: {
                             labels: [],
-                            datasets: [{ 
+                            datasets: [{
                                 data: num,
                                 borderColor: "#3e95cd"
                               }
@@ -179,20 +179,20 @@
                               text: 'Year 2017'
                             }
                           }
-                      });                   
+                      });
                    setTimeout(function(){
                        getEventsData();
                   },200);
                 });
 
-                
+
              function getData(){
                $.ajax({
-                      url:"../../../getUserMonthly.php",
+                      url:"<?php echo site_url()?>/admin/cAdmin/getUserMonthly",
                       method:"GET",
-                      dataType:"text json",
+                      dataType:"json",
                       data: {
-                        years:"2017"
+                        'years': '2017'
                       },
                       success: function(data){
                         var display = Array();
@@ -206,12 +206,11 @@
                         });
                         num =display;
                         labels = newlabel;
-                          
-                        updateChart();                         
+
+                        updateChart();
                       },
                       complete: function(){
 
-                         
                       }
                     });
 
@@ -220,11 +219,11 @@
 
              function getEventsData(){
                $.ajax({
-                      url:"../../../getEvents.php",
+                      url:"<?php echo site_url()?>/admin/cAdmin/getEvents",
                       method:"GET",
                       dataType:"text json",
                       data: {
-                        years:"2017"
+                        'years':'2017'
                       },
                       success: function(data){
                         var display = Array();
@@ -239,12 +238,12 @@
                         });
                         num =display;
                         labels = newlabel;
-                          
-                        updateChart2();                         
+
+                        updateChart2();
                       },
                       complete: function(){
 
-                         
+
                       }
                     });
 
@@ -252,14 +251,14 @@
 
              function updateChart(){
                 chart.data.datasets[0].data = num;
-                chart.data.labels = labels; 
-                chart.update(2000); 
+                chart.data.labels = labels;
+                chart.update(2000);
              }
 
              function updateChart2(){
                 chart2.data.datasets[0].data = num;
-                chart2.data.labels = labels; 
-                chart2.update(2000); 
+                chart2.data.labels = labels;
+                chart2.update(2000);
              }
 
 

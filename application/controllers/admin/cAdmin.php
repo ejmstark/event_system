@@ -136,7 +136,7 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
-	
+
 	public function Ban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -257,7 +257,7 @@ class CAdmin extends CI_Controller {
 					  'date_account_created' => $now->format('Y-m-d H:i:s')
 					);
 
-		
+
 
 		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
 		$res1 = $this->MUser->read_where(array('email' => $data['email']));
@@ -272,12 +272,12 @@ class CAdmin extends CI_Controller {
 			$this->session->set_flashdata('error_msg','Email taken');
 				$this->viewAdminAccountMgt();
 				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
-				
+
 		}else{
 
 			$result = $user->insert($data);
 
-				
+
 			if($result){
 				//$this->index();
 				redirect('admin/cAdmin/viewAdminAccountMgt');
@@ -343,7 +343,7 @@ class CAdmin extends CI_Controller {
 		} else {
 			$data2['users']=array();
 		}
-		
+
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 	}
@@ -506,7 +506,7 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
-	
+
 
 	public function getActiveUsers($startDate, $endDate){
 		$result = $this->MReports->countUsers($startDate, $endDate);
@@ -515,5 +515,27 @@ class CAdmin extends CI_Controller {
 		}else{
 			return false;
 		}
+	}
+
+	public function getUserMonthly(){
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
+		$year = $_GET['years'];
+		$result = $this->MReports->getReportsUserMonthly($year);
+		echo json_encode($result);
+		//////////////////////////////////////
+		//////////////////////////////////////
+	}
+
+	public function getEvents(){
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
+		$year = $_GET['years'];
+		$result = $this->MReports->getReportsEventsMonthly($year);
+		echo json_encode($result);
+		//////////////////////////////////////
+		//////////////////////////////////////
 	}
 }
