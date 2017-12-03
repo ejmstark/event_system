@@ -47,8 +47,8 @@
                 <div id="bg-slider" class="owl-carousel owl-theme">
 
                     <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-4.jpg')?>" alt="The Last of us"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-1.jpg')?>" alt="GTA V"></div>   
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div> 
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>   
 
                 </div>
             </div>
@@ -56,7 +56,6 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <h2>See Events Near You</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                             <form action="<?php echo site_url();?>/user/cUser/search" class=" form-inline">
@@ -65,7 +64,7 @@
                                     <input type="text" class="form-control" placeholder="Key word">
                                 </div>
                                 <div class="form-group">                                     
-                                    <select name="basic" class="">
+                                    <select name="basic" class="form-control">
                                         <!-- <option> -Category- </option>-->
                                         <option>Concerts</option>
                                         <option>Workshops</option>
