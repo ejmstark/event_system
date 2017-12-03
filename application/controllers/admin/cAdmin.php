@@ -448,9 +448,9 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function generateCard() {
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vCards');
-		//$this->load->view('imports/admin_vFooter');
+		$this->load->view('imports/admin_vFooter');
 
 	}
 

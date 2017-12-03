@@ -38,9 +38,9 @@
 
                                             if($object->event_status == "Pending"){
                                               echo " <td><a href='".site_url()."/admin/cAdmin/approveEvent/".$object->event_id."'>
-                                                  <button  type='button' class='btn btn-success'>APPROVE</button></a>
+                                                  <button  type='button' class='btn btn-inverse'>APPROVE</button></a>
                                                   <a href='".site_url()."/admin/cAdmin/rejectEvent/".$object->event_id."'>
-                                                  <button  type='button' class='btn btn-danger'>REJECT</button></a>
+                                                  <button  type='button' class='btn btn-theme'>REJECT</button></a>
                                                   </td>
                                                   </tr>";
                                             }else {
