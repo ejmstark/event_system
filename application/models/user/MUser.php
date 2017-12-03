@@ -19,7 +19,7 @@
 		}
 
 		public function Attendance()
-		{	
+		{
 
 
 			$this->db->select("ei.event_name as event_id, user_account.user_name as name , count(*) as total");
@@ -78,7 +78,7 @@
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
-			return $query;			             
+			return $query;
 		}
 
 		public function updateSpecificEvent($id, $data){
@@ -164,7 +164,7 @@
 
 		public function setContact_no($contact_no){
 			$this->contact_no = $contact_no;
-		}	
+		}
 
 	}
 ?>
