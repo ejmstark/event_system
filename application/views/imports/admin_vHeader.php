@@ -113,7 +113,7 @@
 
             <li><a href ="<?php echo site_url();?>/admin/cAdmin/generateCard" data-wow-delay="0.1s"><i class="icon  fa fa-credit-card"></i> Cards </a></li>
 
-            <li><a href ="<?php echo site_url();?>/admin/cAdmin/viewReport" data-wow-delay="0.1s"><i class="icon fa fa-table"></i> Reports </a></li>
+            <li><a href ="<?php echo site_url();?>/admin/cAdmin/viewReport" data-wow-delay="0.1s"><i class="icon  fa fa-bar-chart-o"></i> Reports </a></li>
             
         </ul>
     </nav>
