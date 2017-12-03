@@ -45,8 +45,11 @@ class CAdmin extends CI_Controller {
 		$data2['row'] = $array;
 
    		$data3['users']=$this->getUserCount();
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
+		//$this->load->view('admin/vAdminDashboard', $data2);
 		$this->load->view('admin/vAdmin', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function getUserCount(){
@@ -314,8 +317,10 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data2['users']=$array;
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 	//Roald Code
 	//this function will show the search results coming from viewUserAccountMgt()
@@ -344,8 +349,10 @@ class CAdmin extends CI_Controller {
 			$data2['users']=array();
 		}
 
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function viewAdminAccountMgt() {
@@ -377,8 +384,10 @@ class CAdmin extends CI_Controller {
 		$data2['admin']=$array;
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
 
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vAdminAccountMgt', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function viewFinance() {
@@ -398,8 +407,10 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vFinance');
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function viewReport() {
@@ -430,13 +441,17 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vReport');
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function generateCard() {
 		$this->load->view('imports/vHeaderAdmin');
 		$this->load->view('admin/vCards');
+		//$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function updateAdmin() {
