@@ -20,13 +20,13 @@ class cCard extends CI_Controller {
 		$amount = array (100, 200, 500, 1000);
 		//$qty = array (1, 2, 3, 4, 5, 6);
 		$qty = array ( $this->input->post('qty1'),
-		 		       $this->input->post('qty2'), 
-		 			   $this->input->post('qty3'), 
-		 			   $this->input->post('qty4'), 
+		 		       $this->input->post('qty2'),
+		 			   $this->input->post('qty3'),
+		 			   $this->input->post('qty4'),
 		 			 );
 		echo 'qty'.$qty[0];
 		for ($i = 0; $i < 4; $i++) {
-				
+
 			$this->card1($amount[$i], $qty[$i]);
 		}
 	}
@@ -36,7 +36,7 @@ class cCard extends CI_Controller {
 			$this->addCard($amount);
 		}
 	}
-	
+
 	//generates and returns random alpha numeric strings
 	public function randomCode () {
 		$rand = '';
@@ -51,6 +51,9 @@ class cCard extends CI_Controller {
 
 	//checks if the code is unique in the database
 	public function isCodeUnique ($rand) {
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
 		$card = new MCardLoad();
 
 		$data = array('cardCode' => $rand);
@@ -60,9 +63,14 @@ class cCard extends CI_Controller {
 		} else {
 			return false;
 		}
+		///////////////////////////////////////
+		///////////////////////////////////////
 	}
 
 	public function addCard($amount) {
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
 		$card = new MCardLoad();
 		$random = '';
 
@@ -78,5 +86,7 @@ class cCard extends CI_Controller {
 					'cardStatus' => 1);
 
 		$query = $card->insert($data);
+		///////////////////////////////////////
+		///////////////////////////////////////
 	}
 }
