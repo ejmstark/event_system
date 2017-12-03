@@ -4,7 +4,7 @@
 		public function __construct(){
 			$this->load->database();
 		}
-		
+
 		public function insert ($data) {
 			return $this->db->insert($this::DB_TABLE, $data);
 		}
@@ -20,9 +20,9 @@
 		}
 
 		public function read_all(){
-      	$query = $this->db->get($this::DB_TABLE);
+      $query = $this->db->get($this::DB_TABLE);
 			return $query->result();
-   		}
+   	}
 
    		//$data is an array of where clause
 		public function read_where($where){

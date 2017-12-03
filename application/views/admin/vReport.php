@@ -23,17 +23,17 @@
                         </div>
                         <h2>Registered Users</h2>
 
-                        <!----- REPORTS CHART --> 
+                        <!----- REPORTS CHART -->
                         <canvas id="line-chart" width="600" height="200"></canvas>
 
                         <?php  $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
-                            
+
                               echo "<br>Num of active users for month of Oct: ".$result;?>
                     </div>
                 </section>
             </div>
 
-            <br> 
+            <br>
             <br>
 
             <div class="col-lg-12" >
@@ -43,31 +43,31 @@
                         </div>
                         <h2>Approved Events</h2>
                         <canvas id="line-chart2" width="600" height="200"></canvas>
-                        
+
                         <!--- jesus part -->
-                        <?php                   
+                        <?php
                           echo "<br>Number of approved events for month of Oct: ".$result."<br>";
-                          
+
                           $result =$this->MReports->numEvents('2017-11-01 01:00:00', '2017-12-01 01:00:00');
-                          
+
                           echo "<br>Number of approved events for month of Nov: ".$result."<br>";
 
                           $result =$this->MReports->numEvents('2017-12-01 01:00:00', '2018-01-01 01:00:00');
-                          
+
                           echo "<br>Number of approved events for month of Dec: ".$result."<br>";
                       ?>
-                    </div>    
+                    </div>
                 </section>
             </div>
         </div>
     </div>
 </div>
 
-     
+
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-    
+
               <script>
                var labels;
                var num;
@@ -79,7 +79,7 @@
                           type: 'line',
                           data: {
                             labels: [],
-                            datasets: [{ 
+                            datasets: [{
                                 data: num,
                                 borderColor: "#FFFFFF"
                               }
@@ -102,7 +102,7 @@
                           type: 'line',
                           data: {
                             labels: [],
-                            datasets: [{ 
+                            datasets: [{
                                 data: num,
                                 borderColor: "#FFFFFF"
                               }
@@ -115,20 +115,20 @@
                               text: 'Year 2017'
                             }
                           }
-                      });                   
+                      });
                    setTimeout(function(){
                        getEventsData();
                   },200);
                 });
 
-                
+
              function getData(){
                $.ajax({
-                      url:"../../../getUserMonthly.php",
+                      url:"<?php echo site_url()?>/admin/cAdmin/getUserMonthly",
                       method:"GET",
-                      dataType:"text json",
+                      dataType:"json",
                       data: {
-                        years:"2017"
+                        'years': '2017'
                       },
                       success: function(data){
                         var display = Array();
@@ -142,12 +142,11 @@
                         });
                         num =display;
                         labels = newlabel;
-                          
-                        updateChart();                         
+
+                        updateChart();
                       },
                       complete: function(){
 
-                         
                       }
                     });
 
@@ -156,11 +155,11 @@
 
              function getEventsData(){
                $.ajax({
-                      url:"../../../getEvents.php",
+                      url:"<?php echo site_url()?>/admin/cAdmin/getEvents",
                       method:"GET",
                       dataType:"text json",
                       data: {
-                        years:"2017"
+                        'years':'2017'
                       },
                       success: function(data){
                         var display = Array();
@@ -175,12 +174,12 @@
                         });
                         num =display;
                         labels = newlabel;
-                          
-                        updateChart2();                         
+
+                        updateChart2();
                       },
                       complete: function(){
 
-                         
+
                       }
                     });
 
@@ -188,14 +187,14 @@
 
              function updateChart(){
                 chart.data.datasets[0].data = num;
-                chart.data.labels = labels; 
-                chart.update(2000); 
+                chart.data.labels = labels;
+                chart.update(2000);
              }
 
              function updateChart2(){
                 chart2.data.datasets[0].data = num;
-                chart2.data.labels = labels; 
-                chart2.update(2000); 
+                chart2.data.labels = labels;
+                chart2.update(2000);
              }
 
 
