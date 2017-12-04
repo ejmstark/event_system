@@ -1,4 +1,3 @@
-
 <?php
 	class MTicket extends MY_model {
 		private $ticket_id;
