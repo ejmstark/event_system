@@ -542,7 +542,7 @@ class CAdmin extends CI_Controller {
 									 'user_account.user_status' => 'Active',
 									 'user_account.user_type' => 'Regular'
 								 );
-		$result = $userModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		$result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
 							MONTHNAME(user_account.date_account_created) as monthname',
 							$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
 		$arr_data = array();
@@ -563,7 +563,7 @@ class CAdmin extends CI_Controller {
 		$where = array("event_status" => "APPROVED",
 										"YEAR(date_created)" => $year
 								 );
-		$result = $eventModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
+		$result = $eventModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
 							$where,FALSE,FALSE,FALSE,FALSE);
 		$arr_data = array();
 		foreach ($result as $value) {

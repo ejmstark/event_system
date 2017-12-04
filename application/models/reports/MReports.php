@@ -80,7 +80,7 @@
 			///////Interface New Implementation////
 			///////////////////////////////////////
 			$where = array('date_sold >=' => date('Y-m-d', strtotime($startDate)),'date_sold <=' => date('Y-m-d', strtotime($endDate)));
-			return $this->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('user_id',$where,TRUE,FALSE,FALSE,TRUE);
+			return $this->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('user_id',$where,TRUE,FALSE,FALSE,TRUE);
 			//////////////////////////////////////
 			//////////////////////////////////////
 		}
@@ -108,7 +108,7 @@
 			// 							 'user_account.user_status' => 'Active',
 			// 							 'user_account.user_type' => 'Regular'
 			// 						 );
-			// $result = $this->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount, MONTHNAME(user_account.date_account_created) as monthname',
+			// $result = $this->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount, MONTHNAME(user_account.date_account_created) as monthname',
 			// 					$where,"user_account",FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
 			// $arr_data = array();
 			// foreach ($result as $value) {
