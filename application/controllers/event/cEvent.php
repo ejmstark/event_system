@@ -41,8 +41,8 @@ class cEvent extends CI_Controller {
 	}
 
 	public function viewEditFromCalendar(){
-	
-	
+
+
 		$data1['start'] = $_POST['start'];
 		$data1['end'] = $_POST['end'];
 		$data1['title'] = $_POST['title'];
@@ -51,7 +51,7 @@ class cEvent extends CI_Controller {
 		$data1['venue'] = $_POST['venue'];
 
 		$id = $_POST['id'];
-		
+
 		$tid = $this->MEvent->joinEventTicketType($id);
 
 
@@ -59,14 +59,14 @@ class cEvent extends CI_Controller {
 		if($tid){
 			$data2['ticket_info'] = $tid;
 		}
-       
+
 
         $data = array_merge($data1, $data2);
 
 		$result = $this->load->view('vEditEvent',$data,TRUE);
 		//$this->viewCreateEvent();
 		echo $result;
-		
+
 	}
 
 	public function viewCreateEvent()
@@ -83,7 +83,8 @@ class cEvent extends CI_Controller {
 
 	public function viewEvents()
 	{
-		$result_data = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
+		$userid = $this->session->userdata['userSession']->userID;
+		$result_data = $this->MEvent->getAllEventsByUser($userid);
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
@@ -135,6 +136,7 @@ class cEvent extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data['hist']   = $array1;
+		$data['userid'] = $userid;
 
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEvents',$data);
@@ -429,7 +431,7 @@ class cEvent extends CI_Controller {
 		//code for tests purposes
 		/*
 		$event_id = 18;
-		$event_date_start = '2017-10-01 12:12:12';	
+		$event_date_start = '2017-10-01 12:12:12';
 		$event_date_end = '2017-10-01 12:12:12';
 		$no_tickets_total = 15;
 		$event_status = 'Approved';
