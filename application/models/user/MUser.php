@@ -67,7 +67,7 @@
 		}
 
 		public function getTicketDetails($id){
-			$this->db->select('ticket_name, price, ticket_count');
+			$this->db->select('ticket_type_id, ticket_name, price, ticket_count');
 			$this->db->from('ticket_type');
 			$this->db->where('event_id', $id);
 
@@ -84,6 +84,11 @@
 		public function updateSpecificEvent($id, $data){
 			$this->db->where('event_id', $id);
 			return $this->db->update('event_info', $data);
+		}
+
+		public function updateSpecificTicketType($data, $id){
+			$this->db->where('ticket_type_id', $id);
+			return $this->db->update('ticket_type',$data);
 		}
 
 		public function getAccount_id(){

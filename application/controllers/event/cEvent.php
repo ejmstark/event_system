@@ -452,10 +452,24 @@ class cEvent extends CI_Controller {
 		$v = $this->MUser->updateSpecificEvent($event_id,$data);
 
 		if($v){
+			for($temp = 0; $temp < $this->input->post('totalshit'); $temp++){
+				$data = array(
+					'ticket_name' => $this->input->post('ticketType'.$temp),
+					'price' => $this->input->post('price_tickets_total'.$temp),
+					'ticket_count' => $this->input->post('no_tickets_total'.$temp)
+				);
+				$var = $this->MUser->updateSpecificTicketType($data, $this->input->post('ticketID'.$temp));
+				if(!$var){
+					echo "Error shit";
+					break;
+				}
+			}
 			redirect('cLogin', 'refresh');
 		}else{
 			echo "Error...";
 		}
+		
+		
 	}
 
 
