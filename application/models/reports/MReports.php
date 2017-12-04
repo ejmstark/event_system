@@ -45,16 +45,7 @@
 		}
 
 		public function totalUsers(){
-			// $query = "SELECT COUNT(*) as UserCount
-			// 		  FROM `user_account`
-			// 		  WHERE 'user_status' = 'Active'";
-			// $result = $this->db->query($query);
-      
-			
-			// return $query->result;
-			// $this->db->distinct();
-
-				$this->db->select('COUNT(*) as UserCount');
+			$this->db->select('COUNT(*) as UserCount');
 			$this->db->from('user_account');
 			$this->db->where("user_status = 'Active'");
 			$this->db->where("user_type = 'Regular'");			
