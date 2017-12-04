@@ -350,6 +350,34 @@
                                                     }
                                                     ?>
                                             </a></h5>
+                                            <?php
+                                                if($event->event_status == 'Approved'){
+                                                        date_default_timezone_set('Asia/Manila');
+                                                        $now = new DateTime("now");
+                                                        $end = new DateTime($event->dateEnd);
+                                                        $start = new DateTime($event->dateStart);
+                                                        $interval = date_diff($now, $start);
+
+                                                        if($now > $start && $now > $end){
+                                                            echo "<h5>Expired!</h5>";
+                                                                
+                                                        }else if($now < $start){
+                                                            if($interval->days == 0){
+                                                                echo "<h5>Less than a day!</h5>";
+                                                            }else{
+                                                                echo "<h5>$interval->days day/s left!</h5>";
+                                                                }
+                                                                    
+                                                        }else if($now >= $start && $now <= $end){
+                                                            echo "<h5>Happening now!</h5>";
+                                                        }
+                                                    }else{
+                                                        echo "<h5>Not yet Approved!</h5>";
+                                                    }    
+                                                        
+                                                            
+                                                ?>   
+
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
                                             <span class="proerty-price pull-right"><?php echo $event->event_status;?> </span>
