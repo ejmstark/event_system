@@ -1,0 +1,37 @@
+[1mdiff --cc application/controllers/admin/cAdmin.php[m
+[1mindex 6130bf3,b150990..0000000[m
+mode 100755,100755..100644[m
+[1m--- a/application/controllers/admin/cAdmin.php[m
+[1m+++ b/application/controllers/admin/cAdmin.php[m
+[36m@@@ -347,5 -312,6 +347,10 @@@[m [mclass CAdmin extends CI_Controller [m
+  	public function generateCard() {[m
+  		$this->load->view('imports/vHeaderAdmin');[m
+  		$this->load->view('admin/vCards');[m
+[32m++<<<<<<< HEAD[m
+[32m +	}[m
+[32m++=======[m
+[32m+ 	}	[m
+[32m+ [m
+[32m++>>>>>>> e7f4da316b6cf9c9ebd71055bdf8514e2712932e[m
+  }[m
+[1mdiff --cc application/views/admin/vAdmin.php[m
+[1mindex fe1ad90,0ffe12b..0000000[m
+mode 100755,100755..100644[m
+[1m--- a/application/views/admin/vAdmin.php[m
+[1m+++ b/application/views/admin/vAdmin.php[m
+[36m@@@ -37,9 -37,9 +37,15 @@@[m
+                    <center> <i class="fa fa-list-alt" aria-hidden="true"></i> </center>[m
+                  </div>[m
+                 <span class= "d-none d-sm-none d-md-inline">[m
+[32m++<<<<<<< HEAD[m
+[32m +                  <i class="fa fa-list-alt" aria-hidden="true"></i>[m
+[32m +                  Events[m
+[32m +                </span>[m
+[32m++=======[m
+[32m+                   <i class="fa fa-list-alt" aria-hidden="true"></i> [m
+[32m+                   Events [m
+[32m+                 </span> [m
+[32m++>>>>>>> e7f4da316b6cf9c9ebd71055bdf8514e2712932e[m
+                </a></li></p>[m
+              <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt">[m
+                <p>[m

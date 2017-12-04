@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2017 at 07:24 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Generation Time: Nov 22, 2017 at 07:08 AM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,24 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `card_load`
+-- Table structure for table `card`
 --
 
-CREATE TABLE `card_load` (
-  `card_id` int(11) NOT NULL,
-  `card_code` varchar(20) NOT NULL,
-  `card_amount` float NOT NULL DEFAULT '0',
-  `card_active` binary(1) NOT NULL,
-  `account_id` int(11) DEFAULT NULL
+CREATE TABLE `card` (
+  `cardId` int(11) NOT NULL,
+  `cardCode` varchar(10) NOT NULL,
+  `cardAmount` int(11) NOT NULL,
+  `cardCreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `cardStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `card_load`
+-- Dumping data for table `card`
 --
 
-INSERT INTO `card_load` (`card_id`, `card_code`, `card_amount`, `card_active`, `account_id`) VALUES
-(1, '123', 100, 0x01, 1),
-(2, '2525', 250, 0x01, 1);
+INSERT INTO `card` (`cardId`, `cardCode`, `cardAmount`, `cardCreatedOn`, `cardStatus`) VALUES
+(55, 'yx1cwudi3g', 100, '2017-11-21 06:40:39', 1),
+(56, 'u05j784mwx', 200, '2017-11-22 06:00:06', 0),
+(57, 'nwxejwwmrj', 500, '2017-11-21 06:40:39', 1),
+(58, '96v4br6akb', 1000, '2017-11-21 06:40:39', 1),
+(59, 'hd3meiugmg', 100, '2017-11-21 06:45:49', 1);
 
 -- --------------------------------------------------------
 
@@ -69,11 +74,11 @@ CREATE TABLE `event_info` (
 
 INSERT INTO `event_info` (`event_id`, `event_date_start`, `event_date_end`, `no_tickets_total`, `event_status`, `event_name`, `event_details`, `event_category`, `event_venue`, `date_created`, `color`, `user_id`) VALUES
 (1, '2017-10-03 00:00:00', '2017-10-19 00:00:00', 500, 'Approved', 'Event', 'Details', 'Other', 'Venue\r\n', '2017-10-02 11:48:13', 'red', 1),
-(5, '2017-10-10 04:03:06', '2017-10-18 00:00:00', 100, 'Pending', 'USC Wariors Night', 'USC Warioirs Night is a event oraganized by USC Supreme Student council that aims to ignite the Carolinian Spirit and foster comrandery amongst the Carlonian ', 'Concert', 'USC TC', '2017-10-02 15:29:08', NULL, 1),
-(10, '2017-10-05 00:00:00', '2017-10-08 00:00:00', 70, 'Approved', 'Software Engineering Presentation', 'Presentation of the whole system.', 'Meeting', 'USC TC', '2017-10-02 16:13:44', NULL, 1),
-(11, '2017-10-15 00:00:00', '2017-10-19 00:00:00', 43, 'Approved', 'IAFT Open House', 'Tour on the school and film short classes.', '', 'IAFT, Lapu Lapu', '2017-10-02 16:19:02', NULL, 2),
-(12, '2017-10-18 00:00:00', '2017-10-20 00:00:00', 20, 'Pending', 'Event Name', 'Description', 'Conference', 'USC TC', '2017-10-03 16:07:35', NULL, 1),
-(13, '2017-10-29 12:00:00', '2017-10-31 12:00:00', 3, 'Pending', 'Software Engineering Integration', 'Integration of the Daily Events System.', '', 'Mabolo, Cebu City', '2017-10-03 19:05:29', NULL, 3);
+(5, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 100, 'Approved', 'USC Wariors Night', 'USC Warioirs Night is a event oraganized by USC Supreme Student council that aims to ignite the Carolinian Spirit and foster comrandery amongst the Carlonian ', 'Concert', 'USC TC', '2017-10-02 15:29:08', NULL, 1),
+(10, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 70, 'Approved', 'Software Engineering Presentation', 'Presentation of the whole system.', 'Meeting', 'USC TC', '2017-10-02 16:13:44', NULL, 1),
+(11, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 43, 'Approved', 'IAFT Open House', 'Tour on the school and film short classes.', '', 'IAFT, Lapu Lapu', '2017-10-02 16:19:02', NULL, 2),
+(12, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 50, 'Rejected', 'SRM Reportin', 'SRM Reporting will be held at USC TC at BUnzel building room 461.', 'Conference', 'USC TC', '2017-10-03 03:31:09', NULL, 1),
+(13, '0000-00-00 00:00:00', '0000-00-00 00:00:00', 50, 'Approved', 'Ethics Reporting', 'REporting sa Tethics sa LB 446 ', 'Party', 'USC TC', '2017-10-03 04:45:10', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -101,8 +106,7 @@ INSERT INTO `ticket` (`ticket_id`, `date_sold`, `user_id`, `ticket_type_id`) VAL
 (6, '2017-10-02 14:26:32', 2, 12),
 (7, '2017-10-02 14:26:32', 2, 12),
 (8, '2017-10-02 14:26:32', 2, 12),
-(9, '2017-10-03 14:57:41', 1, 12),
-(10, '2017-10-03 17:13:22', 3, 1);
+(9, '2017-10-02 15:24:34', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -123,7 +127,7 @@ CREATE TABLE `ticket_type` (
 --
 
 INSERT INTO `ticket_type` (`ticket_type_id`, `ticket_name`, `price`, `ticket_count`, `event_id`) VALUES
-(1, 'Premium', 100, 0, 1),
+(1, 'Premium', 100, 10, 1),
 (2, 'Premium', 150, 50, 5),
 (3, 'Silver', 100, 30, 5),
 (4, 'Gold', 50, 20, 5),
@@ -133,8 +137,8 @@ INSERT INTO `ticket_type` (`ticket_type_id`, `ticket_name`, `price`, `ticket_cou
 (11, 'Premium', 100, 10, 11),
 (12, 'Gold', 350, 3, 11),
 (13, 'Silver', 50, 30, 11),
-(14, 'Type', 600, 20, 12),
-(15, 'VIP', 1000, 3, 13);
+(14, 'Premium', 200, 50, 12),
+(15, 'Premium', 100, 50, 13);
 
 -- --------------------------------------------------------
 
@@ -164,10 +168,12 @@ CREATE TABLE `user_account` (
 --
 
 INSERT INTO `user_account` (`account_id`, `user_name`, `password`, `user_type`, `user_status`, `first_name`, `last_name`, `middle_initial`, `email`, `birthdate`, `gender`, `contact_no`, `load_amt`, `date_account_created`) VALUES
-(1, 'user', 'user', 'Admin', 'Active', 'user', 'user', 'u', 'user@gmail.com', '1998-08-17', 'Male', '09254815798', 650, '2017-08-16 00:00:00'),
-(2, 'test', '123qweasd', 'Regular', 'Banned', 'testq', 'test', 't', 'jen@gmail.com', '0000-00-00', 'Female', '0999999999', 0, '2017-10-02 01:21:21'),
-(3, 'sep', 'sep', 'Regular', 'Active', 'Joseph', 'Entoma', 'A', 'seppjooo@gmail.com', '2017-10-17', 'Other', '09323770455', 0, '2017-10-02 14:36:56'),
-(4, 'bis', 'bis', 'Regular', 'Active', 'Yves', 'Libunao', 'O', 'yves@gmail.com', '2017-10-02', 'Female', '0923585454', 0, '2017-10-02 15:02:09');
+(1, 'user', 'user', 'Admin', 'Active', 'user', 'user', 'u', 'user@gmail.com', '1998-08-17', 'Male', '09254815798', 500, '2017-08-16 00:00:00'),
+(2, 'test', '123qweasd', 'Regular', 'Active', 'testq', 'test', 't', 'jen@gmail.com', '0000-00-00', 'Female', '0999999999', 0, '2017-10-02 01:21:21'),
+(3, 'sep', 'sep', 'Regular', 'Active', 'Joseph', 'Entoma', 'A', 'seppjooo@gmail.com', '2017-10-17', 'Other', '09323770455', 2300, '2017-10-02 14:36:56'),
+(4, 'bis', 'bis', 'Regular', 'Active', 'Yves', 'Libunao', 'O', 'yves@gmail.com', '2017-10-02', 'Female', '0923585454', 0, '2017-10-02 15:02:09'),
+(5, '', '', 'Regular', 'Active', '', '', '', '', '0000-00-00', 'Male', '', 0, '2017-10-03 15:04:44'),
+(6, 'test', 'test', 'Admin', 'Active', 'test', 'test', 't', 'test@gmail.com', '0000-00-00', 'Female', '03265885', 0, '2017-10-03 17:50:25');
 
 -- --------------------------------------------------------
 
@@ -194,11 +200,10 @@ INSERT INTO `user_event_preference` (`user_event_preference_id`, `preference_dat
 --
 
 --
--- Indexes for table `card_load`
+-- Indexes for table `card`
 --
-ALTER TABLE `card_load`
-  ADD PRIMARY KEY (`card_id`),
-  ADD KEY `card_load_fk` (`account_id`);
+ALTER TABLE `card`
+  ADD PRIMARY KEY (`cardId`);
 
 --
 -- Indexes for table `event_info`
@@ -241,10 +246,10 @@ ALTER TABLE `user_event_preference`
 --
 
 --
--- AUTO_INCREMENT for table `card_load`
+-- AUTO_INCREMENT for table `card`
 --
-ALTER TABLE `card_load`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `card`
+  MODIFY `cardId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `event_info`
 --
@@ -254,7 +259,7 @@ ALTER TABLE `event_info`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `ticket_type`
 --
@@ -264,7 +269,7 @@ ALTER TABLE `ticket_type`
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `user_event_preference`
 --
@@ -273,12 +278,6 @@ ALTER TABLE `user_event_preference`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `card_load`
---
-ALTER TABLE `card_load`
-  ADD CONSTRAINT `card_load_fk` FOREIGN KEY (`account_id`) REFERENCES `user_account` (`account_id`);
 
 --
 -- Constraints for table `event_info`
@@ -305,6 +304,7 @@ ALTER TABLE `ticket_type`
 ALTER TABLE `user_event_preference`
   ADD CONSTRAINT `user_event_preference_fk1` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`account_id`),
   ADD CONSTRAINT `user_event_preference_fk2` FOREIGN KEY (`event_id`) REFERENCES `event_info` (`event_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

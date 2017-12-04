@@ -6,32 +6,55 @@
     <link href="<?php echo base_url('assets/dianeAssets/css/bootstrap/bootstrap.min.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/dianeAssets/css/bootstrap/bootstrap-themes.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/dianeAssets/css/font-awesome.min.css')?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/dianeAssets/css/style1.css')?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/dianeAssets/css/style.css')?>" rel="stylesheet" />
+     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class = "outer-header">
-	    <div class = "top"></div>
-	   	<div class = "row ">
-	 		<div class = "col-sm-10 div-content">
-				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/cInitialize">HOME</a></div>
-				<div class = "col-sm-2"><a href = "#">EVENTS</a> </div>
-				<div class = "col-sm-2"><a href = "#">ABOUT</a></div>
-				<?php if (!$this->session->userdata('userSession')) { ?>
-				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/cLogin">LOGIN</a> </div><?php }?>
-				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/user/cUser/viewSignUp">CREATE ACCOUNT</a> </div>
+	<div class = "body-content">
+		<div class = "outer-header">
+		    <div class = "top"></div>
+
+			 	<nav class="navbar">
+		    		<div class="container-fluid">
+				        <!-- Brand and toggle get grouped for better mobile display -->
+				        <div class="navbar-header">
+				            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+				                <span class="sr-only">Toggle navigation</span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+				            </button>
+				        </div>
+				        
+				        <!-- Collect the nav links, forms, and other content for toggling -->
+				        <div class="collapse navbar-collapse">
+				            <ul class="nav navbar-nav">
+				                <li><a href = "<?php echo site_url();?>/cInitialize">HOME</a></li>
+				                <li><a href = "#">EVENTS</a></li>
+				                <li><a href = "#">ABOUT</a></li>
+				                <?php if (!$this->session->userdata('userSession')) { ?>
+				                	<li><a href = "<?php echo site_url();?>/cLogin">LOGIN</a></li>
+				                <?php }?>
+				                <li><a href = "<?php echo site_url();?>/user/cUser/viewSignUp">CREATE ACCOUNT</a></li>
+				            </ul>
+				        </div><!-- /.navbar-collapse -->
+				    </div><!-- /.container-fluid -->
+				</nav>
+
+
+
+		    <div class = "inner-header"></div>
+
+		    <div class="search-container">
+			      <input type="text" class="searchTerm" placeholder="Name of Event  &#x2022;  Category  &#x2022;  Location  &#x2022;  Date">
+			      <button type="submit" class="searchButton">
+			        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+			     </button>
 			</div>
 		</div>
 
-	    <div class = "inner-header"></div>
-
-	    <div class="search-container">
-		      <input type="text" class="searchTerm" placeholder="Name of Event  &#x2022;  Category  &#x2022;  Location  &#x2022;  Date">
-		      <button type="submit" class="searchButton">
-		        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		     </button>
-		</div>
-	</div>
-
+		
 	
 	
 

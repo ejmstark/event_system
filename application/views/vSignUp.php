@@ -71,26 +71,32 @@
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
                             <h2>New account : </h2> 
+                            <?php if ($this->session->flashdata('error_msg')): ?>
+                                <div class="alert alert-danger" style="margin-top: 15px;">
+                                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                                    <?php echo $this->session->flashdata('error_msg'); ?>
+                                </div>
+                            <?php endif ?>
                             <form action="<?php echo site_url();?>/user/cUser/signup" method="post">
                                 <div class="form-group">
                                     <label for="name">First Name</label>
-                                    <input type="text" class="form-control" name="fname" id="name" required="">
+                                    <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Middle Initial</label>
-                                    <input type="text" class="form-control" name="miname" id="name" required="">
+                                    <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Last Name</label>
-                                    <input type="text" class="form-control" name="lname" id="name" required="">
+                                    <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input type="email" class="form-control" name="email" id="email" required="">
+                                    <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Birthdate</label>
-                                    <input type="date" name="bdate" required="">
+                                    <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
 
 
 
@@ -98,23 +104,22 @@
                                 <div class="form-group">
                                     <label for="email">Gender</label>
                                     <select class="form-control" name="gender">
-                                        <option selected="" value="Male">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
+                                        <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
+                                        <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
+                                        <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Contact Number</label>
-                                    <input type="number" min="11" class="form-control" name="contact" id="email" required="">
+                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Username</label>
-                                    <input type="text" minlength="8" class="form-control" name="uname" id="email">
+                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password">
+                                    <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>

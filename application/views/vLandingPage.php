@@ -4,32 +4,7 @@
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
-        <!-- Body content -->
-
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-<!--                         <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> +1 234 567 7890</span>
-                                <span><i class="pe-7s-mail"></i> eventsystem@system.com</span>
-                            </p>
-                        </div> -->
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>            
-
+        
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,7 +24,7 @@
                     </div>
 
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                     </div>
                     
 
@@ -72,8 +47,8 @@
                 <div id="bg-slider" class="owl-carousel owl-theme">
 
                     <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-4.jpg')?>" alt="The Last of us"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-1.jpg')?>" alt="GTA V"></div>   
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div> 
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>   
 
                 </div>
             </div>
@@ -81,17 +56,16 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <h2>See Events Near You</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                            <form action="" class=" form-inline">
+                            <form action="<?php echo site_url();?>/user/cUser/search" class=" form-inline">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Key word">
                                 </div>
                                 <div class="form-group">                                     
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> -Category- </option>
+                                    <select name="basic" class="form-control">
+                                        <!-- <option> -Category- </option>-->
                                         <option>Concerts</option>
                                         <option>Workshops</option>
                                         <option>Other</option>  
@@ -170,6 +144,20 @@
                                                             echo $event->event_name;
                                                     }
                                                     ?></a></h5>
+                                                    <?php
+                                                        $date1 = new DateTime($event->dateStart);
+                                                            $date2 = new DateTime(date("Y-m-d h:i:s"));
+                                                            
+                                                            if($date1 == $date2){
+                                                                echo "<h5>Happening now!</h5>";
+                                                            }else if($date1 < $date2){
+                                                                    echo "<h5>Expired</h5>";
+                                                            }else{
+                                                                    $interval = $date2->diff($date1);
+                                                                echo "<h5>" . $interval->days . " day/s to go</h5>";
+                                                            }
+                                                                                                                
+                                                    ?>
                                                         <div class="dot-hr"></div>
                                                         <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
                                                         <span class="proerty-price pull-right"></span>
@@ -208,7 +196,7 @@
         </div>
 
 
-          <!-- Footer area-->
+        <!-- Footer area-->
         <div class="footer-area">
 
             <div class=" footer">
@@ -220,14 +208,9 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                                <img src = "<?php echo base_url('assets/img/footer-logo.png')?>" class="wow pulse" data-wow-delay="1s">
-
-                                <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
-                                <ul class="footer-adress">
-                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
-                                </ul>
+                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
+                                
                             </div>
                         </div>
                     
@@ -235,25 +218,11 @@
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
                                 <div class="footer-title-line"></div>
-                                <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
+                                <ul class="footer-adress">
+                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
+                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
+                                </ul>
 
-                                <form>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </form> 
-
-                                <div class="social pull-right"> 
-                                    <ul>
-                                        <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                    </ul> 
-                                </div>
                             </div>
                         </div>
 

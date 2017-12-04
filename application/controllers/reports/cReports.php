@@ -11,6 +11,7 @@ class CReports extends CI_Controller {
       $this->load->model('user/MPreference');
       $this->load->model('user/MTicketType');
       $this->load->model('user/MTicket');
+      $this->load->model('user/MReports');
      	
   	}
 
@@ -60,8 +61,7 @@ class CReports extends CI_Controller {
 
 	public function generateHistory()
 	{
-		$id = $this->
-		$data['perfs'] = $this->MUser->Attendance();
+		$id = $this->$data['perfs'] = $this->MUser->Attendance();
 		//print_r(expression)
 		$this->load->view('imports/vHeader');
 		$this->load->view('reports/vHistory.php', $data);
@@ -70,14 +70,9 @@ class CReports extends CI_Controller {
 
 	}
 
-	// public function generateAttendance()
-	// {
-	// 	$data['perfs'] = $this->MUser->Attendance();
-	// 	//print_r(expression)
-	// 	$this->load->view('imports/vHeader');
-	// 	$this->load->view('reports/vAttendance.php', $data);
-	// 	$this->load->view('imports/vFooter');
-
-
-	// }
+	public function eventsGraph(){
+			$year = "2017"
+			$data['events'] = $this->MReports->numEventPerMonth($year);
+			return $data['events'];
+	}
 }
