@@ -100,6 +100,49 @@
 			# code...
 		}
 
+		public function do_upload_event($id)
+	    {
+	        $config = array(
+				'upload_path' => "./images/events",
+				'allowed_types' => "gif|jpg|png|jpeg",
+				'overwrite' => TRUE,
+				'max_size' => "100000000000000000000000000000000000000000000000000000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+				'max_height' => "1000000000000",
+				'max_width' => "1000000000"
+			);
+
+	        $this->load->library('upload', $config);
+	        
+	        if ( ! $this->upload->do_upload('userfile'))
+	        {
+                $error = array('error' => $this->upload->display_errors());
+                return false;
+	        }
+	        else
+	        {
+                $data = array('upload_data' => $this->upload->data()); //actual uploading
+                
+                if($this->insertPhotoEvent($this->upload->data()['file_name'], $id)) { //query to db
+                	return true;	
+                } else {
+                	return false;
+                }
+	        }
+	    }
+
+	    public function insertPhotoEvent($filename,$id) { //called upon uploading file
+	      // $now = new DateTime ( NULL, new DateTimeZone('UTC'));
+	      // $station = new MStation();
+	      // $id = $station->getLastAddedStation();
+
+			$where = array(
+				"event_picture" =>  "images/events/".$filename,
+			);
+
+
+			return $result = $this->update($id, $where);
+	    }
+
 		//Class getters and setters.
 
 		public function getEvent_id(){

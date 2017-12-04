@@ -331,92 +331,106 @@ class cEvent extends CI_Controller {
 
 			# code...
 		}
-	public function createEvent(){
-		// $this->load->model('events/mEvent','event');
-
-		$data['event_date_start'] = $this->input->post('dateStart');
-		$data['event_date_end'] = $this->input->post('dateEnd');
-
-		$date2=explode(" ", $data['event_date_start']);
-		$d = explode ("/", $date2[0]);
-		$ts = strtotime($d[2]."-".$d[0]."-".$d[1]." ".$date2[1].":00 ".$date2[2]);
-		$data['event_date_start'] = mdate("%Y-%m-%d %H:%i:%s", $ts);
-
-		$date2=explode(" ", $data['event_date_end']);
-		$d = explode ("/", $date2[0]);
-		$ts = strtotime($d[2]."-".$d[0]."-".$d[1]." ".$date2[1].":00 ".$date2[2]);
-		$data['event_date_end'] = mdate("%Y-%m-%d %H:%i:%s", $ts);
-
-		$data['no_tickets_total'] = 0;
-		$data['event_status'] = 'pending';
-		$data['event_name'] = $this->input->post('event_name');
-		$data['event_details'] = $this->input->post('event_details');
-		$data['event_category'] = $this->input->post('event_category');
-		$data['event_venue'] = $this->input->post('event_venue');
-		$data['date_created'] = date('Y-m-d H:i:s');
-
-		 $data['user_id'] = $this->session->userdata['userSession']->userID;
-
-		$affectedRows = $this->MEvent->insert($data);
-
-		$evt_id = $this->MEvent->db->insert_id();
-
-		$totalNumTix = 0;
-		$data1['ticket_name'] = $this->input->post('ticketType1');
-		$data1['ticket_count'] = $this->input->post('no_tickets_total1');
-		$data1['price'] = $this->input->post('price_tickets_total1');
-
-		$data1['event_id'] = $evt_id;
-		$totalNumTix += $data1['ticket_count'];
-		$this->MTicketType->insert($data1);
-
-		if($this->input->post('ticketType2')||$this->input->post('no_tickets_total2')||$this->input->post('no_tickets_total2')){
-			$data1['ticket_name'] = $this->input->post('ticketType2');
-			$data1['ticket_count'] = $this->input->post('no_tickets_total2');
-			$data1['price'] = $this->input->post('price_tickets_total2');
-
+		public function createEvent(){
+			// $this->load->model('events/mEvent','event');
+			$event = new mEvent();
+			$data['event_date_start'] = $this->input->post('dateStart');
+			$data['event_date_end'] = $this->input->post('dateEnd');
+	
+			$date2=explode(" ", $data['event_date_start']);
+			$d = explode ("/", $date2[0]);
+			$ts = strtotime($d[2]."-".$d[0]."-".$d[1]." ".$date2[1].":00 ".$date2[2]);
+			$data['event_date_start'] = mdate("%Y-%m-%d %H:%i:%s", $ts);
+	
+			$date2=explode(" ", $data['event_date_end']);
+			$d = explode ("/", $date2[0]);
+			$ts = strtotime($d[2]."-".$d[0]."-".$d[1]." ".$date2[1].":00 ".$date2[2]);
+			$data['event_date_end'] = mdate("%Y-%m-%d %H:%i:%s", $ts);
+	
+			$data['no_tickets_total'] = 0;
+			$data['event_status'] = 'pending';
+			$data['event_name'] = $this->input->post('event_name');
+			$data['event_details'] = $this->input->post('event_details');
+			$data['event_category'] = $this->input->post('event_category');
+			// $data['event_picture'] = null;
+			$data['event_venue'] = $this->input->post('event_venue');
+			$data['date_created'] = date('Y-m-d H:i:s');
+	
+			 $data['user_id'] = $this->session->userdata['userSession']->userID;
+	
+			$affectedRows = $this->MEvent->insert($data);
+	
+			$evt_id = $this->MEvent->db->insert_id();
+			// print_r($evt_id);
+			$photo = $this->MEvent->do_upload_event($evt_id);
+			// $this->MEvent->do_upload_event($evt_id);
+			
+			if(!$photo) {
+				$photo = $this->MEvent->insertPhotoEvent("Default.png",$evt_id);
+			}
+			var_dump($photo);
+	
+				// print_r($photo);
+	
+			$totalNumTix = 0;
+			$data1['ticket_name'] = $this->input->post('ticketType1');
+			$data1['ticket_count'] = $this->input->post('no_tickets_total1');
+			$data1['price'] = $this->input->post('price_tickets_total1');
+	
 			$data1['event_id'] = $evt_id;
 			$totalNumTix += $data1['ticket_count'];
 			$this->MTicketType->insert($data1);
+	
+			if($this->input->post('ticketType2')||$this->input->post('no_tickets_total2')||$this->input->post('no_tickets_total2')){
+				$data1['ticket_name'] = $this->input->post('ticketType2');
+				$data1['ticket_count'] = $this->input->post('no_tickets_total2');
+				$data1['price'] = $this->input->post('price_tickets_total2');
+	
+				$data1['event_id'] = $evt_id;
+				$totalNumTix += $data1['ticket_count'];
+				$this->MTicketType->insert($data1);
+			}
+	
+			if($this->input->post('ticketType3')||$this->input->post('no_tickets_total3')||$this->input->post('no_tickets_total3')){
+				$data1['ticket_name'] = $this->input->post('ticketType3');
+				$data1['ticket_count'] = $this->input->post('no_tickets_total3');
+				$data1['price'] = $this->input->post('price_tickets_total3');
+	
+				$data1['event_id'] = $evt_id;
+				$totalNumTix += $data1['ticket_count'];
+				$this->MTicketType->insert($data1);
+			}
+	
+			$where =  array('no_tickets_total' => $totalNumTix );
+			$res = $this->MEvent->update($evt_id,$where);
+	
+			
+	
+			if($res){
+				redirect('event/cEvent/viewEvents');
+			}else{
+				redirect('event/cEvent/viewCreateEvent');
+			}
+	
 		}
-
-		if($this->input->post('ticketType3')||$this->input->post('no_tickets_total3')||$this->input->post('no_tickets_total3')){
-			$data1['ticket_name'] = $this->input->post('ticketType3');
-			$data1['ticket_count'] = $this->input->post('no_tickets_total3');
-			$data1['price'] = $this->input->post('price_tickets_total3');
-
-			$data1['event_id'] = $evt_id;
-			$totalNumTix += $data1['ticket_count'];
-			$this->MTicketType->insert($data1);
+	
+		public function deleteEvent($id){
+			$this->load->model('events/mEvent','event');
+	
+	
+			// $event_id = $this->input>post('event_id');
+	
+			$result = $this->event->deleteEvent($id);
+	
+			redirect('event/cEvents/index');
+	
+	
+			//code for tests purposes
+			/*
+			$this->event->deleteEvent(18);
+			*/
 		}
-
-		$where =  array('no_tickets_total' => $totalNumTix );
-		$res = $this->MEvent->update($evt_id,$where);
-		if($res){
-			redirect('event/cEvent/viewEvents');
-		}else{
-			redirect('event/cEvent/viewCreateEvent');
-		}
-
-	}
-
-	public function deleteEvent($id){
-		$this->load->model('events/mEvent','event');
-
-
-		// $event_id = $this->input>post('event_id');
-
-		$result = $this->event->deleteEvent($id);
-
-		redirect('event/cEvents/index');
-
-
-		//code for tests purposes
-		/*
-		$this->event->deleteEvent(18);
-		*/
-	}
-
+		
 	public function updateEvent(){
 		$this->load->model('events/mEvent','event');
 
