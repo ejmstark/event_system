@@ -520,7 +520,7 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="settings">
     </div>
-          <a href="<?php echo site_url('user/cUser/editAccount/'.$userid);?>"><div>Edit event</div></a>
+          <a href="<?php echo site_url('user/cUser/editAccount/'.$userid);?>"><div>Edit Profile</div></a>
 
     </div>
 
