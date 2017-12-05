@@ -23,7 +23,7 @@
                         </div>
                         <h2>Registered Users</h2>
 
-                        <!----- REPORTS CHART -->
+                        <!--- REPORTS CHART -->
                         <canvas id="line-chart" width="600" height="200"></canvas>
 
                         <?php  $result = $this->MReports->totalUsers();
@@ -64,7 +64,7 @@
                               
                                 echo "<tr>";
 
-                                  echo "<td>Number of registeres users for ".$object['event_name'].": ".$this->MReports->countAttendees($object['event_id'])."</td>";
+                                  echo "<td>Number of registered users for ".$object['event_name'].": ".$this->MReports->countAttendees($object['event_id'])."</td>";
 
                                 echo "</tr>";
                               
