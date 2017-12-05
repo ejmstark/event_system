@@ -35,6 +35,28 @@
 			///////////////////////////////////////
 		}
 
+		// Sugod dinhi
+		public function showApprovedEvents(){
+			$this->db->select('event_name');
+			$this->db->select('event_id');
+			$this->db->from('event_info');
+			$this->db->where("event_status = 'APPROVED'");
+			$query = $this->db->get();
+
+			return $query->result_array();
+		}
+
+
+		public function countAttendees($event_id){
+			$statement = "SELECT DISTINCT U.user_name
+						  FROM user_account U, ticket_type TT, event_info E, ticket T
+						  WHERE U.account_id = T.user_id AND T.ticket_type_id = TT.ticket_type_id AND TT.event_id = '$event_id'";
+			$query = $this->db->query($statement);
+			  
+			return $query->num_rows();
+
+		}
+
 
 		public function numEventPerMonth($year){
 			$query = "SELECT COUNT(*) as EventCount FROM `event_info` WHERE `event_status` = 'APPROVED' AND YEAR(`date_created`) = '2017'";
@@ -54,6 +76,8 @@
 
 			return $result[0]->UserCount;
 		}
+
+
 
 
 		public function countUsers($startDate, $endDate){

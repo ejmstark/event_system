@@ -55,7 +55,26 @@
                           $result =$this->MReports->numEvents('2017-12-01 01:00:00', '2018-01-01 01:00:00');
 
                           echo "<br>Number of approved events for month of Dec: ".$result."<br>";
+
+                          $result = $this->MReports->showApprovedEvents();
+              
+                          if($result){
+                            echo "<table>";
+                            foreach($result as $object){
+                              
+                                echo "<tr>";
+
+                                  echo "<td>Number of registeres users for ".$object['event_name'].": ".$this->MReports->countAttendees($object['event_id'])."</td>";
+
+                                echo "</tr>";
+                              
+                            }
+                            echo "</table>";
+                          }
+                          
                       ?>
+
+
                     </div>
                 </section>
             </div>
