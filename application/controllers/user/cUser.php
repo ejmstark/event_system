@@ -10,7 +10,8 @@ class cUser extends CI_Controller {
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
       $this->load->library('session');
-
+	
+	  $this->data = null;
   	}
 
   	public function redeemCode(){
@@ -21,17 +22,18 @@ class cUser extends CI_Controller {
 			$card = json_decode(json_encode($card));
 			echo $card[0]->card_amount;
 			$u =  $this->MUser->read($this->session->userdata['userSession']->userID);
-			$cardNew = $u[0]->load_amt + $card[0]->card_amount;
+			if($card[0]->cardStatus==1){
+				$cardNew = $u[0]->load_amt + $card[0]->cardAmount;
+				$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
 
-			$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
+				if($res){
+					$code = $card[0]->cardId;
+					$res1 = $this->MCardLoad->update($code, array('cardStatus'=>0));
+				}				
+			}		
+		}  
 
-			if($res){
-				$res1 = $this->MCardLoad->update($code, array('card_active' => '0'));
-				redirect("event/cEvent/viewEvents");
-			}
-		}else{
-			redirect("event/cEvent/viewEvents");
-		}
+		redirect("event/cEvent/viewEvents");
 	}
 	public function index()
 	{
