@@ -10,30 +10,28 @@ class cUser extends CI_Controller {
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
       $this->load->library('session');
-	
-	  $this->data = null;
+     	
   	}
 
   	public function redeemCode(){
-
+		
 		$code = $this->input->post('ccode');
 		$card = $this->MCardLoad->read_where( array('card_code' => $code ));
 		if($card != 0){
 			$card = json_decode(json_encode($card));
 			echo $card[0]->card_amount;
 			$u =  $this->MUser->read($this->session->userdata['userSession']->userID);
-			if($card[0]->cardStatus==1){
-				$cardNew = $u[0]->load_amt + $card[0]->cardAmount;
-				$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
+			$cardNew = $u[0]->load_amt + $card[0]->card_amount;
+			
+			$res = $this->MUser->update($this->session->userdata["userSession"]->userID,array('load_amt'=>$cardNew));
 
-				if($res){
-					$code = $card[0]->cardId;
-					$res1 = $this->MCardLoad->update($code, array('cardStatus'=>0));
-				}				
-			}		
-		}  
-
-		redirect("event/cEvent/viewEvents");
+			if($res){
+				$res1 = $this->MCardLoad->update($code, array('card_active' => '0'));
+				redirect("event/cEvent/viewEvents");
+			}
+		}else{
+			redirect("event/cEvent/viewEvents");
+		}
 	}
 	public function index()
 	{
@@ -50,31 +48,11 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vFooter',$this->data);
 	}
 
-	public function editAccount ($id) {
-
-		$result =  $this->MUser->read($id);
-
-		foreach ($result as $res) {
-			$ar = array ('account_id'=>$res->account_id,
-									'first_name' => $res->first_name,
-								'last_name' => $res->last_name,
-							'password' => $res->password);
-		}
-		$data['ev'] = $ar;
-		//echo json_encode($data['ev']);
-
-
-		 //$this->load->view('imports/vHeader');
-		 $this->load->view('user/vEditAccount', $data);
-		 // $this->load->view('imports/vFooter',$this->data);
-	}
-
-
-
 	public function signuppage()
 	{
-
+		
 		$this->load->view('user/vSignup.php');
+		
 	}
 
 
@@ -84,17 +62,17 @@ class cUser extends CI_Controller {
 
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
-		$data = array('user_name' => $this->input->post('uname'),
+		$data = array('user_name' => $this->input->post('uname'), 
 					  'password' => $this->input->post('password'),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
 					  'email' => $this->input->post('email'),
 					  'birthdate' => $this->input->post('bdate'),
-					  'gender' => $this->input->post('gender'),
+					  'gender' => $this->input->post('gender'),					  
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' => 'Regular',
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'date_account_created' => $now->format('Y-m-d H:i:s')	
 					);
 
 		$result = $user->insert($data);
@@ -106,7 +84,6 @@ class cUser extends CI_Controller {
 
 		# code...
 	}
-
 
 	public function eventregister()
 	{
@@ -127,9 +104,9 @@ class cUser extends CI_Controller {
 
 	public function displayEventDetails($id)
 	{
-
+		
 		$uid = null;
-
+		
 		$data1 ['events']= $this->MEvent->loadEventDetails($id);
 		$gID = $this->MEvent->loadEventDetails($id);
 		foreach ($gID as $k) {
@@ -158,32 +135,5 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vHeaderSignUpPage');
 		$this->load->view('vSignUp');
 		$this->load->view('imports/vFooterLandingPage');
-	}
-
-	public function updateAccount(){
-		$this->load->model('user/MUser','user');
-
-		$account_id = $this->input->post('account_id');
-		$first_name = $this->input->post('first_name');
-		$last_name = $this->input->post('last_name');
-		$password = $this->input->post('password');
-
-
-		$data = array('first_name' => $first_name,
-							'last_name' => $last_name,
-						'password' => $password);
-
-		echo $account_id;
-
-		$v = $this->MUser->update($account_id,$data);
-
-
-
-		// if($v){
-		// 	redirect('cLogin', 'refresh');
-		// }else{
-		// 	echo "Error...";
-		// }
-
 	}
 }
