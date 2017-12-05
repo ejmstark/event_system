@@ -58,11 +58,16 @@ foreach($going as $g){
         <!-- End of nav bar -->
 
         <div class="page-head">
+        <!-- put feedback icon here -->
+            
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
                         <h1 class="page-title">EVENT DETAILS</h1>
                     </div>
+                </div>
+                <div class="row" >
+                    <a href="<?php echo site_url();?>">link to feedback</a>
                 </div>
             </div>
         </div>
