@@ -280,7 +280,7 @@ class cEvent extends CI_Controller {
 		}
 		
 		$this->load->view('imports/vHeaderLandingPage');
-		$this->load->view('vEventReview',$data);
+		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
 
 
