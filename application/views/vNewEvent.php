@@ -62,7 +62,11 @@
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
                             <h2>Event Details : </h2> 
-                            <form action="<?php echo site_url();?>/event/cEvent/createEvent " method="post">
+                            <form action="<?php echo site_url();?>/event/cEvent/createEvent " method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="name">Event Picture</label>
+                                   <input type="file" name="userfile"  id="fileToUpload" accept="image/*">
+                                </div>
                                 <div class="form-group">
                                     <label for="name">Event Title</label>
                                     <input type="text" class="form-control" name="event_name" required="">

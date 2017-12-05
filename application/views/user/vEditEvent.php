@@ -21,11 +21,11 @@
     
                     <div class="collapse navbar-collapse yamm" id="navigation">
                         <div class="button navbar-right">
-                            <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
                         </div>
     
                         <div class="button navbar-right">
-                            <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                            <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                         </div>
                         
     
@@ -139,9 +139,10 @@
     
     
                                     <br>
-                                    <?php $x = 1; ?>
+                                    <?php $x = 0; ?>
                                     <?php foreach($ti as $t) { ?>
-                                        
+
+                                    <input type="text" name="<?php echo 'ticketID'.$x;?>" value="<?php echo $t->ticket_type_id;?>" hidden>
                                      <div class="ticketContainer">
                                         <span>TICKET TYPE </span> <br>
                                         <div class="select-field">
@@ -168,11 +169,12 @@
                                     
                                     <br><br>
                                     <?php $x++; } ?>
+                                    <input type="text"  name="totalshit" value="<?php echo $x; ?>">
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default" value="Create Event"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit</button>
                                     </div>
-    
+                                        
                                     <br><br>
                                 </form>
                             </div>
