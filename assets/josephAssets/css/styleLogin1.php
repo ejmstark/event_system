@@ -3,6 +3,7 @@
   require("../../CustomizationManager.php");
   CustomizationManager::SetTheme("configurations 1");
   $images = CustomizationManager::$images;
+  $colors = CustomizationManager::$colors;
 ?>
 
 /*
@@ -139,9 +140,9 @@ h2
 	outline: none;
 	margin-top: 8px;
 	height: 40px;
-	color: #fff;
+	color: <?php echo $colors->LOGIN_BUTTON_FONT_COLOR; ?>;
 	font-size: 16px;
-	background: #e2624b;
+	background: <?php echo $colors->LOGIN_BUTTON_COLOR; ?>;
 	cursor: pointer;
 	border-radius: 30px;
 

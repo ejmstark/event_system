@@ -108,7 +108,7 @@ a:hover {
   height: 70%;
   border-radius: 5px;
   outline: none;
-  color: #fff;
+  color: <?php echo $colors->INDEX_PAGE_SEARCH_CONTAINER; ?>;
 }
 
 .searchTerm:focus{
@@ -277,7 +277,7 @@ footer {
 }
 
 .event-name {
-   color: white;
+   color: <?php echo $colors->INDEX_PAGE_EVENT_NAME_COLOR; ?>;
    font: bold 20px Oswald Regular Regular;
    letter-spacing: 1px;
    padding: 10px;
