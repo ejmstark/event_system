@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2017 at 12:10 PM
+-- Generation Time: Dec 05, 2017 at 12:57 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -23,30 +23,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `announcement`
+-- Table structure for table `card`
 --
 
-CREATE TABLE `announcement` (
-  `announcementID` int(11) NOT NULL,
-  `announcementDetails` varchar(500) NOT NULL,
-  `announcementStatus` enum('OnGoing','Finished') NOT NULL,
-  `postedBy` int(11) NOT NULL,
-  `datePosted` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `card_load`
---
-
-CREATE TABLE `card_load` (
-  `card_id` int(11) NOT NULL,
-  `card_code` varchar(20) NOT NULL,
-  `card_amount` float NOT NULL DEFAULT '0',
-  `card_active` binary(1) NOT NULL,
-  `date_claimed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `account_id` int(11) DEFAULT NULL
+CREATE TABLE `card` (
+  `cardId` int(11) NOT NULL,
+  `cardCode` varchar(10) NOT NULL,
+  `cardAmount` int(11) NOT NULL,
+  `cardStatus` tinyint(1) NOT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -60,6 +48,8 @@ CREATE TABLE `event_info` (
   `event_date_start` datetime NOT NULL,
   `event_date_end` datetime NOT NULL,
   `no_tickets_total` int(11) NOT NULL,
+  `total_no_addedTickets` int(11) NOT NULL,
+  `total_tickets_amtSold` int(11) NOT NULL,
   `event_status` enum('Pending','Approved','Rejected') DEFAULT NULL,
   `event_name` varchar(50) NOT NULL,
   `event_details` text,
@@ -67,17 +57,13 @@ CREATE TABLE `event_info` (
   `event_venue` text NOT NULL,
   `event_isActive` tinyint(1) NOT NULL DEFAULT '1',
   `event_picture` text NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `color` varchar(7) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `event_info`
---
-
-INSERT INTO `event_info` (`event_id`, `event_date_start`, `event_date_end`, `no_tickets_total`, `event_status`, `event_name`, `event_details`, `event_category`, `event_venue`, `event_isActive`, `event_picture`, `date_created`, `color`, `user_id`) VALUES
-(1, '2017-12-08 08:00:00', '2017-12-07 12:00:00', 180, 'Pending', 'Kittens', 'Kittens', 'Screening', 'Cat Place', 1, '', '2017-12-04 12:46:17', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -102,7 +88,11 @@ CREATE TABLE `ticket` (
   `ticket_id` int(11) NOT NULL,
   `date_sold` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `ticket_type_id` int(11) DEFAULT NULL
+  `ticket_type_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -116,17 +106,12 @@ CREATE TABLE `ticket_type` (
   `ticket_name` varchar(50) DEFAULT NULL,
   `price` float NOT NULL,
   `ticket_count` int(11) NOT NULL,
-  `event_id` int(11) DEFAULT NULL
+  `event_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `ticket_type`
---
-
-INSERT INTO `ticket_type` (`ticket_type_id`, `ticket_name`, `price`, `ticket_count`, `event_id`) VALUES
-(1, 'Regular', 50, 100, 1),
-(2, 'Special', 150, 50, 1),
-(3, 'Super', 300, 30, 1);
 
 -- --------------------------------------------------------
 
@@ -150,15 +135,11 @@ CREATE TABLE `user_account` (
   `gender` enum('Male','Female','Other') NOT NULL,
   `contact_no` varchar(16) DEFAULT NULL,
   `load_amt` float NOT NULL DEFAULT '0',
-  `date_account_created` datetime NOT NULL
+  `addedBy` int(11) DEFAULT NULL,
+  `updatedBy` int(11) DEFAULT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `user_account`
---
-
-INSERT INTO `user_account` (`account_id`, `user_name`, `password`, `user_type`, `upgradedBy`, `user_status`, `first_name`, `last_name`, `middle_initial`, `user_imgpath`, `email`, `birthdate`, `gender`, `contact_no`, `load_amt`, `date_account_created`) VALUES
-(1, 'user1234', 'user1234', 'Regular', 0, 'Active', 'Regular', 'User', 'U', '', 'reguser@gmail.com', '2001-01-01', 'Male', '09111111111', 0, '2017-12-04 11:44:30');
 
 -- --------------------------------------------------------
 
@@ -170,25 +151,16 @@ CREATE TABLE `user_event_preference` (
   `user_event_preference_id` int(11) NOT NULL,
   `preference_date` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `event_id` int(11) DEFAULT NULL
+  `event_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `announcement`
---
-ALTER TABLE `announcement`
-  ADD PRIMARY KEY (`announcementID`);
-
---
--- Indexes for table `card_load`
---
-ALTER TABLE `card_load`
-  ADD PRIMARY KEY (`card_id`),
-  ADD KEY `card_load_fk` (`account_id`);
 
 --
 -- Indexes for table `event_info`
@@ -223,7 +195,9 @@ ALTER TABLE `ticket_type`
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
-  ADD PRIMARY KEY (`account_id`);
+  ADD PRIMARY KEY (`account_id`),
+  ADD UNIQUE KEY `user_name` (`user_name`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `user_event_preference`
@@ -238,20 +212,10 @@ ALTER TABLE `user_event_preference`
 --
 
 --
--- AUTO_INCREMENT for table `announcement`
---
-ALTER TABLE `announcement`
-  MODIFY `announcementID` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `card_load`
---
-ALTER TABLE `card_load`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `event_info`
 --
 ALTER TABLE `event_info`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `review`
 --
@@ -266,12 +230,12 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `ticket_type`
 --
 ALTER TABLE `ticket_type`
-  MODIFY `ticket_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ticket_type_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `account_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user_event_preference`
 --
@@ -280,18 +244,6 @@ ALTER TABLE `user_event_preference`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `announcement`
---
-ALTER TABLE `announcement`
-  ADD CONSTRAINT `announcement_ibfk_1` FOREIGN KEY (`announcementID`) REFERENCES `user_account` (`account_id`);
-
---
--- Constraints for table `card_load`
---
-ALTER TABLE `card_load`
-  ADD CONSTRAINT `card_load_fk` FOREIGN KEY (`account_id`) REFERENCES `user_account` (`account_id`);
 
 --
 -- Constraints for table `event_info`
