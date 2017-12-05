@@ -96,7 +96,7 @@
                     </div>
             </div>
           <!-- end of header cards -->
-            <div class="col-lg-12" >
+            <div class="col-lg-6" >
                 <section class="panel corner-flip">
                     <div class="widget-chart bg-lightseagreen">
                         <div id="reportrange" class="pull-right" style="background: rgba(255,255,255,0.3); color:#FFF; cursor: pointer; padding: 5px 10px 10px; margin-top:5px;">
@@ -113,10 +113,7 @@
                 </section>
             </div>
 
-            <br>
-            <br>
-
-            <div class="col-lg-12" >
+            <div class="col-lg-6" >
                 <section class="panel corner-flip">
                     <div class="widget-chart bg-danger-lighten">
                         <div id="reportrange" class="pull-right" style="background: rgba(255,255,255,0.3); color:#FFF; cursor: pointer; padding: 5px 10px 10px; margin-top:5px;">
