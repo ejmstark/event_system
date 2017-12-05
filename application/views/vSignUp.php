@@ -1,3 +1,9 @@
+<?php
+  require('assets/CustomizationManager.php');
+  CustomizationManager::SetTheme("configurations 1");
+  $images = CustomizationManager::$images;
+?>
+
 <body>
 
         <div id="preloader">
@@ -14,7 +20,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="index-5.html"><img src="<?php
+                      if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                        echo base_url('assets/customizationAssets/img/DailyEventsDark.png');
+                      }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+
+                      }else{
+                        echo base_url('assets/dianeAssets/img/logoBlack.png');
+                      }
+                     ?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -27,17 +41,17 @@
         <!-- End of nav bar -->
 
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Sign Up / Sign In</h1>               
+                        <h1 class="page-title">Sign Up / Sign In</h1>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End page header -->
- 
+
 
         <!-- register-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
@@ -46,7 +60,7 @@
                 <div class="col-md-6">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
-                            <h2>New account : </h2> 
+                            <h2>New account : </h2>
                             <form action="<?php echo site_url();?>/user/cUser/signup" method="post">
                                 <div class="form-group">
                                     <label for="name">First Name</label>
@@ -100,7 +114,7 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
 
          <!-- Footer area-->
         <div class="footer-area">
@@ -114,12 +128,20 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                               <img src= "<?php
+                                 if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                                   echo base_url('assets/customizationAssets/img/DailyEventsDark.png');
+                                 }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+
+                                 }else{
+                                   echo base_url('assets/dianeAssets/img/logoBlack.png');
+                                 }
+                                ?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                                
+
                             </div>
                         </div>
-                    
+
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
@@ -140,18 +162,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                            <ul>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-        

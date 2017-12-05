@@ -6,7 +6,7 @@
     <link href="<?php echo base_url('assets/dianeAssets/css/bootstrap/bootstrap.min.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/dianeAssets/css/bootstrap/bootstrap-themes.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/dianeAssets/css/font-awesome.min.css')?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/dianeAssets/css/style.css')?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/dianeAssets/css/style.php')?>" rel="stylesheet" />
      <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
@@ -25,7 +25,7 @@
 			                <span class="icon-bar"></span>
 			            </button>
 			        </div>
-			        
+
 			        <!-- Collect the nav links, forms, and other content for toggling -->
 			        <div class="collapse navbar-collapse">
 			            <ul class="nav navbar-nav">
@@ -52,10 +52,3 @@
 		     </button>
 		</div>
 	</div>
-
-	
-	
-	
-
-
-	 

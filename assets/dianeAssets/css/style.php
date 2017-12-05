@@ -1,6 +1,6 @@
 <?php
    header('Content-type: text/css');
-   include("../../CustomizationManager.php");
+   require("../../CustomizationManager.php");
    CustomizationManager::SetTheme("configurations 1");
    $colors = CustomizationManager::$colors;
 ?>
@@ -18,7 +18,7 @@ body {
   content: url('../img/btnAdd_Black.png');
     position: fixed;
     bottom: 0px;
-    right: 0px; 
+    right: 0px;
     width: 80px;
     margin: 10px 10px 10px 10px;
     cursor: pointer;
@@ -28,7 +28,7 @@ body {
   content: url('../img/btnAdd_Orange.png');
   position: fixed;
     bottom: 0px;
-    right: 0px; 
+    right: 0px;
     width: 80px;
     margin: 10px 10px 10px 10px;
     cursor: pointer;
@@ -38,7 +38,15 @@ body {
 
 /*header background images*/
 .top {
-    background-image: url('../img/toptop.png');
+    background-image: <?php
+      if(CustomizationManager::$currentConfigName == 'configurations 1'){
+        echo 'url(../../customizationAssets/img/homebg.png);';
+      }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+
+      }else{
+        echo 'url(../img/toptop.png);';
+      }
+    ?>
     width: 100%;
     height: 100%;
     visibility: visible;
@@ -47,7 +55,7 @@ body {
     left: 0px;
 }
 
-.inner-header {   
+.inner-header {
     content: url('../img/dailyEvents.png');
     width: 55%;
     height: 70%;
@@ -108,7 +116,7 @@ a:hover {
 }
 
 .searchButton {
-  position: absolute;  
+  position: absolute;
   right: 0px;
   width: 40px;
   height: 36px;
@@ -144,7 +152,7 @@ footer {
    width: 100%;
        background-color: #1e1e1e;*/
 
-  
+
 }
 
 .footer-content {
@@ -190,7 +198,7 @@ footer {
 
 /*module content*/
 .container-content {
-    background: linear-gradient(#cb6c52,#363636); 
+    background: linear-gradient(#cb6c52,#363636);
     /*height: 2500px;
     width: 102.5%;
     visibility: visible;
@@ -230,30 +238,30 @@ footer {
     -webkit-column-count: 3; /* Chrome, Safari, Opera */
     -moz-column-count: 3; /* Firefox */
     column-count: 3;
-}   
+}
 
 .list-of-events  img{ width: 100%; padding: 7px 0;}
-@media (max-width: 500px) { 
+@media (max-width: 500px) {
     .list-of-events  {
         -webkit-column-count: 1; /* Chrome, Safari, Opera */
         -moz-column-count: 1; /* Firefox */
         column-count: 1;
-    }     
+    }
 }
 /* end of responsive events layout*/
 
 /*event's description*/
-.event { 
+.event {
    width: 100%; /* for IE 6 */
 }
 
-.event-description { 
+.event-description {
    position: absolute;
-   color: white; 
-   letter-spacing: 1px;  
+   color: white;
+   letter-spacing: 1px;
    background: rgb(0, 0, 0); /* fallback color */
    background: rgba(0, 0, 0, 0.7);
-   padding: 5px; 
+   padding: 5px;
    margin-top: -107px;
    width: 100%;
    height: 100px;
@@ -261,27 +269,27 @@ footer {
 
 .event-date-category {
     margin-top: -3px;
-   color: white; 
+   color: white;
    font-size: 15px;
-   letter-spacing: 0.5px;  
-   padding: 10px; 
+   letter-spacing: 0.5px;
+   padding: 10px;
    width: 100%;
 }
 
-.event-name { 
-   color: white; 
+.event-name {
+   color: white;
    font: bold 20px Oswald Regular Regular;
-   letter-spacing: 1px;  
-   padding: 10px; 
+   letter-spacing: 1px;
+   padding: 10px;
    width: 100%;
    margin-top: -20px;
 }
 
-.event-location { 
-    color: white; 
+.event-location {
+    color: white;
     font-size: 13px;
-    letter-spacing: 0.5px;  
-    padding: 10px; 
+    letter-spacing: 0.5px;
+    padding: 10px;
     width: 100%;
     margin-top: -10px;
 }
@@ -305,7 +313,7 @@ footer {
 /*event:hover*/
 .event-box {
     display: inline-block;
-    position: relative; 
+    position: relative;
     overflow: hidden;
 }
 

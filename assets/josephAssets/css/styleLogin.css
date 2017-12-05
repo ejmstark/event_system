@@ -17,7 +17,7 @@ body
 	font-family: Roboto;
 }
 
-body::after 
+body::after
 {
 	background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3) ), url(../img/LoginBg.jpg);
 	content: "";
@@ -125,7 +125,7 @@ h2
 	background: #e2624b;
 	cursor: pointer;
 	border-radius: 30px;
-    
+
 	-webkit-transition: all 0.3s linear;
 	transition: all 0.25s linear;
 }
