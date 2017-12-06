@@ -169,7 +169,7 @@
                                     
                                     <br><br>
                                     <?php $x++; } ?>
-                                    <input type="text"  name="totalshit" value="<?php echo $x; ?>">
+                                    <!-- <input type="text"  name="totalshit" value="<?php //echo $x; ?>"> -->
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default" value="Create Event"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit</button>

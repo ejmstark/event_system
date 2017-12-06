@@ -563,17 +563,16 @@ class cEvent extends CI_Controller {
 	
 		}
 	
+
 		public function deleteEvent($id){
-			$this->load->model('events/mEvent','event');
-	
-	
 			// $event_id = $this->input>post('event_id');
-	
-			$result = $this->event->deleteEvent($id);
-	
-			redirect('event/cEvents/index');
-	
-	
+			$data = array('event_isActive'=> 0);
+			$v = $this->MUser->updateSpecificEvent($id,$data);
+			if($v){
+				redirect('event/cEvent/viewEvents');
+			}else{
+				echo "Error...";
+			}
 			//code for tests purposes
 			/*
 			$this->event->deleteEvent(18);
