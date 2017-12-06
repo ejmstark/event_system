@@ -278,7 +278,7 @@ class cEvent extends CI_Controller {
 			$data['successMsg']= $this->success;
 		 // print_r($data);
 		}
-
+		
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
@@ -289,6 +289,18 @@ class cEvent extends CI_Controller {
 		// $this->load->view('imports/vFooter');
 		# code...
 	}
+
+	public function displayEventReviews($eventData)
+	{
+		//GET ALL REVIEWS FROM EVENT//
+		//Insert data retrieval here//
+		
+		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('vEventReview',$eventData);
+		$this->load->view('imports/vFooterLandingPage');
+	}
+
+	
 	public function buyTicket($tId,$eid)
 		{
 			// print_r($id);
