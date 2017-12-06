@@ -21,6 +21,17 @@
 			return $query->result_array();
 		}
 
+		public function totalUsers(){
+			$this->db->select('COUNT(*) as UserCount');
+			$this->db->from('user_account');
+			$this->db->where("user_status = 'Active'");
+			$this->db->where("user_type = 'Regular'");			
+			$query = $this->db->get();
+			$result = $query->result();
+
+			return $result[0]->UserCount;
+		}
+		
 		public function numEvents($startDate, $endDate){
 			///////////////////////////////////////
 			///////Interface New Implementation////
