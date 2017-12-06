@@ -15,8 +15,93 @@
                     </div>
                 </section>
             </div>
+            <!--  header cards -->
+            <div class="col-md-3">
+                    <div class="well bg-primary">
+                        <div class="widget-tile">
+                          <section>
+                              <h5><strong>REGISTERED</strong> USERS </h5>
+                              <h2>
+                                <?php
+                                    $result = $this->MReports->totalUsers(); 
+                                    echo $result; 
+                                ?>
+                              </h2>
+                              <div class="progress progress-xs 
+                              progress-white progress-over-tile">
+                                  <div class="progress-bar  progress-bar-white" aria-valuetransitiongoal="8590" aria-valuemax="10000"></div>
+                              </div>
+                              
+                          </section>
+                          <div class="hold-icon"><i class="fa fa-bar-chart-o"></i></div>
+                        </div>
+                    </div>
+            </div>
 
-            <div class="col-lg-12" >
+            <div class="col-md-3">
+                    <div class="well bg-danger">
+                        <div class="widget-tile">
+                          <section>
+                              <h5><strong>APPROVED </strong> EVENTS </h5>
+                              <h2>
+                                <?php 
+                                  $result =$this->MReports->totalnumEvents(1);
+
+                                  echo $result;
+                                ?>
+                              </h2>
+                              <div class="progress progress-xs 
+                              progress-white progress-over-tile">
+                                  <div class="progress-bar  progress-bar-white" aria-valuetransitiongoal="8590" aria-valuemax="10000"></div>
+                              </div>
+                              
+                          </section>
+                          <div class="hold-icon"><i class="fa fa-bar-chart-o"></i></div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="col-md-3">
+                    <div class="well bg-warning">
+                        <div class="widget-tile">
+                          <section>
+                              <h5><strong>REJECTED</strong>EVENTS</h5>
+                              <h2>
+                                <?php 
+                                  $result =$this->MReports->totalnumEvents(2);
+
+                                  echo $result;
+                                ?>
+                              </h2>
+                              <div class="progress progress-xs 
+                              progress-white progress-over-tile">
+                                  <div class="progress-bar  progress-bar-white" aria-valuetransitiongoal="8590" aria-valuemax="10000"></div>
+                              </div>
+                              
+                          </section>
+                          <div class="hold-icon"><i class="fa fa-bar-chart-o"></i></div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="col-md-3">
+                    <div class="well bg-success">
+                        <div class="widget-tile">
+                          <section>
+                              <h5><strong>CARDS</strong>SOLD</h5>
+                              <h2>100</h2>
+                              <div class="progress progress-xs 
+                              progress-white progress-over-tile">
+                                  <div class="progress-bar  progress-bar-white" aria-valuetransitiongoal="8590" aria-valuemax="10000"></div>
+                              </div>
+                              
+                          </section>
+                          <div class="hold-icon"><i class="fa fa-bar-chart-o"></i></div>
+                        </div>
+                    </div>
+            </div>
+          <!-- end of header cards -->
+            <div class="col-lg-6" >
                 <section class="panel corner-flip">
                     <div class="widget-chart bg-lightseagreen">
                         <div id="reportrange" class="pull-right" style="background: rgba(255,255,255,0.3); color:#FFF; cursor: pointer; padding: 5px 10px 10px; margin-top:5px;">
@@ -29,14 +114,14 @@
                         <?php  $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
 
                               echo "<br>Num of active users for month of Oct: ".$result;?>
+
+                          <?php  $result = $this->MReports->totalUsers();
+                              echo "<br>Total Registered Users for 2017: ".$result;?>
                     </div>
                 </section>
             </div>
 
-            <br>
-            <br>
-
-            <div class="col-lg-12" >
+            <div class="col-lg-6" >
                 <section class="panel corner-flip">
                     <div class="widget-chart bg-danger-lighten">
                         <div id="reportrange" class="pull-right" style="background: rgba(255,255,255,0.3); color:#FFF; cursor: pointer; padding: 5px 10px 10px; margin-top:5px;">
@@ -46,15 +131,30 @@
 
                         <!--- jesus part -->
                         <?php
-                          echo "<br>Number of approved events for month of Oct: ".$result."<br>";
-
-                          $result =$this->MReports->numEvents('2017-11-01 01:00:00', '2017-12-01 01:00:00');
+                         
 
                           echo "<br>Number of approved events for month of Nov: ".$result."<br>";
 
                           $result =$this->MReports->numEvents('2017-12-01 01:00:00', '2018-01-01 01:00:00');
 
                           echo "<br>Number of approved events for month of Dec: ".$result."<br>";
+
+
+                          $result = $this->MReports->showApprovedEvents();
+              
+                          if($result){
+                            echo "<table>";
+                            foreach($result as $object){
+                              
+                                echo "<tr>";
+
+                                  echo "<td>Number of registered users for ".$object['event_name'].": ".$this->MReports->countAttendees($object['event_id'])."</td>";
+
+                                echo "</tr>";
+                              
+                            }
+                            echo "</table>";
+                          }
                       ?>
                     </div>
                 </section>

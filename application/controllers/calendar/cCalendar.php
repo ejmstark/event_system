@@ -27,21 +27,22 @@ class cCalendar extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-
-
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->event_id = $value->event_id;
-				$arrObj->event_date_start = $value->event_date_start;
-				$arrObj->event_date_end = $value->event_date_end;
-				$arrObj->event_name = $value->event_name;
-				//$arrObj->event_isActive = $value->event_isActive;
-				$arrObj->date_created = $value->date_created;
-				$arrObj->event_details = $value->event_details;
-				$arrObj->event_category = $value->event_category;
-				$arrObj->event_venue = $value->event_venue;
-				$arrObj->color = $value->color;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_name = $value->event_name;
+					//$arrObj->event_isActive = $value->event_isActive;
+					$arrObj->date_created = $value->date_created;
+					$arrObj->event_details = $value->event_details;
+					$arrObj->event_category = $value->event_category;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->color = $value->color;
+					$array[] = $arrObj;
+			}
 		}
 		$data['event_data'] = $array;
 		////////////STOPS HERE///////////////////////////////////////////////////

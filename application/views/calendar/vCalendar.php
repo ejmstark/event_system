@@ -312,7 +312,7 @@
                                         <div class="row">
                                             <div class="col-lg-12 text-center">
                                                 
-                                                <div id="calendar" class="col-centered">
+                                                <div id="calendar" class="col-centered" style="overflow: auto;">
                                                 </div>
                                             </div>
                                             
@@ -457,16 +457,11 @@
                                           
                                         </div>
                                         
-                                        <?php  
+                                    <?php  
                                         foreach($event_data as $data){
-                                            
-                                            
                                             echo "<br>";
                                         }
-                                        
-                                        // echo date("Ymd",strtotime("-12days",strtotime(20171022))); 
-                                        
-                                        ?>
+                                    ?> 
                                 
                                     </div>
                             </div>
@@ -505,15 +500,12 @@
 
                     var flag = true;
 
-                    if(start[2] <= date[2] ){
-                        if(start[0] <= date[0]){
-                                if(start[1]< date[1]){
-                                     $('#errmodal').modal('show');
-                                    flag = false;
-                                }
+                    // if(start[2] <= date[2] ){
+                        if(start[2]< date[2] || start[2] == date[2] && (start[0]<date[0] || (start[0] == date[0] && start[1]< date[1]))){
+                            $('#errmodal').modal('show');
+                            flag = false;
                         }
-                       
-                    }
+                    // }
 
 
                     if(flag){
@@ -539,8 +531,6 @@
             eventResize: function(event,dayDelta,minuteDelta,revertFunc) { //
                 edit(event);
             },
-
-
             events: [
                 <?php foreach($event_data as $events): 
                 
@@ -587,38 +577,37 @@
                 <?php endforeach; ?>
             ],
 
+
             eventClick: function(event) {
                var id = event.id;
-               var title = event.title;
-               var details = event.details;
-               var category = event.category;
-               var venue = event.venue;
+            //    var title = event.title;
+            //    var details = event.details;
+            //    var category = event.category;
+            //    var venue = event.venue;
 
-            if(event.end){
-                end = event.end.format('YYYY-MM-DD HH:mm:ss');
-            }else{
-                end = start;
-            }
-           
+            // if(event.end){
+            //     end = event.end.format('YYYY-MM-DD HH:mm:ss');
+            // }else{
+            //     end = start;
+            // }
+           var color = event.color;
 
                 if(event.color == "#808080"){
                         $('#errmodal').modal('show');
                     }else{
-                        var dataSet = "start="+start+"&end="+end+"&title="+title+"&id="+id+"&details="+details+"&category="+category+"&venue="+venue;
+                        // var dataSet = "start="+start+"&end="+end+"&title="+title+"&id="+id+"&details="+details+"&category="+category+"&venue="+venue;
+                        var dataSet = "id="+id+"&color="+color;
                         $.ajax({
                             type: "POST",
-                            url: '<?php echo site_url()?>/event/cEvent/viewEditFromCalendar',
+                            url: '<?php echo site_url()?>/event/cEvent/displayEventDetailsFromCalendar',
                             data: dataSet,
                             cache: false,
                             success: function(result){
-                                // if(result=="error"){
-                                    // $('#ModalEdit').html(result);
-                                    // $('#ModalEdit').modal('show');
-                                // }else{
-                                    // alert("Error");
-                                // }                
-                                //alert(result);
-                                $('body').html(result);
+                                if(result){
+                                   $('body').html(result);
+                                }else{
+                                    alert("Error");
+                                }                         
                             },
                             error: function(jqXHR, errorThrown){
                                 console.log(errorThrown);
@@ -655,18 +644,17 @@
 
 </script>
 
-<div class="modal fade bd-example-modal-sm" id="errmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade bd-example" id="errmodal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" style="background-color: red;">
+      <div class="modal-header" style="background-color: #cb6d53;">
         <h2 style="color: white;">ERROR!</h2>
       </div>
       <div class="modal-body">
-        <h2><strong>Cannot add/edit events on past dates!</strong></h2>
-        <h3>Please choose a different date.</h3>
+        <h2>Cannot add events on past dates! Please choose a different date.</h2>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it.</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
