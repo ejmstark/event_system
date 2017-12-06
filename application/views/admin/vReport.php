@@ -21,7 +21,12 @@
                         <div class="widget-tile">
                           <section>
                               <h5><strong>REGISTERED</strong> USERS </h5>
-                              <h2>100</h2>
+                              <h2>
+                                <?php
+                                    $result = $this->MReports->totalUsers(); 
+                                    echo $result; 
+                                ?>
+                              </h2>
                               <div class="progress progress-xs 
                               progress-white progress-over-tile">
                                   <div class="progress-bar  progress-bar-white" aria-valuetransitiongoal="8590" aria-valuemax="10000"></div>
@@ -109,6 +114,9 @@
                         <?php  $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
 
                               echo "<br>Num of active users for month of Oct: ".$result;?>
+
+                          <?php  $result = $this->MReports->totalUsers();
+                              echo "<br>Total Registered Users for 2017: ".$result;?>
                     </div>
                 </section>
             </div>

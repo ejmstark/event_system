@@ -109,6 +109,8 @@
             
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAdminAccountMgt"><i class="icon  fa fa-user"></i>  Admin Account </a></li>
 
+            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAnnouncements"><i class="icon  fa fa-user"></i>  Announcements </a></li>            
+
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewFinance"><i class="icon  fa fa-money"></i> Finance </a></li>
 
             <li><a href ="<?php echo site_url();?>/admin/cAdmin/generateCard" data-wow-delay="0.1s"><i class="icon  fa fa-credit-card"></i> Cards </a></li>

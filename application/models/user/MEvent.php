@@ -90,6 +90,18 @@
 			$query = $this->db->get();
 			return $query->result();			             
 		}
+
+		//get events that match the search word
+		public function getSearchEvents($searchWord){
+			//Sample code
+			//find read_all function at application/core/MY_Model.php
+			$this->db->select("*");
+			$this->db->from("event_info");
+			$this->db->where("event_name LIKE '%".$searchWord."%'");
+			$query = $this->db->get();
+			return $query->result();			             
+		}
+		
 		public function getAllApprovedEvents(){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
