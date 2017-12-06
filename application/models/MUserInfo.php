@@ -128,7 +128,7 @@
 
 		public function updateUpgradedBy($id,$toUpgrade)
 		{
-			$data = array('upgraded_by' => $toUpgrade);
+			$data = array('upgradedBy' => $toUpgrade);
 
 			return $this->update($id, $data);
 		}
