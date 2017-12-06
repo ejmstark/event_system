@@ -651,7 +651,7 @@
         <h2 style="color: white;">ERROR!</h2>
       </div>
       <div class="modal-body">
-        <h2>Cannot add or edit events on past dates! Please choose a different date.</h2>
+        <h2>Cannot add events on past dates! Please choose a different date.</h2>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
