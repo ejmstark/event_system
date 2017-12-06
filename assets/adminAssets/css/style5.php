@@ -39,7 +39,7 @@ html {
 }
 body {
   background: #1C1D1F;
-  color: #6f7b8a;
+  color: <?php echo $colors->ADMIN_PAGE_SIDEBAR_FONT_COLOR; ?>;
   font-family: "Ubuntu";
   font-weight: 300;
   min-width: 320px;
