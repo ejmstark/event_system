@@ -13,7 +13,7 @@
 		private $user_id;
 
 		const DB_TABLE = "event_info";
-    	const DB_TABLE_PK = "event_id";
+    	const DB_TABLE_PK = "event_id"; 
 
     	public function __construct(){
 

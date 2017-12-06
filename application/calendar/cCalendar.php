@@ -16,6 +16,8 @@ class cCalendar extends CI_Controller {
 	
 	public function displayCalendar()
 	{
+		$array=array();
+
 		$data['user'] = $this->MUser->read($this->session->userdata['userSession']->userID);
 		echo $this->MUser->db->last_query();
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -49,6 +51,8 @@ class cCalendar extends CI_Controller {
 			$event_ticket_total_no= $_POST['event_ticket_total_no'];
 			$event_ticket_discount= $_POST['event_ticket_discount'];
 			$color=$_POST['color'];
+
+
 			
 			$data = array(
 				'event_date_start'=>$start,

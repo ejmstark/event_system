@@ -136,6 +136,7 @@ foreach($going as $g){
                                 </span>
 
                             </div>
+
                             <!-- .property-meta -->
 
                             <div class="section">
@@ -186,7 +187,15 @@ foreach($going as $g){
                             </div>
                         <?php }?>
                             <!-- End video area  -->
+                            <?php foreach($events as $x){ if($id == $x->user_id){ ?>
+                            <div class="button navbar-right">
+                                <button class="navbar-btn nav-button login" style="background-color: gray;"> <a href ="<?php echo site_url('event/cEvent/deleteEvent/'.$e->event_id);?>">Delete Event </a></button>
+                            </div>
 
+                            <div class="button navbar-right">
+                                <button class="navbar-btn nav-button login"> <a href="<?php echo site_url('event/cEvent/editEvent/'.$e->event_id);?>">Edit Event </a></button>
+                            </div>
+                        <?php }} ?>
                         </div>
                     </div>
 
