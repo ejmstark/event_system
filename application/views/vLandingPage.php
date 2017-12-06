@@ -4,7 +4,7 @@
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
-    
+        
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -20,11 +20,11 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
                     </div>
 
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                     </div>
                     
 
@@ -47,8 +47,8 @@
                 <div id="bg-slider" class="owl-carousel owl-theme">
 
                     <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-4.jpg')?>" alt="The Last of us"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-1.jpg')?>" alt="GTA V"></div>   
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div> 
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>   
 
                 </div>
             </div>
@@ -56,17 +56,16 @@
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <h2>See Events Near You</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                            <form action="" class=" form-inline">
+                            <form action="<?php echo site_url();?>/user/cUser/search" class=" form-inline">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Key word">
                                 </div>
                                 <div class="form-group">                                     
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> -Category- </option>
+                                    <select name="basic" class="form-control">
+                                        <!-- <option> -Category- </option>-->
                                         <option>Concerts</option>
                                         <option>Workshops</option>
                                         <option>Other</option>  
@@ -145,6 +144,28 @@
                                                             echo $event->event_name;
                                                     }
                                                     ?></a></h5>
+                                                    <?php
+                                                            date_default_timezone_set('Asia/Manila');
+                                                            $now = new DateTime("now");
+                                                            $end = new DateTime($event->dateEnd);
+                                                            $start = new DateTime($event->dateStart);
+                                                            $interval = date_diff($now, $start);
+
+                                                            if($now > $start && $now > $end){
+                                                                echo "<h5>Expired!</h5>";
+                                                            
+                                                            }else if($now < $start){
+                                                                if($interval->days == 0){
+                                                                    echo "<h5>Less than a day!</h5>";
+                                                                }else{
+                                                                    echo "<h5>$interval->days day/s left!</h5>";
+                                                                }
+                                                                
+                                                            }else if($now >= $start && $now <= $end){
+                                                                echo "<h5>Happening now!</h5>";
+                                                            }
+                                                            
+                                                    ?>   
                                                         <div class="dot-hr"></div>
                                                         <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
                                                         <span class="proerty-price pull-right"></span>

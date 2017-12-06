@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 19, 2017 at 02:53 PM
+-- Generation Time: Dec 05, 2017 at 07:42 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -23,16 +23,18 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `card_load`
+-- Table structure for table `card`
 --
 
-CREATE TABLE IF NOT EXISTS `card_load` (
-  `card_id` int(11) NOT NULL,
-  `card_code` varchar(20) NOT NULL,
-  `card_amount` float NOT NULL DEFAULT '0',
-  `card_active` binary(1) NOT NULL,
-  `date_claimed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `account_id` int(11) DEFAULT NULL
+CREATE TABLE IF NOT EXISTS `card` (
+  `cardId` int(11) NOT NULL,
+  `cardCode` varchar(10) NOT NULL,
+  `cardAmount` int(11) NOT NULL,
+  `cardStatus` tinyint(1) NOT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -46,6 +48,8 @@ CREATE TABLE IF NOT EXISTS `event_info` (
   `event_date_start` datetime NOT NULL,
   `event_date_end` datetime NOT NULL,
   `no_tickets_total` int(11) NOT NULL,
+  `total_no_addedTickets` int(11) NOT NULL,
+  `total_tickets_amtSold` int(11) NOT NULL,
   `event_status` enum('Pending','Approved','Rejected') DEFAULT NULL,
   `event_name` varchar(50) NOT NULL,
   `event_details` text,
@@ -53,9 +57,12 @@ CREATE TABLE IF NOT EXISTS `event_info` (
   `event_venue` text NOT NULL,
   `event_isActive` tinyint(1) NOT NULL DEFAULT '1',
   `event_picture` text NOT NULL,
-  `date_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `color` varchar(7) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,7 +75,11 @@ CREATE TABLE IF NOT EXISTS `ticket` (
   `ticket_id` int(11) NOT NULL,
   `date_sold` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `ticket_type_id` int(11) DEFAULT NULL
+  `ticket_type_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -82,7 +93,11 @@ CREATE TABLE IF NOT EXISTS `ticket_type` (
   `ticket_name` varchar(50) DEFAULT NULL,
   `price` float NOT NULL,
   `ticket_count` int(11) NOT NULL,
-  `event_id` int(11) DEFAULT NULL
+  `event_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -107,7 +122,10 @@ CREATE TABLE IF NOT EXISTS `user_account` (
   `gender` enum('Male','Female','Other') NOT NULL,
   `contact_no` varchar(16) DEFAULT NULL,
   `load_amt` float NOT NULL DEFAULT '0',
-  `date_account_created` datetime NOT NULL
+  `addedBy` int(11) DEFAULT NULL,
+  `updatedBy` int(11) DEFAULT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -120,19 +138,16 @@ CREATE TABLE IF NOT EXISTS `user_event_preference` (
   `user_event_preference_id` int(11) NOT NULL,
   `preference_date` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `event_id` int(11) DEFAULT NULL
+  `event_id` int(11) DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `updatedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `card_load`
---
-ALTER TABLE `card_load`
-  ADD PRIMARY KEY (`card_id`),
-  ADD KEY `card_load_fk` (`account_id`);
 
 --
 -- Indexes for table `event_info`
@@ -160,7 +175,9 @@ ALTER TABLE `ticket_type`
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
-  ADD PRIMARY KEY (`account_id`);
+  ADD PRIMARY KEY (`account_id`),
+  ADD UNIQUE KEY `user_name` (`user_name`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `user_event_preference`
@@ -174,11 +191,6 @@ ALTER TABLE `user_event_preference`
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `card_load`
---
-ALTER TABLE `card_load`
-  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `event_info`
 --
@@ -207,12 +219,6 @@ ALTER TABLE `user_event_preference`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `card_load`
---
-ALTER TABLE `card_load`
-  ADD CONSTRAINT `card_load_fk` FOREIGN KEY (`account_id`) REFERENCES `user_account` (`account_id`);
 
 --
 -- Constraints for table `event_info`

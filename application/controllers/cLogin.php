@@ -110,7 +110,7 @@ class CLogin extends CI_Controller {
 
                              'userLevel' => $row->user_type,
 
-							 'userSuperior' => $row->upgraded_by,
+							 'userSuperior' => $row->upgradedBy
                       );
 
 
@@ -145,13 +145,16 @@ class CLogin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		foreach ($result_data as $value) {
-				$arrObj = new stdClass;
-				$arrObj->event_id = $value->event_id;
-				$arrObj->event_name = $value->event_name;
-				$arrObj->dateStart = $value->dateStart;
-				$arrObj->event_category = $value->event_category;
-				$array[] = $arrObj;
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->dateStart = $value->dateStart;
+					$arrObj->event_category = $value->event_category;
+					$array[] = $arrObj;
+			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data['events'] = $array;

@@ -27,6 +27,8 @@ class cCalendar extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
+
+
 		foreach ($result_data as $value) {
 				$arrObj = new stdClass;
 				$arrObj->event_id = $value->event_id;
@@ -35,17 +37,19 @@ class cCalendar extends CI_Controller {
 				$arrObj->event_name = $value->event_name;
 				//$arrObj->event_isActive = $value->event_isActive;
 				$arrObj->date_created = $value->date_created;
+				$arrObj->event_details = $value->event_details;
+				$arrObj->event_category = $value->event_category;
+				$arrObj->event_venue = $value->event_venue;
 				$arrObj->color = $value->color;
 				$array[] = $arrObj;
 		}
 		$data['event_data'] = $array;
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$this->load->helper('url');
-		$this->load->view('imports/vHeaderCalendarPage');
+		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('calendar/vCalendar',$data);
-		$this->load->view('imports/vFooterCalendarPage',$this->data);
+		$this->load->view('imports/vFooterLandingPage',$this->data);
 	}
-
 	public function AddEvent()
 	{
 		if (isset($_POST['title']) && isset($_POST['event_detail']) && isset($_POST['start']) && isset($_POST['end']) && isset($_POST['event_category']) && isset($_POST['event_venue']) && isset($_POST['event_ticket_price']) && isset($_POST['event_ticket_type']) && isset($_POST['event_ticket_total_no']) && isset($_POST['event_ticket_discount'])
