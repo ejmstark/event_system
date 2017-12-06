@@ -68,7 +68,6 @@ class cEvent extends CI_Controller {
                               });
 
                         </script>';
-        echo "<h1>Search results for: ".$_POST['searchWord']."</h1>";
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vLandingPage', $data);
 		//$this->load->view('user/vListEvents', $data['events']);
