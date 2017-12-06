@@ -4,7 +4,7 @@
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
-        
+
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -26,12 +26,15 @@
                     <div class="button navbar-right">
                         <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                     </div>
-                    
+
 
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
+
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li><!-- 
+                        <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
                     </ul>
@@ -46,9 +49,9 @@
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>   
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div>
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div>
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>
 
                 </div>
             </div>
@@ -63,14 +66,14 @@
                                 <div class="form-group">
                                     <input name="searchWord" type="text" class="form-control" placeholder="Key word">
                                 </div>
-                                <!-- <div class="form-group">                                     
+                                <!-- <div class="form-group">
                                     <select name="basic" class="form-control">
                                         <option>Concerts</option>
                                         <option>Workshops</option>
-                                        <option>Other</option>  
+                                        <option>Other</option>
                                     </select>
                                 </div> -->
-                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
+                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </div>
@@ -81,21 +84,21 @@
 
         <!-- property area -->
         <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
-            <div class="container">   
+            <div class="container">
                 <div class="row">
                     <div class="col-md-12  padding-top-40 properties-page">
-                        <div class="col-md-12 "> 
+                        <div class="col-md-12 ">
                             <div class="col-xs-10 page-subheader sorting pl0">
 
                                 <ul class="sort-by-list">
                                     <li class="active">
                                         <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
-                                            Sort By Date <i class="fa fa-sort-amount-asc"></i>					
+                                            Sort By Date <i class="fa fa-sort-amount-asc"></i>
                                         </a>
                                     </li>
                                     <li class="">
                                         <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
-                                            Sort By Price <i class="fa fa-sort-numeric-desc"></i>						
+                                            Sort By Price <i class="fa fa-sort-numeric-desc"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -119,13 +122,13 @@
 
                             <div class="col-xs-2 layout-switcher">
                                 <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                                <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>                          
+                                <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
                             </div><!--/ .layout-switcher-->
                         </div>
 
-                        <div class="col-md-12 "> 
+                        <div class="col-md-12 ">
                             <div id="list-type" class="proerty-th">
-                            <?php   
+                            <?php
                             $cnt =1;
                                         if(isset($events)){
                                             foreach ($events as $event) {
@@ -136,9 +139,9 @@
                                                     <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 70px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
                                                 </div>
                                                    <div class="item-entry overflow">
-                                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php 
+                                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
                                                     if(strlen($event->event_name)>=42){
-                                                        echo substr($event->event_name,0,39)."..."; 
+                                                        echo substr($event->event_name,0,39)."...";
                                                     }else{
                                                             echo $event->event_name;
                                                     }
@@ -154,19 +157,19 @@
 
                                                             if($now > $start && $now > $end){
                                                                 echo "<h5>Expired!</h5>";
-                                                            
+
                                                             }else if($now < $start){
                                                                 if($interval->days == 0){
                                                                     echo "<h5>Less than a day!</h5>";
                                                                 }else{
                                                                     echo "<h5>$interval->days day/s left!</h5>";
                                                                 }
-                                                                
+
                                                             }else if($now >= $start && $now <= $end){
                                                                 echo "<h5>Happening now!</h5>";
                                                             }
-                                                            
-                                                    ?>   
+
+                                                    ?>
                                                         <div class="dot-hr"></div>
                                                         <!-- <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span> -->
                                                         <span class="proerty-price pull-right"></span>
@@ -174,18 +177,18 @@
                                                         <!-- <div class="property-icon pull-right">
                                                             <a>Read More</a>
                                                         </div> -->
-                                                    </div> 
+                                                    </div>
                                             </div>
-                                        </div>    
+                                        </div>
                                     <?php
                                             }
                                         }
                                     ?>
-                                
+
 
                             </div>
                         </div>
-                        <div class="col-md-12"> 
+                        <div class="col-md-12">
                             <div class="pull-right">
                                 <div class="pagination">
                                     <ul>
@@ -197,9 +200,9 @@
                                         <li><a href="#">Next</a></li>
                                     </ul>
                                 </div>
-                            </div>                
+                            </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>
@@ -219,10 +222,10 @@
 
                                <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                                
+
                             </div>
                         </div>
-                    
+
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
@@ -243,23 +246,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                            <ul>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-          
-
-
-    
-     
-
