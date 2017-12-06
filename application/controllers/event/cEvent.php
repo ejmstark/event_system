@@ -563,37 +563,20 @@ class cEvent extends CI_Controller {
 	
 		}
 	
-		// public function deleteEvent($id){
-		// 	$this->load->model('events/mEvent','event');
-	
-	
-		// 	// $event_id = $this->input>post('event_id');
-	
-		// 	$result = $this->event->deleteEvent($id);
-	
-		// 	redirect('event/cEvents/index');
-	
-	
-		// 	//code for tests purposes
-		// 	/*
-		// 	$this->event->deleteEvent(18);
-		// 	*/
-		// }
 
 		public function deleteEvent($id){
-
-			$data = array(
-				//'event_isActive' => 0,
-				'event_status' => 'Rejected'
-				//supposedly change status to 'Deleted' instead of 'Rejected'
-			);
-
-			$this->db->where('event_id',$id);
-			$this->db->update('event_info',$data);
-
-			$this->load->view('imports/vHeaderSignUpPage');
-			$this->viewEvents();
-			$this->load->view('imports/vFooterLandingPage');
+			// $event_id = $this->input>post('event_id');
+			$data = array('event_isActive'=> 0);
+			$v = $this->MUser->updateSpecificEvent($id,$data);
+			if($v){
+				redirect('event/cEvent/viewEvents');
+			}else{
+				echo "Error...";
+			}
+			//code for tests purposes
+			/*
+			$this->event->deleteEvent(18);
+			*/
 		}
 		
 	public function updateEvent(){
