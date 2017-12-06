@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$mysql = new mysqli("localhost", "root", "","event_db");
 
 	// Check connection

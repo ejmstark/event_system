@@ -10,6 +10,7 @@ class CAdmin extends CI_Controller {
 		$this->load->model('MUserInfo');
 		$this->load->model('MEventInfo');
 		$this->load->model('MReports');
+		$this->load->model('MUser');
 		// $this->load->model('MUserInfo');
 	}
 
@@ -44,8 +45,11 @@ class CAdmin extends CI_Controller {
 		$data2['row'] = $array;
 
    		$data3['users']=$this->getUserCount();
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
+		//$this->load->view('admin/vAdminDashboard', $data2);
 		$this->load->view('admin/vAdmin', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function getUserCount(){
@@ -135,7 +139,7 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
-	
+
 	public function Ban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -256,11 +260,31 @@ class CAdmin extends CI_Controller {
 					  'date_account_created' => $now->format('Y-m-d H:i:s')
 					);
 
-		$result = $user->insert($data);
 
-		if($result){
-			//$this->index();
-			redirect('admin/cAdmin/viewAdminAccountMgt');
+
+		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
+		$res1 = $this->MUser->read_where(array('email' => $data['email']));
+
+    	if($res){
+    			$this->session->set_flashdata('error_msg','Username taken');
+    			$this->viewAdminAccountMgt();
+    			// redirect('user/cUser/viewSignUp',"refresh");
+				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
+
+		}else if($res1){
+			$this->session->set_flashdata('error_msg','Email taken');
+				$this->viewAdminAccountMgt();
+				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+
+		}else{
+
+			$result = $user->insert($data);
+
+
+			if($result){
+				//$this->index();
+				redirect('admin/cAdmin/viewAdminAccountMgt');
+			}
 		}
 
 		# code...
@@ -293,8 +317,10 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data2['users']=$array;
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 	//Roald Code
 	//this function will show the search results coming from viewUserAccountMgt()
@@ -322,9 +348,11 @@ class CAdmin extends CI_Controller {
 		} else {
 			$data2['users']=array();
 		}
-		
-		$this->load->view('imports/vHeaderAdmin');
+
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function viewAdminAccountMgt() {
@@ -356,8 +384,10 @@ class CAdmin extends CI_Controller {
 		$data2['admin']=$array;
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
 
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vAdminAccountMgt', $data2);
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function viewFinance() {
@@ -377,8 +407,10 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vFinance');
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function viewReport() {
@@ -409,13 +441,17 @@ class CAdmin extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		//$data['data']=$array;
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vReport');
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function generateCard() {
-		$this->load->view('imports/vHeaderAdmin');
+		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vCards');
+		$this->load->view('imports/admin_vFooter');
+
 	}
 
 	public function updateAdmin() {
@@ -485,7 +521,7 @@ class CAdmin extends CI_Controller {
 			return false;
 		}
 	}
-	
+
 
 	public function getActiveUsers($startDate, $endDate){
 		$result = $this->MReports->countUsers($startDate, $endDate);
@@ -494,5 +530,47 @@ class CAdmin extends CI_Controller {
 		}else{
 			return false;
 		}
+	}
+
+	public function getUserMonthly(){
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
+		$year = $_GET['years'];
+		$userModel = new MUser();
+		$where = array('YEAR(user_account.date_account_created)' => $year,
+									 'user_account.user_status' => 'Active',
+									 'user_account.user_type' => 'Regular'
+								 );
+		$result = $userModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+							MONTHNAME(user_account.date_account_created) as monthname',
+							$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+		$arr_data = array();
+		foreach ($result as $value) {
+			$arr_data[] = [$value->UserCount, $value->monthname];
+		}
+		echo json_encode($arr_data);
+		//////////////////////////////////////
+		//////////////////////////////////////
+	}
+
+	public function getEvents(){
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
+		$year = $_GET['years'];
+		$eventModel = new MEventInfo();
+		$where = array("event_status" => "APPROVED",
+										"YEAR(date_created)" => $year
+								 );
+		$result = $eventModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
+							$where,FALSE,FALSE,FALSE,FALSE);
+		$arr_data = array();
+		foreach ($result as $value) {
+			$arr_data[] = [$value->EventCount];
+		}
+		echo json_encode($arr_data);
+		//////////////////////////////////////
+		//////////////////////////////////////
 	}
 }
