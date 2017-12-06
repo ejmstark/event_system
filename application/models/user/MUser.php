@@ -19,7 +19,7 @@
 		}
 
 		public function Attendance()
-		{	
+		{
 
 
 			$this->db->select("ei.event_name as event_id, user_account.user_name as name , count(*) as total");
@@ -57,11 +57,38 @@
 			# code...
 		}
 
+		public function getEventDetails($id){
+			// $id is the id of the event
+			$this->db->select('event_id, event_name, event_venue, event_date_start, event_date_end, event_category, event_details');
+			$this->db->from('event_info');
+			$this->db->where('event_info.event_id', $id);
+
+			return $this->db->get();
+		}
+
+		public function getTicketDetails($id){
+			$this->db->select('ticket_type_id, ticket_name, price, ticket_count');
+			$this->db->from('ticket_type');
+			$this->db->where('event_id', $id);
+
+			return $this->db->get();
+		}
+
 		public function getAllUsers(){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
-			return $query;			             
+			return $query;
+		}
+
+		public function updateSpecificEvent($id, $data){
+			$this->db->where('event_id', $id);
+			return $this->db->update('event_info', $data);
+		}
+
+		public function updateSpecificTicketType($data, $id){
+			$this->db->where('ticket_type_id', $id);
+			return $this->db->update('ticket_type',$data);
 		}
 
 		public function getAccount_id(){
@@ -69,7 +96,7 @@
 		}
 
 		public function setAccount_id($account_id){
-			$this->account_id = $account_id;
+			$this->account_id = (int) $account_id;
 		}
 
 		public function getUser_name(){
@@ -77,10 +104,14 @@
 		}
 
 		public function setUser_name($user_name){
+			$user_name = trim($user_name);
+			$user_name = filter_var($user_name,FILTER_SANITIZE_STRING);
 			$this->user_name = $user_name;
 		}
 
 		public function setUser_password($user_password){
+			$user_password = trim($user_password);
+			$user_password = filter_var($user_password,FILTER_SANITIZE_STRING);
 			$this->user_password = $user_password;
 		}
 
@@ -93,6 +124,8 @@
 		}
 
 		public function setFirst_name($first_name){
+			$first_name = trim($first_name);
+			$first_name = filter_var($first_name,FILTER_SANITIZE_STRING);
 			$this->first_name = $first_name;
 		}
 
@@ -101,6 +134,8 @@
 		}
 
 		public function setLast_name($last_name){
+			$last_name = trim($last_name);
+			$last_name = filter_var($last_name,FILTER_SANITIZE_STRING);
 			$this->last_name = $last_name;
 		}
 
@@ -109,6 +144,7 @@
 		}
 
 		public function setMiddle_initial($middle_initial){
+			$middle_initial = trim($middle_initial,FILTER_SANITIZE_STRING);
 			$this->middle_initial = $middle_initial;
 		}
 
@@ -117,6 +153,8 @@
 		}
 
 		public function setEmail($email){
+			$email = trim($email);
+			$email = filter_var($email,FILTER_SANITIZE_STRING);
 			$this->email = $email;
 		}
 
@@ -125,6 +163,8 @@
 		}
 
 		public function setBirthdate($birthdate){
+			$birthdate = trim($birthdate);
+			$birthdate = filter_var($birthdate,FILTER_SANITIZE_STRING);
 			$this->birthdate = $birthdate;
 		}
 
@@ -133,6 +173,8 @@
 		}
 
 		public function setGender($gender){
+			$gender = trim($gender);
+			$gender = filter_var($gender,FILTER_SANITIZE_STRING);
 			$this->gender = $gender;
 		}
 
@@ -141,8 +183,10 @@
 		}
 
 		public function setContact_no($contact_no){
+			$contact_no = trim($contact_no);
+			$contact_no = filter_var($contact_no,FILTER_SANITIZE_STRING);
 			$this->contact_no = $contact_no;
-		}	
+		}
 
 	}
 ?>

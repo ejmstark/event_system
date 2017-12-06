@@ -20,17 +20,17 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
                     </div>
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                     </div>
 
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                        
+
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
-                        <!-- 
+                        <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
                     </ul>
@@ -40,11 +40,11 @@
         <!-- End of nav bar -->
 
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Profile</h1>               
+                        <h1 class="page-title">Profile</h1>
                     </div>
                 </div>
             </div>
@@ -53,10 +53,10 @@
 
         <!-- property area -->
         <div class="properties-area recent-property" style="background-color: #FFF;">
-            <div class="container">  
-                <div class="row">  
+            <div class="container">
+                <div class="row">
                 <div class="col-md-3 p0 padding-top-40">
-                    <div class="blog-asside-right pr0">   
+                    <div class="blog-asside-right pr0">
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
                             <div class="panel-body search-widget">
                                <div class="col-md-12">
@@ -68,9 +68,9 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <p>Insufficient balance? 
-                                             <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" >Load Now</a> 
-                                            
+                                        <p>Insufficient balance?
+                                             <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" >Load Now</a>
+
 <!--                                             <button type="button" class="dbutton" data-toggle ="modal" data-target="#lmodal">Load Now</button>
  -->
  <script>
@@ -80,17 +80,17 @@
  </script>
                                         </p>
                                         <div class="row">
-                                            
+
                                                 <div class="col-xs-12" id="some" hidden="">
                                                     <form action="<?php echo site_url(); ?>/user/cUser/redeemCode" method="post">
                                                         <input type="text" class="form-control" name="ccode" placeholder="Enter code">
                                                         <button type="submit" class="navbar-btn nav-button pull-right"   >Redeem Code</button>
                                                     </form>
                                                 </div>
-                                            
+
                                         </div>
-                                    </div>    
-                                </div>                                    
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="modal fade" id="lmodal">
@@ -100,10 +100,10 @@
                                             <h3><img src="img/credit-card.png" class="elogo"> eLoad</h3>
                                         </div>
                                         <div class="modal-body">
-                                            
+
                                             <label class="label-control">Card Number</label>
                                             <input type="text" class="form-control" name="" placeholder="Enter Card Number">
-                                            
+
                                             <h6 class="note">*Note: you only have 3 attemps to enter correct values</h6>
                                         </div>
                                         <div class="modal-footer">
@@ -117,26 +117,26 @@
                             <div class="panel-body search-widget">
                                 <fieldset >
                                     <div class="row">
-                                        <div class="col-md-12">  
+                                        <div class="col-md-12">
                                              <a href="<?php echo site_url()?>/calendar/cCalendar">
                                             <button class = "button btn largesearch-btn">Calendar</button></a>
-                                        </div>  
+                                        </div>
                                     </div>
-                                </fieldset>   
+                                </fieldset>
                                 <fieldset >
                                     <div class="row">
-                                        <div class="col-md-12">  
+                                        <div class="col-md-12">
                                             <button class = "button btn largesearch-btn">Payment Summary</button>
-                                        </div>  
+                                        </div>
                                     </div>
-                                </fieldset>                                     
+                                </fieldset>
                             </div>
                             <br><br>
                             <div class="panel-heading">
                                 <h3 class="panel-title">Search</h3>
                             </div>
                             <div class="panel-body search-widget">
-                                <form action="" class=" form-inline"> 
+                                <form action="" class=" form-inline">
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -176,83 +176,83 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <label for="price-range">Price range (P):</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0" 
-                                                       data-slider-max="10000" data-slider-step="5" 
+                                                <input type="text" class="span2" value="" data-slider-min="0"
+                                                       data-slider-max="10000" data-slider-step="5"
                                                        data-slider-value="[0,1000]" id="price-range" ><br />
-                                                <b class="pull-left color">P0.00</b> 
-                                                <b class="pull-right color">P10,000.00</b>                                       
-                                            </div>                                      
+                                                <b class="pull-left color">P0.00</b>
+                                                <b class="pull-right color">P10,000.00</b>
+                                            </div>
                                         </div>
-                                    </fieldset>                                
-                                    
+                                    </fieldset>
+
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox" checked> Workshops</label>
-                                                </div> 
+                                                </div>
                                             </div>
 
                                             <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox"> Parties</label>
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset class="padding-5">
                                         <div class="row">
-                                            <div class="col-xs-6"> 
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox" checked> Food Bazaar</label>
                                                 </div>
-                                            </div>  
-                                            <div class="col-xs-6"> 
+                                            </div>
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox" checked> Fashion Shows</label>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset class="padding-5">
                                         <div class="row">
-                                            <div class="col-xs-6"> 
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label><input type="checkbox"> Concerts </label>
                                                 </div>
-                                            </div>  
-                                            <div class="col-xs-6"> 
+                                            </div>
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label> <input type="checkbox"> Exhibits</label>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset class="padding-5">
                                         <div class="row">
-                                            <div class="col-xs-6"> 
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label>  <input type="checkbox" checked> Sports Event </label>
                                                 </div>
-                                            </div>  
-                                            <div class="col-xs-6"> 
+                                            </div>
+                                            <div class="col-xs-6">
                                                 <div class="checkbox">
                                                     <label>  <input type="checkbox"> Others </label>
                                                 </div>
-                                            </div>  
+                                            </div>
                                         </div>
                                     </fieldset>
 
                                     <fieldset >
                                         <div class="row">
-                                            <div class="col-xs-12">  
+                                            <div class="col-xs-12">
                                                 <input class="button btn largesearch-btn" value="Search" type="submit">
-                                            </div>  
+                                            </div>
                                         </div>
-                                    </fieldset>                                     
+                                    </fieldset>
                                 </form>
                             </div>
                         </div>
@@ -321,35 +321,63 @@
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
-        <div class="col-md-12 clear"> 
+        <div class="col-md-12 clear">
             <div class="row">
                 <div class="col-xs-12 layout-switcher pull-right">
                     <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                    <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>                 
+                    <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
                 </div>
             </div>
-            
+
             <div id="list-type" class="proerty-th">
-                
-                        <?php 
+
+                        <?php
                             if(isset($events)){
                                 $cnt =1;
                                 foreach ($events as $event) {
                                    ?>
-                                <div class="col-sm-6 col-md-4 p0">
+                            <div class="col-sm-6 col-md-4 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
                                         <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
                                     </div>
                                        <div class="item-entry overflow">
-                                            <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php 
-                                                    if(strlen($event->event_name)>=26){
-                                                        echo substr($event->event_name,0,23)."..."; 
+                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
+                                                if(strlen($event->event_name)>=26){
+                                                    echo substr($event->event_name,0,23)."...";
+                                                }else{
+                                                        echo $event->event_name;
+                                                }
+                                                ?>
+                                        </a></h5>
+                                        <?php
+                                                if($event->event_status == 'Approved'){
+                                                        date_default_timezone_set('Asia/Manila');
+                                                        $now = new DateTime("now");
+                                                        $end = new DateTime($event->dateEnd);
+                                                        $start = new DateTime($event->dateStart);
+                                                        $interval = date_diff($now, $start);
+
+                                                        if($now > $start && $now > $end){
+                                                            echo "<h5>Expired!</h5>";
+                                                                
+                                                        }else if($now < $start){
+                                                            if($interval->days == 0){
+                                                                echo "<h5>Less than a day!</h5>";
+                                                            }else{
+                                                                echo "<h5>$interval->days day/s left!</h5>";
+                                                                }
+                                                                    
+                                                        }else if($now >= $start && $now <= $end){
+                                                            echo "<h5>Happening now!</h5>";
+                                                        }
                                                     }else{
-                                                            echo $event->event_name;
-                                                    }
-                                                    ?>
-                                            </a></h5>
+                                                        echo "<h5>Not yet Approved!</h5>";
+                                                    }    
+                                                        
+                                                            
+                                                ?>   
+
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
                                             <span class="proerty-price pull-right"><?php echo $event->event_status;?> </span>
@@ -358,16 +386,17 @@
                                             <!-- <div class="property-icon pull-right">
                                                 <a>Read More</a>
                                             </div> -->
-                                        </div> 
+                                        </div>
                                 </div>
-                            </div>    
+                            </div>
+
                         <?php
                                 }
                             }
                         ?>
             </div>
 
-            <div class="col-md-12"> 
+            <div class="col-md-12">
                 <div class="pull-right">
                     <div class="pagination">
                         <ul>
@@ -379,7 +408,7 @@
                             <li><a href="#">Next</a></li>
                         </ul>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
@@ -412,12 +441,12 @@
                                                 <div class="panel-body search-widget">
                                                     <fieldset >
                                                         <div class="row">
-                                                            <div class="col-md-12">  
+                                                            <div class="col-md-12">
                                                                 <!-- <a href="<?php echo site_url();?>/reports/cReports/generateRevenue/<?php echo $e->event_id;?>"><button class="button btn largesearch-btn " id="<?php echo $e->event_id;?>">Generate Revenue</button></a> -->
 
 <!-- Button HTML (to Trigger Modal) -->
 <a href="#myModal<?php echo $e->event_id;?>" role="button" class="button btn largesearch-btn" data-toggle="modal">Generate Revenue</a>
- 
+
 <!-- Modal HTML -->
 <div id="myModal<?php echo $e->event_id;?>" class="modal fade">
     <div class="modal-dialog">
@@ -443,10 +472,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php 
+                            <?php
                             $gTotal = 0;
                 foreach ($res as $r) {
-                    $gTotal += ($r->cnt*$r->price);                
+                    $gTotal += ($r->cnt*$r->price);
                 ?>
                             <tr>
                                 <td><?php echo $r->ticket_name; ?></td>
@@ -518,8 +547,12 @@
                         </table>
                     </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="settings">...</div>
-  </div>
+    <div role="tabpanel" class="tab-pane" id="settings">
+    </div>
+          <a href="<?php echo site_url('user/cUser/editAccount/'.$userid);?>"><div>Edit Profile</div></a>
+
+    </div>
+
 
   <script type="text/javascript">
 
@@ -540,20 +573,20 @@
 
 </div>
 
-                    <div class="col-md-12 clear"> 
+                    <div class="col-md-12 clear">
                         <div class="col-xs-10 page-subheader sorting pl0">
                             <!-- <ul class="sort-by-list">
                                 <li class="active">
                                     <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
-                                        Event Date <i class="fa fa-sort-amount-asc"></i>                    
+                                        Event Date <i class="fa fa-sort-amount-asc"></i>
                                     </a>
                                 </li>
                                 <li class="">
                                     <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
-                                        Event Ticket Price <i class="fa fa-sort-numeric-desc"></i>                      
+                                        Event Ticket Price <i class="fa fa-sort-numeric-desc"></i>
                                     </a>
                                 </li>
-                            </ul> 
+                            </ul>
 
                             <div class="items-per-page">
                                 <label for="items_per_page"><b>Events per page :</b></label>
@@ -572,16 +605,16 @@
                             </div>
                         </div>-->
 
-                        
+
                     </div>
 
-                    
-                </div>  
-                </div>              
+
+                </div>
+                </div>
             </div>
         </div>
 
-        
+
 
         <!-- Footer area-->
         <div class="footer-area">
@@ -597,10 +630,10 @@
 
                                <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                                
+
                             </div>
                         </div>
-                    
+
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
@@ -621,20 +654,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                            <ul>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-          
-       
-   
