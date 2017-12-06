@@ -13,7 +13,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
 
     <!-- FullCalendar -->
-    <script  src="<?php echo base_url(); ?>assets/js/moment.min.js"></script>
+    <script  src="<?php echo base_url(); ?>assets/jsKyleAssets/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.js"></script>
     
