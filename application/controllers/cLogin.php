@@ -152,6 +152,7 @@ class CLogin extends CI_Controller {
 					$arrObj->event_id = $value->event_id;
 					$arrObj->event_name = $value->event_name;
 					$arrObj->dateStart = $value->dateStart;
+					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
 					$array[] = $arrObj;
 			}
