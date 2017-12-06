@@ -14,7 +14,11 @@
 	   	<div class = "center">
 	 		<div class = "col-md-8 col-md-offset-10 div-content">
                 <h1>Error 404</h1>
-                <p>Can't find the page that you're looking for.</p>
+                <p>PAGE NOT FOUND<p>
+                <br>
+                <h2>Kamalian 404<h2>
+                <p>ANG PAHINA AY HINDI MATAGPUAN. </p>  
+
             </div>
         </div>
     </div>

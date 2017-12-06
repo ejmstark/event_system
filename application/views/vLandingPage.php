@@ -230,7 +230,11 @@
                                  }
                                 ?>
                                " alt="" class="wow pulse" data-wow-delay="1s" >
-                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
+                                <p>
+                                <?php 
+                                include_once("vAboutUs.php");         
+                                ?>
+                                </p>
 
                             </div>
                         </div>
@@ -240,10 +244,17 @@
                                 <h4>Contact Us</h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-adress">
-                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
+                                    <li><i class="pe-7s-mail strong"> </i> 
+                                        <?php 
+                                        include_once("vEmail.php");         
+                                        ?>
+                                    </li>
+                                    <li><i class="pe-7s-call strong"> </i>
+                                        <?php 
+                                        include_once("vContactNo.php");         
+                                        ?>
+                                    </li>
                                 </ul>
-
                             </div>
                         </div>
 
