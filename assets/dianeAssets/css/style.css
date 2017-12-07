@@ -1,3 +1,13 @@
+/* oswald-regular - latin */
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald Regular'), local('Oswald-Regular'),
+       url('fonts/oswald-v16-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('fonts/oswald-v16-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
 body {
     overflow-y: scroll;
     overflow-x: hidden;
@@ -56,7 +66,7 @@ body {
 /*navbar styling*/
 .div-content {
     color: white;
-    font-family: Oswald Regular Regular;
+    font-family: Oswald;
     font-size: 20px;
     margin-top: 70px;
     margin-left: 200px;
@@ -121,7 +131,7 @@ a:hover {
 
 input::placeholder {
     color: #fff;
-    font-family: Oswald Regular Regular;
+    font-family: Oswald;
 }
 /*end of search bar styling*/
 
@@ -136,7 +146,7 @@ footer {
 
 .footer-content {
     color: white;
-    font-family: Oswald Regular Regular;
+    font-family: Oswald;
     margin-left: 10px;
     margin-bottom: 20px;
     padding-right: -1000px;
@@ -250,7 +260,7 @@ footer {
 
 .event-name { 
    color: white; 
-   font: bold 20px Oswald Regular Regular;
+   font: bold 20px Oswald;
    letter-spacing: 1px;  
    padding: 10px; 
    width: 100%;
@@ -355,7 +365,7 @@ footer {
 
 .nav li{
   padding-right: 50px;
-  font-family: Oswald Regular Regular;
+  font-family: Oswald;
 
  }
 

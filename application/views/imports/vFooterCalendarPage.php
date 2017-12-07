@@ -1,6 +1,6 @@
         <script src="<?php echo base_url('assets/nikkiAssets/js/modernizr-2.6.2.min.js')?>" rel="stylesheet" /> </script>
         <script src="<?php echo base_url('assets/nikkiAssets/js/jquery-1.10.2.min.js')?>" rel="stylesheet" /> </script>
-        <script src="<?php echo base_url('assets/nikkiAssets/bootstrap/js/bootstrap.min.j')?>" rel="stylesheet" /> </script>
+        <script src="<?php echo base_url('assets/nikkiAssets/bootstrap/js/bootstrap.min.js')?>" rel="stylesheet" /> </script>
        
         <script src="<?php echo base_url('assets/nikkiAssets/js/bootstrap-select.min.js')?>" rel="stylesheet" /> </script>
         <script src="<?php echo base_url('assets/nikkiAssets/js/bootstrap-hover-dropdown.js')?>" rel="stylesheet" /> </script>

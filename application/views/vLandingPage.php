@@ -58,19 +58,18 @@
                         <h2>See Events Near You</h2>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                            <form action="<?php echo site_url();?>/user/cUser/search" class=" form-inline">
+                            <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Key word">
+                                    <input name="searchWord" type="text" class="form-control" placeholder="Key word">
                                 </div>
-                                <div class="form-group">                                     
+                                <!-- <div class="form-group">                                     
                                     <select name="basic" class="form-control">
-                                        <!-- <option> -Category- </option>-->
                                         <option>Concerts</option>
                                         <option>Workshops</option>
                                         <option>Other</option>  
                                     </select>
-                                </div>
+                                </div> -->
                                 <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
                             </form>
                         </div>
@@ -145,6 +144,8 @@
                                                     }
                                                     ?></a></h5>
                                                     <?php
+                                                        echo $event->event_name;
+
                                                             date_default_timezone_set('Asia/Manila');
                                                             $now = new DateTime("now");
                                                             $end = new DateTime($event->dateEnd);
@@ -167,7 +168,7 @@
                                                             
                                                     ?>   
                                                         <div class="dot-hr"></div>
-                                                        <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
+                                                        <!-- <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span> -->
                                                         <span class="proerty-price pull-right"></span>
                                                         <!-- <p><?php echo $event->event_details;?> </p> -->
                                                         <!-- <div class="property-icon pull-right">

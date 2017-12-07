@@ -336,21 +336,21 @@
                                 $cnt =1;
                                 foreach ($events as $event) {
                                    ?>
-                                <div class="col-sm-6 col-md-4 p0">
+                            <div class="col-sm-6 col-md-4 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
                                         <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
                                     </div>
                                        <div class="item-entry overflow">
-                                            <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
-                                                    if(strlen($event->event_name)>=26){
-                                                        echo substr($event->event_name,0,23)."...";
-                                                    }else{
-                                                            echo $event->event_name;
-                                                    }
-                                                    ?>
-                                            </a></h5>
-                                            <?php
+                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
+                                                if(strlen($event->event_name)>=26){
+                                                    echo substr($event->event_name,0,23)."...";
+                                                }else{
+                                                        echo $event->event_name;
+                                                }
+                                                ?>
+                                        </a></h5>
+                                        <?php
                                                 if($event->event_status == 'Approved'){
                                                         date_default_timezone_set('Asia/Manila');
                                                         $now = new DateTime("now");
@@ -389,6 +389,7 @@
                                         </div>
                                 </div>
                             </div>
+
                         <?php
                                 }
                             }
@@ -551,6 +552,7 @@
           <a href="<?php echo site_url('user/cUser/editAccount/'.$userid);?>"><div>Edit Profile</div></a>
 
     </div>
+
 
   <script type="text/javascript">
 
