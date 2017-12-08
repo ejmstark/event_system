@@ -290,13 +290,24 @@ class cEvent extends CI_Controller {
 		# code...
 	}
 
-	public function displayEventReviews($eventData)
+	public function displayEventReviews()
 	{
 		//GET ALL REVIEWS FROM EVENT//
 		//Insert data retrieval here//
+		$events = array(
+			'event_name' => $_GET['event_name'],
+			'user_id' => $_GET['user_id'],
+			'event_status' => $_GET['event_status'],
+			'event_id' => $_GET['event_id'],
+			'event_venue' => $_GET['event_venue'],
+			'event_date_start' => $_GET['event_date_start'],
+			'event_date_end' => $_GET['event_date_end']
+		);
 		
+		$events = (object)$events;
+
 		$this->load->view('imports/vHeaderLandingPage');
-		$this->load->view('vEventReview',$eventData);
+		$this->load->view('vEventReview',$events);
 		$this->load->view('imports/vFooterLandingPage');
 	}
 
