@@ -59,5 +59,14 @@
 
 			return $this->update($id,$data);
 		}
+
+		public function loadAllAnnouncementDetails(){
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('user_account', $this::DB_TABLE . '.postedBy = user_account.account_id');
+			$query = $this->db->get();
+
+			return $query->result();
+		}
 	}
 ?>
