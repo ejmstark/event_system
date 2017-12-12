@@ -1,11 +1,11 @@
 <?php
-	class MCart extends MY_Model {
+	class MPreference extends MY_Model {
 		/*Declare Entities*/
 		//Ex.: private $event_id;
-		private $cart_id;
+		private $user_preference_id;
 
-		const DB_TABLE = "cart"; //Table Name
-    	const DB_TABLE_PK = "cart_id"; // Primary Key
+		const DB_TABLE = "user_event_preference"; //Table Name
+    	const DB_TABLE_PK = "user_preference_id"; // Primary Key
 
     	public function __construct(){
 
@@ -13,12 +13,12 @@
 		/* GETTER AND SETTERS */
 			
 
-		public function getCart_id(){
-			return $this->cart_id;
+		public function getUser_preference_id(){
+			return $this->user_preference_id;
 		}
 
-		public function setCart_id($cart_id){
-			$this->cart_id = $cart_id;
+		public function setUser_preference_id($user_preference_id){
+			$this->user_preference_id = $user_preference_id;
 		}
 
 		/* ****************** */

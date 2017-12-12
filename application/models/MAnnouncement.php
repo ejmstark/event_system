@@ -1,11 +1,11 @@
 <?php
-	class MCart extends MY_Model {
+	class MAnnouncement extends MY_Model {
 		/*Declare Entities*/
-		//Ex.: private $event_id;
-		private $cart_id;
+		//Ex.: private $announcementID;
+		private $announcementID;
 
-		const DB_TABLE = "cart"; //Table Name
-    	const DB_TABLE_PK = "cart_id"; // Primary Key
+		const DB_TABLE = "announcement"; //Table Name
+    	const DB_TABLE_PK = "announcementID"; // Primary Key
 
     	public function __construct(){
 
@@ -13,18 +13,19 @@
 		/* GETTER AND SETTERS */
 			
 
-		public function getCart_id(){
-			return $this->cart_id;
+		public function getAnnouncementID(){
+			return $this->announcementID;
 		}
 
-		public function setCart_id($cart_id){
-			$this->cart_id = $cart_id;
+		public function setAnnouncementID($announcementID){
+			$this->announcementID = $announcementID;
 		}
 
 		/* ****************** */
 
 
 		/* QUERY FUNCTIONS */
+
 			/* ADMIN MODULE FUNCTIONS */
 			
 
@@ -52,6 +53,7 @@
 
 
 			/* *************** */
+		
 		/* ************** */
 	} 
 ?>

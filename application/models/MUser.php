@@ -1,11 +1,11 @@
 <?php
-	class MCart extends MY_Model {
+	class MUser extends MY_Model {
 		/*Declare Entities*/
 		//Ex.: private $event_id;
-		private $cart_id;
+		private $account_id;
 
-		const DB_TABLE = "cart"; //Table Name
-    	const DB_TABLE_PK = "cart_id"; // Primary Key
+		const DB_TABLE = "user_account"; //Table Name
+    	const DB_TABLE_PK = "account_id"; // Primary Key
 
     	public function __construct(){
 
@@ -13,12 +13,12 @@
 		/* GETTER AND SETTERS */
 			
 
-		public function getCart_id(){
-			return $this->cart_id;
+		public function getAccount_id(){
+			return $this->account_id;
 		}
 
-		public function setCart_id($cart_id){
-			$this->cart_id = $cart_id;
+		public function setAccount_id($account_id){
+			$this->account_id = $account_id;
 		}
 
 		/* ****************** */
