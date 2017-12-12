@@ -64,7 +64,7 @@
                             <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
                                 <div class="form-group">
-                                    <input name="searchWord" type="text" class="form-control" placeholder="Key word">
+                                    <input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">
                                 </div>
                                 <!-- <div class="form-group">
                                     <select name="basic" class="form-control">

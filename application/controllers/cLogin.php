@@ -46,7 +46,7 @@ class CLogin extends CI_Controller {
 
 		$user->setUser_name($this->input->post('Username'));
 
-		$user->setUser_password($this->input->post('Password'));
+		$user->setUser_password(hash('sha512',$this->input->post('Password')));
 
 
 

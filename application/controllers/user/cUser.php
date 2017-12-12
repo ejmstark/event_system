@@ -66,7 +66,7 @@ class cUser extends CI_Controller {
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		$data = array('user_name' => $this->input->post('uname'),
-					  'password' => $this->input->post('password'),
+					  'password' => hash('sha512',$this->input->post('password')),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
