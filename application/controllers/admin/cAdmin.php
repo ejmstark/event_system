@@ -554,6 +554,45 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////
 	}
 
+	public function getCardsMonthly(){
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
+		// $year = $_GET['years'];
+		// $userModel = new MUser();
+		// $where = array('YEAR(user_account.date_account_created)' => $year,
+		// 							 'card.cardStatus' => 1,
+		// 						 );
+		// $result = $userModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		// 					MONTHNAME(user_account.date_account_created) as monthname',
+		// 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+		// $arr_data = array();
+		// foreach ($result as $value) {
+		// 	$arr_data[] = [$value->UserCount, $value->monthname];
+		// }
+		// echo json_encode($arr_data);
+
+		// SELECT COUNT(cardId), MONTHNAME(cardCreatedOn) as month FROM `card` WHERE cardStatus=1 group by month
+
+		$this->db->select('COUNT(*) as CardCount');
+		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
+		$this->db->from('card');
+		$this->db->where("cardStatus = 1");
+		$this->db->group_by("monthname");
+		$this->db->order_by("monthname", "desc");
+
+		$query = $this->db->get();
+		$result = $query->result();
+		
+		$arr_data = array();
+		foreach ($result as $value) {
+			$arr_data[] = [$value->CardCount, $value->monthname];
+		}
+		// //////////////////////////////////////
+		echo json_encode($arr_data);
+		//////////////////////////////////////
+	}
+
 	public function getEvents(){
 		///////////////////////////////////////
 		///////Interface New Implementation////

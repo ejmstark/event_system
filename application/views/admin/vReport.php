@@ -87,15 +87,21 @@
             <div class="col-md-3">
                     <div class="well bg-success">
                         <div class="widget-tile">
-                          <section>
-                              <h5><strong>CARDS</strong>SOLD</h5>
-                              <h2>100</h2>
+                            <section>
+                              <h5><strong>CARDS</strong> SOLD </h5>
+                              <h2>
+                                <?php
+                                    $result = $this->MReports->cardsSold(); 
+                                    echo $result; 
+                                ?>
+                              </h2>
                               <div class="progress progress-xs 
                               progress-white progress-over-tile">
                                   <div class="progress-bar  progress-bar-white" aria-valuetransitiongoal="8590" aria-valuemax="10000"></div>
                               </div>
                               
                           </section>
+
                           <div class="hold-icon"><i class="fa fa-bar-chart-o"></i></div>
                         </div>
                     </div>
@@ -113,10 +119,24 @@
 
                         <?php  $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
 
-                              echo "<br>Num of active users for month of Oct: ".$result;?>
+                              echo "<br><h3>Number of active users for month of Oct: ".$result."</h3>";?>
+                    </div>
+                </section>
+            </div>
 
-                          <?php  $result = $this->MReports->totalUsers();
-                              echo "<br>Total Registered Users for 2017: ".$result;?>
+            <div class="col-lg-6" >
+                <section class="panel corner-flip">
+                    <div class="widget-chart bg-lightseagreen">
+                        <div id="reportrange" class="pull-right" style="background: rgba(255,255,255,0.3); color:#FFF; cursor: pointer; padding: 5px 10px 10px; margin-top:5px;">
+                        </div>
+                        <h2>Total Cards Sold</h2>
+
+                        <!----- REPORTS CHART -->
+                        <canvas id="line-chart3" width="600" height="200"></canvas>
+
+                        <?php  $result = $this->MReports->cardsSold('2017-01-01 01:00:00','2017-12-12 01:00:00');
+
+                        echo "<br><h3>Number of cards sold: ".$result."</h3>";?>
                     </div>
                 </section>
             </div>
@@ -135,7 +155,7 @@
 
                           echo "<br>Number of approved events for month of Nov: ".$result."<br>";
 
-                          $result =$this->MReports->numEvents('2017-12-01 01:00:00', '2018-01-01 01:00:00');
+                          $result =$this->MReports->numEvents('2017-01-01 01:00:00', '2018-01-01 01:00:00');
 
                           echo "<br>Number of approved events for month of Dec: ".$result."<br>";
 
@@ -156,6 +176,7 @@
                             echo "</table>";
                           }
                       ?>
+
                     </div>
                 </section>
             </div>
@@ -171,7 +192,7 @@
               <script>
                var labels;
                var num;
-               var chart1, chart2;
+               var chart1, chart2, chart3;
 
                 $(document).ready(function(){
                    Chart.defaults.global.legend.display = false;
@@ -219,8 +240,30 @@
                    setTimeout(function(){
                        getEventsData();
                   },200);
-                });
 
+                chart3 = new Chart(document.getElementById("line-chart3"), {
+                          type: 'line',
+                          data: {
+                            labels: [],
+                            datasets: [{
+                                data: num,
+                                borderColor: "#FFFFFF"
+                              }
+                            ]
+                          },
+                          options: {
+
+                            title: {
+                              display: true,
+                              text: 'Year 2017'
+                            }
+                          }
+                      });
+                   setTimeout(function(){
+                       getData2();
+
+                  },200);
+                });
 
              function getData(){
                $.ajax({
@@ -244,6 +287,37 @@
                         labels = newlabel;
 
                         updateChart();
+                      },
+                      complete: function(){
+
+                      }
+                    });
+
+             }
+
+             function getData2(){
+
+               $.ajax({
+                      url:"<?php echo site_url()?>/admin/cAdmin/getCardsMonthly",
+                      method:"GET",
+                      dataType:"json",
+                      data: {
+                        'years': '2017'
+                      },
+                      success: function(data){
+                        var display = Array();
+                        var newlabel = Array();
+                        var i =1;
+                        display[0] = 0;
+                        newlabel[0]=" ";
+                        $(data).each(function(key,val){
+                            newlabel[i] = val[1];
+                            display[i++] = parseInt(val[0]);
+                        });
+                        num =display;
+                        labels = newlabel;
+  
+                        updateChart3();
                       },
                       complete: function(){
 
@@ -297,5 +371,9 @@
                 chart2.update(2000);
              }
 
-
+             function updateChart3(){
+                chart3.data.datasets[0].data = num;
+                chart3.data.labels = labels;
+                chart3.update(2000);
+             }
               </script>

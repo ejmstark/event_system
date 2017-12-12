@@ -32,6 +32,16 @@
 			return $result[0]->UserCount;
 		}
 		
+		public function cardsSold(){
+			$this->db->select('COUNT(*) as CardCount');
+			$this->db->from('card');
+			$this->db->where("cardStatus = 1");			
+			$query = $this->db->get();
+			$result = $query->result();
+
+			return $result[0]->CardCount;
+		}
+		
 		public function numEvents($startDate, $endDate){
 			///////////////////////////////////////
 			///////Interface New Implementation////
