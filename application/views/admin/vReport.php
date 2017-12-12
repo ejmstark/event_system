@@ -98,10 +98,8 @@
                               <div class="progress progress-xs 
                               progress-white progress-over-tile">
                                   <div class="progress-bar  progress-bar-white" aria-valuetransitiongoal="8590" aria-valuemax="10000"></div>
-                              </div>
-                              
-                          </section>
-
+                              </div>            
+                            </section>
                           <div class="hold-icon"><i class="fa fa-bar-chart-o"></i></div>
                         </div>
                     </div>

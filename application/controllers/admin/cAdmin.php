@@ -572,8 +572,6 @@ class CAdmin extends CI_Controller {
 		// }
 		// echo json_encode($arr_data);
 
-		// SELECT COUNT(cardId), MONTHNAME(cardCreatedOn) as month FROM `card` WHERE cardStatus=1 group by month
-
 		$this->db->select('COUNT(*) as CardCount');
 		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
 		$this->db->from('card');
