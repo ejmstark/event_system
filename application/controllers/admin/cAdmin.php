@@ -559,7 +559,7 @@ class CAdmin extends CI_Controller {
 									 'user_account.user_status' => 'Active',
 									 'user_account.user_type' => 'Regular'
 								 );
-		$result = $userModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		$result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
 							MONTHNAME(user_account.date_account_created) as monthname',
 							$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
 		$arr_data = array();
@@ -568,6 +568,43 @@ class CAdmin extends CI_Controller {
 		}
 		echo json_encode($arr_data);
 		//////////////////////////////////////
+		//////////////////////////////////////
+	}
+
+	public function getCardsMonthly(){
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
+		// $year = $_GET['years'];
+		// $userModel = new MUser();
+		// $where = array('YEAR(user_account.date_account_created)' => $year,
+		// 							 'card.cardStatus' => 1,
+		// 						 );
+		// $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		// 					MONTHNAME(user_account.date_account_created) as monthname',
+		// 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+		// $arr_data = array();
+		// foreach ($result as $value) {
+		// 	$arr_data[] = [$value->UserCount, $value->monthname];
+		// }
+		// echo json_encode($arr_data);
+
+		$this->db->select('COUNT(*) as CardCount');
+		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
+		$this->db->from('card');
+		$this->db->where("cardStatus = 1");
+		$this->db->group_by("monthname");
+		$this->db->order_by("monthname", "desc");
+
+		$query = $this->db->get();
+		$result = $query->result();
+		
+		$arr_data = array();
+		foreach ($result as $value) {
+			$arr_data[] = [$value->CardCount, $value->monthname];
+		}
+		// //////////////////////////////////////
+		echo json_encode($arr_data);
 		//////////////////////////////////////
 	}
 
@@ -580,7 +617,7 @@ class CAdmin extends CI_Controller {
 		$where = array("event_status" => "APPROVED",
 										"YEAR(date_created)" => $year
 								 );
-		$result = $eventModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
+		$result = $eventModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
 							$where,FALSE,FALSE,FALSE,FALSE);
 		$arr_data = array();
 		foreach ($result as $value) {

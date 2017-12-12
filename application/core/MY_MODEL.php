@@ -37,7 +37,7 @@
 		}
 
 		//This method is used for complex queries. To make sure that this method will work fill out each parameter!
-		public function select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray($select_str, $where, $is_Distinct = FALSE, $has_orderBy = FALSE,
+		public function select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($select_str, $where, $is_Distinct = FALSE, $has_orderBy = FALSE,
 																																				$has_groupBy = FALSE, $returnAs_objectORarray = FALSE)
 		{
 			//If 3rd parameter is blank then $is_Distinct is set to Default: False
