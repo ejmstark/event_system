@@ -1,0 +1,26 @@
+1.) Create priviliges for guests
+	create user 'guest'@'localhost' identified by 'uSerp@sSw0rD123';
+
+	grant select, insert on event_db.user_account to 'guest'@'localhost';
+	grant select on event_db.event_info to 'guest'@'localhost';
+	grant select on event_db.ticket to 'guest'@'localhost';
+	grant select on event_db.ticket_type to 'guest'@'localhost';
+	grant select on event_db.user_event_preference to 'guest'@'localhost';
+	FLUSH PRIVILEGES;
+
+2.) Create priviliges for registered users
+	create user 'registered'@'localhost' identified by 'rEgIstEreDP@ssW0rd456';
+	
+	grant select, update on event_db.card_load to 'registered'@'localhost';
+	grant select, insert, delete, update on event_db.event_info to 'registered'@'localhost';
+	grant select, insert, delete, update on event_db.ticket to 'registered'@'localhost';
+	grant select, insert, delete, update on event_db.ticket_type to 'registered'@'localhost';
+	grant select, insert, delete, update on event_db.user_event_preference to 'registered'@'localhost';
+	grant select, update on event_db.user_account to 'registered'@'localhost';
+	FLUSH PRIVILEGES;
+
+3.) Create priviliges for administrators
+	create user 'admin'@'localhost' identified by 'aDmInIsTraTorP@SSw0rD';
+
+	grant all privileges on *.* to 'admin'@'localhost' with grant option;
+	FLUSH PRIVILEGES;

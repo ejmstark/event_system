@@ -38,6 +38,7 @@
 				//$hashPass=hash('sha512',$this->agentPassword);
 
 			$query= $this->db->get_where($this::DB_TABLE,array('user_name'=>$this->user_name,'password'=>$this->user_password));
+			// $query= $this->db->get_where($this::DB_TABLE,array("user_name like binary"=>$this->user_name,"password like binary"=>$this->user_password));
 			if($query -> num_rows() == 1){
 			    return $query->result();
 			}else{

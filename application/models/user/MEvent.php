@@ -42,6 +42,17 @@
 
 			return $query->result();
 		}
+		public function joinEventTicketType($id)
+		{
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('ticket_type as t', $this::DB_TABLE.'.event_id = t.event_id');
+			$this->db->where( array($this::DB_TABLE.'.event_id' => $id, ));
+
+			$query = $this->db->get();
+			 return $query->result();
+			# code...
+		}
 		public function Performance()
 		{
 			$select = array('event_info.event_name as Event_Name' , 'count(*) as Total_No_Of_Attendees');
@@ -62,8 +73,10 @@
 			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
+			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
 			$this->db->from("event_info");
 			$this->db->where("user_id = $id");
+			$this->db->where(" event_info.event_isActive!=FALSE");
 			$query = $this->db->get();
 			return $query->result();			             
 		}
@@ -73,14 +86,28 @@
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->from("event_info");
+			$this->db->where("event_info.event_isActive!=FALSE");
 			$query = $this->db->get();
 			return $query->result();			             
 		}
+
+		//get events that match the search word
+		public function getSearchEvents($searchWord){
+			//Sample code
+			//find read_all function at application/core/MY_Model.php
+			$this->db->select("*");
+			$this->db->from("event_info");
+			$this->db->where("event_name LIKE '%".$searchWord."%'");
+			$query = $this->db->get();
+			return $query->result();			             
+		}
+		
 		public function getAllApprovedEvents(){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
+			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
 			$this->db->from("event_info");
 			$this->db->where("event_info.event_status = 'Approved'");
 			$query = $this->db->get();
@@ -99,6 +126,49 @@
 			return $query->result();
 			# code...
 		}
+
+		public function do_upload_event($id)
+	    {
+	        $config = array(
+				'upload_path' => "./images/events",
+				'allowed_types' => "gif|jpg|png|jpeg",
+				'overwrite' => TRUE,
+				'max_size' => "100000000000000000000000000000000000000000000000000000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+				'max_height' => "1000000000000",
+				'max_width' => "1000000000"
+			);
+
+	        $this->load->library('upload', $config);
+	        
+	        if ( ! $this->upload->do_upload('userfile'))
+	        {
+                $error = array('error' => $this->upload->display_errors());
+                return false;
+	        }
+	        else
+	        {
+                $data = array('upload_data' => $this->upload->data()); //actual uploading
+                
+                if($this->insertPhotoEvent($this->upload->data()['file_name'], $id)) { //query to db
+                	return true;	
+                } else {
+                	return false;
+                }
+	        }
+	    }
+
+	    public function insertPhotoEvent($filename,$id) { //called upon uploading file
+	      // $now = new DateTime ( NULL, new DateTimeZone('UTC'));
+	      // $station = new MStation();
+	      // $id = $station->getLastAddedStation();
+
+			$where = array(
+				"event_picture" =>  "images/events/".$filename,
+			);
+
+
+			return $result = $this->update($id, $where);
+	    }
 
 		//Class getters and setters.
 
