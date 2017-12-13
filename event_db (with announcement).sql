@@ -46,16 +46,15 @@ INSERT INTO `announcement` (`announcementID`, `announcementDetails`, `announceme
 -- --------------------------------------------------------
 
 --
--- Table structure for table `card_load`
+-- Table structure for table `card`
 --
 
-CREATE TABLE `card_load` (
-  `card_id` int(11) NOT NULL,
-  `card_code` varchar(20) NOT NULL,
-  `card_amount` float NOT NULL DEFAULT '0',
-  `card_active` binary(1) NOT NULL,
-  `date_claimed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `account_id` int(11) DEFAULT NULL
+CREATE TABLE `card` (
+  `cardId` int(11) NOT NULL,
+  `cardCode` varchar(10) NOT NULL,
+  `cardAmount` int(11) NOT NULL,
+  `cardCreatedOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `cardStatus` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -117,7 +116,7 @@ CREATE TABLE `ticket_type` (
 CREATE TABLE `user_account` (
   `account_id` int(11) NOT NULL,
   `user_name` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(512) NOT NULL,
   `user_type` enum('Regular','Admin','Superadmin','') NOT NULL,
   `upgradedBy` int(11) NOT NULL,
   `user_status` enum('Active','Banned','Deleted') NOT NULL DEFAULT 'Active',
@@ -138,15 +137,15 @@ CREATE TABLE `user_account` (
 --
 
 INSERT INTO `user_account` (`account_id`, `user_name`, `password`, `user_type`, `upgradedBy`, `user_status`, `first_name`, `last_name`, `middle_initial`, `user_imgpath`, `email`, `birthdate`, `gender`, `contact_no`, `load_amt`, `date_account_created`) VALUES
-(1, 'timoteo', 'timoteo123', 'Superadmin', 0, 'Active', 'Timoteo', 'Flowersx', 'A', '', 'timoteo@gmail.com', '2017-12-01', 'Male', '09324558744', 500, '2017-12-06 08:32:20'),
-(2, 'harvey', 'harvey123', 'Regular', 0, 'Active', 'Harvey', 'Harh', 'H', '', 'harvey@gmail.com', '2017-12-01', 'Male', '09325228754', 200, '2017-12-05 00:00:00'),
-(3, 'crystal', 'crystal123', 'Admin', 0, 'Active', 'Crystal', 'Thea', 'H', '', 'crystal@gmail.com', '2017-12-01', 'Female', '09264558742', 200, '0000-00-00 00:00:00'),
-(4, 'george', 'george123', 'Admin', 0, 'Active', 'George', 'Gar', 'G', '', 'george@gmail.com', '2017-12-01', 'Male', '09325441254', 0, '2017-12-06 07:48:03'),
-(5, 'janejord', 'janejord123', 'Superadmin', 1, 'Active', 'Jane', 'Jord', 'J', '', 'jane@gmail.com', '2017-12-01', 'Female', '09321547854', 0, '2017-12-06 08:43:15'),
-(6, 'ursula', 'ursula123', 'Superadmin', 5, 'Active', 'Ursula', 'Uran', 'U', '', 'ursula@gmail.com', '2017-12-01', 'Female', '09323559874', 0, '2017-12-06 08:57:31'),
-(7, 'katekart', 'katekart123', 'Superadmin', 6, 'Active', 'Kate', 'Kart', 'K', '', 'kate@gmail.com', '2017-12-01', 'Female', '09325412587', 0, '2017-12-06 09:20:11'),
-(8, 'johnjan', 'johnjan123', 'Admin', 0, 'Active', 'John', 'Jan', 'J', '', 'john@gmail.com', '2017-12-01', 'Male', '09325669875', 0, '2017-12-06 09:26:50'),
-(9, 'henryherd', 'henryherd123', 'Admin', 0, 'Active', 'Henry', 'Herd', 'H', '', 'henry@gmail.com', '2017-12-01', 'Male', '09325698742', 0, '2017-12-06 09:28:26');
+(1, 'timoteo', '7D6ECC2E16DC040356AE49CFCBE3A36D428E0C64D66C44E95D753EA1CAEF44347A1D4C59AB9942D5531BC60638B429984C0AF27144AF0E9B49446338807CE399', 'Superadmin', 0, 'Active', 'Timoteo', 'Flowersx', 'A', '', 'timoteo@gmail.com', '2017-12-01', 'Male', '09324558744', 500, '2017-12-06 08:32:20'),
+(2, 'harvey', '93E3545BCC181B039B5B3AD091A6C30139CE6A85C1615A2ABB9D450491CF8A0DECF7C4D2C9FDFD62FD76EFAE01583A3F6EBF521BC9A02E64BAF663487EC751DA', 'Regular', 0, 'Active', 'Harvey', 'Harh', 'H', '', 'harvey@gmail.com', '2017-12-01', 'Male', '09325228754', 200, '2017-12-05 00:00:00'),
+(3, 'crystal', '9BC35193EE927E4047CE28012E893ED2366852ADEDE6F7699F6D92B4496DEAA5FDE1B90143ACA4BBEE8416D522FB88468E570514BE07139F07F94A8C39A335C1', 'Admin', 0, 'Active', 'Crystal', 'Thea', 'H', '', 'crystal@gmail.com', '2017-12-01', 'Female', '09264558742', 200, '0000-00-00 00:00:00'),
+(4, 'george', 'FBBF6431E3E2984B4DDB8D3B70285B9AD3CEE96904628577DED29056D9004CBB49F017E356C2172FC7252342783E123A101233543F0B9517D9C35BAD3F34012A', 'Admin', 0, 'Active', 'George', 'Gar', 'G', '', 'george@gmail.com', '2017-12-01', 'Male', '09325441254', 0, '2017-12-06 07:48:03'),
+(5, 'janejord', 'CE00A5F077422E53F30BBA67D7C3135A30E08438B91917A200A5486405C450639059E74EFDAB6909B3750E98FCB14EF4F4AD083A3B085197A11A2457EF4226C8', 'Superadmin', 1, 'Active', 'Jane', 'Jord', 'J', '', 'jane@gmail.com', '2017-12-01', 'Female', '09321547854', 0, '2017-12-06 08:43:15'),
+(6, 'ursula', 'B08F94D54AB4F9F8DCB34FEFBBF91A1F7F4F98636E7943A45922D3FD1071C0D67F8EE196A2E582B70149BEF1C44F8F73D727E87F0D99E2351643D770FDA2812D', 'Superadmin', 5, 'Active', 'Ursula', 'Uran', 'U', '', 'ursula@gmail.com', '2017-12-01', 'Female', '09323559874', 0, '2017-12-06 08:57:31'),
+(7, 'katekart', '6AECBB1E1934401129A873813CAFFA92B2C95324289B7F8704E8DC96BA63D570A0884FE368D9057FD3D32624D2D487FA70AEA61D182648072193AC14C46D78A4', 'Superadmin', 6, 'Active', 'Kate', 'Kart', 'K', '', 'kate@gmail.com', '2017-12-01', 'Female', '09325412587', 0, '2017-12-06 09:20:11'),
+(8, 'johnjan', '0A70AC4EAC09B2D639DD8AD2DC341D889529FEBF5AF42CC8710F0905E71636DF6CD2C122BB56F2448282009A9DF606543013453DB52AA92E668546812BDE7466', 'Admin', 0, 'Active', 'John', 'Jan', 'J', '', 'john@gmail.com', '2017-12-01', 'Male', '09325669875', 0, '2017-12-06 09:26:50'),
+(9, 'henryherd', '5527748E8EBB632C65F4331CDE35D3285B0B934054CA7344121335C1A84A6698951CDDF8DDD319A1A08042C05C9A79439DACC4BA9E63414B0BD3FEF5B119F738', 'Admin', 0, 'Active', 'Henry', 'Herd', 'H', '', 'henry@gmail.com', '2017-12-01', 'Male', '09325698742', 0, '2017-12-06 09:28:26');
 
 -- --------------------------------------------------------
 
