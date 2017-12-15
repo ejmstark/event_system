@@ -1,3 +1,10 @@
+<!-- Add these lines below to pages with customizable elements -->
+<?php
+  require('assets/CustomizationManager.php');
+  CustomizationManager::SetTheme("configurations 1");
+?>
+<!-- Up to here -->
+
  <body>
 
         <div id="preloader">
@@ -29,7 +36,7 @@
                     </div>
                 </div>
             </div>
-        </div>       
+        </div>
         <!--End top header -->
 
         <nav class="navbar navbar-default ">
@@ -42,21 +49,25 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <!-- <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a> -->
+                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
+                        <!-- <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a> -->
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->PROFILE_PAGE_LOGOUT_BUTTON ?> </button></a>
                     </div>
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
+                        <!-- <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a> -->
+                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->PROFILE_PAGE_CREATE_EVENT_BUTTON ?> </button></a>
                     </div>
 
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
+                        <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li> -->
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_HOME ?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_PROFILE ?></a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
@@ -71,7 +82,8 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Profile</h1>
+                        <!-- <h1 class="page-title">Profile</h1> -->
+                        <h1 class="page-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TITLE ?></h1>
                     </div>
                 </div>
             </div>
@@ -95,8 +107,11 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <p>Insufficient balance?
-                                             <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" >Load Now</a>
+                                        <!-- <p>Insufficient balance?
+                                             <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" >Load Now</a> -->
+                                           <p><?php echo CustomizationManager::$strings->PROFILE_PAGE_INSUFFICIENT_BALANCE ?>
+                                                <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" ><?php echo CustomizationManager::$strings->PROFILE_PAGE_LOAD_NOW ?></a>
+
 
 <!--                                             <button type="button" class="dbutton" data-toggle ="modal" data-target="#lmodal">Load Now</button>
  -->
@@ -111,7 +126,8 @@
                                                 <div class="col-xs-12" id="some" hidden="">
                                                     <form action="<?php echo site_url(); ?>/user/cUser/redeemCode" method="post">
                                                         <input type="text" class="form-control" name="ccode" placeholder="Enter code">
-                                                        <button type="submit" class="navbar-btn nav-button pull-right"   >Redeem Code</button>
+                                                        <!-- <button type="submit" class="navbar-btn nav-button pull-right"   >Redeem Code</button> -->
+                                                        <button type="submit" class="navbar-btn nav-button pull-right"   ><?php echo CustomizationManager::$strings->PROFILE_PAGE_REDEEM_CODE ?></button>
                                                     </form>
                                                 </div>
 
@@ -146,21 +162,24 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                              <a href="<?php echo site_url()?>/calendar/cCalendar">
-                                            <button class = "button btn largesearch-btn">Calendar</button></a>
+                                            <!-- <button class = "button btn largesearch-btn">Calendar</button></a> -->
+                                            <button class = "button btn largesearch-btn"><?php echo CustomizationManager::$strings->PROFILE_PAGE_CALENDAR_BUTTON ?></button></a>
                                         </div>
                                     </div>
                                 </fieldset>
                                 <fieldset >
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class = "button btn largesearch-btn">Payment Summary</button>
+                                            <!-- <button class = "button btn largesearch-btn">Payment Summary</button> -->
+                                            <button class = "button btn largesearch-btn"><?php echo CustomizationManager::$strings->PROFILE_PAGE_PAYMENT_SUMMARY_BUTTON ?></button>
                                         </div>
                                     </div>
                                 </fieldset>
                             </div>
                             <br><br>
                             <div class="panel-heading">
-                                <h3 class="panel-title">Search</h3>
+                                <!-- <h3 class="panel-title">Search</h3> -->
+                                <h3 class="panel-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_HEADER ?></h3>
                             </div>
                             <div class="panel-body search-widget">
                                 <form action="" class=" form-inline">
@@ -202,7 +221,8 @@
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <label for="price-range">Price range (P):</label>
+                                                <!-- <label for="price-range">Price range (P):</label> -->
+                                                <label for="price-range"><?php echo CustomizationManager::$strings->PROFILE_PAGE_PRICE_RANGE ?></label>
                                                 <input type="text" class="span2" value="" data-slider-min="0"
                                                        data-slider-max="10000" data-slider-step="5"
                                                        data-slider-value="[0,1000]" id="price-range" ><br />
@@ -276,7 +296,8 @@
                                     <fieldset >
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <input class="button btn largesearch-btn" value="Search" type="submit">
+                                                <!-- <input class="button btn largesearch-btn" value="Search" type="submit"> -->
+                                                <input class="button btn largesearch-btn" value="<?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_BUTTON ?>" type="submit">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -286,7 +307,8 @@
 
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Recommended</h3>
+                                <!-- <h3 class="panel-title">Recommended</h3> -->
+                                <h3 class="panel-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_RECOMMENDED_HEADER ?></h3>
                             </div>
                             <div class="panel-body recent-property-widget">
                                         <ul>
@@ -339,10 +361,14 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs" role="tablist">
-    <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
+    <!-- <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
-    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
+    <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_EVENTS ?></a></li>
+    <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_REPORTS ?></a></li>
+    <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_PAYMENT_HISTORY ?></a></li>
+    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_SETTINGS ?></a></li>
   </ul>
 
   <!-- Tab panes -->
@@ -387,23 +413,23 @@
 
                                                         if($now > $start && $now > $end){
                                                             echo "<h5>Expired!</h5>";
-                                                                
+
                                                         }else if($now < $start){
                                                             if($interval->days == 0){
                                                                 echo "<h5>Less than a day!</h5>";
                                                             }else{
                                                                 echo "<h5>$interval->days day/s left!</h5>";
                                                                 }
-                                                                    
+
                                                         }else if($now >= $start && $now <= $end){
                                                             echo "<h5>Happening now!</h5>";
                                                         }
                                                     }else{
                                                         echo "<h5>Not yet Approved!</h5>";
-                                                    }    
-                                                        
-                                                            
-                                                ?>   
+                                                    }
+
+
+                                                ?>
 
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
@@ -652,14 +678,15 @@
 
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer">
-                                <h4>About us </h4>
+                                <!-- <h4>About us </h4> -->
+                                <h4><?php echo CustomizationManager::$strings->ABOUT_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
 
-<<<<<<< HEAD
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
-                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
+                               <!-- <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" > -->
+                               <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                                <!-- <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p> -->
+                                <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
 
-=======
                                 <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
                                 <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
                                 <ul class="footer-adress">
@@ -667,13 +694,13 @@
                                     <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
                                     <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
                                 </ul>
->>>>>>> 2e2b5d715fb76f73cb9eaedb9483fe223541e46b
                             </div>
                         </div>
 
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
-                                <h4>Contact Us</h4>
+                                <!-- <h4>Contact Us</h4> -->
+                                <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
                                 <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
@@ -685,16 +712,16 @@
                                         </span>
                                     </div>
                                     <!-- /input-group -->
-                                </form> 
+                                </form>
 
-                                <div class="social pull-right"> 
+                                <div class="social pull-right">
                                     <ul>
                                         <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
                                         <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul> 
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -710,11 +737,14 @@
                             <span> (C) UI Module , All rights reserved 2017  </span>
                         </div>
                         <div class="bottom-menu pull-right">
-                            <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul>
+                          <ul>
+                            <!-- <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li> -->
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><?php echo CustomizationManager::$strings->FOOTER_NAV_EVENTS ?></a></li>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><?php echo CustomizationManager::$strings->FOOTER_NAV_CONTACT ?></a></li>
+                          </ul>
                         </div>
                     </div>
                 </div>

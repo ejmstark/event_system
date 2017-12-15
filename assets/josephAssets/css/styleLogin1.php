@@ -1,0 +1,252 @@
+<?php
+	header('Content-type: text/css');
+  require("../../CustomizationManager.php");
+  CustomizationManager::SetTheme("configurations 1");
+?>
+
+/*
+#e2624b (main orange)
+#916B61
+#363636
+#383838
+#ffffff
+
+#CB6C52 (dark orange)
+#ffcec0 (light orange)
+#ffe5dd (very light orange)
+*/
+
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: Roboto;
+}
+
+body::after
+{
+	//background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3) ), url(../img/LoginBg.jpg);
+	background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3) ), <?php
+		echo "url(" . CustomizationManager::$images->LOGIN_PAGE_BACKGROUND . ");";
+	?>
+	content: "";
+	background-size: cover;
+	opacity: 1;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	z-index: -1;
+}
+
+@media only screen and (max-device-width:999px) {}
+
+.eventSystem
+{
+	font-size: 27pt;
+	color: white;
+	margin: 0;
+	text-align: center;
+	text-transform: none;
+}
+
+.loginBox
+{
+	color: white;
+	position: absolute;
+	top: 50%;
+	left: 75%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+	height: 420px;
+	padding: 30px 40px 80px;
+	box-sizing: border-box;
+	text-transform: none;
+	/*background: rgba(0,0,0,0.5);*/
+}
+
+h2
+{
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: center;
+}
+
+.loginBox p
+{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+	color: #fff;
+}
+
+.loginBox input
+{
+	width: 100%;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="password"]
+{
+	width: 85%;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	height: 40px;
+	color: #fff;
+	padding: 2px 10px;
+	font-size: 14px;
+}
+
+.loginBox input ~ span
+{
+	color: white;
+	border-bottom: 1px solid white;
+	padding: 10px;
+	display: inline-block;
+	line-height: 21px;
+}
+
+::placeholder
+{
+	color: rgba(255,255,255,0.5);
+}
+
+.loginBox input:focus, .loginBox input:focus ~ span
+{
+	color: #ffcec0;
+	border-bottom: 1px solid #ffcec0;
+
+	-webkit-transition: all 0.4s linear;
+	transition: all 0.4s linear;
+}
+
+.loginBox input[type="submit"]
+{
+	border: none;
+	outline: none;
+	margin-top: 8px;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+	background: #e2624b;
+	cursor: pointer;
+	border-radius: 30px;
+
+	-webkit-transition: all 0.3s linear;
+	transition: all 0.25s linear;
+}
+
+.loginBox input[type="submit"]:hover
+{
+	background: #fff;
+	color: #e2624b;
+
+}
+
+.loginBox a
+{
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+
+	-webkit-transition: all 0.3s linear;
+	transition: all 0.3s linear;
+}
+
+.loginBox a:hover
+{
+	margin: 0;
+	padding: 0;
+	color: #CB6C52;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.detailsBox
+{
+	color: white;
+	position: absolute;
+	top: 50%;
+	left: 33%;
+	transform: translate(-50%, -50%);
+	width: 720px;
+	height: 420px;
+	padding: 20px 60px;
+	box-sizing: border-box;
+	border-right: 1px solid white;
+    text-align: right;
+	/*background: rgba(0,0,0,0.5);*/
+}
+
+.detailOne
+{
+	font-size: 40pt;
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: left;
+}
+
+.detailTwo
+{
+	font-size: 20pt;
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: left;
+}
+
+.detailThree
+{
+	font-size: 16pt;
+	margin: 0;
+	padding: 0 0 20px;
+	text-align: left;
+}
+
+.orange
+{
+	color: #e2624b;
+}
+
+.eventLogo {
+    max-height: 100px;
+}
+
+
+.messageOne {
+	text-align: right;
+	text-transform: none;
+	font-size: 30pt;
+	margin: 0;
+	padding: 0 0 20px;
+	color: white;
+}
+
+.messageTwo {
+	text-align: right;
+	text-transform: none;
+	font-size: 18pt;
+	margin-top: 40px;
+	padding: 0 0 20px;
+	color: white;
+	letter-spacing: 2px;
+}
+
+.messageThree {
+	text-align: right;
+	text-transform: none;
+	font-size: 14pt;
+	margin: 0;
+	padding: 0 0 20px;
+	color: white;
+	letter-spacing: 2px;
+	text-transform: none;
+}
