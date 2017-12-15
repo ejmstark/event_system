@@ -16,12 +16,10 @@
 
 		/* FUNCTIONS RELATED TO USERS (PUT IT BELOW) */
 			/* ADMIN MODULE FUNCTIONS */
-				
 
-			/* *************** */
+			/* **************** */
 
 			/* USER MODULE FUNCTIONS */
-
 
 			/* *************** */
 

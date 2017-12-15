@@ -5,8 +5,8 @@
 
 		function __construct() {
 			parent::__construct();
-			$this->load->model('MUser');
-			$this->load->model('MUserInfo');
+			/* LOAD MODELS HERE */
+		 	//Ex: $this->load->model('MCalendar');
 		}
 
 
@@ -17,7 +17,7 @@
 
 		/* FUNCTIONS RELATED TO USERS (PUT IT BELOW) */
 			/* ADMIN MODULE FUNCTIONS */
-				
+
 
 			/* *************** */
 
