@@ -4,6 +4,10 @@
 		private $date_sold;
 		private $user_id;
 		private $ticket_type_id;
+		private $addedBy; 
+		private $updatedBy; 
+		private $addedAt; 
+		private $updateAt; 
 
 
 		const DB_TABLE = "ticket";
@@ -96,6 +100,38 @@
 
 		public function setPetition_id($petition_id){
 			$this->petition_id = $petition_id;
+		}
+
+		public function getAddedBy(){
+			return $this->addedBy;
+		}
+
+		public function getUpdatedBy(){
+			return $this->updatedBy;
+		}
+
+		public function getAddedAt(){
+			return $this->addedAt;
+		}
+
+		public function getUpdatedAt(){
+			return $this->updateAt;
+		}
+
+		public function setAddedBy($addedAt){
+			$this->addedBy = $addedAt;
+		}
+
+		public function setUpdatedBy($upgradedAt){
+			$this->updatedBy = $upgradedAt;
+		}
+
+		public function setAddedAt($addedBy){
+			$this->addedBy = $addedBy;
+		}
+
+		public function setUpdateddBy($updateddBy){
+			$this->upgdatedBy = $upgdatedBy;
 		}
 	}
 ?>

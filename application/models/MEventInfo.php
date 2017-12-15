@@ -11,6 +11,10 @@
 		private $event_venue;
 		private $date_created;
 		private $user_id;
+		private $addedBy; 
+		private $updatedBy; 
+		private $addedAt; 
+		private $updateAt; 
 
 		const DB_TABLE = "event_info";
     	const DB_TABLE_PK = "event_id";
@@ -136,6 +140,40 @@
 		public function setUser_id($user_id){
 			$this->user_id = $user_id;
 		}
+
+		public function getAddedBy(){
+			return $this->addedBy;
+		}
+
+		public function getUpdatedBy(){
+			return $this->updatedBy;
+		}
+
+		public function getAddedAt(){
+			return $this->addedAt;
+		}
+
+		public function getUpdatedAt(){
+			return $this->updateAt;
+		}
+
+		public function setAddedBy($addedAt){
+			$this->addedBy = $addedAt;
+		}
+
+		public function setUpdatedBy($upgradedAt){
+			$this->updatedBy = $upgradedAt;
+		}
+
+		public function setAddedAt($addedBy){
+			$this->addedBy = $addedBy;
+		}
+
+		public function setUpgradedBy($updatedBy){
+			$this->updatedBy = $updatedBy;
+		}
+
+
 
 		//End of class getters and setters.
 
