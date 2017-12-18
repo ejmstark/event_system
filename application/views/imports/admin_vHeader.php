@@ -101,9 +101,9 @@
 
     <nav id="menu"  >
         <ul>  
-            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewReport"><i class="icon  fa fa-laptop"></i> Dashboard </a></li>
+            <li><a href="<?php echo site_url();?>/admin/cAdmin"><i class="icon  fa fa-laptop"></i> Dashboard </a></li>
 
-            <li><a href="<?php echo site_url();?>/admin/cAdmin"><i class="icon  fa fa-bullhorn"></i>  Events </a></li>
+            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAllEvents"><i class="icon  fa fa-bullhorn"></i>  Events </a></li>
             
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt"><i class="icon  fa fa-users"></i>  User Account </a></li>
             

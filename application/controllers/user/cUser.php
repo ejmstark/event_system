@@ -9,7 +9,7 @@ class cUser extends CI_Controller {
       $this->load->model('user/MUser');
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
-			$this->load->model('MAnnouncement'); //admin module functionality
+	  $this->load->model('MAnnouncement'); //admin module functionality
       $this->load->library('session');
       $this->data = null;
   	}
@@ -173,9 +173,9 @@ class cUser extends CI_Controller {
 	public function viewAnnouncements()
 	{
 		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
-		$this->load->view('imports/vHeader');
+		$this->load->view('imports/vHeaderSignUpPage');
 		$this->load->view('user/vAnnouncementPage.php', $data);
-		$this->load->view('imports/vFooter');
+		$this->load->view('imports/vFooterLandingPage');
 
 	}
 }

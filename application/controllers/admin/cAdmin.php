@@ -17,39 +17,7 @@ class CAdmin extends CI_Controller {
 
 	public function index()
 	{
-		$this->data['custom_js']= '<script type="text/javascript">
-                              $(function(){
-                              	$("#admin").addClass("active");
-                              });
-                        </script>';
-
-
-    $result_data=$this->readAllEvents();
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->no_tickets_total = $value->no_tickets_total;
-					$arrObj->event_status = $value->event_status;
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-
-		$data2['row'] = $array;
-
-   		$data3['users']=$this->getUserCount();
-		$this->load->view('imports/admin_vHeader');
-		//$this->load->view('admin/vAdminDashboard', $data2);
-		$this->load->view('admin/vAdmin', $data2);
-		$this->load->view('imports/admin_vFooter');
+		redirect('admin/cAdmin/viewReport');
 
 	}
 
@@ -92,7 +60,7 @@ class CAdmin extends CI_Controller {
 			$response = $event_module-> updateEventStatus($id, "Approved");
 
 			if ($response) {
- 				redirect('admin/cAdmin');
+ 				redirect('admin/cAdmin/viewAllEvents');
  			}
 		}
 	}
@@ -107,7 +75,7 @@ class CAdmin extends CI_Controller {
 			$response = $event_module-> updateEventStatus($id, "Rejected");
 
 			if ($response) {
- 				echo redirect('admin/cAdmin');
+ 				echo redirect('admin/cAdmin/viewAllEvents');
  			}
 		}
 	}
@@ -708,6 +676,42 @@ class CAdmin extends CI_Controller {
 				redirect('admin/cAdmin/viewAnnouncements');
  			}
 		}
+	}
+
+	public function viewAllEvents(){
+		$this->data['custom_js']= '<script type="text/javascript">
+                              $(function(){
+                              	$("#admin").addClass("active");
+                              });
+                        </script>';
+
+
+    	$result_data=$this->readAllEvents();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->no_tickets_total = $value->no_tickets_total;
+					$arrObj->event_status = $value->event_status;
+					$array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+
+		$data2['row'] = $array;
+
+   		$data3['users']=$this->getUserCount();
+		$this->load->view('imports/admin_vHeader');
+		//$this->load->view('admin/vAdminDashboard', $data2);
+		$this->load->view('admin/vAdmin', $data2);
+		$this->load->view('imports/admin_vFooter');
 	}
 
 }
