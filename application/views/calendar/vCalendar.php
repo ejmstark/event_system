@@ -606,9 +606,9 @@
             // }
            var color = event.color;
 
-                if(event.color == "#808080"){
-                        $('#errmodal').modal('show');
-                    }else{
+                //if(event.color == "#808080"){
+                //        $('#errmodal').modal('show');
+                //    }else{
                         // var dataSet = "start="+start+"&end="+end+"&title="+title+"&id="+id+"&details="+details+"&category="+category+"&venue="+venue;
                         var dataSet = "id="+id+"&color="+color;
                         $.ajax({
@@ -627,7 +627,7 @@
                                 console.log(errorThrown);
                             }
                         });
-                    }
+                    //}
              }
         });
         function edit(event){
