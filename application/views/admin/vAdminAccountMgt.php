@@ -121,7 +121,7 @@
     </div>
 
     <!-- ADD ADMIN MODAL -->
-	<div id="addAdmin" class="modal fade" tabindex="-1" data-width="450">
+	<div id="addAdmin" class="modal" tabindex="-1" data-width="550">
 		<div class="modal-header bg-inverse bd-inverse-darken">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                 <h1 class="modal-title" align="center">ADD ADMIN</h1>
@@ -229,7 +229,7 @@
 
 
     <!-- UPDATE ACCOUNT MODAL -->
-    <div id="updateAccount" class="modal fade" tabindex="-1" data-width="450">
+    <div id="updateAccount" class="modal" tabindex="-1" data-width="550">
         <div class="modal-header bg-inverse bd-inverse-darken">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                 <h1 class="modal-title" align="center">UPDATE ACCOUNT</h1>
