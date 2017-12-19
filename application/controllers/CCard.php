@@ -10,15 +10,11 @@ class cCard extends CI_Controller {
 
 	public function index()
 	{
-		// //$this->load->view('vLogin.php');
-		// //echo 'hello';
-		// echo 'hey';
-		// $this->load->model('MCardLoad');
+		
 	}
 
 	public function card () {
 		$amount = array (100, 200, 500, 1000);
-		//$qty = array (1, 2, 3, 4, 5, 6);
 		$qty = array ( $this->input->post('qty1'),
 		 		       $this->input->post('qty2'),
 		 			   $this->input->post('qty3'),
@@ -37,7 +33,6 @@ class cCard extends CI_Controller {
 		}
 	}
 
-	//generates and returns random alpha numeric strings
 	public function randomCode () {
 		$rand = '';
 		$c = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -49,11 +44,7 @@ class cCard extends CI_Controller {
 		return $rand;
 	}
 
-	//checks if the code is unique in the database
 	public function isCodeUnique ($rand) {
-		///////////////////////////////////////
-		///////Interface New Implementation////
-		///////////////////////////////////////
 		$card = new MCardLoad();
 
 		$data = array('cardCode' => $rand);
@@ -63,18 +54,12 @@ class cCard extends CI_Controller {
 		} else {
 			return false;
 		}
-		///////////////////////////////////////
-		///////////////////////////////////////
 	}
 
 	public function addCard($amount) {
-		///////////////////////////////////////
-		///////Interface New Implementation////
-		///////////////////////////////////////
 		$card = new MCardLoad();
 		$random = '';
 
-		//the loop will not stop until it make sure that the code is unique
 		do {
 			$random = $this->randomCode();
 		} while ($this->isCodeUnique($random) != true);
@@ -86,7 +71,5 @@ class cCard extends CI_Controller {
 					'cardStatus' => 1);
 
 		$query = $card->insert($data);
-		///////////////////////////////////////
-		///////////////////////////////////////
 	}
 }

@@ -15,23 +15,22 @@ class CCart extends CI_Controller {
 
 	public function addToCart () {
 		$cart = new MCart();
-		//$qty = $this->input->post('qty1')
 		$qty= 5;
-		$id = 1; //ticket id
+		$id = 1; 
 		$cartId = 0;
 
-		//check if ticket already exist!
+		
 		$data = $cart->read_where(array ('cartTicId'=>$id));
 		foreach ($data as $datum) {
 			$cartId = $datum->cartId;
 		}
 
-		//check if cartId != 0, if the data exist!
+		
 		if ($cartId != 0) {
-			//add to existing
+			
 			echo $cartId;
 			$this->addToExisting($cartId, $qty);
-		} else { //add new cart item
+		} else { 
 			$data = array ('cartId'=>null,
 				'cartTicId'=>$id,
 				'cartQty'=>$qty);
@@ -44,13 +43,12 @@ class CCart extends CI_Controller {
 		}
 	}
 
-	//add to existing cart item
+	
 	public function addToExisting ($id, $qty1) {
 		$cart = new MCart();
-		//$id = 1; //cart id here
 		$qty = 0;
 
-		//get the current ticket qty
+		
 		$data = $cart->read($id);
 		foreach ($data as $datum) {
 			$qty = $datum->cartQty;
@@ -71,13 +69,13 @@ class CCart extends CI_Controller {
 		$result = $this->MCart->getCart();
 		$this->load->view('vCart');
 	}
-	//add 1 qty to the cart
+	
 	public function addQty () {
 		$cart = new MCart();
-		$id = 1; //cart id here
+		$id = 1; 
 		$qty = 0;
 
-		//get the current ticket qty
+		
 		$data = $cart->read($id);
 		foreach ($data as $datum) {
 			$qty = $datum->cartQty;
@@ -94,22 +92,19 @@ class CCart extends CI_Controller {
 		}
 	}
 
-	//minus 1 qty to the cart
+	
 	public function minusQty () {
 		$cart = new MCart();
-		$id = 1; //cart id here
+		$id = 1; 
 		$qty = 0;
 
-		//get the current ticket qty
 		$data = $cart->read($id);
 		foreach ($data as $datum) {
 			$qty = $datum->cartQty;
 		}
 		$qty--;
 
-		//delete the item in the cart if 0
 		if ($qty == 0) {
-			//delete here
 			$cart->delete($id);
 		} else {
 			$affectedFields = array ('cartQty'=>$qty);
