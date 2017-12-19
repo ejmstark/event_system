@@ -40,7 +40,7 @@ class cEvent extends CI_Controller {
 
 	}
 
-	public function viewEditFromCalendar(){ 
+	public function viewEditFromCalendar(){
 
 
 		$data1['start'] = $_POST['start'];
@@ -88,7 +88,6 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================Sprint 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 		$strEventSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
 		$strEventWhere = array("user_id" => $userid,
 													 "event_isActive" => TRUE
@@ -96,24 +95,6 @@ class cEvent extends CI_Controller {
 
 		$data['events']  = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strEventSelect,
 							$strEventWhere,FALSE,FALSE,FALSE,FALSE);
-=======
-		$array = $array1 = $array2 = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->dateStart = $value->dateStart;
-					$arrObj->dateEnd = $value->dateEnd;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_status = $value->event_status;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->event_category = $value->event_category;
-					$arrObj->color = $value->color;
-					$array[] = $arrObj;
-			}
-		}
->>>>>>> 54f6bf393d477c93aa4fa9439fb5c6a3a8373aab
 		////////////STOPS HERE///////////////////////////////////////////////////
 
 
@@ -148,27 +129,7 @@ class cEvent extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
 		$gID = $data1 ['events']  = $this->MEvent->read_where('event_id = '.$id.'');
-=======
-		$array = $array1 = $array2 = $array3 = $array4 = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_status = $value->event_status;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->event_category = $value->event_category;
-					$arrObj->color = $value->color;
-					$arrObj->user_id = $value->user_id;
-					$array[] = $arrObj;
-			}
-		}
->>>>>>> 54f6bf393d477c93aa4fa9439fb5c6a3a8373aab
 		////////////STOPS HERE///////////////////////////////////////////////////
 
 		foreach ($gID as $k) {
