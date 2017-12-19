@@ -12,6 +12,7 @@ class CAdmin extends CI_Controller {
 		$this->load->model('MReports');
 		$this->load->model('MUser');
 		$this->load->model('MAnnouncement');
+		$this->load->model('MCardLoad');
 		// $this->load->model('MUserInfo');
 	}
 
@@ -276,32 +277,11 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewUserAccountMgt() {
-		$result_data=$this->readAllUsers();
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->load_amt = $value->load_amt;
-					$array[] = $arrObj;
-			}
-		}
+		$data2['users']=$this->readAllUsers();
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data2['users']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 		$this->load->view('imports/admin_vFooter');
@@ -341,33 +321,13 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewAdminAccountMgt() {
-		$result_data=$this->readAllAdmin();
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->upgraded_by = $value->upgradedBy;//Added by admin module
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		$data2['admin']=$array;
+		$data2['admin']=$this->readAllAdmin();
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
+		////////////STOPS HERE///////////////////////////////////////////////////
+
 
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vAdminAccountMgt', $data2);
@@ -376,22 +336,7 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewFinance() {
-		$result_data = array();//Replace with query
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					 $arrObj = new stdClass;
-					//Only interface filtering
-					//$arrObj->price
-					//$arrObj->ticket_count
-					 $array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		//$data['data']=$array;
+
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vFinance');
 		$this->load->view('imports/admin_vFooter');
@@ -399,32 +344,7 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewReport() {
-		$result_data = array();//
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					 $arrObj = new stdClass;
-					//Only interface filtering
-					// $arrObj->account_id = $value->account_id;
-					// $arrObj->user_name = $value->user_name;
-					// $arrObj->first_name = $value->first_name;
-					// $arrObj->middle_initial = $value->middle_initial;
-					// $arrObj->last_name = $value->last_name;
-					// $arrObj->email= $value->email;
-					// $arrObj->contact_no= $value->contact_no;
-					// $arrObj->birthdate= $value->birthdate;
-					// $arrObj->date_account_created = $value->date_account_created;
-					// $arrObj->gender = $value->gender;
-					// $arrObj->user_type = $value->user_type;
-					// $arrObj->user_status = $value->user_status;
-					// $arrObj->load_amt = $value->load_amt;
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
+
 		//$data['data']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vReport');
@@ -557,16 +477,20 @@ class CAdmin extends CI_Controller {
 		// }
 		// echo json_encode($arr_data);
 
-		$this->db->select('COUNT(*) as CardCount');
-		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
-		$this->db->from('card');
-		$this->db->where("cardStatus = 1");
-		$this->db->group_by("monthname");
-		$this->db->order_by("monthname", "desc");
+		// $this->db->select('COUNT(*) as CardCount');
+		// $this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
+		// $this->db->from('card');
+		// $this->db->where("cardStatus = 1");
+		// $this->db->group_by("monthname");
+		// $this->db->order_by("monthname", "desc");
 
-		$query = $this->db->get();
-		$result = $query->result();
-		
+		$strSelect = "COUNT(*) as CardCount, MONTHNAME(card.cardCreatedOn) as monthname";
+		$strWhere = "cardStatus = 1";
+
+
+		$result = $this->MCardLoad->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strSelect,
+							$strWhere,FALSE,'monthname DESC',"monthname",FALSE);
+
 		$arr_data = array();
 		foreach ($result as $value) {
 			$arr_data[] = [$value->CardCount, $value->monthname];
@@ -599,35 +523,15 @@ class CAdmin extends CI_Controller {
 
 	//ANNOUNCEMENT FUNCTIONALITY - also added MAnnouncement in models/admin and autoload.php (12/04/17)
 	public function viewAnnouncements() {
-		$result_data=$this->readAllAdmin();
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->upgraded_by = $value->upgradedBy;//Added by admin module
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
 
-		$data2['admin']=$array;
+		$data2['admin']=$this->readAllAdmin();
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
 		$data2['announcements']=$this->readAllAnnouncements();
+		////////////STOPS HERE///////////////////////////////////////////////////
+
 
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vAnnouncements', $data2);
@@ -684,30 +588,13 @@ class CAdmin extends CI_Controller {
                               	$("#admin").addClass("active");
                               });
                         </script>';
-
-
-    	$result_data=$this->readAllEvents();
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->no_tickets_total = $value->no_tickets_total;
-					$arrObj->event_status = $value->event_status;
-					$array[] = $arrObj;
-			}
-		}
+		// //////////////////////////////////////////////////////////////////////////////
+		// //================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		// /////////////////////////////////////////////////////////////////////////////
+		$data2['row'] = $this->MEventInfo->read_all();
 		////////////STOPS HERE///////////////////////////////////////////////////
 
-		$data2['row'] = $array;
-
-   		$data3['users']=$this->getUserCount();
+		$data3['users']=$this->getUserCount();
 		$this->load->view('imports/admin_vHeader');
 		//$this->load->view('admin/vAdminDashboard', $data2);
 		$this->load->view('admin/vAdmin', $data2);

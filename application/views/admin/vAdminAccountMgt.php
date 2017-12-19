@@ -28,8 +28,8 @@
                                     <?php echo $this->session->flashdata('error_msg'); ?>
                                 </div>
                             <?php endif ?>
-                        
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover" data-provide="data-table" id="toggle-column table-example">                 
+
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover" data-provide="data-table" id="toggle-column table-example">
                             <thead class="">
                                 <tr>
                                   <th>#</th>
@@ -74,7 +74,7 @@
                                       echo "<a  href='".site_url()."/admin/cAdmin/SuperAdmin/".$object->account_id."'>
                                         <button type='button' class='btn btn-info fa fa-user'></button></a>";
                                     }else{
-                                        if($this->session->userdata['userSession']->userID == $object->upgraded_by){
+                                        if($this->session->userdata['userSession']->userID == $object->upgradedBy){
                                             //upgrade type to Admin
                                               echo "<a  href='".site_url()."/admin/cAdmin/Admin/".$object->account_id."'>
                                                <button  type='button' class='btn btn-warning fa fa-user'></button></a>";
@@ -90,7 +90,7 @@
                                           <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
                                     }
 
-                                    if($this->session->userdata['userSession']->userID == $object->upgraded_by || $object->user_type == "Admin") {
+                                    if($this->session->userdata['userSession']->userID == $object->upgradedBy || $object->user_type == "Admin") {
                                         //update status
                                         if($object->user_status == "Active"){
                                           echo "<a  href='".site_url()."/admin/cAdmin/Ban/".$object->account_id."/admin'>
@@ -100,7 +100,7 @@
                                             <button  type='button' class='btn btn-inverse fa fa-credit-card'></button></a>";
                                         }
                                     }
-                                    
+
                                   }else{
                                     //echo "Can't ban yourself.";
                                     echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
@@ -322,4 +322,3 @@
     </div>
 
 </div>
-        
