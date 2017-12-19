@@ -65,6 +65,11 @@
 			return $query;			             
 		}
 
+		public function updateSpecificEvent($id, $data){
+			$this->db->where('event_id', $id);
+			return $this->db->update('event_info', $data);
+		}
+
 		public function getAccount_id(){
 			return $this->account_id;
 		}

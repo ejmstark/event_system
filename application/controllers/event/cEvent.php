@@ -40,7 +40,7 @@ class cEvent extends CI_Controller {
 
 	}
 
-	public function viewEditFromCalendar(){
+	public function viewEditFromCalendar(){ 
 
 
 		$data1['start'] = $_POST['start'];
@@ -100,6 +100,7 @@ class cEvent extends CI_Controller {
 					$arrObj->event_status = $value->event_status;
 					$arrObj->event_venue = $value->event_venue;
 					$arrObj->event_category = $value->event_category;
+					$arrObj->color = $value->color;
 					$array[] = $arrObj;
 			}
 		}
@@ -164,6 +165,7 @@ class cEvent extends CI_Controller {
 					$arrObj->event_status = $value->event_status;
 					$arrObj->event_venue = $value->event_venue;
 					$arrObj->event_category = $value->event_category;
+					$arrObj->color = $value->color;
 					$arrObj->user_id = $value->user_id;
 					$array[] = $arrObj;
 			}
