@@ -15,7 +15,7 @@ foreach($going as $g){
 }
 // if($isset($tixStat)){foreach ( as $ts) { }}
     }?>
-    <body>
+    <body> 
 
        <!--  <div id="preloader">
             <div id="status">&nbsp;</div>
@@ -189,6 +189,7 @@ foreach($going as $g){
                         <?php }?>
                             <!-- End video area  -->
                             <?php foreach($events as $x){ if($id == $x->user_id && $color != "#808080"){
+                                
                             if($x->event_status == "Approved"){
                                 echo'
                                 <div class="button navbar-right">

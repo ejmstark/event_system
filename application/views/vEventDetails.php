@@ -230,6 +230,7 @@ foreach($going as $g){
                         <?php }?>
                             <!-- End video area  -->
                             <?php foreach($events as $x){ if($id == $x->user_id && $x->event_status != "Expired"){
+                                
                                 if($x->event_status == "Approved"){
                                     echo'
                                     <div class="button navbar-right">
