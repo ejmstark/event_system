@@ -535,16 +535,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (isset($hist)) {
-                                        foreach ($hist as $h) {
-                                   ?>
-                                    <tr>
-                                        <td><?php echo $h->Event;?></td>
-                                        <td><?php echo $h->Paid;?></td>
-                                        <td><?php echo $h->DatePaid;?></td>
-                                    </tr>
-                                   <?php }
-                                }?>
+                              
                             </tbody>
                         </table>
                     </div>
