@@ -50,14 +50,6 @@ class CLogin extends CI_Controller {
 
 
 
-
-
-		// print_r($user->getUser_name());
-
-		// print_r($user->getUser_password());
-
-
-
 		$result = $user->attemptLogin();
 
 
