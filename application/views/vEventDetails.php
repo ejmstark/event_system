@@ -18,7 +18,7 @@ foreach($going as $g){
     <head>
 <style>
 /* The Modal (background) */
-.modal {
+.modal1 {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -33,7 +33,7 @@ foreach($going as $g){
 }
 
 /* Modal Content */
-.modal-content {
+.modal1-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -229,18 +229,42 @@ foreach($going as $g){
                             </div>
                         <?php }?>
                             <!-- End video area  -->
-                            <?php foreach($events as $x){ if($id == $x->user_id){ ?>
-                            <div class="button navbar-right">
-                                <button class="navbar-btn nav-button login" style="background-color: gray;"> <a href ="<?php echo site_url('event/cEvent/deleteEvent/'.$e->event_id);?>">Delete Event </a></button>
-                            </div>
+                            <?php foreach($events as $x){ if($id == $x->user_id && $x->event_status != "Expired"){
+                                
+                                if($x->event_status == "Approved"){
+                                    echo'
+                                    <div class="button navbar-right">
+                                        <button class="navbar-btn nav-button login"> <a href ="'.site_url("/event/cEvent/editEvent/$e->event_id").'">Edit Event </a></button>
+                                    </div>';
+                                }else if($x->event_status == "Pending"){
+                                    echo'
+                                    <div class="button navbar-right">
+                                        <button class="navbar-btn nav-button login" style="background-color:gray;" id="confirmdelete"><a>Delete Event</a></button>
+                                    </div>
 
-                            <div class="button navbar-right">
-                                <button class="navbar-btn nav-button login"> <a href="<?php echo site_url('event/cEvent/editEvent/'.$e->event_id);?>">Edit Event </a></button>
-                            </div>
-                        <?php }} ?>
+                                    <div class="button navbar-right">
+                                        <button class="navbar-btn nav-button login"> <a href ="'.site_url("/event/cEvent/editEvent/$e->event_id").'">Edit Event </a></button>
+                                    </div>';
+                                }
+                            }} ?>
                         </div>
                     </div>
-
+                    <div class="modal fade bd-example" id="deletemodal" tabindex="-1" role="dialog" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header" style="background-color: #cb6d53;">
+                            <h2 style="color: white;">CONFIRM DELETE!</h2>
+                          </div>
+                          <div class="modal-body">
+                            <h2>Are you sure you want to delete this event?</h2>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" style="background-color: gray;"><a href ="<?php echo site_url('event/cEvent/deleteEvent/'.$e->event_id);?>">Delete</a></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <div class="col-md-4 p0">
                         <aside class="sidebar sidebar-property blog-asside-right">
@@ -567,6 +591,9 @@ $(document).ready(function(){
       modal.style.display = "none";
     }
   }
+  $('#confirmdelete').click(function(){
+        $('#deletemodal').modal('show');
+    });
 
   $('.qtyinput').val(value);
 

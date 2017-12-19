@@ -319,6 +319,20 @@
                                         </div>
                                         <!-- /.row -->
                                         
+
+                                        <!-- LEGEND -->
+                                        
+                                        <div class="calendar-legend">
+                                            <center><h3>L E G E N D</h3></center>
+                                            <ul class="legend">
+                                                <li><span class="approved"></span>Upcoming Events</li>
+                                                <li><span class="pending"></span>Future events</li>
+                                                <li><span class="expired"></span>Expired events</li>
+                                            </ul>
+                                        </div>
+                                        
+
+
                                         <!-- Modal -->
                                         <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                           <div class="modal-dialog" role="document">
@@ -592,9 +606,9 @@
             // }
            var color = event.color;
 
-                if(event.color == "#808080"){
-                        $('#errmodal').modal('show');
-                    }else{
+                //if(event.color == "#808080"){
+                //        $('#errmodal').modal('show');
+                //    }else{
                         // var dataSet = "start="+start+"&end="+end+"&title="+title+"&id="+id+"&details="+details+"&category="+category+"&venue="+venue;
                         var dataSet = "id="+id+"&color="+color;
                         $.ajax({
@@ -613,7 +627,7 @@
                                 console.log(errorThrown);
                             }
                         });
-                    }
+                    //}
              }
         });
         function edit(event){
