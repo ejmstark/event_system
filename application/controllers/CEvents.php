@@ -307,8 +307,84 @@
 			/* *************** */
 
 			/* FINANCE MODULE FUNCTIONS */
+        public function buyTicket($tId,$eid)
+		{
+			// print_r($id);
+			// $type = new MTicketType();
+			// $where = array('event_id' => $id );
+			// $data['tickets'] = $type->loadType($id);
+			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
+			if($res){
+				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
+				$result = $res[0]->load_amt - $res1[0]->price;
+
+				if($result >= 0){
+					$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 
+					$data = array('date_sold' => $now->format('Y-m-d H:i:s'),
+					  'user_id' => $this->session->userdata['userSession']->userID ,
+					  'ticket_type_id' => $tId
+	 				  );
+					$res = $this->MTicket->insert($data);
+
+					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
+					$this->success = "Bought ticket for ".$res1[0]->price;
+					// $this->displayEventDetails($eid);
+					redirect('event/cEvent/displayEventDetails/'.$eid);
+				}else{
+					$this->error = "Insufficient balance!";
+					$this->displayEventDetails($eid);
+				}
+
+			}
+
+			// echo $this->MTicket->db->last_query();
+
+			// $this->load->view('imports/vHeader');
+
+			// $this->load->view('imports/vFooter');
+
+			# code...
+		}
+        
+        public function buyTickets()
+	    {
+
+		  $uid = $this->session->userdata['userSession']->userID;
+		  $var = $this->input->post('qty');
+		  $tck = new MTicket();
+		
+		  $now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+
+		  for ($i=0; $i < $var ; $i++) { 
+			$data = array('date_sold' => $now->format('Y-m-d H:i:s'), 
+					  'user_id' => $uid ,
+					  'ticket_type_id' => $this->input->post('type')
+	 				  );
+			$result = $tck->insert($data);
+
+		  }
+
+		
+		  if($result){
+			$this->viewAllTickets($uid);
+		  }
+		
+		# code...
+	    }
+
+
+	    public function viewAllTickets($id)
+	    {
+
+		  $data['tickets'] = $this->MTicket->joinTicketEventType($id);
+
+		  $this->load->view('imports/vHeader');
+		  $this->load->view('user/vAllTickets.php', $data);
+		  $this->load->view('imports/vFooter');
+		# code...
+	    }
 
 			/* *************** */
 

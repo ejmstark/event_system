@@ -412,29 +412,6 @@
 
 	}
 
-	public function viewFinance() {
-		$result_data = array();//Replace with query
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					 $arrObj = new stdClass;
-					//Only interface filtering
-					//$arrObj->price
-					//$arrObj->ticket_count
-					 $array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		//$data['data']=$array;
-		$this->load->view('imports/admin_vHeader');
-		$this->load->view('admin/vFinance');
-		$this->load->view('imports/admin_vFooter');
-
-	}
-
 	public function viewReport() {
 		$result_data = array();//
 		//////////////////////////////////////////////////////////////////////////////
@@ -465,13 +442,6 @@
 		//$data['data']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vReport');
-		$this->load->view('imports/admin_vFooter');
-
-	}
-
-	public function generateCard() {
-		$this->load->view('imports/admin_vHeader');
-		$this->load->view('admin/vCards');
 		$this->load->view('imports/admin_vFooter');
 
 	}
@@ -576,43 +546,6 @@
 		//////////////////////////////////////
 	}
 
-	public function getCardsMonthly(){
-		///////////////////////////////////////
-		///////Interface New Implementation////
-		///////////////////////////////////////
-		// $year = $_GET['years'];
-		// $userModel = new MUser();
-		// $where = array('YEAR(user_account.date_account_created)' => $year,
-		// 							 'card.cardStatus' => 1,
-		// 						 );
-		// $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
-		// 					MONTHNAME(user_account.date_account_created) as monthname',
-		// 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
-		// $arr_data = array();
-		// foreach ($result as $value) {
-		// 	$arr_data[] = [$value->UserCount, $value->monthname];
-		// }
-		// echo json_encode($arr_data);
-
-		$this->db->select('COUNT(*) as CardCount');
-		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
-		$this->db->from('card');
-		$this->db->where("cardStatus = 1");
-		$this->db->group_by("monthname");
-		$this->db->order_by("monthname", "desc");
-
-		$query = $this->db->get();
-		$result = $query->result();
-
-		$arr_data = array();
-		foreach ($result as $value) {
-			$arr_data[] = [$value->CardCount, $value->monthname];
-		}
-		// //////////////////////////////////////
-		echo json_encode($arr_data);
-		//////////////////////////////////////
-	}
-
 	public function getEvents(){
 		///////////////////////////////////////
 		///////Interface New Implementation////
@@ -646,7 +579,70 @@
 			/* *************** */
 
 			/* FINANCE MODULE FUNCTIONS */
+		public function getCardsMonthly(){
+		  ///////////////////////////////////////
+		  ///////Interface New Implementation////
+		  ///////////////////////////////////////
+		  // $year = $_GET['years'];
+		  // $userModel = new MUser();
+		  // $where = array('YEAR(user_account.date_account_created)' => $year,
+		  // 							 'card.cardStatus' => 1,
+		  // 						 );
+		  // $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		  // 					MONTHNAME(user_account.date_account_created) as monthname',
+		  // 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+		  // $arr_data = array();
+		  // foreach ($result as $value) {
+		  // 	$arr_data[] = [$value->UserCount, $value->monthname];
+		  // }
+		  // echo json_encode($arr_data);
 
+		  $this->db->select('COUNT(*) as CardCount');
+		  $this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
+		  $this->db->from('card');
+		  $this->db->where("cardStatus = 1");
+		  $this->db->group_by("monthname");
+		  $this->db->order_by("monthname", "desc");
+
+		  $query = $this->db->get();
+		  $result = $query->result();
+
+		  $arr_data = array();
+		  foreach ($result as $value) {
+			$arr_data[] = [$value->CardCount, $value->monthname];
+		  }
+		  // //////////////////////////////////////
+		  echo json_encode($arr_data);
+		  //////////////////////////////////////
+	    }
+
+	    public function generateCard() {
+		  $this->load->view('imports/admin_vHeader');
+		  $this->load->view('admin/vCards');
+		  $this->load->view('imports/admin_vFooter');
+	    }
+
+	    public function viewFinance() {
+		  $result_data = array();//Replace with query
+		  //////////////////////////////////////////////////////////////////////////////
+		  //================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		  /////////////////////////////////////////////////////////////////////////////
+		  $array = array();
+		  if($result_data){
+			foreach ($result_data as $value) {
+					 $arrObj = new stdClass;
+					//Only interface filtering
+					//$arrObj->price
+					//$arrObj->ticket_count
+					 $array[] = $arrObj;
+			}
+		  }
+		  ////////////STOPS HERE///////////////////////////////////////////////////
+		  //$data['data']=$array;
+		  $this->load->view('imports/admin_vHeader');
+		  $this->load->view('admin/vFinance');
+		  $this->load->view('imports/admin_vFooter');
+	    }
 
 
 			/* *************** */
