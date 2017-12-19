@@ -709,7 +709,6 @@ class CAdmin extends CI_Controller {
 
    		$data3['users']=$this->getUserCount();
 		$this->load->view('imports/admin_vHeader');
-		//$this->load->view('admin/vAdminDashboard', $data2);
 		$this->load->view('admin/vAdmin', $data2);
 		$this->load->view('imports/admin_vFooter');
 	}

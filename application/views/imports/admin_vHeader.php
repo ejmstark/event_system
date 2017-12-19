@@ -25,7 +25,7 @@
 <script src="<?php echo base_url('assets/jcAssets/js/popper.min.js"')?>"></script>
 <script src="<?php echo base_url('assets/jcAssets/js/jquery-3.2.1.min.js"')?>"></script>
 <script src="<?php echo base_url('assets/jcAssets/js/bootstrap.min.js"')?>"></script>
-
+<script src="<?php echo base_url('assets/jcAssets/js/jquery.ui.min.js"')?>"></script>
 </head>
 <body class="leftMenu nav-collapse">
 <div id="wrapper">
