@@ -67,8 +67,7 @@ foreach($going as $g){
                     </div>
                 </div>
                 <div class="row" >
-                    <a href="<?php echo site_url();?>/event/cEvent/displayEventReviews/?event_name=<?php echo $e->event_name; ?>&user_id=<?php echo $e->user_id; ?>&event_status=<?php echo $e->event_status;?>
-                                                    &event_id=<?php echo $e->event_id; ?>&event_venue=<?php echo $e->event_venue; ?>&event_date_start=<?php echo $e->event_date_start; ?>&event_date_end=<?php echo $e->event_date_end; ?>">link to feedback</a>
+                    <a href="<?php echo site_url();?>/event/cEvent/displayEventReviews/<?php echo $e->event_id; ?>">link to feedback</a>
                         <!--<a id = "feedbackLink">link to feedback</a> -->
                 </div>
             </div>
