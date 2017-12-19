@@ -36,7 +36,7 @@
 			
 			$this->db->select('COUNT(*) as CardCount');
 			$this->db->from('card');
-			$this->db->where("cardStatus = 1");	
+			$this->db->where("cardStatus = 0");	
 			$query = $this->db->get();
 			$result = $query->result();
 

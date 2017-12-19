@@ -38,6 +38,16 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/style.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/normalize.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
+
+    <style>
+        .calendar-legend{ margin-top:5%; max-width: 50%; border-radius: 15px; border: 1px solid #ccc; padding: 5px;}
+        .legend { list-style: none; margin-left:-35px;}
+        .legend span {   border: 1px solid #ccc; float: left; width: 15px; height: 15px; margin: 5px; }
+        .legend .expired{ background-color: #808080; }
+        .legend .approved{ background-color: #ffae00; }
+        .legend .pending { background-color: #337ab7; }
+
+    </style>
 </head>
 
 <?php } else {

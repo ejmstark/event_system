@@ -65,6 +65,26 @@
 			return $query;			             
 		}
 
+		public function updateSpecificEvent($id, $data){
+			$this->db->where('event_id', $id);
+			return $this->db->update('event_info', $data);
+		}
+		public function getEventDetails($id){
+			$this->db->select('event_id, event_name, event_venue, event_date_start, event_date_end, event_category, event_details');
+			$this->db->from('event_info');
+			$this->db->where('event_info.event_id', $id);
+
+			return $this->db->get();
+		}
+
+		public function getTicketDetails($id){
+			$this->db->select('ticket_name, price, ticket_count, ticket_type_id');
+			$this->db->from('ticket_type');
+			$this->db->where('event_id', $id);
+
+			return $this->db->get();
+		}
+		
 		public function getAccount_id(){
 			return $this->account_id;
 		}

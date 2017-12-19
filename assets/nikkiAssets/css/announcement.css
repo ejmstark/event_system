@@ -1,0 +1,124 @@
+
+.box-container {
+  background: #d3d3d3;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 4px 2px -2px;
+  font-family: "adelle-sans", sans-serif;
+  font-weight: 100;
+  margin: 48px auto;
+  width: 20rem;
+  color: #CB6C52;
+  padding: 20px;
+}
+
+@media screen and (min-width: 959px) {
+  .box-container {
+    width: 50rem;
+  }
+}
+
+.box-container a {
+  color: #CB6C52;
+  text-decoration: none;
+  -webkit-transition: .25s ease;
+  transition: .25s ease;
+}
+.box-container a:hover {
+  border-color: #ff4d4d;
+  color: #CB6C52;
+}
+
+.box-author,
+.box-author--no-cover {
+  margin: 0 auto;
+  padding-top: .125rem;
+  width: 100%;
+}
+
+.box-author h3::before,
+.box-author--no-cover h3::before {
+  background: url("../../adminAssets/img/admin.png");
+  background-size: cover;
+  border-radius: 50%;
+  content: " ";
+  display: inline-block;
+  height: 32px;
+  margin-right: .5rem;
+  position: relative;
+  top: 8px;
+  width: 32px;
+}
+
+.box-author h3 {
+  color: #fff;
+  font-weight: 100;
+}
+
+.box-author--no-cover h3 {
+  color: #999999;
+  font-weight: 100;
+}
+
+.box-body {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.box-title h1 a {
+  color: #333;
+  font-weight: 100;
+}
+
+.box-summary p {
+  color: #4d4d4d;
+}
+
+.box-footer {
+  border-top: 1px solid #e6e6e6;
+  margin: 0 auto;
+  padding-bottom: .125rem;
+  width: 100%;
+}
+
+.box-footer ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: row;
+      -ms-flex: row wrap;
+          flex: row wrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding-left: 0;
+}
+
+.box-footer li:first-child {
+  margin-right: auto;
+}
+
+.box-footer li + li {
+  margin-left: .5rem;
+}
+
+.box-footer li {
+  color: #999999;
+  font-size: .75rem;
+  height: 1.5rem;
+  letter-spacing: 1px;
+  line-height: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  white-space: nowrap;
+}
+.box-footer li a {
+  color: #999999;
+}
+
+.published-date {
+  border: 1px solid #999999;
+  border-radius: 3px;
+  padding: 0 .5rem;
+}
