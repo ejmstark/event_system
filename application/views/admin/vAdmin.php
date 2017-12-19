@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div id="updateAccount" class="modal fade" tabindex="-1" data-width="500">
+        <div id="updateAccount" class="modal" tabindex="-1" data-width="500">
           <div class="modal-header bg-inverse bd-inverse-darken">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                   <h1 class="modal-title" align="center">TITLE OF EVENT HERE</h1>
@@ -79,5 +79,7 @@
           </div>
         </div>
     </div>
+
 </div>
 
+</body>

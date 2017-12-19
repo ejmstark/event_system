@@ -43,85 +43,89 @@
         </nav>
         <!-- End of nav bar -->
 
-
-
-              <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover" data-provide="data-table" id="toggle-column table-example">
-                <thead class="">
-                    <tr>
-                      <th>Posted By</th>
-                      <th>Announcement Details</th>
-                      <th>Date Posted</th>
-                    </tr>
-                </thead>
-
-                  <tbody>
-                    <?php
-                          if($announcements!=FALSE){
-                            foreach ($announcements as $announcement) {
-                              if($announcement->announcementStatus != "Finished") {
-                                $date = date("m-d-Y", strtotime($announcement->datePosted));
-                                echo  "<tr>
-                                <td id='announcementID'>".$announcement->first_name." ".$announcement->last_name."</td>
-                                <td>".$announcement->announcementDetails."</td>
-                                <td>".$date."</td>
-                                ";
-}
-
-                            }
-
-                                }
-                              ?>
-                  </tbody>
-                </table>
-
-
+        <div class="page-head"> 
+            <div class="container">
+                <div class="row">
+                    <div class="page-head-content">
+                        <h1 class="page-title">Announcements</h1>               
                     </div>
-                </section>
+                </div>
             </div>
         </div>
-    </div>
+        <!-- End page header -->
+ 
+
+        <?php
+            if($announcements!=FALSE){
+                foreach ($announcements as $announcement) {
+                    if($announcement->announcementStatus != "Finished") {
+                        $date = date("m-d-Y", strtotime($announcement->datePosted));
+                        echo  "
+                            <div class='box-container'>
+                                <div class='box-header'>
+                                    <div class='box-author--no-cover'  id='announcementID'>
+                                        <h3>".$announcement->first_name." ".$announcement->last_name."</h3>
+                                    </div>
+                                  </div>
+
+                                  <div class='box-body'>
+                                    <div class='box-title'>
+                                      <h1><a href='#''>This Post Has No Heading</a></h1>
+                                    </div>
+                                    <div class='box-summary'>
+                                      <p>".$announcement->announcementDetails."</p>
+                                    </div>
+                                  </div>
+
+                                   <div class='box-footer'>
+                                    <ul>
+                                      <li class='published-date'>".$date."</li>
+                                    </ul>
+                                </div>
+                            </div>"
+                            ;
+                        }
+                    }
+                }
+            ?>
 
 
 
-<div id="createAnnouncement" class="modal fade" tabindex="-1" data-width="650">
-    <div class="modal-header bg-inverse bd-inverse-darken">
+
+        <div id="createAnnouncement" class="modal fade" tabindex="-1" data-width="650">
+            <div class="modal-header bg-inverse bd-inverse-darken">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                 <h1 class="modal-title" align="center">CREATE AN ANNOUNCEMENT</h1>
-        </div>
+            </div>
 
-        <div class="modal-body">
-            <div class="panel-body">
+            <div class="modal-body">
+                <div class="panel-body">
 
-      <!-- Modal content-->
-          <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/admin/cAdmin/createAnnouncement">
+          <!-- Modal content-->
+                    <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/admin/cAdmin/createAnnouncement">
 
-                <div class="form-group" >
-                  <label for="" class="col-8 control-label">Announcement:</label>
-                  <div class="col-8">
-                    <textarea class="form-control" type="text" name="announcementDetails" required="" style="min-height: 300px; max-height: 300px;"></textarea>
-                  </div>
+                        <div class="form-group" >
+                            <label for="" class="col-8 control-label">Announcement:</label>
+                            <div class="col-8">
+                                <textarea class="form-control" type="text" name="announcementDetails" required="" style="min-height: 300px; max-height: 300px;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group" >
+                            <div class="col-8">
+                                <input class="form-control hidden" type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
+                            </div>
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button id="closeEditAccount" type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+                            <input id="" class="btn btn-primary" type="submit"  name="action" value="Announce">
+                        </div>
+                    </form>
                 </div>
-
-                <div class="form-group" >
-                  <div class="col-8">
-                    <input class="form-control hidden" type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
-                  </div>
-                </div>
-
-
-              <div class="modal-footer">
-                        <button id="closeEditAccount" type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
-                        <input id="" class="btn btn-primary" type="submit"  name="action" value="Announce">
-                    </div>
-                </form>
             </div>
         </div>
-    </div>
-
-
-
-
-
    
         <!-- Footer area-->
         <div class="footer-area">

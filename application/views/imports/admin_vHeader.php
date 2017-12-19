@@ -21,11 +21,14 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/adminAssets/css/style5.css')?>" />
 
 <link type="text/css" rel="alternate stylesheet" media="screen" title="style1" href="<?php echo base_url('assets/adminAssets/css/styleTheme1.css')?>" />
+<link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/adminAssets/css/animation.css')?>" />
 
 <script src="<?php echo base_url('assets/jcAssets/js/popper.min.js"')?>"></script>
 <script src="<?php echo base_url('assets/jcAssets/js/jquery-3.2.1.min.js"')?>"></script>
 <script src="<?php echo base_url('assets/jcAssets/js/bootstrap.min.js"')?>"></script>
-<script src="<?php echo base_url('assets/jcAssets/js/jquery.ui.min.js"')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/adminAssets/js/jquery.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/adminAssets/js/jquery.ui.min.js')?>"></script>
+
 </head>
 <body class="leftMenu nav-collapse">
 <div id="wrapper">
