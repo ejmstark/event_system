@@ -44,10 +44,10 @@
                                                   </td>
                                                   </tr>";
                                             }else {
-                                              echo " <td>
-                                                  You have ".$object->event_status." this event.
-                                                  </td>
-                                                  </tr>";
+                                             echo "<td>
+                                                <button name='button' data-toggle='modal' data-target='#updateAccount' type='button' class='btn btn-info'>VIEW ATTENDEES</button>
+                                              </td>
+                                            </tr>";  
                                             }
                                         }
                                     }
@@ -58,5 +58,26 @@
                 </section>
             </div>
         </div>
+
+        <div id="updateAccount" class="modal fade" tabindex="-1" data-width="500">
+          <div class="modal-header bg-inverse bd-inverse-darken">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+                  <h1 class="modal-title" align="center">TITLE OF EVENT HERE</h1>
+          </div>
+ 
+          <div class="modal-body">
+              <div class="panel-body">
+                table here
+
+                 <h4 class="modal-title" align="center">TOTAL NUMBER OF ATTENDEES : 00000</h4>
+              <!-- Modal content-->
+              </div>
+          </div>
+
+          <div class="modal-footer">
+              <button id="closeEditAccount" type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+          </div>
+        </div>
     </div>
 </div>
+
