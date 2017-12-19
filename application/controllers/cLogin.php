@@ -139,26 +139,16 @@ class CLogin extends CI_Controller {
 
 
 
-		$data['users'] = $this->MUser->getAllUsers();
+		$data['users'] = $this->MUser->read_all();
 
-		$result_data = $this->MEvent->getAllApprovedEvents();
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================INTERFACE MODULE - SPRINT 3 Implementation============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->dateStart = $value->dateStart;
-					$arrObj->dateEnd = $value->event_date_end;
-					$arrObj->event_category = $value->event_category;
-					$array[] = $arrObj;
-			}
-		}
+		$stringSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
+		$stringWhere = "event_info.event_status = 'Approved'";
+		$data['events'] = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($stringSelect,$stringWhere,false,false,false,false);
 		////////////STOPS HERE///////////////////////////////////////////////////
-		$data['events'] = $array;
+
 
 		$this->data['custom_js']= '<script type="text/javascript">
 
