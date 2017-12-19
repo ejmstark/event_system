@@ -38,6 +38,7 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/style.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/normalize.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
+    <!--<link href="<?php echo base_url('assets/nikkiAssets/css/style.php')?>" rel="stylesheet" />-->
 </head>
 
 <?php } else {
