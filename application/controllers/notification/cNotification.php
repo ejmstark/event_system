@@ -19,12 +19,12 @@ class cNotification extends CI_Controller {
 		// $this->load->view('imports/vHeader');
 		// $this->load->view('vListEvents.php', $data);
 		// $this->load->view('imports/vFooter');
-		echo $data;
+		echo json_encode($data);
 		# code...
 	}
-	public function updateStatus($notif_id)
+	public function updateStatus()
 	{
-		$nid = $notif_id;
+		$nid = $this->input->post('notif_id');
 		$data['status'] = $this->MNotification->updateStatus($nid);
 		
 		// $this->load->view('imports/vHeaderLandingPage');
