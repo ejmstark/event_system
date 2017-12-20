@@ -20,16 +20,12 @@
 		}
 
 		public function getAllEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*,asdasd");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->from($this::DB_TABLE);
 			$query = $this->db->get();
 			return $query;
 		}
-
-		//Class getters and setters.
 
 		public function getEvent_id(){
 			return $this->event_id;
@@ -129,10 +125,6 @@
 			$user_id = filter_var($user_id, FILTER_SANITIZE_NUMBER_INT);
 			$this->user_id = $user_id;
 		}
-
-		//End of class getters and setters.
-
-
 
 		public function deleteEvent($event_id){
 			$this->db->trans_begin();
