@@ -43,7 +43,7 @@
 			    return $query->result();
 			}else{
          		return false;
-      }
+            }
 		}
 		//This function will read the user details and display the result using account id.
 		public function loadUserDetails($id)
