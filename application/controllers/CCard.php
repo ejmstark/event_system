@@ -65,11 +65,12 @@ class cCard extends CI_Controller {
       $random = $this->randomCode();
     }while($this->isCodeUnique($random) != true);
 
-    $data = array ('cardId' => null,
-                   'cardCode' => $random,
-                   'cardAmount' => $amount,
-                   'cardCreatedOn' => null,
-                   'cardStatus' => 1
+    $data = array ('card_id' => null,
+                   'card_code' => $random,
+                   'card_amount' => $amount,
+                   'card_active' => 1,
+                   'card_claimed' => null,
+                   'account_id' => $this->session->userdata["userSession"]->userID
                   );
 
     $query = $card->insert($data);
