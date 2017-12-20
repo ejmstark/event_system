@@ -14,6 +14,8 @@ class CUser extends CI_Controller {
       $this->data = null;
   	}
 
+		//This function will redeem code. Where the user must input code_id and will be checked in the database.
+		//If it is still available, then the user can redeem code.
   	public function redeemCode(){
 
 		$code = $this->input->post('ccode');
@@ -36,6 +38,7 @@ class CUser extends CI_Controller {
 
 		redirect("CEvent/viewEvents");
 	}
+
 	public function index()
 	{
 		$this->data['custom_js']= '<script type="text/javascript">
@@ -51,14 +54,14 @@ class CUser extends CI_Controller {
 		$this->load->view('imports/vFooter',$this->data);
 	}
 
+	// This function will load the view for user.
 	public function signuppage()
 	{
 
 		$this->load->view('user/vSignup.php');
 
 	}
-
-
+	//This function is where the user can sign up. Put details in his profile and will be stored in the database.
 	public function signup()
 	{
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
@@ -107,13 +110,14 @@ class CUser extends CI_Controller {
 		# code...
 	}
 
+	//This function is where a user can register to a specific event.
 	public function eventregister()
 	{
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vEventRegistration.php');
 		$this->load->view('imports/vFooter');
 	}
-
+	//This function will display all the events that is stored in the data_base.
 	public function displayEvent()
 	{
 
@@ -123,7 +127,7 @@ class CUser extends CI_Controller {
 		$this->load->view('imports/vFooter');
 		# code...
 	}
-
+	//This function will display all the details in a specific event.
 	public function displayEventDetails($id)
 	{
 
@@ -144,7 +148,7 @@ class CUser extends CI_Controller {
 		$this->load->view('imports/vFooter');
 		# code...
 	}
-
+//This fucntion will get the event that is being search by a user.
 	public function search(){
 		$data['events'] = $this->MEvents->getAllEvents();
 
@@ -154,6 +158,7 @@ class CUser extends CI_Controller {
 		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
 	}
+	 //This function will load the sign-up page.
 	public function viewSignUp()
 	{
 		if(!$this->data){
@@ -167,7 +172,7 @@ class CUser extends CI_Controller {
 		}
 
 	}
-
+//This fucntion will display all the announcements.
 	public function viewAnnouncements()
 	{
 		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
