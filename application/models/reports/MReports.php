@@ -107,6 +107,16 @@
 			return $result->result_array();
 		}
 
+		public function nameAttendees($event_id){
+			$statement = "SELECT DISTINCT U.user_name
+						  FROM user_account U, ticket_type TT, event_info E, ticket T
+						  WHERE U.account_id = T.user_id AND T.ticket_type_id = TT.ticket_type_id AND TT.event_id = '$event_id'";
+			$query = $this->db->query($statement);
+			  
+			return $query->result_array();
+
+		}
+
 		public function countUsers($startDate, $endDate){
 			// $query = "SELECT DISTINCT `user_id`
 			// 		  FROM `ticket`
