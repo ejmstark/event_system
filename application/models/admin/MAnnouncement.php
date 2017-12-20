@@ -34,10 +34,12 @@
 		}
 
 		public function setAnnouncementID($announcementID){
-			$this->announcementID = $announcementID;
+			$this->announcementID = (int) $announcementID;
 		}
 
 		public function setAnnouncementDetails($announcementDetails){
+			$announcementDetails = trim($announcementDetails);
+			$announcementDetails = filter_var($announcementDetails,FILTER_SANITIZE_STRING);
 			$this->announcementDetails = $announcementDetails;
 		}
 
@@ -46,7 +48,7 @@
 		}
 
 		public function setPostedBy($postedBy){
-			$this->postedBy = $postedBy;
+			$this->postedBy = (int) $postedBy;
 		}
 
 		public function setDatePosted($datePosted){
