@@ -391,7 +391,6 @@ class CAdmin extends CI_Controller {
 			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
-		//$data['data']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vReport');
 		$this->load->view('imports/admin_vFooter');

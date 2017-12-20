@@ -14,9 +14,7 @@
 		const DB_TABLE = "user_account";
     	const DB_TABLE_PK = "account_id";
 
-    	public function __construct(){
-
-		}
+    
 
 		public function Attendance()
 		{	

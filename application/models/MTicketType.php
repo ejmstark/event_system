@@ -7,9 +7,7 @@
 		const DB_TABLE = "ticket_type"; //Table Name
     	const DB_TABLE_PK = "ticket_type_id"; // Primary Key
 
-    	public function __construct(){
 
-		}
 		/* GETTER AND SETTERS */
 			
 
@@ -30,7 +28,7 @@
 			$this->db->where('event_id', $id);
 
 			$query = $this->db->get();
-			// echo $this->db->last_query();
+			
 			return $query->result();
 			# code...
 		}

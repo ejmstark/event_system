@@ -7,9 +7,7 @@
 		const DB_TABLE = "user_event_preference"; //Table Name
     	const DB_TABLE_PK = "user_preference_id"; // Primary Key
 
-    	public function __construct(){
-
-		}
+    	
 		/* GETTER AND SETTERS */
 			
 

@@ -17,9 +17,7 @@
 		const DB_TABLE = "event_info";
     	const DB_TABLE_PK = "event_id";
 
-    	public function __construct(){
-
-		}
+    	
 		public function getRevenue($eid){
 			
 			$this->db->select("ei.event_name, tt.ticket_name, COUNT(t.ticket_id) as cnt , tt.price");

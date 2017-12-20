@@ -7,9 +7,7 @@
 		const DB_TABLE = "ticket"; //Table Name
     	const DB_TABLE_PK = "ticket_id"; // Primary Key
 
-    	public function __construct(){
-
-		}
+    	
 		/* GETTER AND SETTERS */
 			
 
@@ -139,57 +137,7 @@
 			//////////////////////////////////////
 		}
 
-		public function getReportsUserMonthly($year){
-			///////////////////////////////////////
-			///////Interface New Implementation////
-			///////////////////////////////////////
-			// $this->db->select('COUNT(*) as UserCount, MONTHNAME(user_account.date_account_created) as monthname');
-			// $this->db->from('user_account');
-			// $this->db->where("YEAR(user_account.date_account_created) = '".$year."'
-		 	// 									AND user_account.user_status = 'Active'
-			// 									AND user_account.user_type = 'Regular'
-			// 									GROUP BY  MONTH(user_account.date_account_created)");
-			// $query = $this->db->get();
-			// $result = $query->result();
-			// $arr_data = array();
-			// foreach ($result as $value) {
-			// 	$arr_data[] = [$value->UserCount,$value->monthname];
-			// }
-			// return $arr_data;
-			/////////////////////////////////////
-			/////////////////////////////////////
-			// $where = array('YEAR(user_account.date_account_created)' => $year,
-			// 							 'user_account.user_status' => 'Active',
-			// 							 'user_account.user_type' => 'Regular'
-			// 						 );
-			// $result = $this->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount, MONTHNAME(user_account.date_account_created) as monthname',
-			// 					$where,"user_account",FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
-			// $arr_data = array();
-			// foreach ($result as $value) {
-			// 	$arr_data[] = [$value->UserCount,$value->monthname];
-			// }
-			// return $arr_data;
-		}
-
-		public function getReportsEventsMonthly($year){
-			///////////////////////////////////////
-			///////Interface New Implementation////
-			///////////////////////////////////////
-			// $this->db->select('COUNT(*) as EventCount');
-			// $this->db->from('event_info');
-			// $this->db->where("event_status = 'APPROVED'");
-			// $this->db->where("YEAR(date_created)",$year);
-			// $query = $this->db->get();
-			// $result = $query->result();
-			// $arr_data = array();
-			// foreach ($result as $value) {
-			// 	$arr_data[] = [$value->EventCount];
-			// }
-			// return $arr_data;
-			/////////////////////////////////////
-			/////////////////////////////////////
-		}
-
+	
 		/* ****************** */
 
 
