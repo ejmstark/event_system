@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+<?php if(isset($this->session->userdata['adminSession'])){
+    ?><!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -123,4 +125,6 @@
         </ul>
     </nav>
     <!-- //nav left menu-->
-    
+    <?php }else{
+        redirect("cLogin/login");
+        }?>
