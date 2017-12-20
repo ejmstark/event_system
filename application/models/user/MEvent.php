@@ -65,12 +65,9 @@
 			$query = $this->db->get();
 
 			return $query->result();	
-			# code...
 		}
 
 		public function getAllEventsByUser($id){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
@@ -81,8 +78,6 @@
 			return $query->result();			             
 		}
 		public function getAllEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->from("event_info");
@@ -91,10 +86,7 @@
 			return $query->result();			             
 		}
 
-		//get events that match the search word
 		public function getSearchEvents($searchWord){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->from("event_info");
 			$this->db->where("event_name LIKE '%".$searchWord."%'");
@@ -103,8 +95,6 @@
 		}
 		
 		public function getAllApprovedEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
@@ -124,7 +114,6 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
 		public function do_upload_event($id)
@@ -133,7 +122,7 @@
 				'upload_path' => "./images/events",
 				'allowed_types' => "gif|jpg|png|jpeg",
 				'overwrite' => TRUE,
-				'max_size' => "100000000000000000000000000000000000000000000000000000", // Can be set to particular file size , here it is 2 MB(2048 Kb)
+				'max_size' => "100000000000000000000000000000000000000000000000000000",
 				'max_height' => "1000000000000",
 				'max_width' => "1000000000"
 			);
@@ -147,9 +136,9 @@
 	        }
 	        else
 	        {
-                $data = array('upload_data' => $this->upload->data()); //actual uploading
+                $data = array('upload_data' => $this->upload->data());
                 
-                if($this->insertPhotoEvent($this->upload->data()['file_name'], $id)) { //query to db
+                if($this->insertPhotoEvent($this->upload->data()['file_name'], $id)) { 
                 	return true;	
                 } else {
                 	return false;
@@ -157,10 +146,7 @@
 	        }
 	    }
 
-	    public function insertPhotoEvent($filename,$id) { //called upon uploading file
-	      // $now = new DateTime ( NULL, new DateTimeZone('UTC'));
-	      // $station = new MStation();
-	      // $id = $station->getLastAddedStation();
+	    public function insertPhotoEvent($filename,$id) { 
 
 			$where = array(
 				"event_picture" =>  "images/events/".$filename,
@@ -170,7 +156,6 @@
 			return $result = $this->update($id, $where);
 	    }
 
-		//Class getters and setters.
 
 		public function getEvent_id(){
 			return $this->event_id;
@@ -259,8 +244,6 @@
 		public function setUser_id($user_id){
 			$this->user_id = $user_id;
 		}
-
-		//End of class getters and setters.
 
 		
 	}
