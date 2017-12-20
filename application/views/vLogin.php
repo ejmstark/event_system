@@ -1,4 +1,9 @@
 <?php if (!$this->session->userdata('userSession')) { ?>
+<?php
+  require("application/customization/CustomizationManager.php");
+  CustomizationManager::SetTheme("configurations 2");
+  $images = CustomizationManager::$images;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +12,8 @@
   <link href="<?php echo base_url('assets/josephAssets/"css/font-awesome.css')?>" rel="stylesheet"> 
     <link href="<?php echo base_url('assets/josephAssets/"css/font-awesome.min.css')?>" rel="stylesheet"> 
 
-  <link href="<?php echo base_url('assets/josephAssets/css/style.css')?>" rel="stylesheet" type="text/css" media="all" >
-  <link href="<?php echo base_url('assets/josephAssets/css/styleLogin1.css')?>" rel="stylesheet" /> 
+  <link href="<?php echo base_url('assets/nikkiAssets/css/style.php')?>" rel="stylesheet" type="text/css" media="all" >
+  <link href="<?php echo base_url('assets/josephAssets/css/styleLogin1.css')?>" rel="stylesheet" /> <!-- should have a styleLogin1.php I thinks -->
   <link href="<?php echo base_url('assets/josephAssets/css/bootstrap.css')?>" rel="stylesheet" />
   <link href="<?php echo base_url('assets/josephAssets/css/bootstrap.min.css')?>" rel="stylesheet" />
 </head>
@@ -26,7 +31,16 @@
       <div class="loginBox">
           <center>
             <span class="eventSystem"> 
-              <img src="<?php echo base_url('assets/josephAssets/img/DailyEvents.png')?>" class="eventLogo"> 
+              <img src="<?php 
+                if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                  //
+                  echo base_url('assets/josephAssets/img/DailyEvents.png');
+                }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+                  echo base_url('assets/josephAssets/img/DailyEvents.png');
+                }else{
+                  echo base_url('assets/josephAssets/img/DailyEvents.png');
+                }
+              ?>" class="eventLogo"> 
             </span>
             <form  method="POST" action="<?php echo site_url()?>/cLogin/userLogin">
               <div>

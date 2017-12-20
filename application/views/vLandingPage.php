@@ -1,4 +1,8 @@
-
+<?php
+    require("application/customization/CustomizationManager.php");
+    CustomizationManager::SetTheme("configurations 2");
+    $images = CustomizationManager::$images;
+?>
     <body>
 
         <div id="preloader">
@@ -15,7 +19,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="index-5.html"><img src="<?php 
+                    echo base_url('assets/dianeAssets/img/logoBlack.png')
+                       /* if(CustomizationManager::$currentConfigName == 'configurations 1'){
++                        echo base_url('assets/customizationAssets/img/DailyEventsDark.png');
++                      }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
++                        echo base_url('assets/dianeAssets/img/logoBlack.png');//no assets for config 2 yet
++                      }else{
++                        echo base_url('assets/dianeAssets/img/logoBlack.png');
++                      }*/
+                    ?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -45,10 +58,30 @@
         <div class="slider-area">
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
+                    <?php
+                        if(CustomizationManager::$currentConfigName == "configurations 1"){
 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div> 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>   
+                        
+                    ?>
+                        <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/img/Slide1.jpg')?>" alt="EXO"></div>
+-	+                   <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/img/Slide2.jpg')?>" alt="Paramore"></div>
++                       <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/img/Slide3.jpg')?>" alt="Willie"></div>
+                    <?php
+                        }else if(CustomizationManager::$currentConfigName == "configurations 2"){
+
+                    ?>
+                        <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/RobinAssets/elmekias pic 2.jpg')?>" alt="crowd"></div>
+-	+                   <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/RobinAssets/elmekias pic 5.jpg')?>" alt="A Day to Remember"></div>
++                       <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/RobinAssets/generic concertPic.jpg')?>" alt="GEazy"></div>
+                    <?php
+                        }else{
+                    ?>
+                        <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div> 
+                        <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div> 
+                        <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>   
+                    <?php
+                        }
+                    ?>
 
                 </div>
             </div>
@@ -208,7 +241,16 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                               <img src= "<?php 
+                                    if(CustomizationManager::$currentConfigName == "configurations 1"){
+
+                                    }else if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                        echo base_url('assets/dianeAssets/img/logoBlack.png');
+                                    }else{
+                                        echo base_url('assets/dianeAssets/img/logoBlack.png');
+                                    }
+                                ?>
+                               " alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
                                 
                             </div>
