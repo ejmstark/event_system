@@ -2,6 +2,7 @@
    header('Content-type: text/css');
    require("../../CustomizationManager.php");
    CustomizationManager::SetTheme("configurations 1");
+   $colors = CustomizationManager::$colors;
 ?>
 
 body {
@@ -54,6 +55,7 @@ body {
     left: 0px;
     opacity:0.9;
     margin: auto;
+    position: relative;
 }
 /*end of header background-images*/
 
@@ -81,9 +83,9 @@ a:hover {
 
 /*search bar styling*/
 .search-container {
-    margin-top: 210px;
+    margin-top: -20px;
     width: 45%;
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -98,7 +100,7 @@ a:hover {
   height: 70%;
   border-radius: 5px;
   outline: none;
-  color: #fff;
+  color: <?php echo $colors->INDEX_PAGE_SEARCH_CONTAINER; ?>;
 }
 
 .searchTerm:focus{
@@ -132,10 +134,17 @@ input::placeholder {
 
 /*footer styling*/
 footer {
-    background-color: #1e1e1e;
+    background-color: <?php echo $colors->INDEX_PAGE_EVENT_NAME_COLOR?>;
     height: 400px;
     position: absolute;
     margin-top: 1000px;
+
+   /* position: relative;
+   bottom: 0px;
+   width: 100%;
+       background-color: #1e1e1e;*/
+
+
 }
 
 .footer-content {
@@ -182,7 +191,7 @@ footer {
 /*module content*/
 .container-content {
     background: linear-gradient(#cb6c52,#363636);
-    height: 2500px;
+    /*height: 2500px;
     width: 102.5%;
     visibility: visible;
     position: absolute;
@@ -191,7 +200,15 @@ footer {
     margin-left: -15px;
     margin-top: 660px;
     display: inline-block;
-    overflow: hidden;
+    overflow: hidden;*/
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 66.64%;
+
+
 }
 
 .content {
@@ -203,7 +220,7 @@ footer {
     top: 0px;
     left: 0px;
     opacity:0.9;
-    margin-top: 170px;
+    /*margin-top: 170px;*/
 }
 /*end of module content*/
 
@@ -252,7 +269,7 @@ footer {
 }
 
 .event-name {
-   color: white;
+   color: <?php echo $colors->INDEX_PAGE_EVENT_NAME_COLOR; ?>;
    font: bold 20px Oswald Regular Regular;
    letter-spacing: 1px;
    padding: 10px;
@@ -326,5 +343,44 @@ footer {
     font-size: 30px;
 }
 
-
 /*end of event:hover*/
+
+
+/* start of header*/
+
+.navbar .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+  margin-top: 20px;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+  margin-left: 20px;
+}
+
+.nav a{
+  font-size: 20px;
+}
+
+.nav li{
+  padding-right: 50px;
+  font-family: Oswald Regular Regular;
+
+ }
+
+.nav li a:hover {
+    color: #ca694f;
+    text-decoration: none;
+}
+
+a:visited {
+    color:white;
+}
+
+/*end of header*/
