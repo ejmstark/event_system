@@ -13,6 +13,7 @@ class CCart extends CI_Controller {
 		
 	}
 
+	//Add items to Cart
 	public function addToCart () {
 		$cart = new MCart();
 		$qty= 5;
@@ -43,7 +44,7 @@ class CCart extends CI_Controller {
 		}
 	}
 
-	
+	//Add items to existing cart
 	public function addToExisting ($id, $qty1) {
 		$cart = new MCart();
 		$qty = 0;
@@ -65,11 +66,13 @@ class CCart extends CI_Controller {
 		}
 	}
 
+	//Displays Cart
 	public function viewCart(){
 		$result = $this->MCart->getCart();
 		$this->load->view('vCart');
 	}
 	
+	//increase items quantity from the cart
 	public function addQty () {
 		$cart = new MCart();
 		$id = 1; 
@@ -92,7 +95,7 @@ class CCart extends CI_Controller {
 		}
 	}
 
-	
+	//decrease items quantity
 	public function minusQty () {
 		$cart = new MCart();
 		$id = 1; 

@@ -12,7 +12,8 @@ class cCard extends CI_Controller {
 	{
 		
 	}
-
+    
+    //Retrieve inputs from view
 	public function card () {
 		$amount = array (100, 200, 500, 1000);
 		$qty = array ( $this->input->post('qty1'),
@@ -27,12 +28,14 @@ class cCard extends CI_Controller {
 		}
 	}
 
+	//Process inputs from view with its amount
 	public function card1 ($amount, $qty) {
 		for ($i = 0; $i < $qty; $i++) {
 			$this->addCard($amount);
 		}
 	}
 
+	//Generates random card code
 	public function randomCode () {
 		$rand = '';
 		$c = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -44,6 +47,7 @@ class cCard extends CI_Controller {
 		return $rand;
 	}
 
+	//Checks if the cardcodes does not yet exist in the database
 	public function isCodeUnique ($rand) {
 		$card = new MCardLoad();
 
@@ -56,6 +60,7 @@ class cCard extends CI_Controller {
 		}
 	}
 
+	//Insert newly generated card on the database
 	public function addCard($amount) {
 		$card = new MCardLoad();
 		$random = '';
