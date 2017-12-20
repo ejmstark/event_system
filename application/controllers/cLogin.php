@@ -91,73 +91,44 @@ class CLogin extends CI_Controller {
     {
 
       foreach ($result as $row) {
+$sessionData = new stdClass;
+					$sessionData->userID =  $row->account_id;
+					$sessionData->userLogName =  $row->user_name;
+					$sessionData->userPassword =  $row->userPassword;
+					$sessionData->userFName =  $row->first_name;
+					$sessionData->userLevel =  $row->user_type;
+					$sessionData->userSuperior =  $row->upgradedBy;
+        // $sessionData = array('userID' => $row->account_id,
 
-        $sessionData = array('userID' => $row->account_id,
+        //                      'userLogName' => $row->user_name,
 
-                             'userLogName' => $row->user_name,
+        //                      'userPassword' => $row->password,
 
-                             'userPassword' => $row->password,
+        //                      'userFName' => $row->first_name,
 
-                             'userFName' => $row->first_name,
+        //                      'userLevel' => $row->user_type,
 
-                             'userLevel' => $row->user_type,
+							 // 'userSuperior' => $row->upgradedBy
+        //               );
 
-							 'userSuperior' => $row->upgradedBy
-                      );
-
-
-
-        $this->session->set_userdata('userSession', $sessionData);
-
+        if($row->user_type == "Regular"){
+        	$this->session->set_userdata('userSession', $sessionData);
+        }else{
+        	$this->session->set_userdata('adminSession', $sessionData);
+        }
       }
-
-    //   print_r($sessionData);
-
     }
 
 
 
 	public function viewDashBoard(){
-
-		$this->session->userdata['userSession'] = json_decode(json_encode($this->session->userdata['userSession']));
-
-		if($this->session->userdata['userSession']->userLevel != "Regular"  ){
-
-					redirect('admin/CAdmin');
-
-			}
-
-		//use the loded MUserModel
-
-
-
-		$data['users'] = $this->MUser->read_all();
-
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - SPRINT 3 Implementation============//
-		/////////////////////////////////////////////////////////////////////////////
-		$stringSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
-		$stringWhere = "event_info.event_status = 'Approved'";
-		$data['events'] = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($stringSelect,$stringWhere,false,false,false,false);
-		////////////STOPS HERE///////////////////////////////////////////////////
-
-
-		$this->data['custom_js']= '<script type="text/javascript">
-
-                              $(function(){
-
-                              	$("#dash").addClass("active");
-
-                              });
-
-                        </script>';
-
-		$this->load->view('imports/vHeaderLandingPage');
-
-		$this->load->view('vLandingPage',$data);
-
-		$this->load->view('imports/vFooterLandingPage',$this->data);
-
+		if(isset($this->session->userdata['adminSession'])){
+			redirect('admin/CAdmin');
+		}else if(isset($this->session->userdata['userSession'])){
+			redirect('user/cUser');
+		}else{
+			$this->index();
+		}
 	}
 
 
@@ -165,21 +136,12 @@ class CLogin extends CI_Controller {
 	public function userLogout()
 
 	{
-
-
-
-		$this->session->unset_userdata('userSession');
-
-// 		session_destroy();
-
-    // print_r(redirect('cInitialize','refresh'))		;
-
-        // $this->load->('')
-
+		if(isset($this->session->userdata['adminSession'])){
+			$this->session->unset_userdata('adminSession');
+		}else if(isset($this->session->userdata['userSession'])){
+			$this->session->unset_userdata('userSession');
+		}
         $this->index();
-
-		# code...
-
 	}
 
 
@@ -187,19 +149,12 @@ class CLogin extends CI_Controller {
 	public function login()
 
 	{
-
-		if ($this->session->userdata('userSession')) {
-
+		if (isset($this->session->userdata['adminSession']) || isset($this->session->userdata['userSession'])) {
 			redirect('cLogin/viewDashBoard');
-
 		} else {
-
-			$this->load->view('vLogin');
+			$this->index();
 
 		}
-
-		# code...
-
 	}
 
 

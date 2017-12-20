@@ -323,7 +323,7 @@ class cEvent extends CI_Controller {
 			$data['event_category'] = $this->input->post('event_category');
 			// $data['event_picture'] = null;
 			$data['event_venue'] = $this->input->post('event_venue');
-			$data['date_created'] = date('Y-m-d H:i:s');
+			$data['addedAt'] = date('Y-m-d H:i:s');
 
 			 $data['user_id'] = $this->session->userdata['userSession']->userID;
 

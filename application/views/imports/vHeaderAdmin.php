@@ -1,3 +1,6 @@
+<?php if(isset($this->session->userdata['adminSession'])){
+    echo"asdAS";
+    ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,3 +17,6 @@
     <script src="<?php echo base_url('assets/jcAssets/js/bootstrap.min.js"')?>"></script>
 
   </head>
+<?php }else{
+        redirect("cLogin/login");
+        }?>

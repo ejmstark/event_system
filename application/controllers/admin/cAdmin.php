@@ -203,7 +203,7 @@ class CAdmin extends CI_Controller {
 			$response = $user_module-> updateUserType($id, "Superadmin");
 
 			if ($response) {
-				$response2 = $user_module->updateUpgradedBy($id,$this->session->userdata['userSession']->userID);
+				$response2 = $user_module->updateUpgradedBy($id,$this->session->userdata['adminSession']->userID);
 				if($response2){
  					redirect('admin/cAdmin/viewAdminAccountMgt');
 				}
@@ -219,7 +219,7 @@ class CAdmin extends CI_Controller {
 
 		if($this->input->post('userType')=="Superadmin") {
 			$data = array('user_name' => $this->input->post('uname'),
-					  'password' => $this->input->post('password'),
+					  'password' => hash('sha512',$this->input->post('password')),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
@@ -228,12 +228,12 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' =>  $this->input->post('userType'),
-					  'upgradedBy' => $this->session->userdata['userSession']->userID,
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'upgradedBy' => $this->session->userdata['adminSession']->userID,
+					  'addedAt	' => $now->format('Y-m-d H:i:s')
 					);
 		} else {
 			$data = array('user_name' => $this->input->post('uname'),
-					  'password' => $this->input->post('password'),
+					  'password' => hash('sha512',$this->input->post('password')),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
@@ -242,7 +242,7 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' =>  $this->input->post('userType'),
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'addedAt	' => $now->format('Y-m-d H:i:s')
 					);
 		}
 
@@ -302,7 +302,7 @@ class CAdmin extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt	 = $value->addedAt	;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -374,10 +374,10 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('ugender'),
 					  'contact_no' => $this->input->post('ucontact'),
 					  'user_type' =>  $this->input->post('uuserType'),
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'addedAt	' => $now->format('Y-m-d H:i:s')
 					);
 
-		$result = $user->update($this->session->userdata['userSession']->userID, $data);
+		$result = $user->update($this->session->userdata['adminSession']->userID, $data);
 
 		if($result){
 			//$this->index();
@@ -407,8 +407,7 @@ class CAdmin extends CI_Controller {
 
 	public function readOwnAdminAccount() {
 		$user_module = new MUserInfo();
-
-		$data = array('account_id' => $this->session->userdata['userSession']->userID);
+		$data = array('account_id' => $this->session->userdata['adminSession']->userID);
 		$result= $this->MUserInfo->read_where($data);
 
 		if($result){
@@ -443,13 +442,13 @@ class CAdmin extends CI_Controller {
 		///////////////////////////////////////
 		$year = $_GET['years'];
 		$userModel = new MUser();
-		$where = array('YEAR(user_account.date_account_created)' => $year,
+		$where = array('YEAR(user_account.addedAt	)' => $year,
 									 'user_account.user_status' => 'Active',
 									 'user_account.user_type' => 'Regular'
 								 );
 		$result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
-							MONTHNAME(user_account.date_account_created) as monthname',
-							$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+							MONTHNAME(user_account.addedAt	) as monthname',
+							$where,FALSE,FALSE,"MONTH(user_account.addedAt	)",FALSE);
 		$arr_data = array();
 		foreach ($result as $value) {
 			$arr_data[] = [$value->UserCount, $value->monthname];
@@ -465,12 +464,12 @@ class CAdmin extends CI_Controller {
 		///////////////////////////////////////
 		// $year = $_GET['years'];
 		// $userModel = new MUser();
-		// $where = array('YEAR(user_account.date_account_created)' => $year,
+		// $where = array('YEAR(user_account.addedAt	)' => $year,
 		// 							 'card.cardStatus' => 1,
 		// 						 );
 		// $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
-		// 					MONTHNAME(user_account.date_account_created) as monthname',
-		// 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+		// 					MONTHNAME(user_account.addedAt	) as monthname',
+		// 					$where,FALSE,FALSE,"MONTH(user_account.addedAt	)",FALSE);
 		// $arr_data = array();
 		// foreach ($result as $value) {
 		// 	$arr_data[] = [$value->UserCount, $value->monthname];
@@ -507,7 +506,7 @@ class CAdmin extends CI_Controller {
 		$year = $_GET['years'];
 		$eventModel = new MEventInfo();
 		$where = array("event_status" => "APPROVED",
-										"YEAR(date_created)" => $year
+										"YEAR(addedAt)" => $year
 								 );
 		$result = $eventModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
 							$where,FALSE,FALSE,FALSE,FALSE);
@@ -545,8 +544,8 @@ class CAdmin extends CI_Controller {
 
 		$data = array('announcementDetails' => $this->input->post('announcementDetails'),
 					  'announcementStatus' => 'OnGoing',
-					  'postedBy' => $this->input->post('postedBy'),
-					  'datePosted' => $now->format('Y-m-d H:i:s')
+					  'addedBy' => $this->input->post('postedBy'),
+					  'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 		$result = $announcement->insert($data);
