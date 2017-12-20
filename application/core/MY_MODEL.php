@@ -60,9 +60,9 @@
 		}
 
 		public function read_all(){
-      $query = $this->db->get($this::DB_TABLE);
+      	$query = $this->db->get($this::DB_TABLE);
 			return $query->result();
-   	}
+   		}
 
    		//$data is an array of where clause
 		public function read_where($where){
