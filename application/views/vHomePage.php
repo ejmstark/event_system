@@ -10,7 +10,7 @@
 	                            foreach ($events as $event) {
 	                    ?>
 		                            <div class="event-box">
-					        		 	<a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>">
+					        		 	<a href="<?php echo site_url();?>/CEvent/displayEventDetails/<?php echo $event->event_id;?>">
 					                		<div class="event-box-overlay">
 						                		<span class="fa-stack fa-lg">
 						    						<i class="glyphicon glyphicon-eye-open"></i>

@@ -15,7 +15,7 @@
                     </header>
 
                     <div class="panel-body">
-                        <form action="<?php echo site_url();?>/admin/cAdmin/viewSearchUserAccountMgt" class=" form-inline" method="POST">
+                        <form action="<?php echo site_url();?>/CAdmin/viewSearchUserAccountMgt" class=" form-inline" method="POST">
 
                             <input name="search_val" type="text" class="form-control" placeholder="Search User"></input>
                 
@@ -58,10 +58,10 @@
                                           <td>".$object->user_status."</td>
                                           <td>";                        
                                         if($object->user_status == "Active"){
-                                          echo "<a  href='".site_url()."/admin/cAdmin/Ban/".$object->account_id."/user'>
+                                          echo "<a  href='".site_url()."/CAdmin/Ban/".$object->account_id."/user'>
                                             <button  type='button' class='btn btn-inverse'>Update Status</button></a>";
                                         }else{
-                                          echo "<a  href='".site_url()."/admin/cAdmin/Unban/".$object->account_id."/user'>
+                                          echo "<a  href='".site_url()."/CAdmin/Unban/".$object->account_id."/user'>
                                             <button  type='button' class='btn btn-inverse'>Update Status</button></a>";
                                         }
                                         echo "</td></tr>";

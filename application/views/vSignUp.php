@@ -18,7 +18,7 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cInitialize">Home</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CInitialize">Home</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -52,7 +52,7 @@
                                     <?php echo $this->session->flashdata('error_msg'); ?>
                                 </div>
                             <?php endif ?>
-                            <form action="<?php echo site_url();?>/user/cUser/signup" method="post">
+                            <form action="<?php echo site_url();?>/CUser/signup" method="post">
                                 <div class="form-group">
                                     <label for="name">First Name</label>
                                     <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">

@@ -24,8 +24,8 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewEvents">Home</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewEvents">Events</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CLogin/viewEvents">Home</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CLogin/viewEvents">Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Contact</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -150,7 +150,7 @@
                             </div>  
                             <!-- End additional-details area  -->
 
-                            <button class="navbar-btn nav-button wow bounceInRight login"><a href ="<?php echo site_url();?>/cLogin/viewEvents">Save Changes</button>
+                            <button class="navbar-btn nav-button wow bounceInRight login"><a href ="<?php echo site_url();?>/CLogin/viewEvents">Save Changes</button>
                             <!-- End video area  -->
                             
                         </div>

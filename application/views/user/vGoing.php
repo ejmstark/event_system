@@ -1,7 +1,7 @@
 
 <div class="content">
 	<h1>BUY TICKETS</h1>
-	<form method="POST" action="<?php echo site_url();?>/user/cEvent/buyTickets">
+	<form method="POST" action="<?php echo site_url();?>/CEvent/buyTickets">
 		<label>Quantity :</label>
 		<input type="number" name="qty" placeholder="Enter Quantity" required=""> <br> <br>
 		<label>Select Ticket Type: </label>

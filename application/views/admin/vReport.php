@@ -23,7 +23,7 @@
                               <h5><strong>REGISTERED</strong> USERS </h5>
                               <h2>
                                 <?php
-                                    $result = $this->MReports->totalUsers(); 
+                                    $result = $this->MTicket->totalUsers(); 
                                     echo $result; 
                                 ?>
                               </h2>
@@ -45,7 +45,7 @@
                               <h5><strong>APPROVED </strong> EVENTS </h5>
                               <h2>
                                 <?php 
-                                  $result =$this->MReports->totalnumEvents(1);
+                                  $result =$this->MTicket->totalnumEvents(1);
 
                                   echo $result;
                                 ?>
@@ -68,7 +68,7 @@
                               <h5><strong>REJECTED</strong>EVENTS</h5>
                               <h2>
                                 <?php 
-                                  $result =$this->MReports->totalnumEvents(2);
+                                  $result =$this->MTicket->totalnumEvents(2);
 
                                   echo $result;
                                 ?>
@@ -91,7 +91,7 @@
                               <h5><strong>CARDS</strong> SOLD </h5>
                               <h2>
                                 <?php
-                                    $result = $this->MReports->cardsSold(); 
+                                    $result = $this->MTicket->cardsSold(); 
                                     echo $result; 
                                 ?>
                               </h2>
@@ -115,7 +115,7 @@
                         <!----- REPORTS CHART -->
                         <canvas id="line-chart" width="600" height="200"></canvas>
 
-                        <?php  $result = $this->MReports->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
+                        <?php  $result = $this->MTicket->countUsers('2017-10-01 01:00:00','2017-11-01 01:00:00');
 
                               echo "<br><h3>Number of active users for month of Oct: ".$result."</h3>";?>
                     </div>
@@ -132,7 +132,7 @@
                         <!----- REPORTS CHART -->
                         <canvas id="line-chart3" width="600" height="200"></canvas>
 
-                        <?php  $result = $this->MReports->cardsSold('2017-01-01 01:00:00','2017-12-12 01:00:00');
+                        <?php  $result = $this->MTicket->cardsSold('2017-01-01 01:00:00','2017-12-12 01:00:00');
 
                         echo "<br><h3>Number of cards sold: ".$result."</h3>";?>
                     </div>
@@ -153,12 +153,12 @@
 
                           echo "<br>Number of approved events for month of Nov: ".$result."<br>";
 
-                          $result =$this->MReports->numEvents('2017-01-01 01:00:00', '2018-01-01 01:00:00');
+                          $result =$this->MTicket->numEvents('2017-01-01 01:00:00', '2018-01-01 01:00:00');
 
                           echo "<br>Number of approved events for month of Dec: ".$result."<br>";
 
 
-                          $result = $this->MReports->showApprovedEvents();
+                          $result = $this->MTicket->showApprovedEvents();
               
                           if($result){
                             echo "<table>";
@@ -166,7 +166,7 @@
                               
                                 echo "<tr>";
 
-                                  echo "<td>Number of registered users for ".$object['event_name'].": ".$this->MReports->countAttendees($object['event_id'])."</td>";
+                                  echo "<td>Number of registered users for ".$object['event_name'].": ".$this->MTicket->countAttendees($object['event_id'])."</td>";
 
                                 echo "</tr>";
                               
@@ -265,7 +265,7 @@
 
              function getData(){
                $.ajax({
-                      url:"<?php echo site_url()?>/admin/cAdmin/getUserMonthly",
+                      url:"<?php echo site_url()?>/CAdmin/getUserMonthly",
                       method:"GET",
                       dataType:"json",
                       data: {
@@ -296,7 +296,7 @@
              function getData2(){
 
                $.ajax({
-                      url:"<?php echo site_url()?>/admin/cAdmin/getCardsMonthly",
+                      url:"<?php echo site_url()?>/CAdmin/getCardsMonthly",
                       method:"GET",
                       dataType:"json",
                       data: {
@@ -327,7 +327,7 @@
 
              function getEventsData(){
                $.ajax({
-                      url:"<?php echo site_url()?>/admin/cAdmin/getEvents",
+                      url:"<?php echo site_url()?>/CAdmin/getEvents",
                       method:"GET",
                       dataType:"text json",
                       data: {

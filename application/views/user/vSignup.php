@@ -5,7 +5,7 @@
 </head>
 <body>
 	<h4>SIGN UP</h4>
-  	<form method="POST" action="<?php echo site_url()?>/user/cUser/signup">
+  	<form method="POST" action="<?php echo site_url()?>/CUser/signup">
 	  	first name: <br>
 	  	<input type="text" name="fname" required=""> <br>
 	  	middle initial: <br>

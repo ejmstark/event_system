@@ -23,6 +23,17 @@
 
 		/* ****************** */
 
+		public function loadType($id)
+		{
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->where('event_id', $id);
+
+			$query = $this->db->get();
+			// echo $this->db->last_query();
+			return $query->result();
+			# code...
+		}
 
 		/* QUERY FUNCTIONS */
 			/* ADMIN MODULE FUNCTIONS */

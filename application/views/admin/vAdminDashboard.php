@@ -90,9 +90,9 @@
 			                                <td>".$object->event_status."</td>";
 
 				                            if($object->event_status == "Pending"){
-				                              echo " <td><a href='".site_url()."/admin/cAdmin/approveEvent/".$object->event_id."'>
+				                              echo " <td><a href='".site_url()."/CAdmin/approveEvent/".$object->event_id."'>
 				                                  <button  type='button' class='btn btn-success'>APPROVE</button></a>
-				                                  <a href='".site_url()."/admin/cAdmin/rejectEvent/".$object->event_id."'>
+				                                  <a href='".site_url()."/CAdmin/rejectEvent/".$object->event_id."'>
 				                                  <button  type='button' class='btn btn-danger'>REJECT</button></a>
 				                                  </td>
                                         		  </tr>";

@@ -2,53 +2,55 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CCart extends CI_Controller {
+
   function __construct() {
     parent::__construct();
     $this->load->model('MCart');
     $this->load->model('MTicket');
   }
 
-  public function index(){
-		
+  public function index() {
+    
   }
 
-  //Add items to Cart
-  public function addToCart(){
-    $cart = new MCart();
+  public function addToCart () {
+    //$qty = $this->input->post('qty1')
     $qty= 5;
-    $id = 1; 
-    $cartId = 0;	
-    $data = $cart->read_where(array ('cartTicId'=>$id));
-		
-    foreach($data as $datum){
+    $id = 1; //ticket id
+    $cartId = 0;
+
+    //check if ticket already exist!
+    $data = $this->MCart->read_where(array ('cartTicId'=>$id));
+    foreach ($data as $datum) {
       $cartId = $datum->cartId;
     }
-	
-    if($cartId != 0){
+
+    //check if cartId != 0, if the data exist!
+    if ($cartId != 0) {
+      //add to existing
       echo $cartId;
       $this->addToExisting($cartId, $qty);
-    }else{ 
-      $data = array (
-                     'cartId'=>null,
-				     'cartTicId'=>$id,
-				     'cartQty'=>$qty
-				    );
+    } else { //add new cart item
+      $data = array ('cartId'=>null,
+        'cartTicId'=>$id,
+        'cartQty'=>$qty);
 
-      if ($cart->insert($data) > 0){
+      if ($this->MCart->insert($data) > 0) {
         echo 'Success!';
-      }else{
+      } else {
         echo 'Failed!';
       }
     }
   }
 
-  //Add items to existing cart
-  public function addToExisting ($id, $qty1){
-    $cart = new MCart();
-    $qty = 0;		
-    $data = $cart->read($id);
-		
-    foreach($data as $datum) {
+  //add to existing cart item
+  public function addToExisting ($id, $qty1) {
+    //$id = 1; //cart id here
+    $qty = 0;
+
+    //get the current ticket qty
+    $data = $this->MCart->read($id);
+    foreach ($data as $datum) {
       $qty = $datum->cartQty;
     }
     $qty += $qty1;
@@ -56,28 +58,25 @@ class CCart extends CI_Controller {
     $affectedFields = array ('cartQty'=>$qty);
     $where = array ('cartId'=>$id);
 
-    if($cart->update1($where, $affectedFields) > 0) {
+    if ($this->MCart->update1($where, $affectedFields) > 0) {
       echo 'Sucess!';
-    }else{
+    } else {
       echo 'Failed!';
     }
   }
 
-  //Displays Cart
   public function viewCart(){
     $result = $this->MCart->getCart();
     $this->load->view('vCart');
   }
-	
-  //increase items quantity from the cart
-  public function addQty(){
-    $cart = new MCart();
-    $id = 1; 
+  //add 1 qty to the cart
+  public function addQty () {
+    $id = 1; //cart id here
     $qty = 0;
-	
-    $data = $cart->read($id);
-    
-    foreach($data as $datum){
+
+    //get the current ticket qty
+    $data = $this->MCart->read($id);
+    foreach ($data as $datum) {
       $qty = $datum->cartQty;
     }
     $qty++;
@@ -85,37 +84,38 @@ class CCart extends CI_Controller {
     $affectedFields = array ('cartQty'=>$qty);
     $where = array ('cartId'=>$id);
 
-    if($cart->update1($where, $affectedFields) > 0) {
+    if ($this->MCart->update1($where, $affectedFields) > 0) {
       echo 'Sucess!';
-    }else{
+    } else {
       echo 'Failed!';
     }
   }
-	
-  //decrease items quantity
-  public function minusQty(){
-    $cart = new MCart();
-    $id = 1; 
+
+  //minus 1 qty to the cart
+  public function minusQty () {
+    $id = 1; //cart id here
     $qty = 0;
-    $data = $cart->read($id);
-	
-    foreach($data as $datum){
+
+    //get the current ticket qty
+    $data = $this->MCart->read($id);
+    foreach ($data as $datum) {
       $qty = $datum->cartQty;
     }
     $qty--;
 
-    if($qty == 0){
-      $cart->delete($id);
-	}else{
+    //delete the item in the cart if 0
+    if ($qty == 0) {
+      //delete here
+      $this->MCart->delete($id);
+    } else {
       $affectedFields = array ('cartQty'=>$qty);
       $where = array ('cartId'=>$id);
 
-      if($cart->update1($where, $affectedFields) > 0){
+      if ($this->MCart->update1($where, $affectedFields) > 0) {
         echo 'Sucess!';
-      }else{
+      } else {
         echo 'Failed!';
       }
-   }
+    }
   }
-
 }

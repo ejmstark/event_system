@@ -1,48 +1,18 @@
 <?php
-	defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class CSecurity extends CI_Controller {
-
-		function __construct() {
-			parent::__construct();
-		 	/* LOAD MODELS HERE */
-		 	//Ex: $this->load->model('MCalendar');
-		}
-
-		public function index()
-		{
-			# code...
-		}
-
-		/* FUNCTIONS RELATED TO USERS (PUT IT BELOW) */
-			/* ADMIN MODULE FUNCTIONS */
-				
-
-			/* *************** */
-
-			/* USER MODULE FUNCTIONS */
+class CSecurity extends CI_Controller {
 
 
-			/* *************** */
-
-			/* CALENDAR MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* FINANCE MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* REPORTS MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-		/**********************************************/
-
+	public function index()
+	{
+		$this->data['custom_js']= '<script type="text/javascript">
+                              $(function(){
+                              	$("#sec").addClass("active");
+                              });
+                        </script>';
+		$this->load->view('imports/vHeader');
+		$this->load->view('security/vSecurity.php');
+		$this->load->view('imports/vFooter',$this->data);
 	}
-?>
+}

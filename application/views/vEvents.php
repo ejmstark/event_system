@@ -47,10 +47,10 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
+                        <a href ="<?php echo site_url();?>/CLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
                     </div>
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
+                        <a href ="<?php echo site_url();?>/CEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                     </div>
 
                     <ul class="main-nav nav navbar-nav navbar-right">
@@ -109,7 +109,7 @@
                                         <div class="row">
 
                                                 <div class="col-xs-12" id="some" hidden="">
-                                                    <form action="<?php echo site_url(); ?>/user/cUser/redeemCode" method="post">
+                                                    <form action="<?php echo site_url(); ?>CUser/redeemCode" method="post">
                                                         <input type="text" class="form-control" name="ccode" placeholder="Enter code">
                                                         <button type="submit" class="navbar-btn nav-button pull-right"   >Redeem Code</button>
                                                     </form>
@@ -145,7 +145,7 @@
                                 <fieldset >
                                     <div class="row">
                                         <div class="col-md-12">
-                                             <a href="<?php echo site_url()?>/calendar/cCalendar">
+                                             <a href="<?php echo site_url()?>/CCalendar">
                                             <button class = "button btn largesearch-btn">Calendar</button></a>
                                         </div>
                                     </div>
@@ -366,10 +366,10 @@
                             <div class="col-sm-6 col-md-4 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
-                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                        <a href="<?php echo site_url();?>/CEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
                                     </div>
                                        <div class="item-entry overflow">
-                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
+                                        <h5><a href="<?php echo site_url();?>/CLogin/viewEventDetails"> <?php
                                                 if(strlen($event->event_name)>=26){
                                                     echo substr($event->event_name,0,23)."...";
                                                 }else{
@@ -484,8 +484,7 @@
             </div>
             <div class="modal-body">
                 <?php
-                $ei = new MEventInfo();
-                $res = $ei->getRevenue($e->event_id);
+                $res = $this->MEvent->getRevenue($e->event_id);
                 ?>
 
                 <table class="table table-hover table-striped">
@@ -576,7 +575,7 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="settings">
     </div>
-          <a href="<?php echo site_url('user/cUser/editAccount/'.$userid);?>"><div>Edit Profile</div></a>
+          <a href="<?php echo site_url('CUser/editAccount/'.$userid);?>"><div>Edit Profile</div></a>
 
     </div>
 

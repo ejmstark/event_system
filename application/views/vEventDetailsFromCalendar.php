@@ -37,18 +37,18 @@ foreach($going as $g){
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/CLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
                     </div>
 
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/CEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
                     </div>
 
 
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
 
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CEvent/viewEvents">Profile</a></li>
                         <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
                     </ul>
@@ -191,11 +191,11 @@ foreach($going as $g){
                             <?php foreach($events as $x){ if($id == $x->user_id){
                                 echo'
                                 <div class="button navbar-right">
-                                    <button class="navbar-btn nav-button login"> <a href ="'.site_url("/event/cEvent/deleteEvent/$e->event_id").'">Cancel Event </a></button>
+                                    <button class="navbar-btn nav-button login"> <a href ="'.site_url("/CEvent/deleteEvent/$e->event_id").'">Cancel Event </a></button>
                                 </div>
 
                                 <div class="button navbar-right">
-                                    <button class="navbar-btn nav-button login"> <a href ="'.site_url("/event/cEvent/editEvent/$e->event_id").'">Edit Event </a></button>
+                                    <button class="navbar-btn nav-button login"> <a href ="'.site_url("/CEvent/editEvent/$e->event_id").'">Edit Event </a></button>
                                 </div>';
                             }} ?>
                         </div>
@@ -276,7 +276,7 @@ foreach($going as $g){
                                                  </form> -->
 
                                                  <?php if(!$bought){?>
-                                                   <a href="<?php echo site_url();?>/event/cEvent/buyTicket/<?php echo $t->ticket_type_id;?>/<?php echo $e->event_id;?>"><input hidden class="val" value="<?php echo $t->price;?>">
+                                                   <a href="<?php echo site_url();?>/CEvent/buyTicket/<?php echo $t->ticket_type_id;?>/<?php echo $e->event_id;?>"><input hidden class="val" value="<?php echo $t->price;?>">
                                                 <button   class="buy navbar-btn nav-button wow bounceInRight login animated" >Buy</button></a>
                                                 <?php }?>
 

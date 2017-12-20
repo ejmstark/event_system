@@ -28,7 +28,7 @@
             <span class="eventSystem"> 
               <img src="<?php echo base_url('assets/josephAssets/img/DailyEvents.png')?>" class="eventLogo"> 
             </span>
-            <form  method="POST" action="<?php echo site_url()?>/cLogin/userLogin">
+            <form  method="POST" action="<?php echo site_url()?>/CLogin/userLogin">
               <div>
                 <input type="text" id="#{label}" name="Username" placeholder="Username" required/>
                 <!-- <span class="fa fa-user" aria-hidden="true"></span> -->
@@ -40,7 +40,7 @@
               
               <input type="submit" name="" value="Log in">
                 <a href="#"> Forgot your password? </a>
-                <br>Don't have an account? <a href="<?php echo site_url();?>/user/cUser/viewSignUp"> Sign up here! </a>
+                <br>Don't have an account? <a href="<?php echo site_url();?>/CUser/viewSignUp"> Sign up here! </a>
             </form>
           </center>
         </div>
@@ -52,5 +52,5 @@
 </body>
 </html>
 <?php }else{
-  redirect('cLogin/viewDashboard');
+  redirect('CLogin/viewDashboard');
   }?>

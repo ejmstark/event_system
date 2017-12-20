@@ -1,5 +1,5 @@
 <body>
-	<form id="createEventForm" action="<?php echo base_url("index.php/event/cEvent/createEvent")?>" method="post">
+	<form id="createEventForm" action="<?php echo base_url("index.php/CEvent/createEvent")?>" method="post">
 		<label>Date Start&nbsp;</label>
 		<input name="event_date_start" type="date" min="<?php echo date('Y-m-d')?>" required/><br/>
 		<label>Date End&nbsp;</label>

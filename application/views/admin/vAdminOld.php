@@ -29,7 +29,7 @@
 
           <div class="lower-sbar">
             
-            <li class="active-li"><a href="<?php echo site_url();?>/admin/cAdmin">
+            <li class="active-li"><a href="<?php echo site_url();?>/CAdmin">
               <p>
                <div class="d-block d-sm-block d-md-none">
                   <center> <i class="fa fa-list-alt" aria-hidden="true"></i> </center>
@@ -39,28 +39,28 @@
                   Events 
                 </span> 
               </a></li></p>
-            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt">
+            <li><a href="<?php echo site_url();?>/CAdmin/viewUserAccountMgt">
               <p>
                 <div class="d-block d-sm-block d-md-none">
                   <center> <i class="fa fa-calendar" aria-hidden="true"></i> </center>
                 </div>
                 <span class="d-none d-sm-none d-md-inline">  <i class="fa fa-calendar" aria-hidden="true"></i> User Account </span>
               </a></li></p>
-            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAdminAccountMgt">
+            <li><a href="<?php echo site_url();?>/CAdmin/viewAdminAccountMgt">
               <p>
                 <div class="d-block d-sm-block d-md-none">
                   <center><i class="fa fa-user-secret" aria-hidden="true"></i> </center>
                 </div>
                 <span class="d-none d-sm-none d-md-inline"> <i class="fa fa-user-secret" aria-hidden="true"></i> Admin Account </span>
               </a></li></p>
-            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewFinance">
+            <li><a href="<?php echo site_url();?>/CAdmin/viewFinance">
               <p>
                 <div class="d-block d-sm-block d-md-none">
                   <center><i class="fa fa-line-chart" aria-hidden="true"></i></center>
                 </div>
                 <span class="d-none d-sm-none d-md-inline"> <i class="fa fa-line-chart" aria-hidden="true"></i> Finance</span>
               </a></li></p>
-            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewReport">
+            <li><a href="<?php echo site_url();?>/CAdmin/viewReport">
               <p>
                 <div class="d-block d-sm-block d-md-none">
                   <center><i class="fa fa-envelope-open" aria-hidden="true"></i></center>
@@ -68,7 +68,7 @@
                 <span class="d-none d-sm-none d-md-inline"> <i class="fa fa-envelope-open" aria-hidden="true"></i> Report</span>
               </a></li></p>
 
-               <li ><a href ="<?php echo site_url();?>/admin/cAdmin/generateCard" data-wow-delay="0.1s">
+               <li ><a href ="<?php echo site_url();?>/CAdmin/generateCard" data-wow-delay="0.1s">
               <p>
                 <div class="d-block d-sm-block d-md-none">
                   <center><i class="fa fa-credit-card" aria-hidden="true"></i></center>
@@ -76,7 +76,7 @@
                 <span class="d-none d-sm-none d-md-inline"><i class="fa fa-credit-card" aria-hidden="true"></i> Cards</span>
               </a></li></p>
 
-            <li><a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">
+            <li><a href ="<?php echo site_url();?>/CLogin/userLogout" data-wow-delay="0.1s">
               <p>
                 <div class="d-block d-sm-block d-md-none">
                   <center><i class="fa fa-sign-out" aria-hidden="true"></i></center>
@@ -119,9 +119,9 @@
                                   <td>".$object->no_tickets_total."</td>
                                   <td>".$object->event_status."</td>";
                             if($object->event_status == "Pending"){
-                              echo " <td><a href='".site_url()."/admin/cAdmin/approveEvent/".$object->event_id."'>
+                              echo " <td><a href='".site_url()."/CAdmin/approveEvent/".$object->event_id."'>
                                   <button  type='button' class='btn btn-success'>APPROVE</button></a>
-                                  <a href='".site_url()."/admin/cAdmin/rejectEvent/".$object->event_id."'>
+                                  <a href='".site_url()."/CAdmin/rejectEvent/".$object->event_id."'>
                                   <button  type='button' class='btn btn-danger'>REJECT</button></a>
                                   </td>
                                              </tr>";  

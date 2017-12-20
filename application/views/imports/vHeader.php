@@ -23,45 +23,45 @@
 	    	<div class="sidebar-wrapper">
 				<ul class="nav">
 				  <li id = "dash">
-	                    <a href="<?php echo site_url();?>/cLogin/viewDashBoard">
+	                    <a href="<?php echo site_url();?>/CLogin/viewDashBoard">
 	                         <i class="material-icons"></i>
 	                        <p>Dashboard</p>
 	                    </a>
 	                </li>
 
 	                <li id = "admin">
-	                   <a href="<?php echo site_url();?>/admin/cAdmin">
+	                   <a href="<?php echo site_url();?>/CAdmin">
 	                         <i class="fa fa-users"></i>
 			        			Admin
 			        	</a>
 	                </li>
 
 	                <li id = "cal">
-	                     <a href="<?php echo site_url();?>/calendar/cCalendar">
+	                     <a href="<?php echo site_url();?>/CCalendar">
 	                        <i class="fa fa-book "></i>
 	                        Calendar
 	                    </a>
 	                </li>
 	                <li id = "fin">
-	                    <a href="<?php echo site_url();?>/finance/cFinance">
+	                    <a href="<?php echo site_url();?>/CFinance">
 	                       <i class="fa fa-location-arrow"></i>
 	                        Finance
 	                    </a>
 	                </li>
 	                <li id = "rep">
-	                    <a href="<?php echo site_url();?>/reports/cReports">
+	                    <a href="<?php echo site_url();?>/CReports">
 	                       <i class="fa fa-location-arrow"></i>
 	                        Report
 	                    </a>
 	                </li>
 					<li id = "sec">
-	                    <a href="<?php echo site_url();?>/security/cSecurity">
+	                    <a href="<?php echo site_url();?>/CSecurity">
 	                       <i class="fa fa-location-arrow"></i>
 	                        Security
 	                    </a>
 	                </li>
 					<li id = "user">
-	                    <a href="<?php echo site_url();?>/user/cUser">
+	                    <a href="<?php echo site_url();?>/CUser">
 	                       <i class="fa fa-location-arrow"></i>
 	                        User
 	                    </a>

@@ -1,65 +1,27 @@
-<?php
-	defined('BASEPATH') OR exit('No direct script access allowed');
+	<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class CAdmin extends CI_Controller {
+class CAdmin extends CI_Controller {
 
-		function __construct() {
-			parent::__construct();
-			/* LOAD MODELS HERE */
-		 	//Ex: $this->load->model('MCalendar');
-			// 	$this->load->model('MAdmin');
+	function __construct() {
+		parent::__construct();
+	 // 	$this->load->model('MAdmin');
 		// $this->load->model('MAdminUsers');
-		$this->load->model('MUserInfo');
-		$this->load->model('MEventInfo');
-		$this->load->model('MReports');
 		$this->load->model('MUser');
+		$this->load->model('MEvents');
+		$this->load->model('MTicket');
 		$this->load->model('MAnnouncement');
 		// $this->load->model('MUserInfo');
-		}
+	}
 
+	public function index()
+	{
+		redirect('CAdmin/viewReport');
 
-		public function index()
-		{
-			# code...
-			$this->data['custom_js']= '<script type="text/javascript">
-			                               $(function(){
-			                                   $("#admin").addClass("active");
-			                               });
-			                           </script>';
+	}
 
-
-    		$result_data=$this->readAllEvents();
-			//////////////////////////////////////////////////////////////////////////////
-			//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-			/////////////////////////////////////////////////////////////////////////////
-			$array = array();
-			if($result_data){
-				foreach ($result_data as $value) {
-						$arrObj = new stdClass;
-						$arrObj->event_id = $value->event_id;
-						$arrObj->event_date_start = $value->event_date_start;
-						$arrObj->event_date_end = $value->event_date_end;
-						$arrObj->event_name = $value->event_name;
-						$arrObj->no_tickets_total = $value->no_tickets_total;
-						$arrObj->event_status = $value->event_status;
-						$array[] = $arrObj;
-				}
-			}
-			////////////STOPS HERE///////////////////////////////////////////////////
-
-			$data2['row'] = $array;
-
-	   		$data3['users']=$this->getUserCount();
-			$this->load->view('imports/admin_vHeader');
-			//$this->load->view('admin/vAdminDashboard', $data2);
-			$this->load->view('admin/vAdmin', $data2);
-			$this->load->view('imports/admin_vFooter');
-		}
-
-		/* FUNCTIONS RELATED TO USERS (PUT IT BELOW) */
-			/* ADMIN MODULE FUNCTIONS */
-			public function getUserCount(){
-		$result = $this->MReports->getUserCountMonthly("2017");
+	public function getUserCount(){
+		$result = $this->MTicket->getUserCountMonthly("2017");
 		if($result){
 			return $result;
 		}else{
@@ -71,7 +33,7 @@
 
 	// view all events
 	public function readAllEvents(){
-		$result= $this->MEventInfo->read_all();
+		$result= $this->MEvents->read_all();
 		if($result){
 			return $result;
 		}else{
@@ -91,38 +53,34 @@
 		$event_module = new MEventInfo();
 
 		$data = array('event_id' => $id);
-		$results = $this->MEventInfo->read_where($data);
+		$results = $this->MEvents->read_where($data);
 
 		if($results){
-			$response = $event_module-> updateEventStatus($id, "Approved");
+			$response = $this->MEvents->updateEventStatus($id, "Approved");
 
 			if ($response) {
- 				redirect('admin/cAdmin');
+ 				redirect('CAdmin/viewAllEvents');
  			}
 		}
 	}
 
 	public function rejectEvent($id){
-		$event_module = new MEventInfo();
-
 		$data = array('event_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $this->MEvents->read_where($data);
 
 		if($results){
-			$response = $event_module-> updateEventStatus($id, "Rejected");
+			$response = $this->MEvents->updateEventStatus($id, "Rejected");
 
 			if ($response) {
- 				echo redirect('admin/cAdmin');
+ 				echo redirect('CAdmin/viewAllEvents');
  			}
 		}
 	}
 
 	// view all users
 	public function readAllUsers(){
-		$user_module = new MUserInfo();
-
 		$data = array('user_type' => 'Regular');
-		$result= $this->MUserInfo->read_where($data);
+		$result= $this->MEvents->read_where($data);
 		if($result){
 			return $result;
 		}else{
@@ -132,10 +90,9 @@
 
 	//view all searched user
 	public function searchUsers(){
-		$user_module = new MUserInfo();
 		if(isset($_POST['search_val'])){
 			$data = array('user_name' => $_POST['search_val']);
-			$result= $this->MUserInfo->read_where($data);
+			$result= $this->MEvents->read_where($data);
 			if($result){
 				return $result;
 			}else{
@@ -147,19 +104,17 @@
 	}
 
 	public function Ban($id,$frm){
-		$user_module = new MUserInfo();
-
 		$data = array('account_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $this->MEvents->read_where($data);
 
 		if($results){
-			$response = $user_module-> updateUserStatus($id, "Banned");
+			$response = $this->MEvents->updateUserStatus($id, "Banned");
 
 			if ($response) {
 				if($frm=="admin"){
-					redirect('admin/cAdmin/viewAdminAccountMgt');
+					redirect('CAdmin/viewAdminAccountMgt');
 				}else if($frm=="user"){
-					redirect('admin/cAdmin/viewUserAccountMgt');
+					redirect('CAdmin/viewUserAccountMgt');
 				}
 
  			}
@@ -167,19 +122,17 @@
 	}
 
 	public function Unban($id,$frm){
-		$user_module = new MUserInfo();
-
 		$data = array('account_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $this->MEvents->read_where($data);
 
 		if($results){
-			$response = $user_module-> updateUserStatus($id, "Active");
+			$response = $this->MEvents->updateUserStatus($id, "Active");
 
 			if ($response) {
  				if($frm=="admin"){
-					redirect('admin/cAdmin/viewAdminAccountMgt');
+					redirect('CAdmin/viewAdminAccountMgt');
 				}else if($frm=="user"){
-					redirect('admin/cAdmin/viewUserAccountMgt');
+					redirect('CAdmin/viewUserAccountMgt');
 				}
  			}
 		}
@@ -187,10 +140,8 @@
 
 	// view all admin
 	public function readAllAdmin(){
-		$user_module = new MUserInfo();
-
 		$data = array('user_type !=' => 'Regular');
-		$result = $this->MUserInfo->read_where($data);
+		$result = $this->MEvents->read_where($data);
 		if($result){
 			return $result;
 		}else{
@@ -200,10 +151,8 @@
 
 	// view all Superadmin
 	public function readAllSuperAdmin(){
-		$user_module = new MUserInfo();
-
 		$data = array('user_type' => 'Superadmin');
-		$result= $this->MUserInfo->read_where($data);
+		$result= $this->MEvents->read_where($data);
 		if($result){
 			return $result;
 		}else{
@@ -212,36 +161,34 @@
 	}
 
 	public function Admin($id){
-		$user_module = new MUserInfo();
-
 		$data = array('account_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $this->MEvents->read_where($data);
 
 		if($results){
-			$response = $user_module-> updateUserType($id, "Admin");
+			$response = $this->MEvents->updateUserType($id, "Admin");
 
 			if ($response) {
-				$response2 = $user_module->updateUpgradedBy($id,NULL);
+				$response2 = $this->MEvents->updateUpgradedBy($id,NULL);
 				if($response2){
- 					redirect('admin/cAdmin/viewAdminAccountMgt');
+ 					redirect('CAdmin/viewAdminAccountMgt');
 				}
 			}
 		}
 	}
 
 	public function SuperAdmin($id){
-		$user_module = new MUserInfo();
+		
 
 		$data = array('account_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $this->MEvents->->read_where($data);
 
 		if($results){
-			$response = $user_module-> updateUserType($id, "Superadmin");
+			$response = $this->MEvents->updateUserType($id, "Superadmin");
 
 			if ($response) {
-				$response2 = $user_module->updateUpgradedBy($id,$this->session->userdata['userSession']->userID);
+				$response2 = $this->MEvents->updateUpgradedBy($id,$this->session->userdata['userSession']->userID);
 				if($response2){
- 					redirect('admin/cAdmin/viewAdminAccountMgt');
+ 					redirect('CAdmin/viewAdminAccountMgt');
 				}
  			}
 		}
@@ -249,8 +196,6 @@
 
 	public function addAdmin()
 	{
-		$user = new MUserInfo();
-
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		if($this->input->post('userType')=="Superadmin") {
@@ -300,12 +245,12 @@
 
 		}else{
 
-			$result = $user->insert($data);
+			$result = $this->MUser->insert($data);
 
 
 			if($result){
 				//$this->index();
-				redirect('admin/cAdmin/viewAdminAccountMgt');
+				redirect('CAdmin/viewAdminAccountMgt');
 			}
 		}
 
@@ -412,6 +357,29 @@
 
 	}
 
+	public function viewFinance() {
+		$result_data = array();//Replace with query
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					 $arrObj = new stdClass;
+					//Only interface filtering
+					//$arrObj->price
+					//$arrObj->ticket_count
+					 $array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		//$data['data']=$array;
+		$this->load->view('imports/admin_vHeader');
+		$this->load->view('admin/vFinance');
+		$this->load->view('imports/admin_vFooter');
+
+	}
+
 	public function viewReport() {
 		$result_data = array();//
 		//////////////////////////////////////////////////////////////////////////////
@@ -446,9 +414,14 @@
 
 	}
 
-	public function updateAdmin() {
-		$user = new MUserInfo();
+	public function generateCard() {
+		$this->load->view('imports/admin_vHeader');
+		$this->load->view('admin/vCards');
+		$this->load->view('imports/admin_vFooter');
 
+	}
+
+	public function updateAdmin() {
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		$data = array('user_name' => $this->input->post('uuname'),
@@ -464,22 +437,22 @@
 					  'date_account_created' => $now->format('Y-m-d H:i:s')
 					);
 
-		$result = $user->update($this->session->userdata['userSession']->userID, $data);
+		$result = $this->MUser->update($this->session->userdata['userSession']->userID, $data);
 
 		if($result){
 			//$this->index();
-			redirect('admin/cAdmin/viewAdminAccountMgt');
+			redirect('CAdmin/viewAdminAccountMgt');
 		}
 	}
 
 	public function Delete($id,$frm){
-		$user_module = new MUserInfo();
+		
 
 		$data = array('account_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $this->MEvents->->read_where($data);
 
 		if($results){
-			$response = $user_module-> updateUserStatus($id, "Deleted");
+			$response = $this->MEvents->updateUserStatus($id, "Deleted");
 
 			if ($response) {
 				if($frm=="admin"){
@@ -493,10 +466,10 @@
 	}
 
 	public function readOwnAdminAccount() {
-		$user_module = new MUserInfo();
+		
 
 		$data = array('account_id' => $this->session->userdata['userSession']->userID);
-		$result= $this->MUserInfo->read_where($data);
+		$result= $this->MEvents->read_where($data);
 
 		if($result){
 			return $result;
@@ -506,7 +479,7 @@
 	}
 
 	public function numEvents($startDate, $endDate){
-		$result = $this->MReports->numEvents($startDate, $endDate);
+		$result = $this->MEvents->numEvents($startDate, $endDate);
 		if($result){
 			return $result;
 		}else{
@@ -516,7 +489,7 @@
 
 
 	public function getActiveUsers($startDate, $endDate){
-		$result = $this->MReports->countUsers($startDate, $endDate);
+		$result = $this->MEvents->countUsers($startDate, $endDate);
 		if($result){
 			return $result;
 		}else{
@@ -529,12 +502,11 @@
 		///////Interface New Implementation////
 		///////////////////////////////////////
 		$year = $_GET['years'];
-		$userModel = new MUser();
 		$where = array('YEAR(user_account.date_account_created)' => $year,
 									 'user_account.user_status' => 'Active',
 									 'user_account.user_type' => 'Regular'
 								 );
-		$result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		$result = $this->Muser->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
 							MONTHNAME(user_account.date_account_created) as monthname',
 							$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
 		$arr_data = array();
@@ -546,16 +518,52 @@
 		//////////////////////////////////////
 	}
 
+	public function getCardsMonthly(){
+		///////////////////////////////////////
+		///////Interface New Implementation////
+		///////////////////////////////////////
+		// $year = $_GET['years'];
+		// $userModel = new MUser();
+		// $where = array('YEAR(user_account.date_account_created)' => $year,
+		// 							 'card.cardStatus' => 1,
+		// 						 );
+		// $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		// 					MONTHNAME(user_account.date_account_created) as monthname',
+		// 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+		// $arr_data = array();
+		// foreach ($result as $value) {
+		// 	$arr_data[] = [$value->UserCount, $value->monthname];
+		// }
+		// echo json_encode($arr_data);
+
+		$this->db->select('COUNT(*) as CardCount');
+		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
+		$this->db->from('card');
+		$this->db->where("cardStatus = 1");
+		$this->db->group_by("monthname");
+		$this->db->order_by("monthname", "desc");
+
+		$query = $this->db->get();
+		$result = $query->result();
+		
+		$arr_data = array();
+		foreach ($result as $value) {
+			$arr_data[] = [$value->CardCount, $value->monthname];
+		}
+		// //////////////////////////////////////
+		echo json_encode($arr_data);
+		//////////////////////////////////////
+	}
+
 	public function getEvents(){
 		///////////////////////////////////////
 		///////Interface New Implementation////
 		///////////////////////////////////////
 		$year = $_GET['years'];
-		$eventModel = new MEventInfo();
 		$where = array("event_status" => "APPROVED",
 										"YEAR(date_created)" => $year
 								 );
-		$result = $eventModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
+		$result = $this->MEvents->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
 							$where,FALSE,FALSE,FALSE,FALSE);
 		$arr_data = array();
 		foreach ($result as $value) {
@@ -565,96 +573,121 @@
 		//////////////////////////////////////
 		//////////////////////////////////////
 	}
-			/* *************** */
-
-			/* USER MODULE FUNCTIONS */
 
 
-			/* *************** */
-
-			/* CALENDAR MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* FINANCE MODULE FUNCTIONS */
-		public function getCardsMonthly(){
-		  ///////////////////////////////////////
-		  ///////Interface New Implementation////
-		  ///////////////////////////////////////
-		  // $year = $_GET['years'];
-		  // $userModel = new MUser();
-		  // $where = array('YEAR(user_account.date_account_created)' => $year,
-		  // 							 'card.cardStatus' => 1,
-		  // 						 );
-		  // $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
-		  // 					MONTHNAME(user_account.date_account_created) as monthname',
-		  // 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
-		  // $arr_data = array();
-		  // foreach ($result as $value) {
-		  // 	$arr_data[] = [$value->UserCount, $value->monthname];
-		  // }
-		  // echo json_encode($arr_data);
-
-		  $this->db->select('COUNT(*) as CardCount');
-		  $this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
-		  $this->db->from('card');
-		  $this->db->where("cardStatus = 1");
-		  $this->db->group_by("monthname");
-		  $this->db->order_by("monthname", "desc");
-
-		  $query = $this->db->get();
-		  $result = $query->result();
-
-		  $arr_data = array();
-		  foreach ($result as $value) {
-			$arr_data[] = [$value->CardCount, $value->monthname];
-		  }
-		  // //////////////////////////////////////
-		  echo json_encode($arr_data);
-		  //////////////////////////////////////
-	    }
-
-	    public function generateCard() {
-		  $this->load->view('imports/admin_vHeader');
-		  $this->load->view('admin/vCards');
-		  $this->load->view('imports/admin_vFooter');
-	    }
-
-	    public function viewFinance() {
-		  $result_data = array();//Replace with query
-		  //////////////////////////////////////////////////////////////////////////////
-		  //================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		  /////////////////////////////////////////////////////////////////////////////
-		  $array = array();
-		  if($result_data){
+	//ANNOUNCEMENT FUNCTIONALITY - also added MAnnouncement in models/admin and autoload.php (12/04/17)
+	public function viewAnnouncements() {
+		$result_data=$this->readAllAdmin();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
 			foreach ($result_data as $value) {
-					 $arrObj = new stdClass;
-					//Only interface filtering
-					//$arrObj->price
-					//$arrObj->ticket_count
-					 $array[] = $arrObj;
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->email= $value->email;
+					$arrObj->contact_no= $value->contact_no;
+					$arrObj->birthdate= $value->birthdate;
+					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->gender = $value->gender;
+					$arrObj->user_type = $value->user_type;
+					$arrObj->user_status = $value->user_status;
+					$arrObj->upgraded_by = $value->upgradedBy;//Added by admin module
+					$array[] = $arrObj;
 			}
-		  }
-		  ////////////STOPS HERE///////////////////////////////////////////////////
-		  //$data['data']=$array;
-		  $this->load->view('imports/admin_vHeader');
-		  $this->load->view('admin/vFinance');
-		  $this->load->view('imports/admin_vFooter');
-	    }
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
 
+		$data2['admin']=$array;
+		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
+		$data2['announcements']=$this->readAllAnnouncements();
 
-			/* *************** */
-
-			/* REPORTS MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-		/**********************************************/
-
-
+		$this->load->view('imports/admin_vHeader');
+		$this->load->view('admin/vAnnouncements', $data2);
+		$this->load->view('imports/admin_vFooter');
 	}
 
-?>
+	public function createAnnouncement() {
+		$announcement = new MAnnouncement();
+
+		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+
+		$data = array('announcementDetails' => $this->input->post('announcementDetails'),
+					  'announcementStatus' => 'OnGoing',
+					  'postedBy' => $this->input->post('postedBy'),
+					  'datePosted' => $now->format('Y-m-d H:i:s')
+					);
+
+		$result = $this->MAnnouncement->insert($data);
+
+		if($result){
+			//$this->index();
+			redirect('CAdmin/viewAnnouncements');
+		}
+	}
+
+	// view all announcements
+	public function readAllAnnouncements(){
+		$result= $this->MAnnouncement->read_all();
+		if($result){
+			return $result;
+		}else{
+			return false;
+		}
+	}
+
+	public function deleteAnnouncement($id){
+		$data = array('announcementID' => $id);
+		$results = $this->MAnnouncement->read_where($data);
+
+		if($results){
+			$response = $this->MAnnouncement->updateAnnouncementStatus($id, "Finished");
+
+			if ($response) {
+				redirect('CAdmin/viewAnnouncements');
+ 			}
+		}
+	}
+
+	public function viewAllEvents(){
+		$this->data['custom_js']= '<script type="text/javascript">
+                              $(function(){
+                              	$("#admin").addClass("active");
+                              });
+                        </script>';
+
+
+    	$result_data=$this->readAllEvents();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->no_tickets_total = $value->no_tickets_total;
+					$arrObj->event_status = $value->event_status;
+					$array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+
+		$data2['row'] = $array;
+
+   		$data3['users']=$this->getUserCount();
+		$this->load->view('imports/admin_vHeader');
+		//$this->load->view('admin/vAdminDashboard', $data2);
+		$this->load->view('admin/vAdmin', $data2);
+		$this->load->view('imports/admin_vFooter');
+	}
+
+}

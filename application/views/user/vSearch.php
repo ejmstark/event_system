@@ -23,7 +23,7 @@ $Search_options;
 <br>
 <!-- <input type="submit" name="button" value="Submit"/></form> -->
 
-		<form method="POST" action="<?php echo site_url()?>/user/cUser/search">
+		<form method="POST" action="<?php echo site_url()?>/CUser/search">
 	  		Search:
 	  		<input type="text" name="search_val" required="">
 	  		<button type="button submit">Search</button><br>

@@ -1,25 +1,22 @@
 <?php
 	class MAnnouncement extends MY_Model {
-		/*Declare Entities*/
-		//Ex.: private $announcementID;
 		private $announcementID;
 		private $announcementDetails;
 		private $announcementStatus;
 		private $postedBy;
 		private $datePosted;
 
-		const DB_TABLE = "announcement"; //Table Name
-    	const DB_TABLE_PK = "announcementID"; // Primary Key
+		const DB_TABLE = "announcement";
+    	const DB_TABLE_PK = "announcementID";
 
     	public function __construct(){
 
 		}
-		/* GETTER AND SETTERS */
-
 
 		public function getAnnouncementID(){
 			return $this->announcementID;
 		}
+
 		public function getAnnouncementDetails(){
 			return $this->announcementDetails;
 		}
@@ -35,6 +32,7 @@
 		public function getDatePosted(){
 			return $this->datePosted;
 		}
+
 		public function setAnnouncementID($announcementID){
 			$this->announcementID = $announcementID;
 		}
@@ -55,51 +53,20 @@
 			$this->datePosted = $datePosted;
 		}
 
-		/* ****************** */
+		//FUNCTIONS
+		public function updateAnnouncementStatus($id, $status) {
+			$data = array('announcementStatus' => $status );
 
+			return $this->update($id,$data);
+		}
 
-		/* QUERY FUNCTIONS */
+		public function loadAllAnnouncementDetails(){
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('user_account', $this::DB_TABLE . '.postedBy = user_account.account_id');
+			$query = $this->db->get();
 
-			/* ADMIN MODULE FUNCTIONS */
-			public function updateAnnouncementStatus($id, $status) {
-				$data = array('announcementStatus' => $status );
-
-				return $this->update($id,$data);
-			}
-			public function loadAllAnnouncementDetails(){
-				$this->db->select('*');
-				$this->db->from($this::DB_TABLE);
-				$this->db->join('user_account', $this::DB_TABLE . '.postedBy = user_account.account_id');
-				$query = $this->db->get();
-
-				return $query->result();
-			}
-
-			/* *************** */
-
-			/* USER MODULE FUNCTIONS */
-
-
-			/* *************** */
-
-			/* CALENDAR MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* FINANCE MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* REPORTS MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-		/* ************** */
+			return $query->result();
+		}
 	}
 ?>

@@ -71,39 +71,39 @@
                                 if ($this->session->userdata['userSession']->userID != $object->account_id){
                                     if($object->user_type == "Admin"){
                                         //upgraded type to Superadmin
-                                      echo "<a  href='".site_url()."/admin/cAdmin/SuperAdmin/".$object->account_id."'>
+                                      echo "<a  href='".site_url()."/CAdmin/SuperAdmin/".$object->account_id."'>
                                         <button type='button' class='btn btn-info fa fa-user'></button></a>";
                                     }else{
                                         if($this->session->userdata['userSession']->userID == $object->upgraded_by){
                                             //upgrade type to Admin
-                                              echo "<a  href='".site_url()."/admin/cAdmin/Admin/".$object->account_id."'>
+                                              echo "<a  href='".site_url()."/CAdmin/Admin/".$object->account_id."'>
                                                <button  type='button' class='btn btn-warning fa fa-user'></button></a>";
                                                //delete
-                                               echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
+                                               echo "<a  href='".site_url()."/CAdmin/Delete/".$object->account_id."/admin'>
                                                  <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
                                           }
                                     }
 
                                     //delete
                                     if($object->user_type == "Admin"){
-                                        echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
+                                        echo "<a  href='".site_url()."/CAdmin/Delete/".$object->account_id."/admin'>
                                           <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
                                     }
 
                                     if($this->session->userdata['userSession']->userID == $object->upgraded_by || $object->user_type == "Admin") {
                                         //update status
                                         if($object->user_status == "Active"){
-                                          echo "<a  href='".site_url()."/admin/cAdmin/Ban/".$object->account_id."/admin'>
+                                          echo "<a  href='".site_url()."/CAdmin/Ban/".$object->account_id."/admin'>
                                             <button  type='button' class='btn btn-success fa fa-credit-card'></button></a>";
                                         }else{
-                                          echo "<a  href='".site_url()."/admin/cAdmin/Unban/".$object->account_id."/admin'>
+                                          echo "<a  href='".site_url()."/CAdmin/Unban/".$object->account_id."/admin'>
                                             <button  type='button' class='btn btn-inverse fa fa-credit-card'></button></a>";
                                         }
                                     }
                                     
                                   }else{
                                     //echo "Can't ban yourself.";
-                                    echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
+                                    echo "<a  href='".site_url()."/CAdmin/Delete/".$object->account_id."/admin'>
                                       <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
                                   }
                                 echo "</td></tr>";
@@ -131,7 +131,7 @@
             <div class="panel-body">
 
 			<!-- Modal content-->
-    			<form class="form-horizontal" method="POST" action="<?php echo site_url()?>/admin/cAdmin/addAdmin">
+    			<form class="form-horizontal" method="POST" action="<?php echo site_url()?>/CAdmin/addAdmin">
 
                     <div class="form-group" >
                     	<label for="" class="col-8 control-label">First name:</label>
@@ -239,7 +239,7 @@
             <div class="panel-body">
 
             <!-- Modal content-->
-                <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/admin/cAdmin/updateAdmin">
+                <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/CAdmin/updateAdmin">
 
                     <div class="form-group" >
                       <label for="" class="col-8 control-label">First name:</label>

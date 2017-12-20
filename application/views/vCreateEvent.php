@@ -28,14 +28,14 @@
                 
                 <div class="container">
                     <ul class="nav navbar-navx navbar-right inline-navbar">
-                        <li><a href="<?php echo site_url();?>/cLogin/viewDashboard">Home</a></li>
-                        <li class="Active"><a href="<?php echo site_url();?>/cLogin/viewEvents">Events</a></li>
+                        <li><a href="<?php echo site_url();?>/CLogin/viewDashboard">Home</a></li>
+                        <li class="Active"><a href="<?php echo site_url();?>/CLogin/viewEvents">Events</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-    <form method="post" action="<?php echo site_url();?>/event/cEvent/createEvent ">
+    <form method="post" action="<?php echo site_url();?>/CEvent/createEvent ">
         <div class ="createYourEvent">
             <h1> CREATE YOUR EVENT! </h1> <br>
             <h2> Share it. Make it live. </h2>
@@ -254,6 +254,6 @@
 </html>
 
 <?php } else {
-        redirect('cLogin/userLogin');
+        redirect('CLogin/userLogin');
     }
 ?>

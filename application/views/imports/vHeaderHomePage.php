@@ -17,8 +17,8 @@
 				<div class = "col-sm-2"><a href = "#">EVENTS</a> </div>
 				<div class = "col-sm-2"><a href = "#">ABOUT</a></div>
 				<?php if (!$this->session->userdata('userSession')) { ?>
-				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/cLogin">LOGIN</a> </div><?php }?>
-				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/user/cUser/viewSignUp">CREATE ACCOUNT</a> </div>
+				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/CLogin">LOGIN</a> </div><?php }?>
+				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/CUser/viewSignUp">CREATE ACCOUNT</a> </div>
 			</div>
 		</div>
 

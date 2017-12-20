@@ -68,7 +68,7 @@
             <div class="panel-body">
 
       <!-- Modal content-->
-          <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/admin/cAdmin/createAnnouncement">
+          <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/CAdmin/createAnnouncement">
 
                 <div class="form-group" >
                   <label for="" class="col-8 control-label">Announcement:</label>

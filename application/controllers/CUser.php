@@ -1,44 +1,26 @@
 <?php
-	defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class CUser extends CI_Controller {
+class CUser extends CI_Controller {
 
-		function __construct() {
-			parent::__construct();
-		 	/* LOAD MODELS HERE */
-		 	//Ex: $this->load->model('MCalendar');
-		}
+	public function __Construct(){
+      parent::__Construct ();
+      $this->load->database(); // load database
+      $this->load->model('MUser');
+      $this->load->model('MEvent');
+      $this->load->model('MCard');
+	  $this->load->model('MAnnouncement'); //admin module functionality
+      $this->load->library('session');
+      $this->data = null;
+  	}
 
-		public function index()
-		{
-			# code...
-		}
+  	public function redeemCode(){
 
-		/* FUNCTIONS RELATED TO USERS (PUT IT BELOW) */
-			/* ADMIN MODULE FUNCTIONS */
-				
+		$code = $this->input->post('ccode');
+		echo "Code ID: ".$code;
+		$card = $this->MCard->read_where(array('cardCode'=> $code));
 
-			/* *************** */
-
-			/* USER MODULE FUNCTIONS */
-
-
-			/* *************** */
-
-			/* CALENDAR MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* FINANCE MODULE FUNCTIONS */
-        public function redeemCode(){
-
-		  $code = $this->input->post('ccode');
-		  echo "Code ID: ".$code;
-		  $card = $this->MCardLoad->read_where(array('cardCode'=> $code));
-
-		  if($card){
+		if($card){
 			$card = json_decode(json_encode($card));
 			$u =  $this->MUser->read($this->session->userdata['userSession']->userID);
 			if($card[0]->cardStatus==1){
@@ -47,23 +29,151 @@
 
 				if($res){
 					$code = $card[0]->cardId;
-					$res1 = $this->MCardLoad->update($code, array('cardStatus'=>0));
+					$res1 = $this->MCard->update($code, array('cardStatus'=>0));
 				}
 			}
-		  }
+		}
 
-		  redirect("event/cEvent/viewEvents");
-	    }
+		redirect("CEvent/viewEvents");
+	}
+	public function index()
+	{
+		$this->data['custom_js']= '<script type="text/javascript">
+                              $(function(){
+                              	$("#user").addClass("active");
+                              });
+                        </script>';
+
+        $data['users'] = $this->MUser->getAllUsers();
+
+		$this->load->view('imports/vHeader');
+		$this->load->view('user/vUser',$data);
+		$this->load->view('imports/vFooter',$this->data);
+	}
+
+	public function signuppage()
+	{
+
+		$this->load->view('user/vSignup.php');
+
+	}
 
 
-			/* *************** */
+	public function signup()
+	{
+		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
-			/* REPORTS MODULE FUNCTIONS */
+		$data = array('user_name' => $this->input->post('uname'),
+					  'password' => hash('sha512',$this->input->post('password')),
+					  'first_name' => $this->input->post('fname'),
+					  'last_name' => $this->input->post('lname'),
+					  'middle_initial' => $this->input->post('miname'),
+					  'email' => $this->input->post('email'),
+					  'birthdate' => $this->input->post('bdate'),
+					  'gender' => $this->input->post('gender'),
+					  'contact_no' => $this->input->post('contact'),
+					  'user_type' => 'Regular',
+					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					);
 
 
+		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
+		$res1 = $this->MUser->read_where(array('email' => $data['email']));
 
-			/* *************** */
-		/**********************************************/
+    	if($res){
+    			$this->session->set_flashdata('error_msg','Username taken');
+    			$this->data = $data;
+    			$this->viewSignUp();
+    			// redirect('user/cUser/viewSignUp',"refresh");
+				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
-	    }
-?>
+		}else if($res1){
+			$this->session->set_flashdata('error_msg','Email taken');
+			$this->data = $data;
+				$this->viewSignUp();
+				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+
+		}else{
+
+			$result = $this->MUser->insert($data);
+
+			if($result){
+			//$this->index();
+			redirect('CEvent/viewEvents');
+		}
+
+		}
+
+		# code...
+	}
+
+	public function eventregister()
+	{
+		$this->load->view('imports/vHeader');
+		$this->load->view('user/vEventRegistration.php');
+		$this->load->view('imports/vFooter');
+	}
+
+	public function displayEvent()
+	{
+
+		$data['events'] = $this->MEvents->getAllEvents();
+		$this->load->view('imports/vHeader');
+		$this->load->view('user/vListEvents.php', $data);
+		$this->load->view('imports/vFooter');
+		# code...
+	}
+
+	public function displayEventDetails($id)
+	{
+
+		$uid = null;
+
+		$data1 ['events']= $this->MEvents->loadEventDetails($id);
+		$gID = $this->MEvents->loadEventDetails($id);
+		foreach ($gID as $k) {
+			$uid = $k->user_id;
+		}
+		// print_r($uid);
+		$data2['users']	= $this->MUser->loadUserDetails($uid);
+
+		$data = array_merge($data1,$data2);
+		// print_r($data);
+		$this->load->view('imports/vHeader');
+		$this->load->view('user/vEventRegistration.php', $data);
+		$this->load->view('imports/vFooter');
+		# code...
+	}
+
+	public function search(){
+		$data['events'] = $this->MEvents->getAllEvents();
+
+		$this->load->view('imports/vHeaderLandingPage');
+		//$this->load->view('imports/vHeader');
+		$this->load->view('user/vSearch.php');
+		// $this->load->view('user/vListEvents.php', $data);
+		$this->load->view('imports/vFooter');
+	}
+	public function viewSignUp()
+	{
+		if(!$this->data){
+		$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('vSignUp');
+		$this->load->view('imports/vFooterLandingPage');
+		}else{
+			$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('vSignUp',$this->data);
+		$this->load->view('imports/vFooterLandingPage');
+		}
+
+	}
+
+	public function viewAnnouncements()
+	{
+		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
+		$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('user/vAnnouncementPage.php', $data);
+		$this->load->view('imports/vFooterLandingPage');
+
+	}
+}
