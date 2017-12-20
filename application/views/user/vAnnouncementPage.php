@@ -59,7 +59,7 @@
             if($announcements!=FALSE){
                 foreach ($announcements as $announcement) {
                     if($announcement->announcementStatus != "Finished") {
-                        $date = date("m-d-Y", strtotime($announcement->datePosted));
+                        $date = date("m-d-Y", strtotime($announcement->addedAt));
                         echo  "
                             <div class='box-container'>
                                 <div class='box-header'>
