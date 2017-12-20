@@ -28,8 +28,8 @@
                                     <?php echo $this->session->flashdata('error_msg'); ?>
                                 </div>
                             <?php endif ?>
-                        
-                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover" data-provide="data-table" id="toggle-column table-example">                 
+
+                        <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover" data-provide="data-table" id="toggle-column table-example">
                             <thead class="">
                                 <tr>
                                   <th>#</th>
@@ -100,7 +100,7 @@
                                             <button  type='button' class='btn btn-inverse fa fa-credit-card'></button></a>";
                                         }
                                     }
-                                    
+
                                   }else{
                                     //echo "Can't ban yourself.";
                                     echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
@@ -322,4 +322,3 @@
     </div>
 
 </div>
-        

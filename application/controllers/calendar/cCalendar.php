@@ -23,28 +23,16 @@ class cCalendar extends CI_Controller {
                               	$("#cal").addClass("active");
                               });
                         </script>';
-		$result_data = $this->MEvent->getAllEventsByUser($this->session->userdata['userSession']->userID);
+
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_name = $value->event_name;
-					//$arrObj->event_isActive = $value->event_isActive;
-					$arrObj->addedAt = $value->addedAt;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_category = $value->event_category;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->color = $value->color;
-					$array[] = $arrObj;
-			}
-		}
-		$data['event_data'] = $array;
+		$strCalSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
+		$strCalWhere = array(
+													"user_id" => $this->session->userdata['userSession']->userID,
+													"event_isActive" => TRUE
+												);
+		$data['event_data'] = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strCalSelect,$strCalWhere,false,false,false,false);
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$this->load->helper('url');
 		$this->load->view('imports/vHeaderLandingPage');
