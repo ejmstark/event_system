@@ -9,7 +9,7 @@
 		private $event_details;
 		private $event_category;
 		private $event_venue;
-		private $date_created;
+		private $addedAt;
 		private $user_id;
 
 		const DB_TABLE = "event_info";
@@ -121,12 +121,12 @@
 			$this->event_venue = $event_venue;
 		}
 
-		public function getDate_created(){
-			return $this->date_created;
+		public function getaddedAt(){
+			return $this->addedAt;
 		}
 
-		public function setDate_created($date_created){
-			$this->date_created = $date_created;
+		public function setaddedAt($addedAt){
+			$this->addedAt = $addedAt;
 		}
 
 		public function getUser_id(){
