@@ -7,9 +7,7 @@
 		const DB_TABLE = "card"; //Table Name
     	const DB_TABLE_PK = "card_id"; // Primary Key
 
-    	public function __construct(){
-
-		}
+   
 		/* GETTER AND SETTERS */
 			
 

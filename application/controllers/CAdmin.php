@@ -5,13 +5,11 @@ class CAdmin extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-	 // 	$this->load->model('MAdmin');
-		// $this->load->model('MAdminUsers');
+;
 		$this->load->model('MUser');
 		$this->load->model('MEvents');
 		$this->load->model('MTicket');
 		$this->load->model('MAnnouncement');
-		// $this->load->model('MUserInfo');
 	}
 
 	public function index()
@@ -373,7 +371,6 @@ class CAdmin extends CI_Controller {
 			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
-		//$data['data']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vFinance');
 		$this->load->view('imports/admin_vFooter');
@@ -389,25 +386,11 @@ class CAdmin extends CI_Controller {
 		if($result_data){
 			foreach ($result_data as $value) {
 					 $arrObj = new stdClass;
-					//Only interface filtering
-					// $arrObj->account_id = $value->account_id;
-					// $arrObj->user_name = $value->user_name;
-					// $arrObj->first_name = $value->first_name;
-					// $arrObj->middle_initial = $value->middle_initial;
-					// $arrObj->last_name = $value->last_name;
-					// $arrObj->email= $value->email;
-					// $arrObj->contact_no= $value->contact_no;
-					// $arrObj->birthdate= $value->birthdate;
-					// $arrObj->date_account_created = $value->date_account_created;
-					// $arrObj->gender = $value->gender;
-					// $arrObj->user_type = $value->user_type;
-					// $arrObj->user_status = $value->user_status;
-					// $arrObj->load_amt = $value->load_amt;
+					
 					$array[] = $arrObj;
 			}
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
-		//$data['data']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vReport');
 		$this->load->view('imports/admin_vFooter');
@@ -440,7 +423,6 @@ class CAdmin extends CI_Controller {
 		$result = $this->MUser->update($this->session->userdata['userSession']->userID, $data);
 
 		if($result){
-			//$this->index();
 			redirect('CAdmin/viewAdminAccountMgt');
 		}
 	}
@@ -522,19 +504,7 @@ class CAdmin extends CI_Controller {
 		///////////////////////////////////////
 		///////Interface New Implementation////
 		///////////////////////////////////////
-		// $year = $_GET['years'];
-		// $userModel = new MUser();
-		// $where = array('YEAR(user_account.date_account_created)' => $year,
-		// 							 'card.cardStatus' => 1,
-		// 						 );
-		// $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
-		// 					MONTHNAME(user_account.date_account_created) as monthname',
-		// 					$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
-		// $arr_data = array();
-		// foreach ($result as $value) {
-		// 	$arr_data[] = [$value->UserCount, $value->monthname];
-		// }
-		// echo json_encode($arr_data);
+
 
 		$this->db->select('COUNT(*) as CardCount');
 		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
@@ -626,7 +596,6 @@ class CAdmin extends CI_Controller {
 		$result = $this->MAnnouncement->insert($data);
 
 		if($result){
-			//$this->index();
 			redirect('CAdmin/viewAnnouncements');
 		}
 	}
@@ -685,7 +654,6 @@ class CAdmin extends CI_Controller {
 
    		$data3['users']=$this->getUserCount();
 		$this->load->view('imports/admin_vHeader');
-		//$this->load->view('admin/vAdminDashboard', $data2);
 		$this->load->view('admin/vAdmin', $data2);
 		$this->load->view('imports/admin_vFooter');
 	}

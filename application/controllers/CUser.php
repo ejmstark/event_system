@@ -92,12 +92,30 @@ class CUser extends CI_Controller {
 			$this->data = $data;
 			$this->viewSignUp();
 				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6ff22e6e417227c7ba6da06817194cc297954bbe
+>>>>>>> ba2f9818bdf623bb599625b6bd9133820f4e1075
 		}else{
 			$result = $this->MUser->insert($data);
 			if($result){
 			//$this->index();
+<<<<<<< HEAD
 				redirect('CEvent/viewEvents');
 			}
+=======
+<<<<<<< HEAD
+				redirect('CEvent/viewEvents');
+			}
+=======
+			redirect('CEvent/viewEvents');
+		}
+
+>>>>>>> 6ff22e6e417227c7ba6da06817194cc297954bbe
+>>>>>>> ba2f9818bdf623bb599625b6bd9133820f4e1075
 		}
 		# code...
 	}
@@ -129,11 +147,9 @@ class CUser extends CI_Controller {
 		foreach ($gID as $k) {
 			$uid = $k->user_id;
 		}
-		// print_r($uid);
 		$data2['users']	= $this->MUser->loadUserDetails($uid);
 
 		$data = array_merge($data1,$data2);
-		// print_r($data);
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vEventRegistration.php', $data);
 		$this->load->view('imports/vFooter');
@@ -144,9 +160,7 @@ class CUser extends CI_Controller {
 		$data['events'] = $this->MEvents->getAllEvents();
 
 		$this->load->view('imports/vHeaderLandingPage');
-		//$this->load->view('imports/vHeader');
 		$this->load->view('user/vSearch.php');
-		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
 	}
 	 //This function will load the sign-up page.

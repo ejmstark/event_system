@@ -9,9 +9,7 @@
 		const DB_TABLE = "announcement";
     	const DB_TABLE_PK = "announcementID";
 
-    	public function __construct(){
-
-		}
+    	
 
 		public function getAnnouncementID(){
 			return $this->announcementID;

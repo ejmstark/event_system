@@ -17,8 +17,17 @@
     	public function __construct(){
 
 		}
+<<<<<<< HEAD
 		// This will get the attendance of the people who participate
 		// in a specific event.
+=======
+<<<<<<< HEAD
+		// This will get the attendance of the people who participate
+		// in a specific event.
+=======
+
+>>>>>>> 6ff22e6e417227c7ba6da06817194cc297954bbe
+>>>>>>> ba2f9818bdf623bb599625b6bd9133820f4e1075
 		public function Attendance()
 		{
 
