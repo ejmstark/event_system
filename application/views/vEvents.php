@@ -1,5 +1,11 @@
- <body>
-
+<?php
+    require_once "application/customization/CustomizationManager.php";
+    CustomizationManager::$currentConfigName = "configurations 2";
+    CustomizationManager::SetTheme(CustomizationManager::$currentConfigName);
+    $images = CustomizationManager::$images;
+?>
+<body>
+        <!-- <img src ="<?php// echo base_url($images->event1); ?>"> -->
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
@@ -265,7 +271,13 @@
                                         <ul>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html">
+                                                    <?php
+                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                            echo '<img src="'.base_url($images->event1).'">';
+                                                        }
+                                                    ?>
+                                                </a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> JS Workshop </a></h6>
@@ -274,7 +286,13 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html">
+                                                    <?php
+                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                            echo '<img src="'.base_url($images->event3).'">';
+                                                        }
+                                                    ?>
+                                                </a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Music Concert </a></h6>
@@ -283,7 +301,13 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html">
+                                                    <?php
+                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                            echo '<img src="'.base_url($images->event4).'">';
+                                                        }
+                                                    ?>
+                                                </a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Some Party </a></h6>
@@ -292,7 +316,13 @@
                                         </li>
                                        <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html">
+                                                    <?php
+                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                            echo '<img src="'.base_url($images->event5).'">';
+                                                        }
+                                                    ?>
+                                                </a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Food Bazaar </a></h6>
