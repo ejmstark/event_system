@@ -17,6 +17,8 @@
 		/* FUNCTIONS RELATED TO USERS (PUT IT BELOW) */
 			/* ADMIN MODULE FUNCTIONS */
 			//ANNOUNCEMENT FUNCTIONALITY - also added MAnnouncement in models/admin and autoload.php (12/04/17)
+
+			//Redirect to Announcements Page with list of announcements
 			public function viewAnnouncements() {
 				$result_data=$this->readAllAdmin();
 				//////////////////////////////////////////////////////////////////////////////
@@ -52,7 +54,8 @@
 				$this->load->view('admin/vAnnouncements', $data2);
 				$this->load->view('imports/admin_vFooter');
 			}
-			
+
+			//Creates announcement to be displayed in the Announcements Page
 			public function createAnnouncement() {
 				$announcement = new MAnnouncement();
 
@@ -82,6 +85,7 @@
 				}
 			}
 
+			//Deletes an announcement by setting its status to "Deleted"
 			public function deleteAnnouncement($id){
 				$announcement = new MAnnouncement();
 
