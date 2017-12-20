@@ -43,7 +43,7 @@ class cEvent extends CI_Controller {
 	public function searchEvent()
 	{
 		$data['users'] = $this->MUser->getAllUsers();
-		$result_data = $this->MEvent->getSearchEvents($_POST['searchWord']);
+		$result_data = $this->MEvent->getSearchEvents($_POST['searchWord'], $_POST['searchDateYear'], $_POST['searchDateMonth']);
 		// print_r($data);
 		$array = array();
 		if($result_data){
