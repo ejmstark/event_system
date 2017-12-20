@@ -464,11 +464,12 @@ class cEvent extends CI_Controller {
 					$res = $this->MTicket->insert($data);
 
 					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
-					$this->success = "Bought ticket for ".$res1[0]->price;
+					// $this->success = "Bought ticket for ".$res1[0]->price;
 					// $this->displayEventDetails($eid);
+					$this->session->set_flashdata('success_msg',"Bought ticket for ".$res1[0]->price);
 					redirect('event/cEvent/displayEventDetails/'.$eid);
 				}else{
-					$this->error = "Insufficient balance!";
+					$this->session->set_flashdata('error_msg','Insufficient balance!');
 					$this->displayEventDetails($eid);
 				}
 
