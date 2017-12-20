@@ -196,7 +196,7 @@ class cEvent extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt = $value->addedAt;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -262,7 +262,7 @@ class cEvent extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt = $value->addedAt;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -347,7 +347,7 @@ class cEvent extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt = $value->addedAt;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -413,7 +413,7 @@ class cEvent extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt = $value->addedAt;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;

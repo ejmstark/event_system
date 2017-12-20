@@ -42,7 +42,7 @@
                                   <th>Date Created</th>
                                   <th>Type</th>
                                   <th>Status</th>
-                                  <?php if($this->session->userdata['userSession']->userLevel == "Superadmin") {
+                                  <?php if($this->session->userdata['adminSession']->userLevel == "Superadmin") {
                                     echo "<th>Action</th>";
                                   } ?>
                                 </tr>
@@ -66,15 +66,15 @@
                                 <td>".$object->user_type."</td>
                                 <td>".$object->user_status."</td>";
 
-                                if($this->session->userdata['userSession']->userLevel == "Superadmin" && $object->user_status != "Deleted"){
+                                if($this->session->userdata['adminSession']->userLevel == "Superadmin" && $object->user_status != "Deleted"){
                                   echo"<td>";
-                                if ($this->session->userdata['userSession']->userID != $object->account_id){
+                                if ($this->session->userdata['adminSession']->userID != $object->account_id){
                                     if($object->user_type == "Admin"){
                                         //upgraded type to Superadmin
                                       echo "<a  href='".site_url()."/admin/cAdmin/SuperAdmin/".$object->account_id."'>
                                         <button type='button' class='btn btn-info fa fa-user'></button></a>";
                                     }else{
-                                        if($this->session->userdata['userSession']->userID == $object->upgraded_by){
+                                        if($this->session->userdata['adminSession']->userID == $object->upgraded_by){
                                             //upgrade type to Admin
                                               echo "<a  href='".site_url()."/admin/cAdmin/Admin/".$object->account_id."'>
                                                <button  type='button' class='btn btn-warning fa fa-user'></button></a>";
@@ -90,7 +90,7 @@
                                           <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
                                     }
 
-                                    if($this->session->userdata['userSession']->userID == $object->upgraded_by || $object->user_type == "Admin") {
+                                    if($this->session->userdata['adminSession']->userID == $object->upgraded_by || $object->user_type == "Admin") {
                                         //update status
                                         if($object->user_status == "Active"){
                                           echo "<a  href='".site_url()."/admin/cAdmin/Ban/".$object->account_id."/admin'>
@@ -187,7 +187,7 @@
                         <option selected="" value="Admin">Select User Type</option>
                         <option value="Admin">Admin</option>
                         <?php
-                            if($this->session->userdata['userSession']->userLevel == "Superadmin"){
+                            if($this->session->userdata['adminSession']->userLevel == "Superadmin"){
                                 echo"<option value='Superadmin'>Superadmin</option>";
                             }
                         ?>
