@@ -21,11 +21,15 @@
     	public function __construct(){
 
 		}
+<<<<<<< HEAD
 		// This will get the attendance of the people who participate
 		// in a specific event.
 >>>>>>> 77844816e5a736c8e5d47b48b31ecefea720fbd0
+=======
+
+>>>>>>> 6ff22e6e417227c7ba6da06817194cc297954bbe
 		public function Attendance()
-		{
+		{	
 
 			$this->db->select("ei.event_name as event_id, user_account.user_name as name , count(*) as total");
 			$this->db->from('user_account ');
@@ -38,7 +42,7 @@
 			return $query->result();
 			# code...
 		}
-		//This will check if the username and password is in the database.
+
 		public function attemptLogin(){
 				//$hashPass=hash('sha512',$this->agentPassword);
 
@@ -48,9 +52,9 @@
 			    return $query->result();
 			}else{
          		return false;
-      }
+            }
 		}
-		//This function will read the user details and display the result using account id.
+
 		public function loadUserDetails($id)
 		{
 			$this->db->select('*');
@@ -62,18 +66,18 @@
 			return $query->result();
 			# code...
 		}
-		//This function will get all the users stored in the database.
+
 		public function getAllUsers(){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
-			return $query;
+			return $query;			             
 		}
-		//This function will get the account id.
+
 		public function getAccount_id(){
 			return $this->account_id;
 		}
-		//This function will set the account id from the database to account_id.
+
 		public function setAccount_id($account_id){
 			$this->account_id = $account_id;
 		}
@@ -148,7 +152,7 @@
 
 		public function setContact_no($contact_no){
 			$this->contact_no = $contact_no;
-		}
+		}	
 
 
 		public function updateUserStatus($id, $status)
