@@ -13,7 +13,44 @@ class cUser extends CI_Controller {
       $this->load->library('session');
       $this->data = null;
   	}
+  	public function index()
+	{
+		$data['users'] = $this->MUser->getAllUsers();
+		$result_data = $this->MEvent->getAllApprovedEvents();
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->dateStart = $value->dateStart;
+					$arrObj->dateEnd = $value->event_date_end;
+					$arrObj->event_category = $value->event_category;
+					$array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['events'] = $array;
 
+		$this->data['custom_js']= '<script type="text/javascript">
+
+                              $(function(){
+
+                              	$("#dash").addClass("active");
+
+                              });
+
+                        </script>';
+
+		$this->load->view('imports/vHeaderLandingPage');
+
+		$this->load->view('vLandingPage',$data);
+
+		$this->load->view('imports/vFooterLandingPage',$this->data);
+	}
   	public function redeemCode(){
 
 		$code = $this->input->post('ccode');
@@ -36,20 +73,7 @@ class cUser extends CI_Controller {
 
 		redirect("event/cEvent/viewEvents");
 	}
-	public function index()
-	{
-		$this->data['custom_js']= '<script type="text/javascript">
-                              $(function(){
-                              	$("#user").addClass("active");
-                              });
-                        </script>';
-
-        $data['users'] = $this->MUser->getAllUsers();
-
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vUser',$data);
-		$this->load->view('imports/vFooter',$this->data);
-	}
+	
 
 	public function signuppage()
 	{
@@ -75,7 +99,7 @@ class cUser extends CI_Controller {
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' => 'Regular',
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 

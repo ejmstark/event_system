@@ -435,7 +435,7 @@
                                         <tr>
                                             <td><?php echo $e->event_id;?></td>
                                             <td><?php echo $e->event_name;?></td>
-                                            <td><?php echo $e->event_date_start;?></td>
+                                            <td><?php echo $e->dateStart;?></td>
                                             <td><?php echo $e->event_status;?></td>
                                             <td><?php echo $e->event_venue;?></td>
                                             <td><?php echo $e->event_category;?></td>
