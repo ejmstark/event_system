@@ -31,6 +31,7 @@
 		}
 		public function getUsername(){
 			return $this->usernamedated
+		}
 		public function getPassword(){
 			return $this->password;
 		}
