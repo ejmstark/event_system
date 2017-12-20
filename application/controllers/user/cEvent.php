@@ -41,6 +41,41 @@ class cEvent extends CI_Controller {
 		# code...
 	}
 
+	public function searchEvent()
+	{
+		$data['users'] = $this->MUser->getAllUsers();
+		$result_data = $this->MEvent->getSearchEvents($_POST['searchWord'], $_POST['searchDateYear'], $_POST['searchDateMonth']);
+		// print_r($data);
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->dateStart = $value->event_date_start;
+					$arrObj->dateEnd = $value->event_date_end;
+					$arrObj->event_category = $value->event_category;
+					$array[] = $arrObj;
+			}
+		}
+		$data['events'] = $array;
+
+		$this->data['custom_js']= '<script type="text/javascript">
+
+                              $(function(){
+
+                              	$("#dash").addClass("active");
+
+                              });
+
+                        </script>';
+		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('vLandingPage', $data);
+		//$this->load->view('user/vListEvents', $data['events']);
+		$this->load->view('imports/vFooterLandingPage');
+		# code...
+	}
+
 	public function displayEventDetails($id)
 	{
 		

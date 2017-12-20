@@ -87,6 +87,22 @@
 			$query = $this->db->get();
 			return $query->result();			             
 		}
+
+		public function getSearchEvents($searchWord, $searchDateYear, $searchDateMonth){
+			//Sample code
+			//find read_all function at application/core/MY_Model.php
+			$this->db->select("*");
+			$this->db->from("event_info");
+			if(!$searchDateMonth == '0'){
+				$this->db->where("event_name LIKE '%".$searchWord."%' AND DATE_FORMAT(event_info.event_date_start,'%c-%Y') = '".$searchDateMonth."-".$searchDateYear."'");
+			} else { 
+				$this->db->where("event_name LIKE '%".$searchWord."%'");
+			}
+
+			$query = $this->db->get();
+			return $query->result();			             
+		}
+
 		public function getAllApprovedEvents(){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
