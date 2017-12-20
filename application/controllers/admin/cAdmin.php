@@ -218,7 +218,7 @@ class CAdmin extends CI_Controller {
 
 		if($this->input->post('userType')=="Superadmin") {
 			$data = array('user_name' => $this->input->post('uname'),
-					  'password' => $this->input->post('password'),
+					  'password' => hash('sha512',$this->input->post('password')),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
@@ -232,7 +232,7 @@ class CAdmin extends CI_Controller {
 					);
 		} else {
 			$data = array('user_name' => $this->input->post('uname'),
-					  'password' => $this->input->post('password'),
+					  'password' => hash('sha512',$this->input->post('password')),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
