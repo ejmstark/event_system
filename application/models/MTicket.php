@@ -1,5 +1,5 @@
 <?php
-	class MTicket extends MY_model {
+	class MTicket extends MY_Model {
 		private $ticket_id;
 		private $date_sold;
 		private $user_id;

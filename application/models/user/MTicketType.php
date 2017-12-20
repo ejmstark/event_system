@@ -1,6 +1,6 @@
 
 <?php
-	class MTicketType extends MY_model {
+	class MTicketType extends MY_Model {
 		private $ticket_type_id;
 		private $ticket_name;
 		private $price;

@@ -1,5 +1,5 @@
 <?php
-	class MUserInfo extends MY_model {
+	class MUserInfo extends MY_Model {
 		private $account_id;
 		private $user_name;
 		private $password;

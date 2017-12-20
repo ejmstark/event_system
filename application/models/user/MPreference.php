@@ -1,5 +1,5 @@
 <?php
-	class MPreference extends MY_model {
+	class MPreference extends MY_Model {
 		private $user_preference_id;
 		private $preference_date;
 		private $user_id;

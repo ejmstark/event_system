@@ -1,5 +1,5 @@
 <?php
-	class MEventInfo extends MY_model {
+	class MEventInfo extends MY_Model {
 		private $event_id;
 		private $event_date_start;
 		private $event_date_end;
