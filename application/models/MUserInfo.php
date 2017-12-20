@@ -30,7 +30,7 @@
 			return $this->account_id;
 		}
 		public function getUsername(){
-			return $this->usernamedated
+			return $this->usernamedated;
 		}
 		public function getPassword(){
 			return $this->password;
@@ -71,7 +71,7 @@
 		}
 
 		public function getUser_imgPath(){
-			retun $this->user_imgPath;
+			return $this->user_imgPath;
 		}
 
 		public function getAddedBy(){
