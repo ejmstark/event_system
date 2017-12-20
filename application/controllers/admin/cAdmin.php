@@ -640,8 +640,8 @@ class CAdmin extends CI_Controller {
 
 		$data = array('announcementDetails' => $this->input->post('announcementDetails'),
 					  'announcementStatus' => 'OnGoing',
-					  'postedBy' => $this->input->post('postedBy'),
-					  'datePosted' => $now->format('Y-m-d H:i:s')
+					  'addedBy' => $this->input->post('postedBy'),
+					  'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 		$result = $announcement->insert($data);
