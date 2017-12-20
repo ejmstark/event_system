@@ -20,14 +20,14 @@
                     </header>
 
                     <div class="panel-body">
-                      
+
                         <?php if ($this->session->flashdata('error_msg')): ?>
                                 <div class="alert alert-danger" style="margin-top: 15px;">
                                     <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
                                     <?php echo $this->session->flashdata('error_msg'); ?>
                                 </div>
                             <?php endif ?>
-                        
+
 
                         <button class="btn btn-outline-primary" style="margin-bottom:25px;" type="button" name="button" data-toggle="modal" data-target="#createAnnouncement">Create Announcement</button>
 
@@ -47,14 +47,14 @@
                           if($announcements!=FALSE){
                             foreach ($announcements as $announcement) {
                               if($announcement->announcementStatus != "Finished") {
-                                $date = date("m-d-Y", strtotime($announcement->datePosted));
+                                $date = date("m-d-Y", strtotime($announcement->addedAt));
                                 echo  "<tr>
                                 <td id='announcementID'>".$announcement->announcementID."</td>
                                 <td>".$announcement->announcementDetails."</td>
                                 <td>".$date."</td>
                                 <td>".$announcement->announcementStatus."</td>
                                 <td>";
-                                
+
                                 /*if($announcement->announcementStatus == "OnGoing" ){
                                   echo "<a  href='".site_url()."/admin/cAdmin/FinishAnnouncement/".$announcement->announcementID."/user'>
                                     <button  type='button' class='btn btn-primary'>Update Status</button></a>";
@@ -62,12 +62,12 @@
                                   echo "<a  href='".site_url()."/admin/cAdmin/OnGoingAnnouncement/".$announcement->announcementID."/user'>
                                     <button  type='button' class='btn btn-primary'>Update Status</button></a>";
                                 }*/
-                                
+
                                   echo "<a  href='".site_url()."/admin/cAdmin/deleteAnnouncement/".$announcement->announcementID."'>
                                   <button  type='button' class='btn btn-danger'>Delete Announcement</button></a>";
                                 }
                             }
-                          
+
                                 }
                               ?>
                   </tbody>
@@ -97,13 +97,13 @@
                 <div class="form-group" >
                   <label for="" class="col-8 control-label">Announcement:</label>
                   <div class="col-8">
-                    <textarea class="form-control" type="text" name="announcementDetails" required="" style="min-height: 300px; max-height: 300px;"></textarea> 
+                    <textarea class="form-control" type="text" name="announcementDetails" required="" style="min-height: 300px; max-height: 300px;"></textarea>
                   </div>
                 </div>
 
                 <div class="form-group" >
                   <div class="col-8">
-                    <input class="form-control hidden" type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
+                    <input class="form-control hidden" type="text" name="addedBy" value="<?php echo $ownAccount->account_id; ?>">
                   </div>
                 </div>
 
@@ -120,7 +120,7 @@
 
 
 
-    <div class="content"> 
+    <div class="content">
       <!-- Create Announcement Modal -->
       <div id="" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -135,7 +135,7 @@
 
               <div class="modal-body form-horizontal ">
 
-                
+
               </div>
 
               <div class="modal-footer">

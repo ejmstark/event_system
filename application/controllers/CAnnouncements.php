@@ -63,8 +63,8 @@
 
 				$data = array('announcementDetails' => $this->input->post('announcementDetails'),
 							  'announcementStatus' => 'OnGoing',
-							  'postedBy' => $this->input->post('postedBy'),
-							  'datePosted' => $now->format('Y-m-d H:i:s')
+							  'addedBy' => $this->input->post('addedBy'),
+							  'addedAt' => $now->format('Y-m-d H:i:s'),
 							);
 
 				$result = $announcement->insert($data);

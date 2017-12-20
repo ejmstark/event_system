@@ -5,8 +5,11 @@
 		private $announcementID;
 		private $announcementDetails;
 		private $announcementStatus;
-		private $postedBy;
-		private $datePosted;
+
+		private $addedBy;
+		private $updatedBy;
+		private $addedAt;
+		private $updatedAt;
 
 		const DB_TABLE = "announcement"; //Table Name
     	const DB_TABLE_PK = "announcementID"; // Primary Key
@@ -28,13 +31,22 @@
 			return $this->announcementStatus;
 		}
 
-		public function getPostedBy(){
-			return $this->postedBy;
+		public function getAddedBy(){
+			return $this->addedBy;
 		}
 
-		public function getDatePosted(){
-			return $this->datePosted;
+		public function getUpdatedBy(){
+			return $this->updatedBy;
 		}
+
+		public function getAddedAt(){
+			return $this->addedAt;
+		}
+
+		public function getUpdatedAt(){
+			return $this->updatedAt;
+		}
+
 		public function setAnnouncementID($announcementID){
 			$this->announcementID = $announcementID;
 		}
@@ -47,12 +59,20 @@
 			$this->announcementStatus = $announcementStatus;
 		}
 
-		public function setPostedBy($postedBy){
-			$this->postedBy = $postedBy;
+		public function set($addedBy){
+			$this->addedBy = $addedBy;
 		}
 
-		public function setDatePosted($datePosted){
-			$this->datePosted = $datePosted;
+		public function set($updatedBy){
+			$this->updatedBy = $updatedBy;
+		}
+
+		public function set($addedAt){
+			$this->addedAt = $addedAt;
+		}
+
+		public function set($updatedAt){
+			$this->updatedAt = $updatedAt;
 		}
 
 		/* ****************** */
@@ -69,7 +89,7 @@
 			public function loadAllAnnouncementDetails(){
 				$this->db->select('*');
 				$this->db->from($this::DB_TABLE);
-				$this->db->join('user_account', $this::DB_TABLE . '.postedBy = user_account.account_id');
+				$this->db->join('user_account', $this::DB_TABLE . '.addedBy = user_account.account_id');
 				$query = $this->db->get();
 
 				return $query->result();

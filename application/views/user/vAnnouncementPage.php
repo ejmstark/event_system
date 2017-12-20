@@ -34,7 +34,7 @@
                           if($announcements!=FALSE){
                             foreach ($announcements as $announcement) {
                               if($announcement->announcementStatus != "Finished") {
-                                $date = date("m-d-Y", strtotime($announcement->datePosted));
+                                $date = date("m-d-Y", strtotime($announcement->addedAt));
                                 echo  "<tr>
                                 <td id='announcementID'>".$announcement->first_name." ".$announcement->last_name."</td>
                                 <td>".$announcement->announcementDetails."</td>
@@ -79,7 +79,7 @@
 
                 <div class="form-group" >
                   <div class="col-8">
-                    <input class="form-control hidden" type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
+                    <input class="form-control hidden" type="text" name="addedBy" value="<?php echo $ownAccount->account_id; ?>">
                   </div>
                 </div>
 
