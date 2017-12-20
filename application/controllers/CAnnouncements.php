@@ -67,7 +67,6 @@
 				$result = $announcement->insert($data);
 
 				if($result){
-					//$this->index();
 					redirect('admin/cAdmin/viewAnnouncements');
 				}
 			}

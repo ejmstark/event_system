@@ -87,11 +87,9 @@ class CEvent extends CI_Controller {
 		foreach ($gID as $k) {
 			$uid = $k->user_id; //retrieve
 		}
-		// print_r($uid);
 		$data2['users']	= $this->MUser->loadUserDetails($uid);
 
 		$data = array_merge($data1,$data2); 
-		// print_r($data);
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vEventRegistration.php', $data);
 		$this->load->view('imports/vFooter');
@@ -108,11 +106,9 @@ class CEvent extends CI_Controller {
 		foreach ($gID as $k) {
 			$uid = $k->user_id;
 		}
-		// print_r($uid);
 		$data2['users']	= $this->MUser->loadUserDetails($uid);
 
 		$data = array_merge($data1,$data2);
-		// print_r($data);
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vER.php', $data);
 		$this->load->view('imports/vFooter');
@@ -247,7 +243,6 @@ class CEvent extends CI_Controller {
         $data = array_merge($data1, $data2);
 
 		$result = $this->load->view('vEditEvent',$data,TRUE);
-		//$this->viewCreateEvent();
 		echo $result;
 
 	}
@@ -361,7 +356,6 @@ class CEvent extends CI_Controller {
 			$uid = $k->user_id; //retrieve
 		}
 
-		// print_r($uid);
 		$result_data = $this->MUser->loadUserDetails($uid);
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
@@ -404,12 +398,6 @@ class CEvent extends CI_Controller {
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data3['types'] = $array2;
 
-		// $data4['tixStat'] = $this->MTicketType->getTicketStatus($eid);
-		// if(isset($data4['tixStat'])){
-		// 	$data = array_merge($data1,$data2,$data3,$data4);
-		// }else{
-
-		// }
 		$data = array_merge($data1,$data2,$data3);
 		$result_data= $this->MEvents->getGoingToEvent($id);
 		//////////////////////////////////////////////////////////////////////////////
@@ -456,12 +444,10 @@ class CEvent extends CI_Controller {
 		$data['id'] = $this->session->userdata['userSession']->userID;
 		if($this->error != ""){
 			$data['errorMsg']= $this->error;
-		 // print_r($data);
 		}
 
 		if($this->success != ""){
 			$data['successMsg']= $this->success;
-		 // print_r($data);
 		}
 
 		$this->load->view('imports/vHeaderLandingPage');
@@ -512,7 +498,6 @@ class CEvent extends CI_Controller {
 			$uid = $k->user_id; //retrieve
 		}
 
-		// print_r($uid);
 		$result_data = $this->MUser->loadUserDetails($uid);
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
@@ -555,12 +540,6 @@ class CEvent extends CI_Controller {
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$data3['types'] = $array2;
 
-		// $data4['tixStat'] = $this->MTicketType->getTicketStatus($eid);
-		// if(isset($data4['tixStat'])){
-		// 	$data = array_merge($data1,$data2,$data3,$data4);
-		// }else{
-
-		// }
 		$data = array_merge($data1,$data2,$data3);
 		$result_data= $this->MEvents->getGoingToEvent($id);
 		//////////////////////////////////////////////////////////////////////////////
@@ -607,12 +586,10 @@ class CEvent extends CI_Controller {
 		$data['id'] = $this->session->userdata['userSession']->userID;
 		if($this->error != ""){
 			$data['errorMsg']= $this->error;
-		 // print_r($data);
 		}
 
 		if($this->success != ""){
 			$data['successMsg']= $this->success;
-		 // print_r($data);
 		}
 		$data['color'] = $_POST['color'];
 		
@@ -625,10 +602,7 @@ class CEvent extends CI_Controller {
 
 	public function buyTicket($tId,$eid)
 		{
-			// print_r($id);
-			// $type = new MTicketType();
-			// $where = array('event_id' => $id );
-			// $data['tickets'] = $type->loadType($id);
+			
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
@@ -655,16 +629,11 @@ class CEvent extends CI_Controller {
 
 			}
 
-			// echo $this->MTicket->db->last_query();
-
-			// $this->load->view('imports/vHeader');
-
-			// $this->load->view('imports/vFooter');
+		
 
 			# code...
 		}
 		public function createEvent(){
-			// $this->load->model('events/mEvent','event');
 			$event = new mEvent();
 			$data['event_date_start'] = $this->input->post('dateStart');
 			$data['event_date_end'] = $this->input->post('dateEnd');
@@ -684,7 +653,6 @@ class CEvent extends CI_Controller {
 			$data['event_name'] = $this->input->post('event_name');
 			$data['event_details'] = $this->input->post('event_details');
 			$data['event_category'] = $this->input->post('event_category');
-			// $data['event_picture'] = null;
 			$data['event_venue'] = $this->input->post('event_venue');
 			$data['date_created'] = date('Y-m-d H:i:s');
 	
@@ -693,16 +661,13 @@ class CEvent extends CI_Controller {
 			$affectedRows = $this->MEvents->insert($data);
 	
 			$evt_id = $this->MEvents->db->insert_id();
-			// print_r($evt_id);
 			$photo = $this->MEvents->do_upload_event($evt_id);
-			// $this->MEvent->do_upload_event($evt_id);
 			
 			if(!$photo) {
 				$photo = $this->MEvents->insertPhotoEvent("events1.jpg",$evt_id);
 			}
 			var_dump($photo);
 	
-				// print_r($photo);
 	
 			$totalNumTix = 0;
 			$data1['ticket_name'] = $this->input->post('ticketType1');
@@ -748,7 +713,6 @@ class CEvent extends CI_Controller {
 	
 
 		public function deleteEvent($id){
-			// $event_id = $this->input>post('event_id');
 			$data = array('event_isActive'=> 0);
 			$v = $this->MUser->updateSpecificEvent($id,$data);
 			if($v){
@@ -756,10 +720,7 @@ class CEvent extends CI_Controller {
 			}else{
 				echo "Error...";
 			}
-			//code for tests purposes
-			/*
-			$this->event->deleteEvent(18);
-			*/
+		
 		}
 		
 	public function updateEvent(){
@@ -771,19 +732,7 @@ class CEvent extends CI_Controller {
 		$event_category = $this->input->post('event_category');
 		$event_venue = $this->input->post('event_venue');
 
-		//code for tests purposes
-		/*
-		$event_id = 18;
-		$event_date_start = '2017-10-01 12:12:12';
-		$event_date_end = '2017-10-01 12:12:12';
-		$no_tickets_total = 15;
-		$event_status = 'Approved';
-		$event_name = 'Suntukan ng mga SHS sa Bunzel Lobby';
-		$event_details = 'Bak-bakan na!';
-		$event_category = 'Training';
-		$event_venue = 'Consolacion Central Elementary School, Consolacion, Central Visayas, Philippines';
-		*/
-		//end of code snippet
+		
 
 		$data = array('event_date_start'=>$event_date_start,
 					  'event_date_end'=>$event_date_end,
@@ -820,12 +769,10 @@ class CEvent extends CI_Controller {
 			$this->load->model('events/mEvent','Event');
 			$data['events'] = $this->MEvents->showUpcomingEvents();
 
-			// print_r($data);
 			$this->load->view('imports/vHeader');
 			$this->load->view('user/vUpcoming.php', $data);
 			$this->load->view('imports/vFooter');
 
-		// $this->output->set_content_type('application/json')->set_output(json_encode($result));
 		}
 
 		public function editEvent($id){

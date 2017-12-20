@@ -22,7 +22,6 @@ class CLogin extends CI_Controller {
 
 	 	$this->load->helper('url');
 
-// 	 	$this->load->library('../controllers/CInitialize');
 
 
 
@@ -61,7 +60,6 @@ class CLogin extends CI_Controller {
 
 				$this->load->view('vLogin');
 
-				// redirect('cInitialize','refresh');
 
 			}
 
@@ -71,7 +69,6 @@ class CLogin extends CI_Controller {
 
 			$this->load->view('vLogin');
 
-			// redirect('cInitialize','refresh');
 
 		}
 
@@ -106,7 +103,6 @@ class CLogin extends CI_Controller {
 
       }
 
-    //   print_r($sessionData);
 
     }
 
@@ -175,11 +171,6 @@ class CLogin extends CI_Controller {
 
 		$this->session->unset_userdata('userSession');
 
-// 		session_destroy();
-
-    // print_r(redirect('cInitialize','refresh'))		;
-
-        // $this->load->('')
 
         $this->index();
 

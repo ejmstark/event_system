@@ -84,21 +84,19 @@ class CUser extends CI_Controller {
     			$this->session->set_flashdata('error_msg','Username taken');
     			$this->data = $data;
     			$this->viewSignUp();
-    			// redirect('user/cUser/viewSignUp',"refresh");
-				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
+    			
+				
 
 		}else if($res1){
 			$this->session->set_flashdata('error_msg','Email taken');
 			$this->data = $data;
 				$this->viewSignUp();
-				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
 
 		}else{
 
 			$result = $this->MUser->insert($data);
 
 			if($result){
-			//$this->index();
 			redirect('CEvent/viewEvents');
 		}
 
@@ -134,11 +132,9 @@ class CUser extends CI_Controller {
 		foreach ($gID as $k) {
 			$uid = $k->user_id;
 		}
-		// print_r($uid);
 		$data2['users']	= $this->MUser->loadUserDetails($uid);
 
 		$data = array_merge($data1,$data2);
-		// print_r($data);
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vEventRegistration.php', $data);
 		$this->load->view('imports/vFooter');
@@ -149,9 +145,7 @@ class CUser extends CI_Controller {
 		$data['events'] = $this->MEvents->getAllEvents();
 
 		$this->load->view('imports/vHeaderLandingPage');
-		//$this->load->view('imports/vHeader');
 		$this->load->view('user/vSearch.php');
-		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
 	}
 	public function viewSignUp()

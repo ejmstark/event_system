@@ -14,7 +14,6 @@ class CCart extends CI_Controller {
   }
 
   public function addToCart () {
-    //$qty = $this->input->post('qty1')
     $qty= 5;
     $id = 1; //ticket id
     $cartId = 0;
