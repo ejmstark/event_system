@@ -30,7 +30,17 @@
 						'user_id'  => $user_id,
 						'event_id' => $event_id
 					);
-			return $this->db->insert('notification', $data);
+			$this->db->select("*");
+			$this->db->from($this::DB_TABLE);
+			$this->db->where($data);
+
+			$query = $this->db->get();
+			$count = $query->num_rows();
+
+			if($count === 0){
+				$this->db->insert('notification', $data);	
+			}
 		}
+
 	}
 ?>
