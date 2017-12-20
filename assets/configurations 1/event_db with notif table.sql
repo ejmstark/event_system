@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2017 at 04:14 AM
+-- Generation Time: Dec 20, 2017 at 10:57 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -88,7 +88,7 @@ CREATE TABLE `event_info` (
 
 CREATE TABLE `notification` (
   `notif_id` int(11) NOT NULL,
-  `notif_stataus` enum('Read','Unread') DEFAULT 'Unread',
+  `notif_status` enum('Read','Unread') DEFAULT 'Unread',
   `user_id` int(11) NOT NULL,
   `event_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
