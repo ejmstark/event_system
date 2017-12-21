@@ -68,7 +68,6 @@
 
 	}
 
-
 	// view all events
 	public function readAllEvents(){
 		$result= $this->MEventInfo->read_all();
@@ -87,6 +86,7 @@
         $data2['users']=$this->readAllUsers();
 	}
 
+	//Updates a selected Event's Status to Approved so that it will be displayed
 	public function approveEvent($id){
 		$event_module = new MEventInfo();
 
@@ -102,6 +102,7 @@
 		}
 	}
 
+	//Updates a selected Event's Status to Rejected
 	public function rejectEvent($id){
 		$event_module = new MEventInfo();
 
@@ -146,6 +147,7 @@
 		}
 	}
 
+	//updates the selected User's Status to Banned
 	public function Ban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -166,6 +168,7 @@
 		}
 	}
 
+	//updates the selected User's Status to Active
 	public function Unban($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -185,7 +188,7 @@
 		}
 	}
 
-	// view all admin
+	//Returns all Admin (Regular Admin) accounts
 	public function readAllAdmin(){
 		$user_module = new MUserInfo();
 
@@ -198,7 +201,7 @@
 		}
 	}
 
-	// view all Superadmin
+	//Returns all Superadmin accounts
 	public function readAllSuperAdmin(){
 		$user_module = new MUserInfo();
 
@@ -211,6 +214,7 @@
 		}
 	}
 
+	//Degrades a slected Superadmin back to Admin (Regular Admin)
 	public function Admin($id){
 		$user_module = new MUserInfo();
 
@@ -229,6 +233,7 @@
 		}
 	}
 
+	//Upgrades a selected Admin to a Superadmin
 	public function SuperAdmin($id){
 		$user_module = new MUserInfo();
 
@@ -247,6 +252,7 @@
 		}
 	}
 
+	//adds a new Admin
 	public function addAdmin()
 	{
 		$user = new MUserInfo();
@@ -282,8 +288,6 @@
 					);
 		}
 
-
-
 		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
 		$res1 = $this->MUser->read_where(array('email' => $data['email']));
 
@@ -312,6 +316,7 @@
 		# code...
 	}
 
+	//Redirects to User Account Management with list of users
 	public function viewUserAccountMgt() {
 		$result_data=$this->readAllUsers();
 		//////////////////////////////////////////////////////////////////////////////
@@ -345,6 +350,7 @@
 
 	}
 	//Roald Code
+
 	//this function will show the search results coming from viewUserAccountMgt()
 	public function viewSearchUserAccountMgt() {
 		$result_data=$this->searchUsers();
@@ -374,9 +380,9 @@
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 		$this->load->view('imports/admin_vFooter');
-
 	}
 
+	//Redirects to Admin Account Management with list of admins 
 	public function viewAdminAccountMgt() {
 		$result_data=$this->readAllAdmin();
 		//////////////////////////////////////////////////////////////////////////////
@@ -446,6 +452,7 @@
 
 	}
 
+	//Updates the details of the current admin logged in with the session
 	public function updateAdmin() {
 		$user = new MUserInfo();
 
@@ -472,6 +479,7 @@
 		}
 	}
 
+	//Deletes a selected user by updating its status to "Deleted"
 	public function Delete($id,$frm){
 		$user_module = new MUserInfo();
 
@@ -492,6 +500,7 @@
 		}
 	}
 
+	//Returns the details of the current admin logged in with the session
 	public function readOwnAdminAccount() {
 		$user_module = new MUserInfo();
 

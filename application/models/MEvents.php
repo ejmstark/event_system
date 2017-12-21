@@ -12,7 +12,7 @@
 		private $event_category;
 		private $event_venue;
 		private $date_created;
-		private $user_id
+		private $user_id;
 
 		const DB_TABLE = "event_info"; //Table Name
     	const DB_TABLE_PK = "event_id"; // Primary Key
