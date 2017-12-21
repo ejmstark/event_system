@@ -2,6 +2,7 @@
 	<form action="" method="post">
 		<p>Search Via:<br>
 		<select name="Search_options">
+			<option value="event_name">Name</option>
 			<option value="event_category">Category</option>
 			<option value="event_venue">Venue</option>
 			<option value="event_date_start">Date</option>

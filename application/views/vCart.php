@@ -1,0 +1,32 @@
+
+ <body>
+     <h2>My Cart</h2>
+     <table>
+     	<thead>
+     		<tr>
+     			<th>Name</th>
+     			<th>Quantity</th>
+     			<th></th>
+     			<th></th>
+     		</tr>
+     	</thead>
+     	<tbody>
+     	  <tr>
+ 		      <td>sample1</td>
+ 		      <td>1000</td>
+ 			  <td><button>Approve</button>
+ 			  <td><button>Cancel</button>
+     		</tr>
+     		  <td>sample2</td>
+ 		      <td>1000</td>
+ 			  <td><button>Approve</button>
+ 			  <td><button>Cancel</button>
+     		</tr>
+     		  <td>sample3</td>
+ 		      <td>1000</td>
+ 			  <td><button>Approve</button>
+ 			  <td><button>Cancel</button>
+     		</tr>
+     	</tbody>
+     </table>
+ </body>
