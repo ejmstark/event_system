@@ -17,7 +17,7 @@
 												</span>
 											</div>
 											<div class = "event">
-												<img src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg">
+												<img src="<?php echo base_url();?><?php echo $event->event_picture; ?>">
 												<div class = "event-description">
 													<div class = "event-date-category">
 														<span><?php echo $event->dateStart;?> </span>
