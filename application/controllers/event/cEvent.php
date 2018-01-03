@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class cEvent extends CI_Controller {
+class CEvent extends CI_Controller {
 
 	public function __construct()
 	{
@@ -336,7 +336,7 @@ class cEvent extends CI_Controller {
 			// $this->MEvent->do_upload_event($evt_id);
 
 			if(!$photo) {
-				$photo = $this->MEvent->insertPhotoEvent("Default.png",$evt_id);
+				$photo = $this->MEvent->insertPhotoEvent("events1.jpg",$evt_id);
 			}
 			var_dump($photo);
 
