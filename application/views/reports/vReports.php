@@ -25,7 +25,7 @@
 						<td><?php echo $e->event_status;?></td>
 						<td><?php echo $e->event_venue;?></td>
 						<td><?php echo $e->event_category;?></td>
-						<td><a href="<?php echo site_url();?>/CReports/generateRevenue/<?php echo $e->event_id;?>"><button id="<?php echo $e->event_id;?>">Generate Revenue</button></a></td>
+						<td><a href="<?php echo site_url();?>/reports/cReports/generateRevenue/<?php echo $e->event_id;?>"><button id="<?php echo $e->event_id;?>">Generate Revenue</button></a></td>
 					</tr>
 				<?php } ?>
 			<?php } ?>

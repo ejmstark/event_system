@@ -21,18 +21,18 @@
     
                     <div class="collapse navbar-collapse yamm" id="navigation">
                         <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/CLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
                         </div>
     
                         <div class="button navbar-right">
-                            <a href ="<?php echo site_url();?>/CEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
+                            <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                         </div>
                         
     
                         <ul class="main-nav nav navbar-nav navbar-right">
-                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CLogin/viewDashBoard">Home</a></li>
+                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
                             
-                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CEvent/viewEvents">Profile</a></li><!-- 
+                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li><!-- 
                             <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                             <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
                         </ul>
@@ -62,7 +62,7 @@
                         <div class="box-for overflow">
                             <div class="col-md-12 col-xs-12 register-blocks">
                                 <h2>Event Details : </h2> 
-                                <form action="<?php echo site_url();?>/CEvent/updateEvent " method="post">
+                                <form action="<?php echo site_url();?>/event/cEvent/updateEvent " method="post">
                                     <input type="text" name="event_id" value="<?php echo $ev->event_id;?>" hidden>
                                     <div class="form-group">
                                         <label for="name">Event Title</label>

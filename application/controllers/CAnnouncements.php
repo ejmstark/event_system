@@ -67,7 +67,7 @@
 				$result = $announcement->insert($data);
 
 				if($result){
-					redirect('admin/cAdmin/viewAnnouncements');
+					redirect('CAdmin/viewAnnouncements');
 				}
 			}
 
@@ -91,7 +91,7 @@
 					$response = $announcement->updateAnnouncementStatus($id, "Finished");
 
 					if ($response) {
-						redirect('admin/cAdmin/viewAnnouncements');
+						redirect('CAdmin/viewAnnouncements');
 					}
 				}
 			}

@@ -13,7 +13,7 @@
 	    <div class = "top"></div>
 	   	<div class = "row ">
 	 		<div class = "col-sm-10 div-content">
-				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/cInitialize">HOME</a></div>
+				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/CInitialize">HOME</a></div>
 				<div class = "col-sm-2"><a href = "#">EVENTS</a> </div>
 				<div class = "col-sm-2"><a href = "#">ABOUT</a></div>
 				<?php if (!$this->session->userdata('userSession')) { ?>

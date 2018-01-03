@@ -6,12 +6,12 @@ class CEvent extends CI_Controller {
 	public function __construct()
 	{
     	parent::__construct();
-    	$this->load->model('MEvents');
+    	$this->load->model('MEvent');
     	$this->load->model('MUser');
     	$this->load->model('MTicketType');
     	$this->load->model('MTicket');
-    	$this->load->model('MPreference');
     	$this->load->helper('date');
+    	$this->load->model('MEventInfo');
     	$this->error = "";
     	$this->success = "";
     }
@@ -19,186 +19,7 @@ class CEvent extends CI_Controller {
 
 	public function index()
 	{
-		$this->data['custom_js']= '<script type="text/javascript">
-                              $(function(){
-                              	$("#user").addClass("active");
-                              });
-                        </script>';
 
-        $data['users'] = $this->MUser->getAllUsers();
-
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vUser.php',$data);
-		$this->load->view('imports/vFooter',$this->data);
-	}
-
-	public function displayEvent()
-	{
-
-		$data['events'] = $this->MEvents->getAllEvents();
-		// print_r($data);
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vListEvents.php', $data);
-		$this->load->view('imports/vFooter');
-		# code...
-	}
-	public function searchEvent()
-	{
-		$data['users'] = $this->MUser->getAllUsers();
-		$result_data = $this->MEvents->getSearchEvents($_POST['searchWord']);
-		// print_r($data);
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->dateStart = $value->event_date_start;
-					$arrObj->dateEnd = $value->event_date_end;
-					$arrObj->event_category = $value->event_category;
-					$array[] = $arrObj;
-			}
-		}
-		$data['events'] = $array;
-
-		$this->data['custom_js']= '<script type="text/javascript">
-
-                              $(function(){
-
-                              	$("#dash").addClass("active");
-
-                              });
-
-                        </script>';
-		$this->load->view('imports/vHeaderLandingPage');
-		$this->load->view('vLandingPage', $data);
-		//$this->load->view('user/vListEvents', $data['events']);
-		$this->load->view('imports/vFooterLandingPage');
-		# code...
-	}
-
-	public function displayEventDetails($id)
-	{
-		
-		$uid = null; //to get organize name
-		
-		$data1 ['events'] = $this->MEvents->loadEventDetails($id);
-		$gID = $this->MEvents->loadEventDetails($id);
-		foreach ($gID as $k) {
-			$uid = $k->user_id; //retrieve
-		}
-		$data2['users']	= $this->MUser->loadUserDetails($uid);
-
-		$data = array_merge($data1,$data2); 
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vEventRegistration.php', $data);
-		$this->load->view('imports/vFooter');
-		# code...
-	}
-
-	public function displayEventDetails2($id)
-	{
-		
-		$uid = null;
-		
-		$data1 ['events']= $this->MEvents->loadEventDetails($id);
-		$gID = $this->MEvents->loadEventDetails($id);
-		foreach ($gID as $k) {
-			$uid = $k->user_id;
-		}
-		$data2['users']	= $this->MUser->loadUserDetails($uid);
-
-		$data = array_merge($data1,$data2);
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vER.php', $data);
-		$this->load->view('imports/vFooter');
-		# code...
-	}
-
-
-	public function interested($id)
-	{
-		$uid = $this->session->userdata['userSession']['userID'];
-		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
-		$data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
-					  'user_id' => $uid ,
-					  'event_id' => $id
-	 				  );
-
-		$result = $this->MPreference->insert($data);
-
-		if($result){
-			$this->viewPreferenceEvents();
-		}
-		
-		# code...
-	}
-
-	public function going($id)
-	{
-		$type = new MTicketType();
-		$where = array('event_id' => $id );
-		$data['tickets'] = $this->MTicketType->loadType($id);
-
-
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vGoing.php', $data);
-		$this->load->view('imports/vFooter');
-		
-		# code...
-	}
-
-
-	public function buyTickets()
-	{
-
-		$uid = $this->session->userdata['userSession']->userID;
-		$var = $this->input->post('qty');
-		
-		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
-
-		for ($i=0; $i < $var ; $i++) { 
-			$data = array('date_sold' => $now->format('Y-m-d H:i:s'), 
-					  'user_id' => $uid ,
-					  'ticket_type_id' => $this->input->post('type')
-	 				  );
-			$result = $this->MTicket->insert($data);
-
-		}
-
-		
-		if($result){
-			$this->viewAllTickets($uid);
-		}
-		
-		# code...
-	}
-
-
-	public function viewAllTickets($id)
-	{
-
-		$data['tickets'] = $this->MTicket->joinTicketEventType($id);
-
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vAllTickets.php', $data);
-		$this->load->view('imports/vFooter');
-		# code...
-	}
-
-
-
-	public function viewPreferenceEvents()
-	{
-
-		$uid = $this->session->userdata['userSession']['userID'];
-
-		$data['prefs'] = $this->MPreference->joinEventPrefs($uid);
-
-		$this->load->view('imports/vHeader');
-		$this->load->view('user/vPrefEvents.php', $data);
-		$this->load->view('imports/vFooter');
-		# code...
 	}
 
 		//This function gets the date from the Calendar Module and sends in to the VCreateEvent.php
@@ -231,7 +52,7 @@ class CEvent extends CI_Controller {
 
 		$id = $_POST['id'];
 
-		$tid = $this->MEvents->joinEventTicketType($id);
+		$tid = $this->MEvent->joinEventTicketType($id);
 
 
 		$data2['ticket_info'] = null;
@@ -243,6 +64,7 @@ class CEvent extends CI_Controller {
         $data = array_merge($data1, $data2);
 
 		$result = $this->load->view('vEditEvent',$data,TRUE);
+		//$this->viewCreateEvent();
 		echo $result;
 
 	}
@@ -262,192 +84,100 @@ class CEvent extends CI_Controller {
 	public function viewEvents()
 	{
 		$userid = $this->session->userdata['userSession']->userID;
-		$result_data = $this->MEvents->getAllEventsByUser($userid);
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = $array1 = $array2 = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->dateStart = $value->dateStart;
-					$arrObj->dateEnd = $value->dateEnd;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_status = $value->event_status;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->event_category = $value->event_category;
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		$data['events']  = $array;
 
-		$result_data = $this->MUser->read($this->session->userdata['userSession']->userID);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->load_amt = $value->load_amt;
-					$array1[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		$data['user']   = $array1;
+		$strEventSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
+		$strEventWhere = array("user_id" => $userid,
+													 "event_isActive" => TRUE
+													);
 
-		$result_data = $this->MEvents->getTransHistory($this->session->userdata['userSession']->userID);
+		$data['events']  = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strEventSelect,
+							$strEventWhere,FALSE,FALSE,FALSE,FALSE);
+		////////////STOPS HERE///////////////////////////////////////////////////
+
+
+
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->Event = $value->Event;
-					$arrObj->Paid = $value->Paid;
-					$arrObj->DatePaid = $value->DatePaid;
-					$array2[] = $arrObj;
-			}
-
-		}
+		$data['user'] = $this->MUser->read($this->session->userdata['userSession']->userID);
 		////////////STOPS HERE///////////////////////////////////////////////////
-		$data['hist']   = $array1;
+
+
+
+		//////////////////////////////////////////////////////////////////////////////
+		//================Sprint 3 SPRINT 3 INTERFACE MODULE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$data['hist']   = $this->MEventInfo->getTransHistory($this->session->userdata['userSession']->userID);
+		////////////STOPS HERE///////////////////////////////////////////////////
+
 		$data['userid'] = $userid;
 
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEvents',$data);
 		$this->load->view('imports/vFooterLandingPage');
 	}
+
 	public function displayEventDetails($id)
 	{
 
 		$uid = null; //to get organize name
 		$eid = null;
 
-		$result_data = $this->MEvents->loadEventDetails($id);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = $array1 = $array2 = $array3 = $array4 = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_status = $value->event_status;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->event_category = $value->event_category;
-					$arrObj->user_id = $value->user_id;
-					$array[] = $arrObj;
-			}
-		}
+		$gID = $data1 ['events']  = $this->MEvent->read_where('event_id = '.$id.'');
 		////////////STOPS HERE///////////////////////////////////////////////////
-		$data1 ['events']  = $array;
-
-		$gID = $this->MEvents->loadEventDetails($id);
 
 		foreach ($gID as $k) {
 			$eid = $k->event_id;
 			$uid = $k->user_id; //retrieve
 		}
 
-		$result_data = $this->MUser->loadUserDetails($uid);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->load_amt = $value->load_amt;
-					$array1[] = $arrObj;
-			}
-		}
+		$data2['organizer'] = $this->MUser->read_where('account_id = '.$uid.'');
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data2['organizer'] = $array1;
 
 		$result_data = $this->MTicketType->loadType($eid);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->ticket_name = $value->ticket_name;
-					$arrObj->price = $value->price;
-					$arrObj->ticket_type_id = $value->ticket_type_id;
-					$array2[] = $arrObj;
-			}
-		}
+		$data3['types'] = $this->MTicketType->read_where('event_id = '.$eid.'');
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data3['types'] = $array2;
 
+		// $data4['tixStat'] = $this->MTicketType->getTicketStatus($eid);
+		// if(isset($data4['tixStat'])){
+		// 	$data = array_merge($data1,$data2,$data3,$data4);
+		// }else{
+
+		// }
 		$data = array_merge($data1,$data2,$data3);
-		$result_data= $this->MEvents->getGoingToEvent($id);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$array3[] = $arrObj;
-			}
-		}
+		$data['going'] = $this->MEvent->getGoingToEvent($id);
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data['going'] = $array3;
 
-		$result_data = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->load_amt = $value->load_amt;
-					$array4[] = $arrObj;
-			}
-		}
+		$data['user'] = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID));
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data['user'] = $array4;
+
+		//////////////////////////////////////////////////////////////////////////////
 		$data['id'] = $this->session->userdata['userSession']->userID;
 		if($this->error != ""){
 			$data['errorMsg']= $this->error;
+		 // print_r($data);
 		}
 
 		if($this->success != ""){
 			$data['successMsg']= $this->success;
+		 // print_r($data);
 		}
 
 		$this->load->view('imports/vHeaderLandingPage');
@@ -468,133 +198,63 @@ class CEvent extends CI_Controller {
 		$eid = null;
 		$id = $_POST['id'];
 
-		$result_data = $this->MEvents->loadEventDetails($id);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = $array1 = $array2 = $array3 = $array4 = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_status = $value->event_status;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->event_category = $value->event_category;
-					$arrObj->user_id = $value->user_id;
-					$array[] = $arrObj;
-			}
-		}
+		$gID = $data1 ['events']  = $this->MEvent->read_where('event_id = '.$id.'');
 		////////////STOPS HERE///////////////////////////////////////////////////
-		$data1 ['events']  = $array;
-
-		$gID = $this->MEvents->loadEventDetails($id);
 
 		foreach ($gID as $k) {
 			$eid = $k->event_id;
 			$uid = $k->user_id; //retrieve
 		}
 
-		$result_data = $this->MUser->loadUserDetails($uid);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->load_amt = $value->load_amt;
-					$array1[] = $arrObj;
-			}
-		}
+		$data2['organizer'] = $this->MUser->read_where('account_id = '.$uid.'');
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data2['organizer'] = $array1;
 
 		$result_data = $this->MTicketType->loadType($eid);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->ticket_name = $value->ticket_name;
-					$arrObj->price = $value->price;
-					$arrObj->ticket_type_id = $value->ticket_type_id;
-					$array2[] = $arrObj;
-			}
-		}
+		$data3['types'] = $this->MTicketType->read_where('event_id = '.$eid.'');
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data3['types'] = $array2;
 
+		// $data4['tixStat'] = $this->MTicketType->getTicketStatus($eid);
+		// if(isset($data4['tixStat'])){
+		// 	$data = array_merge($data1,$data2,$data3,$data4);
+		// }else{
+
+		// }
 		$data = array_merge($data1,$data2,$data3);
-		$result_data= $this->MEvents->getGoingToEvent($id);
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$array3[] = $arrObj;
-			}
-		}
+		$data['going'] = $this->MEvent->getGoingToEvent($id);
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data['going'] = $array3;
 
-		$result_data = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->load_amt = $value->load_amt;
-					$array4[] = $arrObj;
-			}
-		}
+		$data['user'] = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID));
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data['user'] = $array4;
+
+		//////////////////////////////////////////////////////////////////////////////
 		$data['id'] = $this->session->userdata['userSession']->userID;
 		if($this->error != ""){
 			$data['errorMsg']= $this->error;
+		 // print_r($data);
 		}
 
 		if($this->success != ""){
 			$data['successMsg']= $this->success;
+		 // print_r($data);
 		}
 		$data['color'] = $_POST['color'];
-		
+
 		$result = $this->load->view("vEventDetailsFromCalendar",$data,true);
-	 
+
 		echo $result;
 	}
 
@@ -602,7 +262,10 @@ class CEvent extends CI_Controller {
 
 	public function buyTicket($tId,$eid)
 		{
-			
+			// print_r($id);
+			// $type = new MTicketType();
+			// $where = array('event_id' => $id );
+			// $data['tickets'] = $type->loadType($id);
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
@@ -619,100 +282,111 @@ class CEvent extends CI_Controller {
 					$res = $this->MTicket->insert($data);
 
 					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
-					$this->success = "Bought ticket for ".$res1[0]->price;
+					// $this->success = "Bought ticket for ".$res1[0]->price;
 					// $this->displayEventDetails($eid);
+					$this->session->set_flashdata('success_msg',"Bought ticket for ".$res1[0]->price);
 					redirect('CEvent/displayEventDetails/'.$eid);
 				}else{
-					$this->error = "Insufficient balance!";
+					$this->session->set_flashdata('error_msg','Insufficient balance!');
 					$this->displayEventDetails($eid);
 				}
 
 			}
 
-		
+			// echo $this->MTicket->db->last_query();
+
+			// $this->load->view('imports/vHeader');
+
+			// $this->load->view('imports/vFooter');
 
 			# code...
 		}
 		public function createEvent(){
+			// $this->load->model('events/mEvent','event');
 			$event = new mEvent();
 			$data['event_date_start'] = $this->input->post('dateStart');
 			$data['event_date_end'] = $this->input->post('dateEnd');
-	
+
 			$date2=explode(" ", $data['event_date_start']);
 			$d = explode ("/", $date2[0]);
 			$ts = strtotime($d[2]."-".$d[0]."-".$d[1]." ".$date2[1].":00 ".$date2[2]);
 			$data['event_date_start'] = mdate("%Y-%m-%d %H:%i:%s", $ts);
-	
+
 			$date2=explode(" ", $data['event_date_end']);
 			$d = explode ("/", $date2[0]);
 			$ts = strtotime($d[2]."-".$d[0]."-".$d[1]." ".$date2[1].":00 ".$date2[2]);
 			$data['event_date_end'] = mdate("%Y-%m-%d %H:%i:%s", $ts);
-	
+
 			$data['no_tickets_total'] = 0;
 			$data['event_status'] = 'pending';
 			$data['event_name'] = $this->input->post('event_name');
 			$data['event_details'] = $this->input->post('event_details');
 			$data['event_category'] = $this->input->post('event_category');
+			// $data['event_picture'] = null;
 			$data['event_venue'] = $this->input->post('event_venue');
-			$data['date_created'] = date('Y-m-d H:i:s');
-	
-			$data['user_id'] = $this->session->userdata['userSession']->userID;
-	
-			$affectedRows = $this->MEvents->insert($data);
-	
-			$evt_id = $this->MEvents->db->insert_id();
-			$photo = $this->MEvents->do_upload_event($evt_id);
-			
+			$data['addedAt'] = date('Y-m-d H:i:s');
+
+			 $data['user_id'] = $this->session->userdata['userSession']->userID;
+
+			$affectedRows = $this->MEvent->insert($data);
+
+			$evt_id = $this->MEvent->db->insert_id();
+			// print_r($evt_id);
+			$photo = $this->MEvent->do_upload_event($evt_id);
+			// $this->MEvent->do_upload_event($evt_id);
+
 			if(!$photo) {
-				$photo = $this->MEvents->insertPhotoEvent("events1.jpg",$evt_id);
+				$photo = $this->MEvent->insertPhotoEvent("Default.png",$evt_id);
 			}
 			var_dump($photo);
-	
-	
+
+				// print_r($photo);
+
 			$totalNumTix = 0;
 			$data1['ticket_name'] = $this->input->post('ticketType1');
 			$data1['ticket_count'] = $this->input->post('no_tickets_total1');
 			$data1['price'] = $this->input->post('price_tickets_total1');
-	
+
 			$data1['event_id'] = $evt_id;
 			$totalNumTix += $data1['ticket_count'];
 			$this->MTicketType->insert($data1);
-	
+
 			if($this->input->post('ticketType2')||$this->input->post('no_tickets_total2')||$this->input->post('no_tickets_total2')){
 				$data1['ticket_name'] = $this->input->post('ticketType2');
 				$data1['ticket_count'] = $this->input->post('no_tickets_total2');
 				$data1['price'] = $this->input->post('price_tickets_total2');
-	
+
 				$data1['event_id'] = $evt_id;
 				$totalNumTix += $data1['ticket_count'];
 				$this->MTicketType->insert($data1);
 			}
-	
+
 			if($this->input->post('ticketType3')||$this->input->post('no_tickets_total3')||$this->input->post('no_tickets_total3')){
 				$data1['ticket_name'] = $this->input->post('ticketType3');
 				$data1['ticket_count'] = $this->input->post('no_tickets_total3');
 				$data1['price'] = $this->input->post('price_tickets_total3');
-	
+
 				$data1['event_id'] = $evt_id;
 				$totalNumTix += $data1['ticket_count'];
 				$this->MTicketType->insert($data1);
 			}
-	
+
 			$where =  array('no_tickets_total' => $totalNumTix );
-			$res = $this->MEvents->update($evt_id,$where);
-	
-			
-	
+			$res = $this->MEvent->update($evt_id,$where);
+
+
+
 			if($res){
 				redirect('CEvent/viewEvents');
 			}else{
 				redirect('CEvent/viewCreateEvent');
 			}
-	
+
 		}
-	
+
 
 		public function deleteEvent($id){
+			// $event_id = $this->input>post('event_id');
 			$data = array('event_isActive'=> 0);
 			$v = $this->MUser->updateSpecificEvent($id,$data);
 			if($v){
@@ -720,10 +394,15 @@ class CEvent extends CI_Controller {
 			}else{
 				echo "Error...";
 			}
-		
+			//code for tests purposes
+			/*
+			$this->event->deleteEvent(18);
+			*/
 		}
-		
+
 	public function updateEvent(){
+		$this->load->model('MEvent','event');
+
 		$event_id = $this->input->post('event_id');
 		$event_date_start = $this->input->post('event_date_start');
 		$event_date_end = $this->input->post('event_date_end');
@@ -732,7 +411,19 @@ class CEvent extends CI_Controller {
 		$event_category = $this->input->post('event_category');
 		$event_venue = $this->input->post('event_venue');
 
-		
+		//code for tests purposes
+		/*
+		$event_id = 18;
+		$event_date_start = '2017-10-01 12:12:12';
+		$event_date_end = '2017-10-01 12:12:12';
+		$no_tickets_total = 15;
+		$event_status = 'Approved';
+		$event_name = 'Suntukan ng mga SHS sa Bunzel Lobby';
+		$event_details = 'Bak-bakan na!';
+		$event_category = 'Training';
+		$event_venue = 'Consolacion Central Elementary School, Consolacion, Central Visayas, Philippines';
+		*/
+		//end of code snippet
 
 		$data = array('event_date_start'=>$event_date_start,
 					  'event_date_end'=>$event_date_end,
@@ -760,19 +451,21 @@ class CEvent extends CI_Controller {
 		}else{
 			echo "Error...";
 		}
-		
-		
+
+
 	}
 
 
 		public function upcomingEvents(){
-			$this->load->model('events/mEvent','Event');
-			$data['events'] = $this->MEvents->showUpcomingEvents();
+			$this->load->model('MEvent','Event');
+			$data['events'] = $this->Event->showUpcomingEvents();
 
+			// print_r($data);
 			$this->load->view('imports/vHeader');
 			$this->load->view('user/vUpcoming.php', $data);
 			$this->load->view('imports/vFooter');
 
+		// $this->output->set_content_type('application/json')->set_output(json_encode($result));
 		}
 
 		public function editEvent($id){
@@ -782,6 +475,162 @@ class CEvent extends CI_Controller {
 			$this->load->view('imports/vHeaderSignUpPage');
 			$this->load->view('user/vEditEvent', $v);
 			$this->load->view('imports/vFooterLandingPage');
+		}
+
+		public function displayEvent()
+		{
+	
+			$data['events'] = $this->MEvent->getAllEvents();
+			// print_r($data);
+			$this->load->view('imports/vHeader');
+			$this->load->view('user/vListEvents.php', $data);
+			$this->load->view('imports/vFooter');
+			# code...
+		}
+		public function searchEvent()
+		{
+			$data['users'] = $this->MUser->getAllUsers();
+			$result_data = $this->MEvent->getSearchEvents($_POST['searchWord'], $_POST['searchDateYear'], $_POST['searchDateMonth']);
+			// print_r($data);
+			$array = array();
+			if($result_data){
+				foreach ($result_data as $value) {
+						$arrObj = new stdClass;
+						$arrObj->event_id = $value->event_id;
+						$arrObj->event_name = $value->event_name;
+						$arrObj->dateStart = $value->event_date_start;
+						$arrObj->dateEnd = $value->event_date_end;
+						$arrObj->event_category = $value->event_category;
+						$array[] = $arrObj;
+				}
+			}
+			$data['events'] = $array;
+	
+			$this->data['custom_js']= '<script type="text/javascript">
+	
+								  $(function(){
+	
+									  $("#dash").addClass("active");
+	
+								  });
+	
+							</script>';
+			$this->load->view('imports/vHeaderLandingPage');
+			$this->load->view('vLandingPage', $data);
+			//$this->load->view('user/vListEvents', $data['events']);
+			$this->load->view('imports/vFooterLandingPage');
+			# code...
+		}
+	
+		public function displayEventDetails($id)
+		{
+			
+			$uid = null; //to get organize name
+			
+			$data1 ['events'] = $this->MEvent->loadEventDetails($id);
+			$gID = $this->MEvent->loadEventDetails($id);
+			foreach ($gID as $k) {
+				$uid = $k->user_id; //retrieve
+			}
+			// print_r($uid);
+			$data2['users']	= $this->MUser->loadUserDetails($uid);
+	
+			$data = array_merge($data1,$data2); 
+			// print_r($data);
+			$this->load->view('imports/vHeader');
+			$this->load->view('user/vEventRegistration.php', $data);
+			$this->load->view('imports/vFooter');
+			# code...
+		}
+	
+	
+		public function interested($id)
+		{
+			$uid = $this->session->userdata['userSession']['userID'];
+			$pref = new MPreference();
+			
+			$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+			$data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
+						  'user_id' => $uid ,
+						  'event_id' => $id
+						   );
+	
+			$result = $pref->insert($data);
+	
+			if($result){
+				$this->viewPreferenceEvents();
+			}
+			
+			# code...
+		}
+	
+		public function going($id)
+		{
+			// print_r($id);
+			$type = new MTicketType();
+			$where = array('event_id' => $id );
+			$data['tickets'] = $type->loadType($id);
+	
+	
+			$this->load->view('imports/vHeader');
+			$this->load->view('user/vGoing.php', $data);
+			$this->load->view('imports/vFooter');
+			
+			# code...
+		}
+	
+	
+		public function buyTickets()
+		{
+	
+			$uid = $this->session->userdata['userSession']->userID;
+			$var = $this->input->post('qty');
+			$tck = new MTicket();
+			
+			$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+	
+			for ($i=0; $i < $var ; $i++) { 
+				$data = array('date_sold' => $now->format('Y-m-d H:i:s'), 
+						  'user_id' => $uid ,
+						  'ticket_type_id' => $this->input->post('type')
+						   );
+				$result = $tck->insert($data);
+	
+			}
+	
+			
+			if($result){
+				$this->viewAllTickets($uid);
+			}
+			
+			# code...
+		}
+	
+	
+		public function viewAllTickets($id)
+		{
+	
+			$data['tickets'] = $this->MTicket->joinTicketEventType($id);
+	
+			$this->load->view('imports/vHeader');
+			$this->load->view('user/vAllTickets.php', $data);
+			$this->load->view('imports/vFooter');
+			# code...
+		}
+	
+	
+	
+		public function viewPreferenceEvents()
+		{
+	
+			$uid = $this->session->userdata['userSession']['userID'];
+	
+			$data['prefs'] = $this->MPreference->joinEventPrefs($uid);
+	
+			$this->load->view('imports/vHeader');
+			$this->load->view('user/vPrefEvents.php', $data);
+			$this->load->view('imports/vFooter');
+			# code...
 		}
 }
 ?>

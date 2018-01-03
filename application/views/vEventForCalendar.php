@@ -62,11 +62,11 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/CLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
                     </div>
 
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/CEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
                     </div>
                     
 
@@ -101,7 +101,7 @@
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
                             <h2>Event Details : </h2> 
-                            <form action="<?php echo site_url();?>/CEvent/createEvent " method="post">
+                            <form action="<?php echo site_url();?>/event/cEvent/createEvent " method="post">
                                 <div class="form-group">
                                     <label for="name">Event Title</label>
                                     <input type="text" class="form-control" name="event_name" required="">

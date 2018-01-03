@@ -40,7 +40,7 @@
               
               <input type="submit" name="" value="Log in">
                 <a href="#"> Forgot your password? </a>
-                <br>Don't have an account? <a href="<?php echo site_url();?>/CUser/viewSignUp"> Sign up here! </a>
+                <br>Don't have an account? <a href="<?php echo site_url();?>/user/cUser/viewSignUp"> Sign up here! </a>
             </form>
           </center>
         </div>
@@ -52,5 +52,5 @@
 </body>
 </html>
 <?php }else{
-  redirect('CLogin/viewDashboard');
+  redirect('cLogin/viewDashboard');
   }?>

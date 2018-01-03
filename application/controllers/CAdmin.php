@@ -1,15 +1,19 @@
-	<?php
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CAdmin extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-;
+	 // 	$this->load->model('MAdmin');
+		// $this->load->model('MAdminUsers');
+		$this->load->model('MUserInfo');
+		$this->load->model('MEventInfo');
+		$this->load->model('MReports');
 		$this->load->model('MUser');
-		$this->load->model('MEvents');
-		$this->load->model('MTicket');
 		$this->load->model('MAnnouncement');
+		$this->load->model('MCardLoad');
+		// $this->load->model('MUserInfo');
 	}
 
 	public function index()
@@ -19,7 +23,7 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function getUserCount(){
-		$result = $this->MTicket->getUserCountMonthly("2017");
+		$result = $this->MReports->getUserCountMonthly("2017");
 		if($result){
 			return $result;
 		}else{
@@ -31,7 +35,7 @@ class CAdmin extends CI_Controller {
 
 	// view all events
 	public function readAllEvents(){
-		$result= $this->MEvents->read_all();
+		$result= $this->MEventInfo->read_all();
 		if($result){
 			return $result;
 		}else{
@@ -51,10 +55,10 @@ class CAdmin extends CI_Controller {
 		$event_module = new MEventInfo();
 
 		$data = array('event_id' => $id);
-		$results = $this->MEvents->read_where($data);
+		$results = $this->MEventInfo->read_where($data);
 
 		if($results){
-			$response = $this->MEvents->updateEventStatus($id, "Approved");
+			$response = $event_module-> updateEventStatus($id, "Approved");
 
 			if ($response) {
  				redirect('CAdmin/viewAllEvents');
@@ -63,11 +67,13 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function rejectEvent($id){
+		$event_module = new MEventInfo();
+
 		$data = array('event_id' => $id);
-		$results = $this->MEvents->read_where($data);
+		$results = $this->MUserInfo->read_where($data);
 
 		if($results){
-			$response = $this->MEvents->updateEventStatus($id, "Rejected");
+			$response = $event_module-> updateEventStatus($id, "Rejected");
 
 			if ($response) {
  				echo redirect('CAdmin/viewAllEvents');
@@ -77,8 +83,10 @@ class CAdmin extends CI_Controller {
 
 	// view all users
 	public function readAllUsers(){
+		$user_module = new MUserInfo();
+
 		$data = array('user_type' => 'Regular');
-		$result= $this->MEvents->read_where($data);
+		$result= $this->MUserInfo->read_where($data);
 		if($result){
 			return $result;
 		}else{
@@ -88,9 +96,10 @@ class CAdmin extends CI_Controller {
 
 	//view all searched user
 	public function searchUsers(){
+		$user_module = new MUserInfo();
 		if(isset($_POST['search_val'])){
 			$data = array('user_name' => $_POST['search_val']);
-			$result= $this->MEvents->read_where($data);
+			$result= $this->MUserInfo->read_where($data);
 			if($result){
 				return $result;
 			}else{
@@ -102,11 +111,13 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function Ban($id,$frm){
+		$user_module = new MUserInfo();
+
 		$data = array('account_id' => $id);
-		$results = $this->MEvents->read_where($data);
+		$results = $this->MUserInfo->read_where($data);
 
 		if($results){
-			$response = $this->MEvents->updateUserStatus($id, "Banned");
+			$response = $user_module-> updateUserStatus($id, "Banned");
 
 			if ($response) {
 				if($frm=="admin"){
@@ -120,11 +131,13 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function Unban($id,$frm){
+		$user_module = new MUserInfo();
+
 		$data = array('account_id' => $id);
-		$results = $this->MEvents->read_where($data);
+		$results = $this->MUserInfo->read_where($data);
 
 		if($results){
-			$response = $this->MEvents->updateUserStatus($id, "Active");
+			$response = $user_module-> updateUserStatus($id, "Active");
 
 			if ($response) {
  				if($frm=="admin"){
@@ -138,8 +151,10 @@ class CAdmin extends CI_Controller {
 
 	// view all admin
 	public function readAllAdmin(){
+		$user_module = new MUserInfo();
+
 		$data = array('user_type !=' => 'Regular');
-		$result = $this->MEvents->read_where($data);
+		$result = $this->MUserInfo->read_where($data);
 		if($result){
 			return $result;
 		}else{
@@ -149,8 +164,10 @@ class CAdmin extends CI_Controller {
 
 	// view all Superadmin
 	public function readAllSuperAdmin(){
+		$user_module = new MUserInfo();
+
 		$data = array('user_type' => 'Superadmin');
-		$result= $this->MEvents->read_where($data);
+		$result= $this->MUserInfo->read_where($data);
 		if($result){
 			return $result;
 		}else{
@@ -159,14 +176,16 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function Admin($id){
+		$user_module = new MUserInfo();
+
 		$data = array('account_id' => $id);
-		$results = $this->MEvents->read_where($data);
+		$results = $this->MUserInfo->read_where($data);
 
 		if($results){
-			$response = $this->MEvents->updateUserType($id, "Admin");
+			$response = $user_module-> updateUserType($id, "Admin");
 
 			if ($response) {
-				$response2 = $this->MEvents->updateUpgradedBy($id,NULL);
+				$response2 = $user_module->updateUpgradedBy($id,NULL);
 				if($response2){
  					redirect('CAdmin/viewAdminAccountMgt');
 				}
@@ -175,16 +194,16 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function SuperAdmin($id){
-		
+		$user_module = new MUserInfo();
 
 		$data = array('account_id' => $id);
-		$results = $this->MEvents->->read_where($data);
+		$results = $this->MUserInfo->read_where($data);
 
 		if($results){
-			$response = $this->MEvents->updateUserType($id, "Superadmin");
+			$response = $user_module-> updateUserType($id, "Superadmin");
 
 			if ($response) {
-				$response2 = $this->MEvents->updateUpgradedBy($id,$this->session->userdata['userSession']->userID);
+				$response2 = $user_module->updateUpgradedBy($id,$this->session->userdata['adminSession']->userID);
 				if($response2){
  					redirect('CAdmin/viewAdminAccountMgt');
 				}
@@ -194,11 +213,13 @@ class CAdmin extends CI_Controller {
 
 	public function addAdmin()
 	{
+		$user = new MUserInfo();
+
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		if($this->input->post('userType')=="Superadmin") {
 			$data = array('user_name' => $this->input->post('uname'),
-					  'password' => $this->input->post('password'),
+					  'password' => hash('sha512',$this->input->post('password')),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
@@ -207,12 +228,12 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' =>  $this->input->post('userType'),
-					  'upgradedBy' => $this->session->userdata['userSession']->userID,
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'upgradedBy' => $this->session->userdata['adminSession']->userID,
+					  'addedAt	' => $now->format('Y-m-d H:i:s')
 					);
 		} else {
 			$data = array('user_name' => $this->input->post('uname'),
-					  'password' => $this->input->post('password'),
+					  'password' => hash('sha512',$this->input->post('password')),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
@@ -221,7 +242,7 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' =>  $this->input->post('userType'),
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'addedAt	' => $now->format('Y-m-d H:i:s')
 					);
 		}
 
@@ -243,7 +264,7 @@ class CAdmin extends CI_Controller {
 
 		}else{
 
-			$result = $this->MUser->insert($data);
+			$result = $user->insert($data);
 
 
 			if($result){
@@ -256,32 +277,11 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewUserAccountMgt() {
-		$result_data=$this->readAllUsers();
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->load_amt = $value->load_amt;
-					$array[] = $arrObj;
-			}
-		}
+		$data2['users']=$this->readAllUsers();
 		////////////STOPS HERE////////////////////////////////////////////////////
-		$data2['users']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
 		$this->load->view('imports/admin_vFooter');
@@ -302,7 +302,7 @@ class CAdmin extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt	 = $value->addedAt	;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -321,33 +321,13 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewAdminAccountMgt() {
-		$result_data=$this->readAllAdmin();
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->upgraded_by = $value->upgradedBy;//Added by admin module
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		$data2['admin']=$array;
+		$data2['admin']=$this->readAllAdmin();
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
+		////////////STOPS HERE///////////////////////////////////////////////////
+
 
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vAdminAccountMgt', $data2);
@@ -356,21 +336,7 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewFinance() {
-		$result_data = array();//Replace with query
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					 $arrObj = new stdClass;
-					//Only interface filtering
-					//$arrObj->price
-					//$arrObj->ticket_count
-					 $array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
+
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vFinance');
 		$this->load->view('imports/admin_vFooter');
@@ -378,19 +344,8 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function viewReport() {
-		$result_data = array();//
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					 $arrObj = new stdClass;
-					
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
+
+		//$data['data']=$array;
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vReport');
 		$this->load->view('imports/admin_vFooter');
@@ -405,6 +360,8 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function updateAdmin() {
+		$user = new MUserInfo();
+
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		$data = array('user_name' => $this->input->post('uuname'),
@@ -417,30 +374,31 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('ugender'),
 					  'contact_no' => $this->input->post('ucontact'),
 					  'user_type' =>  $this->input->post('uuserType'),
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'addedAt	' => $now->format('Y-m-d H:i:s')
 					);
 
-		$result = $this->MUser->update($this->session->userdata['userSession']->userID, $data);
+		$result = $user->update($this->session->userdata['adminSession']->userID, $data);
 
 		if($result){
+			//$this->index();
 			redirect('CAdmin/viewAdminAccountMgt');
 		}
 	}
 
 	public function Delete($id,$frm){
-		
+		$user_module = new MUserInfo();
 
 		$data = array('account_id' => $id);
-		$results = $this->MEvents->->read_where($data);
+		$results = $this->MUserInfo->read_where($data);
 
 		if($results){
-			$response = $this->MEvents->updateUserStatus($id, "Deleted");
+			$response = $user_module-> updateUserStatus($id, "Deleted");
 
 			if ($response) {
 				if($frm=="admin"){
-					redirect('cLogin/userLogout');
+					redirect('CLogin/userLogout');
 				}else if($frm=="user"){
-					redirect('cLogin/userLogout');
+					redirect('CLogin/userLogout');
 				}
 
  			}
@@ -448,10 +406,9 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function readOwnAdminAccount() {
-		
-
-		$data = array('account_id' => $this->session->userdata['userSession']->userID);
-		$result= $this->MEvents->read_where($data);
+		$user_module = new MUserInfo();
+		$data = array('account_id' => $this->session->userdata['adminSession']->userID);
+		$result= $this->MUserInfo->read_where($data);
 
 		if($result){
 			return $result;
@@ -461,7 +418,7 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function numEvents($startDate, $endDate){
-		$result = $this->MEvents->numEvents($startDate, $endDate);
+		$result = $this->MReports->numEvents($startDate, $endDate);
 		if($result){
 			return $result;
 		}else{
@@ -471,7 +428,7 @@ class CAdmin extends CI_Controller {
 
 
 	public function getActiveUsers($startDate, $endDate){
-		$result = $this->MEvents->countUsers($startDate, $endDate);
+		$result = $this->MReports->countUsers($startDate, $endDate);
 		if($result){
 			return $result;
 		}else{
@@ -484,13 +441,14 @@ class CAdmin extends CI_Controller {
 		///////Interface New Implementation////
 		///////////////////////////////////////
 		$year = $_GET['years'];
-		$where = array('YEAR(user_account.date_account_created)' => $year,
+		$userModel = new MUser();
+		$where = array('YEAR(user_account.addedAt	)' => $year,
 									 'user_account.user_status' => 'Active',
 									 'user_account.user_type' => 'Regular'
 								 );
-		$result = $this->Muser->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
-							MONTHNAME(user_account.date_account_created) as monthname',
-							$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+		$result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+							MONTHNAME(user_account.addedAt	) as monthname',
+							$where,FALSE,FALSE,"MONTH(user_account.addedAt	)",FALSE);
 		$arr_data = array();
 		foreach ($result as $value) {
 			$arr_data[] = [$value->UserCount, $value->monthname];
@@ -504,18 +462,34 @@ class CAdmin extends CI_Controller {
 		///////////////////////////////////////
 		///////Interface New Implementation////
 		///////////////////////////////////////
+		// $year = $_GET['years'];
+		// $userModel = new MUser();
+		// $where = array('YEAR(user_account.addedAt	)' => $year,
+		// 							 'card.cardStatus' => 1,
+		// 						 );
+		// $result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
+		// 					MONTHNAME(user_account.addedAt	) as monthname',
+		// 					$where,FALSE,FALSE,"MONTH(user_account.addedAt	)",FALSE);
+		// $arr_data = array();
+		// foreach ($result as $value) {
+		// 	$arr_data[] = [$value->UserCount, $value->monthname];
+		// }
+		// echo json_encode($arr_data);
+
+		// $this->db->select('COUNT(*) as CardCount');
+		// $this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
+		// $this->db->from('card');
+		// $this->db->where("cardStatus = 1");
+		// $this->db->group_by("monthname");
+		// $this->db->order_by("monthname", "desc");
+
+		$strSelect = "COUNT(*) as CardCount, MONTHNAME(card.cardCreatedOn) as monthname";
+		$strWhere = "cardStatus = 1";
 
 
-		$this->db->select('COUNT(*) as CardCount');
-		$this->db->select('MONTHNAME(card.cardCreatedOn) as monthname');
-		$this->db->from('card');
-		$this->db->where("cardStatus = 1");
-		$this->db->group_by("monthname");
-		$this->db->order_by("monthname", "desc");
+		$result = $this->MCardLoad->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strSelect,
+							$strWhere,FALSE,'monthname DESC',"monthname",FALSE);
 
-		$query = $this->db->get();
-		$result = $query->result();
-		
 		$arr_data = array();
 		foreach ($result as $value) {
 			$arr_data[] = [$value->CardCount, $value->monthname];
@@ -530,10 +504,11 @@ class CAdmin extends CI_Controller {
 		///////Interface New Implementation////
 		///////////////////////////////////////
 		$year = $_GET['years'];
+		$eventModel = new MEventInfo();
 		$where = array("event_status" => "APPROVED",
-										"YEAR(date_created)" => $year
+										"YEAR(addedAt)" => $year
 								 );
-		$result = $this->MEvents->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
+		$result = $eventModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as EventCount',
 							$where,FALSE,FALSE,FALSE,FALSE);
 		$arr_data = array();
 		foreach ($result as $value) {
@@ -547,35 +522,15 @@ class CAdmin extends CI_Controller {
 
 	//ANNOUNCEMENT FUNCTIONALITY - also added MAnnouncement in models/admin and autoload.php (12/04/17)
 	public function viewAnnouncements() {
-		$result_data=$this->readAllAdmin();
 		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->account_id = $value->account_id;
-					$arrObj->user_name = $value->user_name;
-					$arrObj->first_name = $value->first_name;
-					$arrObj->middle_initial = $value->middle_initial;
-					$arrObj->last_name = $value->last_name;
-					$arrObj->email= $value->email;
-					$arrObj->contact_no= $value->contact_no;
-					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
-					$arrObj->gender = $value->gender;
-					$arrObj->user_type = $value->user_type;
-					$arrObj->user_status = $value->user_status;
-					$arrObj->upgraded_by = $value->upgradedBy;//Added by admin module
-					$array[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
 
-		$data2['admin']=$array;
+		$data2['admin']=$this->readAllAdmin();
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
 		$data2['announcements']=$this->readAllAnnouncements();
+		////////////STOPS HERE///////////////////////////////////////////////////
+
 
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vAnnouncements', $data2);
@@ -589,13 +544,14 @@ class CAdmin extends CI_Controller {
 
 		$data = array('announcementDetails' => $this->input->post('announcementDetails'),
 					  'announcementStatus' => 'OnGoing',
-					  'postedBy' => $this->input->post('postedBy'),
-					  'datePosted' => $now->format('Y-m-d H:i:s')
+					  'addedBy' => $this->input->post('postedBy'),
+					  'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
-		$result = $this->MAnnouncement->insert($data);
+		$result = $announcement->insert($data);
 
 		if($result){
+			//$this->index();
 			redirect('CAdmin/viewAnnouncements');
 		}
 	}
@@ -611,11 +567,13 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function deleteAnnouncement($id){
+		$announcement = new MAnnouncement();
+
 		$data = array('announcementID' => $id);
 		$results = $this->MAnnouncement->read_where($data);
 
 		if($results){
-			$response = $this->MAnnouncement->updateAnnouncementStatus($id, "Finished");
+			$response = $announcement->updateAnnouncementStatus($id, "Finished");
 
 			if ($response) {
 				redirect('CAdmin/viewAnnouncements');
@@ -629,30 +587,13 @@ class CAdmin extends CI_Controller {
                               	$("#admin").addClass("active");
                               });
                         </script>';
-
-
-    	$result_data=$this->readAllEvents();
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->no_tickets_total = $value->no_tickets_total;
-					$arrObj->event_status = $value->event_status;
-					$array[] = $arrObj;
-			}
-		}
+		// //////////////////////////////////////////////////////////////////////////////
+		// //================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		// /////////////////////////////////////////////////////////////////////////////
+		$data2['row'] = $this->MEventInfo->read_all();
 		////////////STOPS HERE///////////////////////////////////////////////////
 
-		$data2['row'] = $array;
-
-   		$data3['users']=$this->getUserCount();
+		$data3['users']=$this->getUserCount();
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vAdmin', $data2);
 		$this->load->view('imports/admin_vFooter');

@@ -35,7 +35,7 @@
                 </div>
             </div>
         </nav>
-    <form method="post" action="<?php echo site_url();?>/CEvent/createEvent ">
+    <form method="post" action="<?php echo site_url();?>/CEvent/createEvent">
         <div class ="createYourEvent">
             <h1> CREATE YOUR EVENT! </h1> <br>
             <h2> Share it. Make it live. </h2>

@@ -41,6 +41,6 @@
 </head>
 
 <?php } else {
-        redirect('CLogin/userLogin');
+        redirect('cLogin/userLogin');
     }
 ?>

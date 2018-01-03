@@ -1,13 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CCalendar extends CI_Controller {
+class cCalendar extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
 	 	$this->load->model('MCalendar');
 		$this->load->model('MUser');
-	 	$this->load->model('MEvents');
+	 	$this->load->model('MEvent');
 	}
 
 	public function index()
@@ -23,28 +23,16 @@ class CCalendar extends CI_Controller {
                               	$("#cal").addClass("active");
                               });
                         </script>';
-		$result_data = $this->MEvents->getAllEventsByUser($this->session->userdata['userSession']->userID);
+
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_name = $value->event_name;
-					//$arrObj->event_isActive = $value->event_isActive;
-					$arrObj->date_created = $value->date_created;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_category = $value->event_category;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->color = $value->color;
-					$array[] = $arrObj;
-			}
-		}
-		$data['event_data'] = $array;
+		$strCalSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
+		$strCalWhere = array(
+													"user_id" => $this->session->userdata['userSession']->userID,
+													"event_isActive" => TRUE
+												);
+		$data['event_data'] = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strCalSelect,$strCalWhere,false,false,false,false);
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$this->load->helper('url');
 		$this->load->view('imports/vHeaderLandingPage');
@@ -117,7 +105,7 @@ class CCalendar extends CI_Controller {
 				if($row!=NULL){
 					$HTML='<div class="modal-dialog" role="document">
 						<div class="modal-content">
-						<form class="form-horizontal" method="POST" action="'.site_url().'/CCalendar/ajaxUpdateAndDelete">
+						<form class="form-horizontal" method="POST" action="'.site_url().'/calendar/cCalendar/ajaxUpdateAndDelete">
 						  <div class="modal-header" style="background-color:'.$row->color.';">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							<h4 class="modal-title" id="myModalLabel">Edit Event</h4>
@@ -286,6 +274,23 @@ class CCalendar extends CI_Controller {
 					'event_status'=>"Rejected"
 				);
 
+				// echo "Delete".$id;
+				// die();
+
+				//$sql = "UPDATE `register_event` SET petition_status='Inactive' WHERE petition_id=".$id." ";
+
+
+				// $sql = "DELETE FROM events WHERE id = $id";
+				// $query = $bdd->prepare( $sql );
+				// if ($query == false) {
+				//  print_r($bdd->errorInfo());
+				//  die ('Erreur prepare');
+				// }
+				// $res = $query->execute();
+				// if ($res == false) {
+				//  print_r($query->errorInfo());
+				//  die ('Erreur execute');
+				// }
 
 			}
 		}

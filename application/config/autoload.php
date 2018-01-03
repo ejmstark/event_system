@@ -133,6 +133,6 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array('MAnnouncement', 'MCard', 'MCart', 'MEvents', 'MPreference', 'MTicket', 'MTicketType', 'MUser');
+$autoload['model'] = array('MAnnouncement', 'MCard', 'MCart', 'MEvent', 'MPreference', 'MTicket', 'MTicketType', 'MUser');
 	
 

@@ -21,16 +21,16 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/CLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
                     </div>
                     <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/CEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
                     </div>
 
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CLogin/viewDashBoard">Home</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
                         
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CEvent/viewEvents">Profile</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <!-- 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
@@ -117,7 +117,7 @@
                                     <fieldset >
                                         <div class="row">
                                             <div class="col-md-12">  
-                                                 <a href="<?php echo site_url()?>/CCalendar">
+                                                 <a href="<?php echo site_url()?>/calendar/cCalendar">
                                                 <button class = "button btn largesearch-btn">Calendar</button></a>
                                             </div>  
                                         </div>
@@ -323,7 +323,7 @@
                                         <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                           <div class="modal-dialog" role="document">
                                             <div class="modal-content">
-                                            <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/CCalendar/AddEvent">
+                                            <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/calendar/cCalendar/AddEvent">
                                             
                                               <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -599,7 +599,7 @@
                         var dataSet = "id="+id+"&color="+color;
                         $.ajax({
                             type: "POST",
-                            url: '<?php echo site_url()?>/CEvent/displayEventDetailsFromCalendar',
+                            url: '<?php echo site_url()?>/event/cEvent/displayEventDetailsFromCalendar',
                             data: dataSet,
                             cache: false,
                             success: function(result){
@@ -629,7 +629,7 @@
             Event[1] = start;
             Event[2] = end;
             $.ajax({
-             url: '<?php echo site_url()?>/CCalendar/ajaxUpdate',
+             url: '<?php echo site_url()?>/calendar/cCalendar/ajaxUpdate',
              type: "POST",
              data: {Event:Event},
              success: function(rep) {

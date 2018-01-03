@@ -19,7 +19,7 @@
 						<td><?php echo $e->event_name;?></td>
 						<td><?php echo $e->event_venue;?></td>
 						<td><?php echo $e->event_date_start;?></td>
-						<td><a href="<?php echo site_url();?>/CEvent/displayEventDetails2/<?php echo $e->event_id;?>"><button id="<?php echo $e->event_id;?>">View</button></a></td>
+						<td><a href="<?php echo site_url();?>/user/cEvent/displayEventDetails2/<?php echo $e->event_id;?>"><button id="<?php echo $e->event_id;?>">View</button></a></td>
 					</tr>
 				<?php } ?>
 			<?php } ?>

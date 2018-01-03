@@ -5,7 +5,7 @@ class CInitialize extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 	 	$this->load->library('session');
-	 	$this->load->model('MEvents');
+	 	$this->load->model('MEvent');
 	}
 
 	public function index()
@@ -13,27 +13,19 @@ class CInitialize extends CI_Controller {
 		if ($this->session->userdata('userSession')) {
 			redirect('CLogin/viewDashBoard');
 		} else {
-			$result_data = $this->MEvent->getAllApprovedEvents();
-			$array = array();
 			//////////////////////////////////////////////////////////////////////////////
-			//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+			//================INTERFACE MODULE - SPRINT 3 Implementation============//
 			/////////////////////////////////////////////////////////////////////////////
-			if($result_data){
-				foreach ($result_data as $value) {
-						$arrObj = new stdClass;
-						$arrObj->event_id = $value->event_id;
-						$arrObj->event_name = $value->event_name;
-						$arrObj->dateStart = $value->dateStart;
-						$arrObj->event_category = $value->event_category;
-						$array[] = $arrObj;
-				}
-			}
+			$stringSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
+			$stringWhere = "event_info.event_status = 'Approved'";
+			$data['events'] = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($stringSelect,$stringWhere,false,false,false,false);
 			////////////STOPS HERE///////////////////////////////////////////////////
-			$data['events'] = $array;
-			$this->load->view('imports/vHeaderHomePage');
-			$this->load->view('vHomePage',$data);
-			$this->load->view('imports/vFooterHomePage');
-			
+
+			$this->load->view('imports/vHeaderHomepage');
+			$this->load->view('vHomepage',$data);
+			$this->load->view('imports/vFooterHomepage');
+			// $this->load->view('vLogin');
+			//redirect('cInitialize');
 		}
 	}
 }

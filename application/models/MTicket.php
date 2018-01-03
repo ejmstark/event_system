@@ -1,15 +1,66 @@
 <?php
 	class MTicket extends MY_Model {
-		/*Declare Entities*/
-		//Ex.: private $event_id;
 		private $ticket_id;
+		private $date_sold;
+		private $user_id;
+		private $ticket_type_id;
+		private $addedBy; 
+		private $updatedBy; 
+		private $addedAt; 
+		private $updateAt; 
 
-		const DB_TABLE = "ticket"; //Table Name
-    	const DB_TABLE_PK = "ticket_id"; // Primary Key
 
-    	
-		/* GETTER AND SETTERS */
-			
+		const DB_TABLE = "ticket";
+    	const DB_TABLE_PK = "petition_id";
+
+    	public function __construct(){
+
+		}
+
+		public function Attendance($id)
+		{
+			$this->db->select("count(*), event_info.event_id as Event ID, event_info.event_name as Event Name ");
+			$this->db->from('ticket');
+			$this->db->join('ticket_type as tt', 'ticket.ticket_type_id = tt.ticket_type_id');
+			$this->db->join('event_info', 'tt.event_id = event_info.event_id');
+			$this->db->where('ticket.user_id', $id);
+
+			$query = $this->db->get();
+
+			return $query->result();
+			# code...
+		}
+
+		public function joinTicketEventType($id)
+		{
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('ticket_type as tt', $this::DB_TABLE.'.ticket_type_id = tt.ticket_type_id');
+			$this->db->join('event_info as e', 'tt.event_id = e.event_id');
+			$this->db->where( array($this::DB_TABLE.'.user_id' => $id, ));
+
+			$query = $this->db->get();
+			 return $query->result();
+			# code...
+		}
+
+		public function generateRevenue($id)
+		{
+			$this->db->select('count(*) as TOTAL_TICKET_SOLD' );
+			$this->db->select_sum('price', 'REVENUE');
+			// $this->db->select_count('*','TOTAL_TICKE_SOLD' );
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('ticket_type as tt', $this::DB_TABLE.'.ticket_type_id = tt.ticket_type_id');
+			$this->db->where( array('tt.event_id' => $id ));
+			$query = $this->db->get();
+
+			return $query->result();
+
+			# code...
+		}
+
+
+
 
 		public function getTicket_id(){
 			return $this->ticket_id;
@@ -19,156 +70,68 @@
 			$this->ticket_id = $ticket_id;
 		}
 
-		public function getUserCountMonthly($year){
-			$statement="SELECT    COUNT(*) as UserCount
-						FROM      user_account
-						WHERE     YEAR(user_account.date_account_created) = ".$year."
-						AND user_account.user_status = 'Active'
-						AND user_account.user_type = 'Regular'
-						GROUP BY  MONTH(user_account.date_account_created)";
-			$query = $this->db->query($statement);
-
-			return $query->result_array();
+		public function getPrice(){
+			return $this->price;
 		}
 
-		public function totalUsers(){
-			$this->db->select('COUNT(*) as UserCount');
-			$this->db->from('user_account');
-			$this->db->where("user_status = 'Active'");
-			$this->db->where("user_type = 'Regular'");			
-			$query = $this->db->get();
-			$result = $query->result();
-
-			return $result[0]->UserCount;
-		}
-		
-		public function cardsSold(){
-			
-			$this->db->select('COUNT(*) as CardCount');
-			$this->db->from('card');
-			$this->db->where("cardStatus = 1");	
-			$query = $this->db->get();
-			$result = $query->result();
-
-			return $result[0]->CardCount;
-		}
-		
-		public function numEvents($startDate, $endDate){
-			///////////////////////////////////////
-			///////Interface New Implementation////
-			///////////////////////////////////////
-			$this->db->select('event_name');
-			$this->db->from('event_info');
-			$this->db->where("event_status = 'APPROVED'");
-			//$this->db->where("date_created BETWEEN '".$startDate."' AND '".$endDate."'");
-			$query = $this->db->get();
-			return $query->num_rows();
-			///////////////////////////////////////
-			///////////////////////////////////////
+		public function setPrice($price){
+			$this->price = $price;
 		}
 
-
-		public function totalnumEvents($type){
-			///////////////////////////////////////
-			///////Interface New Implementation////
-			///////////////////////////////////////
-			if($type==1){
-				$this->db->select('event_name');
-				$this->db->from('event_info');
-				$this->db->where("event_status = 'APPROVED'");
-			}else{
-				$this->db->select('event_name');
-				$this->db->from('event_info');
-				$this->db->where("event_status = 'REJECTED'");
-			}
-			
-			$query = $this->db->get();
-			return $query->num_rows();
-			///////////////////////////////////////
-			///////////////////////////////////////
+		public function getType(){
+			return $this->type;
 		}
 
-		public function showApprovedEvents(){
-			$this->db->select('event_name');
-			$this->db->select('event_id');
-			$this->db->from('event_info');
-			$this->db->where("event_status = 'APPROVED'");
-			$query = $this->db->get();
-
-			return $query->result_array();
+		public function setType($type){
+			$this->type = $type;
 		}
 
-
-		public function countAttendees($event_id){
-			$statement = "SELECT DISTINCT U.user_name
-						  FROM user_account U, ticket_type TT, event_info E, ticket T
-						  WHERE U.account_id = T.user_id AND T.ticket_type_id = TT.ticket_type_id AND TT.event_id = '$event_id'";
-			$query = $this->db->query($statement);
-			  
-			return $query->num_rows();
-
+		public function getEvent_id(){
+			return $this->event_id;
 		}
 
-		public function numEventPerMonth($year){
-			$query = "SELECT COUNT(*) as EventCount FROM `event_info` WHERE `event_status` = 'APPROVED' AND YEAR(`date_created`) = '2017'";
-			$result = $this->db->query($query);
-
-
-			return $result->result_array();
+		public function setEvent_id($event_id){
+			$this->event_id = $event_id;
 		}
 
-		public function countUsers($startDate, $endDate){
-			// $query = "SELECT DISTINCT `user_id`
-			// 		  FROM `ticket`
-			// 		  WHERE date_sold BETWEEN '$startDate' AND '$endDate'";
-			// $result = $this->db->query($query);
-      //
-			// $return = $result->num_rows();
-			// return $return;
-			// $this->db->distinct();
-
-
-			///////////////////////////////////////
-			///////Interface New Implementation////
-			///////////////////////////////////////
-			$where = array('date_sold >=' => date('Y-m-d', strtotime($startDate)),'date_sold <=' => date('Y-m-d', strtotime($endDate)));
-			return $this->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('user_id',$where,TRUE,FALSE,FALSE,TRUE);
-			//////////////////////////////////////
-			//////////////////////////////////////
+		public function getPetition_id(){
+			return $this->petition_id;
 		}
 
-	
-		/* ****************** */
+		public function setPetition_id($petition_id){
+			$this->petition_id = $petition_id;
+		}
 
+		public function getAddedBy(){
+			return $this->addedBy;
+		}
 
-		/* QUERY FUNCTIONS */
-			/* ADMIN MODULE FUNCTIONS */
-			
+		public function getUpdatedBy(){
+			return $this->updatedBy;
+		}
 
-			/* *************** */
+		public function getAddedAt(){
+			return $this->addedAt;
+		}
 
-			/* USER MODULE FUNCTIONS */
+		public function getUpdatedAt(){
+			return $this->updateAt;
+		}
 
+		public function setAddedBy($addedAt){
+			$this->addedBy = $addedAt;
+		}
 
-			/* *************** */
+		public function setUpdatedBy($upgradedAt){
+			$this->updatedBy = $upgradedAt;
+		}
 
-			/* CALENDAR MODULE FUNCTIONS */
+		public function setAddedAt($addedBy){
+			$this->addedBy = $addedBy;
+		}
 
-
-
-			/* *************** */
-
-			/* FINANCE MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* REPORTS MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-		/* ************** */
-	} 
+		public function setUpdateddBy($updateddBy){
+			$this->upgdatedBy = $upgdatedBy;
+		}
+	}
 ?>

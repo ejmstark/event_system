@@ -20,16 +20,16 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
+                        <a href ="<?php echo site_url();?>/CLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
                     </div>
 
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
+                        <a href ="<?php echo site_url();?>/CEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                     </div>
 
 
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/CLogin/viewDashBoard">Home</a></li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
@@ -61,7 +61,7 @@
                         <h2>See Events Near You</h2>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                            <form action="<?php echo site_url();?>/CEvent/searchEvent" class=" form-inline" method="POST">
+                            <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
                                 <div class="form-group">
                                     <input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">
@@ -136,10 +136,10 @@
                                             <div class="col-sm-6 col-md-4 p0">
                                             <div class="box-two proerty-item">
                                                 <div class="item-thumb">
-                                                    <a href="<?php echo site_url();?>/CEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 70px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 70px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
                                                 </div>
                                                    <div class="item-entry overflow">
-                                                        <h5><a href="<?php echo site_url();?>/CLogin/viewEventDetails"> <?php
+                                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
                                                     if(strlen($event->event_name)>=42){
                                                         echo substr($event->event_name,0,39)."...";
                                                     }else{
