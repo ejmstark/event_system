@@ -51,7 +51,6 @@
 
 			$query = $this->db->get();
 			 return $query->result();
-			# code...
 		}
 		public function Performance()
 		{
@@ -65,12 +64,9 @@
 			$query = $this->db->get();
 
 			return $query->result();	
-			# code...
 		}
 
 		public function getAllEventsByUser($id){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
@@ -81,8 +77,6 @@
 			return $query->result();			             
 		}
 		public function getAllEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->from("event_info");
@@ -93,8 +87,6 @@
 
 		//get events that match the search word
 		public function getSearchEvents($searchWord, $searchDateYear, $searchDateMonth){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->from("event_info");
 			if(!$searchDateMonth == '0'){
@@ -108,8 +100,6 @@
 		}
 		
 		public function getAllApprovedEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
@@ -129,7 +119,6 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
 		public function do_upload_event($id)
@@ -152,9 +141,9 @@
 	        }
 	        else
 	        {
-                $data = array('upload_data' => $this->upload->data()); //actual uploading
+                $data = array('upload_data' => $this->upload->data()); 
                 
-                if($this->insertPhotoEvent($this->upload->data()['file_name'], $id)) { //query to db
+                if($this->insertPhotoEvent($this->upload->data()['file_name'], $id)) { 
                 	return true;	
                 } else {
                 	return false;
@@ -162,11 +151,7 @@
 	        }
 	    }
 
-	    public function insertPhotoEvent($filename,$id) { //called upon uploading file
-	      // $now = new DateTime ( NULL, new DateTimeZone('UTC'));
-	      // $station = new MStation();
-	      // $id = $station->getLastAddedStation();
-
+	    public function insertPhotoEvent($filename,$id) { 
 			$where = array(
 				"event_picture" =>  "images/events/".$filename,
 			);

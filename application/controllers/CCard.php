@@ -10,15 +10,10 @@ class cCard extends CI_Controller {
 
 	public function index()
 	{
-		// //$this->load->view('vLogin.php');
-		// //echo 'hello';
-		// echo 'hey';
-		// $this->load->model('MCardLoad');
 	}
 
 	public function card () {
 		$amount = array (100, 200, 500, 1000);
-		//$qty = array (1, 2, 3, 4, 5, 6);
 		$qty = array ( $this->input->post('qty1'),
 		 		       $this->input->post('qty2'),
 		 			   $this->input->post('qty3'),

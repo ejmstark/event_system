@@ -17,8 +17,6 @@
 		}
 
 		public function loadAllPrefEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
 			return $query;			             
 		}
@@ -32,7 +30,6 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
 		public function joinEventPrefs($id)
@@ -45,7 +42,6 @@
 
 			$query = $this->db->get();
 			 return $query->result();
-			# code...
 		}
 
 

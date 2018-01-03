@@ -1,11 +1,9 @@
 <?php
 	class MTicketType extends MY_Model {
-		/*Declare Entities*/
-		//Ex.: private $event_id;
 		private $ticket_type_id;
 
-		const DB_TABLE = "ticket_type"; //Table Name
-    	const DB_TABLE_PK = "ticket_type_id"; // Primary Key
+		const DB_TABLE = "ticket_type";
+    	const DB_TABLE_PK = "ticket_type_id"; 
 
 
 		/* GETTER AND SETTERS */
@@ -19,7 +17,6 @@
 			$this->ticket_type_id = $ticket_type_id;
 		}
 
-		/* ****************** */
 
 		public function loadType($id)
 		{
@@ -30,37 +27,8 @@
 			$query = $this->db->get();
 			
 			return $query->result();
-			# code...
 		}
 
-		/* QUERY FUNCTIONS */
-			/* ADMIN MODULE FUNCTIONS */
-			
-
-			/* *************** */
-
-			/* USER MODULE FUNCTIONS */
-
-
-			/* *************** */
-
-			/* CALENDAR MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* FINANCE MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* REPORTS MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-		/* ************** */
+	
 	} 
 ?>

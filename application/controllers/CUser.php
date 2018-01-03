@@ -5,11 +5,11 @@ class cUser extends CI_Controller {
 
 	public function __Construct(){
       parent::__Construct ();
-      $this->load->database(); // load database
+      $this->load->database();
       $this->load->model('MUser');
       $this->load->model('MEvent');
       $this->load->model('MCardLoad');
-	  $this->load->model('MAnnouncement'); //admin module functionality
+	  $this->load->model('MAnnouncement');
       $this->load->library('session');
       $this->data = null;
   	}
@@ -17,9 +17,6 @@ class cUser extends CI_Controller {
 	{
 		$data['users'] = $this->MUser->getAllUsers();
 		$result_data = $this->MEvent->getAllApprovedEvents();
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
 		$array = array();
 		if($result_data){
 			foreach ($result_data as $value) {
@@ -110,27 +107,22 @@ class cUser extends CI_Controller {
     			$this->session->set_flashdata('error_msg','Username taken');
     			$this->data = $data;
     			$this->viewSignUp();
-    			// redirect('user/cUser/viewSignUp',"refresh");
-				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
 		}else if($res1){
 			$this->session->set_flashdata('error_msg','Email taken');
 			$this->data = $data;
 				$this->viewSignUp();
-				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
 
 		}else{
 
 			$result = $user->insert($data);
 
 			if($result){
-			//$this->index();
 			redirect('CEvent/viewEvents');
 		}
 
 		}
 
-		# code...
 	}
 
 	public function eventregister()
@@ -160,24 +152,19 @@ class cUser extends CI_Controller {
 		foreach ($gID as $k) {
 			$uid = $k->user_id;
 		}
-		// print_r($uid);
 		$data2['users']	= $this->MUser->loadUserDetails($uid);
 
 		$data = array_merge($data1,$data2);
-		// print_r($data);
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vEventRegistration.php', $data);
 		$this->load->view('imports/vFooter');
-		# code...
 	}
 
 	public function search(){
 		$data['events'] = $this->MEvent->getAllEvents();
 
 		$this->load->view('imports/vHeaderLandingPage');
-		//$this->load->view('imports/vHeader');
 		$this->load->view('user/vSearch.php');
-		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
 	}
 	public function viewSignUp()

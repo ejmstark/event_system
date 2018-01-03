@@ -28,7 +28,6 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
 		public function joinTicketEventType($id)
@@ -41,14 +40,12 @@
 
 			$query = $this->db->get();
 			 return $query->result();
-			# code...
 		}
 
 		public function generateRevenue($id)
 		{
 			$this->db->select('count(*) as TOTAL_TICKET_SOLD' );
 			$this->db->select_sum('price', 'REVENUE');
-			// $this->db->select_count('*','TOTAL_TICKE_SOLD' );
 			$this->db->from($this::DB_TABLE);
 			$this->db->join('ticket_type as tt', $this::DB_TABLE.'.ticket_type_id = tt.ticket_type_id');
 			$this->db->where( array('tt.event_id' => $id ));
@@ -56,7 +53,6 @@
 
 			return $query->result();
 
-			# code...
 		}
 
 

@@ -20,7 +20,6 @@ class CLogin extends CI_Controller {
 
 	 	$this->load->helper('url');
 
-// 	 	$this->load->library('../controllers/CInitialize');
 
 
 
@@ -66,7 +65,6 @@ class CLogin extends CI_Controller {
 
 				$this->load->view('vLogin');
 
-				// redirect('cInitialize','refresh');
 
 			}
 
@@ -76,7 +74,6 @@ class CLogin extends CI_Controller {
 
 			$this->load->view('vLogin');
 
-			// redirect('cInitialize','refresh');
 
 		}
 
@@ -98,18 +95,7 @@ $sessionData = new stdClass;
 					$sessionData->userFName =  $row->first_name;
 					$sessionData->userLevel =  $row->user_type;
 					$sessionData->userSuperior =  $row->upgradedBy;
-        // $sessionData = array('userID' => $row->account_id,
-
-        //                      'userLogName' => $row->user_name,
-
-        //                      'userPassword' => $row->password,
-
-        //                      'userFName' => $row->first_name,
-
-        //                      'userLevel' => $row->user_type,
-
-							 // 'userSuperior' => $row->upgradedBy
-        //               );
+      
 
         if($row->user_type == "Regular"){
         	$this->session->set_userdata('userSession', $sessionData);

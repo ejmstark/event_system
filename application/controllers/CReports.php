@@ -5,7 +5,7 @@ class CReports extends CI_Controller {
 
 	public function __Construct(){
       parent::__Construct ();
-      $this->load->database(); // load database
+      $this->load->database();
       $this->load->model('MUser');
       $this->load->model('MEvent');
       $this->load->model('MPreference');
@@ -18,7 +18,6 @@ class CReports extends CI_Controller {
 	public function index()
 	{	
 		$data['events'] = $this->MEvent->getAllEvents();
-		// print_r($data);
 		$this->load->view('imports/vHeader');
 		$this->load->view('reports/vReports.php', $data);
 		$this->load->view('imports/vFooter');
@@ -33,13 +32,11 @@ class CReports extends CI_Controller {
 		$this->load->view('reports/vRevenue.php', $data);
 		$this->load->view('imports/vFooter');
 
-		# code...
 	}
 
 	public function generatePerformance()
 	{
 		$data['perfs'] = $this->MEvent->Performance();
-		//print_r(expression)
 		$this->load->view('imports/vHeader');
 		$this->load->view('reports/vPerformance.php', $data);
 		$this->load->view('imports/vFooter');
@@ -51,7 +48,6 @@ class CReports extends CI_Controller {
 	public function generateAttendance()
 	{
 		$data['perfs'] = $this->MUser->Attendance();
-		//print_r(expression)
 		$this->load->view('imports/vHeader');
 		$this->load->view('reports/vAttendance.php', $data);
 		$this->load->view('imports/vFooter');
@@ -62,7 +58,6 @@ class CReports extends CI_Controller {
 	public function generateHistory()
 	{
 		$id = $this->$data['perfs'] = $this->MUser->Attendance();
-		//print_r(expression)
 		$this->load->view('imports/vHeader');
 		$this->load->view('reports/vHistory.php', $data);
 		$this->load->view('imports/vFooter');

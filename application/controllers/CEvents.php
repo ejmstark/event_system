@@ -64,7 +64,6 @@ class CEvent extends CI_Controller {
         $data = array_merge($data1, $data2);
 
 		$result = $this->load->view('vEditEvent',$data,TRUE);
-		//$this->viewCreateEvent();
 		echo $result;
 
 	}
@@ -185,10 +184,6 @@ class CEvent extends CI_Controller {
 		$this->load->view('imports/vFooterLandingPage');
 
 
-		// $this->load->view('imports/vHeader');
-		// $this->load->view('user/vEventRegistration', $data);
-		// $this->load->view('imports/vFooter');
-		# code...
 	}
 
 	public function displayEventDetailsFromCalendar()
@@ -244,12 +239,10 @@ class CEvent extends CI_Controller {
 		$data['id'] = $this->session->userdata['userSession']->userID;
 		if($this->error != ""){
 			$data['errorMsg']= $this->error;
-		 // print_r($data);
 		}
 
 		if($this->success != ""){
 			$data['successMsg']= $this->success;
-		 // print_r($data);
 		}
 		$data['color'] = $_POST['color'];
 
@@ -262,10 +255,7 @@ class CEvent extends CI_Controller {
 
 	public function buyTicket($tId,$eid)
 		{
-			// print_r($id);
-			// $type = new MTicketType();
-			// $where = array('event_id' => $id );
-			// $data['tickets'] = $type->loadType($id);
+			
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
@@ -282,8 +272,6 @@ class CEvent extends CI_Controller {
 					$res = $this->MTicket->insert($data);
 
 					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
-					// $this->success = "Bought ticket for ".$res1[0]->price;
-					// $this->displayEventDetails($eid);
 					$this->session->set_flashdata('success_msg',"Bought ticket for ".$res1[0]->price);
 					redirect('CEvent/displayEventDetails/'.$eid);
 				}else{
@@ -293,16 +281,9 @@ class CEvent extends CI_Controller {
 
 			}
 
-			// echo $this->MTicket->db->last_query();
-
-			// $this->load->view('imports/vHeader');
-
-			// $this->load->view('imports/vFooter');
-
-			# code...
+			
 		}
 		public function createEvent(){
-			// $this->load->model('events/mEvent','event');
 			$event = new mEvent();
 			$data['event_date_start'] = $this->input->post('dateStart');
 			$data['event_date_end'] = $this->input->post('dateEnd');
@@ -322,7 +303,6 @@ class CEvent extends CI_Controller {
 			$data['event_name'] = $this->input->post('event_name');
 			$data['event_details'] = $this->input->post('event_details');
 			$data['event_category'] = $this->input->post('event_category');
-			// $data['event_picture'] = null;
 			$data['event_venue'] = $this->input->post('event_venue');
 			$data['addedAt'] = date('Y-m-d H:i:s');
 
@@ -331,16 +311,13 @@ class CEvent extends CI_Controller {
 			$affectedRows = $this->MEvent->insert($data);
 
 			$evt_id = $this->MEvent->db->insert_id();
-			// print_r($evt_id);
 			$photo = $this->MEvent->do_upload_event($evt_id);
-			// $this->MEvent->do_upload_event($evt_id);
 
 			if(!$photo) {
 				$photo = $this->MEvent->insertPhotoEvent("Default.png",$evt_id);
 			}
 			var_dump($photo);
 
-				// print_r($photo);
 
 			$totalNumTix = 0;
 			$data1['ticket_name'] = $this->input->post('ticketType1');
@@ -386,7 +363,6 @@ class CEvent extends CI_Controller {
 
 
 		public function deleteEvent($id){
-			// $event_id = $this->input>post('event_id');
 			$data = array('event_isActive'=> 0);
 			$v = $this->MUser->updateSpecificEvent($id,$data);
 			if($v){
@@ -394,10 +370,6 @@ class CEvent extends CI_Controller {
 			}else{
 				echo "Error...";
 			}
-			//code for tests purposes
-			/*
-			$this->event->deleteEvent(18);
-			*/
 		}
 
 	public function updateEvent(){
@@ -460,12 +432,10 @@ class CEvent extends CI_Controller {
 			$this->load->model('MEvent','Event');
 			$data['events'] = $this->Event->showUpcomingEvents();
 
-			// print_r($data);
 			$this->load->view('imports/vHeader');
 			$this->load->view('user/vUpcoming.php', $data);
 			$this->load->view('imports/vFooter');
 
-		// $this->output->set_content_type('application/json')->set_output(json_encode($result));
 		}
 
 		public function editEvent($id){
@@ -481,17 +451,14 @@ class CEvent extends CI_Controller {
 		{
 	
 			$data['events'] = $this->MEvent->getAllEvents();
-			// print_r($data);
 			$this->load->view('imports/vHeader');
 			$this->load->view('user/vListEvents.php', $data);
 			$this->load->view('imports/vFooter');
-			# code...
 		}
 		public function searchEvent()
 		{
 			$data['users'] = $this->MUser->getAllUsers();
 			$result_data = $this->MEvent->getSearchEvents($_POST['searchWord'], $_POST['searchDateYear'], $_POST['searchDateMonth']);
-			// print_r($data);
 			$array = array();
 			if($result_data){
 				foreach ($result_data as $value) {
@@ -517,9 +484,7 @@ class CEvent extends CI_Controller {
 							</script>';
 			$this->load->view('imports/vHeaderLandingPage');
 			$this->load->view('vLandingPage', $data);
-			//$this->load->view('user/vListEvents', $data['events']);
 			$this->load->view('imports/vFooterLandingPage');
-			# code...
 		}
 	
 		public function displayEventDetails($id)
@@ -532,11 +497,9 @@ class CEvent extends CI_Controller {
 			foreach ($gID as $k) {
 				$uid = $k->user_id; //retrieve
 			}
-			// print_r($uid);
 			$data2['users']	= $this->MUser->loadUserDetails($uid);
 	
 			$data = array_merge($data1,$data2); 
-			// print_r($data);
 			$this->load->view('imports/vHeader');
 			$this->load->view('user/vEventRegistration.php', $data);
 			$this->load->view('imports/vFooter');
@@ -561,12 +524,10 @@ class CEvent extends CI_Controller {
 				$this->viewPreferenceEvents();
 			}
 			
-			# code...
 		}
 	
 		public function going($id)
 		{
-			// print_r($id);
 			$type = new MTicketType();
 			$where = array('event_id' => $id );
 			$data['tickets'] = $type->loadType($id);
@@ -576,7 +537,6 @@ class CEvent extends CI_Controller {
 			$this->load->view('user/vGoing.php', $data);
 			$this->load->view('imports/vFooter');
 			
-			# code...
 		}
 	
 	
@@ -603,7 +563,6 @@ class CEvent extends CI_Controller {
 				$this->viewAllTickets($uid);
 			}
 			
-			# code...
 		}
 	
 	
@@ -615,7 +574,6 @@ class CEvent extends CI_Controller {
 			$this->load->view('imports/vHeader');
 			$this->load->view('user/vAllTickets.php', $data);
 			$this->load->view('imports/vFooter');
-			# code...
 		}
 	
 	
@@ -630,7 +588,6 @@ class CEvent extends CI_Controller {
 			$this->load->view('imports/vHeader');
 			$this->load->view('user/vPrefEvents.php', $data);
 			$this->load->view('imports/vFooter');
-			# code...
 		}
 }
 ?>

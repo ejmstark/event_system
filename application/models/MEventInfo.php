@@ -36,13 +36,10 @@
 
 		}
 		public function getAllEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
 			return $query;			             
 		}
 
-		//Class getters and setters.
 		public function getTransHistory($id){
 			$this->db->select('e.event_name AS  "Event", y.price AS "Paid", DATE_FORMAT(t.date_sold, "%d-%b-%y") AS "DatePaid"');
         	$this->db->from("event_info AS e");

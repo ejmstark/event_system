@@ -1,11 +1,9 @@
 <?php
 	class MCard extends MY_Model {
-		/*Declare Entities*/
-		//Ex.: private $event_id;
 		private $card_id;
 
-		const DB_TABLE = "card"; //Table Name
-    	const DB_TABLE_PK = "card_id"; // Primary Key
+		const DB_TABLE = "card";
+    	const DB_TABLE_PK = "card_id";
 
    
 		/* GETTER AND SETTERS */
@@ -19,39 +17,5 @@
 			$this->card_id = $card_id;
 		}
 
-		/* ****************** */
-
-
-		/* QUERY FUNCTIONS */
-			
-			/* ADMIN MODULE FUNCTIONS */
-			
-
-			/* *************** */
-
-			/* USER MODULE FUNCTIONS */
-
-
-			/* *************** */
-
-			/* CALENDAR MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* FINANCE MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-			/* REPORTS MODULE FUNCTIONS */
-
-
-
-			/* *************** */
-
-		/* ************** */
 	} 
 ?>

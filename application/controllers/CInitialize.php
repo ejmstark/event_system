@@ -24,8 +24,6 @@ class CInitialize extends CI_Controller {
 			$this->load->view('imports/vHeaderHomepage');
 			$this->load->view('vHomepage',$data);
 			$this->load->view('imports/vFooterHomepage');
-			// $this->load->view('vLogin');
-			//redirect('cInitialize');
 		}
 	}
 }

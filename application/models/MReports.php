@@ -50,7 +50,6 @@
 			$this->db->select('event_name');
 			$this->db->from('event_info');
 			$this->db->where("event_status = 'APPROVED'");
-			//$this->db->where("date_created BETWEEN '".$startDate."' AND '".$endDate."'");
 			$query = $this->db->get();
 			return $query->num_rows();
 			///////////////////////////////////////
@@ -118,15 +117,7 @@
 		}
 
 		public function countUsers($startDate, $endDate){
-			// $query = "SELECT DISTINCT `user_id`
-			// 		  FROM `ticket`
-			// 		  WHERE date_sold BETWEEN '$startDate' AND '$endDate'";
-			// $result = $this->db->query($query);
-      //
-			// $return = $result->num_rows();
-			// return $return;
-			// $this->db->distinct();
-
+			
 
 			///////////////////////////////////////
 			///////Interface New Implementation////

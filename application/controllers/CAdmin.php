@@ -5,15 +5,12 @@ class CAdmin extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-	 // 	$this->load->model('MAdmin');
-		// $this->load->model('MAdminUsers');
 		$this->load->model('MUserInfo');
 		$this->load->model('MEventInfo');
 		$this->load->model('MReports');
 		$this->load->model('MUser');
 		$this->load->model('MAnnouncement');
 		$this->load->model('MCardLoad');
-		// $this->load->model('MUserInfo');
 	}
 
 	public function index()
@@ -254,13 +251,10 @@ class CAdmin extends CI_Controller {
     	if($res){
     			$this->session->set_flashdata('error_msg','Username taken');
     			$this->viewAdminAccountMgt();
-    			// redirect('user/cUser/viewSignUp',"refresh");
-				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
 		}else if($res1){
 			$this->session->set_flashdata('error_msg','Email taken');
 				$this->viewAdminAccountMgt();
-				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
 
 		}else{
 
@@ -268,12 +262,10 @@ class CAdmin extends CI_Controller {
 
 
 			if($result){
-				//$this->index();
 				redirect('CAdmin/viewAdminAccountMgt');
 			}
 		}
 
-		# code...
 	}
 
 	public function viewUserAccountMgt() {
@@ -380,7 +372,6 @@ class CAdmin extends CI_Controller {
 		$result = $user->update($this->session->userdata['adminSession']->userID, $data);
 
 		if($result){
-			//$this->index();
 			redirect('CAdmin/viewAdminAccountMgt');
 		}
 	}
@@ -551,7 +542,6 @@ class CAdmin extends CI_Controller {
 		$result = $announcement->insert($data);
 
 		if($result){
-			//$this->index();
 			redirect('CAdmin/viewAnnouncements');
 		}
 	}
