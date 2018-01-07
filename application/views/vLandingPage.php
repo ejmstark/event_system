@@ -30,13 +30,10 @@
                         <!-- <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a> -->
                         <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->LANDING_PAGE_LOGOUT_BUTTON ?> </button></a>
                     </div>
-
                     <div class="button navbar-right">
                         <!-- <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a> -->
                         <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->LANDING_PAGE_CREATE_EVENT_BUTTON ?> </button></a>
                     </div>
-
-
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
@@ -108,7 +105,12 @@
                     <div class="col-md-12  padding-top-40 properties-page">
                         <div class="col-md-12 ">
                             <div class="col-xs-10 page-subheader sorting pl0">
-
+                                <div class="noti-container">
+                                    <button id="noti-button" data-toggle="collapse" data-target="#noti">Notifications</button>
+                                    <div id="noti" class="collapse">
+                                        
+                                    </div>
+                                </div>
                                 <ul class="sort-by-list">
                                     <li class="active">
                                         <!-- <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">

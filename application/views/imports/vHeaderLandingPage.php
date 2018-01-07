@@ -38,7 +38,11 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/style.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/normalize.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
+
+    <!--Customization module-->
     <!--<link href="<?php echo base_url('assets/nikkiAssets/css/style.php')?>" rel="stylesheet" />-->
+    <link href="<?php echo base_url('assets/customization1Assets/css/notification.css')?>" rel="stylesheet" />
+    <script src="<?php echo base_url('assets/customization1Assets/js/notification.js')?>"></script>
 </head>
 
 <?php } else {
