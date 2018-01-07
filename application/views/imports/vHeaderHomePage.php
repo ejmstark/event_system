@@ -34,11 +34,4 @@
 
 	    <div class = "inner-header"></div>
 
-	    <div class="search-container">
-		      <!-- <input type="text" class="searchTerm" placeholder="Name of Event  &#x2022;  Category  &#x2022;  Location  &#x2022;  Date" pattern="[\sa-zA-z0-9]+"> -->
-					<input type="text" class="searchTerm" placeholder="<?php echo CustomizationManager::$strings->WELCOME_PAGE_SEARCH_BOX_PLACEHOLDER ?>" pattern="[\sa-zA-z0-9]+">
-		      <button type="submit" class="searchButton">
-		        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-		     </button>
-		</div>
 	</div>

@@ -1,4 +1,5 @@
 <?php 
+
     require('assets/CustomizationManager.php');
     CustomizationManager::SetTheme("configurations 1");
     

@@ -1,19 +1,23 @@
 <?php
-	class MUserInfo extends MY_model {
+	class MUserInfo extends MY_Model {
 		private $account_id;
-		private $username;
+		private $user_name;
 		private $password;
 		private $user_type;
+		private $upgradedBy; 
 		private $user_status;
 		private $first_name;
 		private $last_name;
 		private $middle_initial;
+		private $user_imgpath; 	
 		private $email;
 		private $birthdate;
 		private $gender;
 		private $contact_no;
-		private $load_amt;
-		private $date_created;
+		private $addedBy; 
+		private $updatedBy; 
+		private $addedAt; 
+		private $updateAt; 
 
 		const DB_TABLE = "user_account";
     	const DB_TABLE_PK = "account_id";
@@ -26,7 +30,7 @@
 			return $this->account_id;
 		}
 		public function getUsername(){
-			return $this->username;
+			return $this->usernamedated;
 		}
 		public function getPassword(){
 			return $this->password;
@@ -61,10 +65,31 @@
 		public function getLoad(){
 			return $this->load_amt;
 		}
-		public function getDateCreated(){
-			return $this->date_created;
+
+		public function getUpgradedBy(){
+			return $this->upgradedBy;
 		}
 
+		public function getUser_imgPath(){
+			return $this->user_imgPath;
+		}
+
+		public function getAddedBy(){
+			return $this->addedBy;
+		}
+
+		public function getUpdatedBy(){
+			return $this->updatedBy;
+		}
+
+		public function getAddedAt(){
+			return $this->addedAt;
+		}
+
+		public function getUpdatedAt(){
+			return $this->updateAt;
+		}
+		
 
 		public function setAccount_id($account_id){
 			$this->account_id = $account_id;
@@ -105,9 +130,30 @@
 		public function setLoad($load_amt){
 			$this->load_amt = $load_amt;
 		}
-		public function setDateCreated($date_created){
-			$this->date_created = $date_created;
+		public function setUpgradedBy($upgradedBy){
+			$this->upgradedBy = $upgradedBy;
 		}
+
+		public function setUser_imgPath($user_imgpath){
+			$this->user_imgPath = $user_imgpath;
+		}
+
+		public function setAddedBy($addedAt){
+			$this->addedBy = $addedAt;
+		}
+
+		public function setUpdatedBy($upgradedAt){
+			$this->updatedBy = $upgradedAt;
+		}
+
+		public function setAddedAt($addedBy){
+			$this->addedBy = $addedBy;
+		}
+
+		public function setUpdateddBy($updateddBy){
+			$this->upgdatedBy = $upgdatedBy;
+		}
+		
 
 		//End of class getters and setters.
 

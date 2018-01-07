@@ -34,10 +34,12 @@
 		}
 
 		public function setAnnouncementID($announcementID){
-			$this->announcementID = $announcementID;
+			$this->announcementID = (int) $announcementID;
 		}
 
 		public function setAnnouncementDetails($announcementDetails){
+			$announcementDetails = trim($announcementDetails);
+			$announcementDetails = filter_var($announcementDetails,FILTER_SANITIZE_STRING);
 			$this->announcementDetails = $announcementDetails;
 		}
 
@@ -46,7 +48,7 @@
 		}
 
 		public function setPostedBy($postedBy){
-			$this->postedBy = $postedBy;
+			$this->postedBy = (int) $postedBy;
 		}
 
 		public function setDatePosted($datePosted){
@@ -63,7 +65,7 @@
 		public function loadAllAnnouncementDetails(){
 			$this->db->select('*');
 			$this->db->from($this::DB_TABLE);
-			$this->db->join('user_account', $this::DB_TABLE . '.postedBy = user_account.account_id');
+			$this->db->join('user_account', $this::DB_TABLE . '.addedBy = user_account.account_id');
 			$query = $this->db->get();
 
 			return $query->result();

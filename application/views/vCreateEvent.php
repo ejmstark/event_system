@@ -261,6 +261,6 @@
 </html>
 
 <?php } else {
-        redirect('cLogin/userLogin');
+        redirect('cLogin/login');
     }
 ?>

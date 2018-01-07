@@ -50,14 +50,6 @@ class CLogin extends CI_Controller {
 
 
 
-
-
-		// print_r($user->getUser_name());
-
-		// print_r($user->getUser_password());
-
-
-
 		$result = $user->attemptLogin();
 
 
@@ -99,83 +91,44 @@ class CLogin extends CI_Controller {
     {
 
       foreach ($result as $row) {
+$sessionData = new stdClass;
+					$sessionData->userID =  $row->account_id;
+					$sessionData->userLogName =  $row->user_name;
+					$sessionData->userPassword =  $row->userPassword;
+					$sessionData->userFName =  $row->first_name;
+					$sessionData->userLevel =  $row->user_type;
+					$sessionData->userSuperior =  $row->upgradedBy;
+        // $sessionData = array('userID' => $row->account_id,
 
-        $sessionData = array('userID' => $row->account_id,
+        //                      'userLogName' => $row->user_name,
 
-                             'userLogName' => $row->user_name,
+        //                      'userPassword' => $row->password,
 
-                             'userPassword' => $row->password,
+        //                      'userFName' => $row->first_name,
 
-                             'userFName' => $row->first_name,
+        //                      'userLevel' => $row->user_type,
 
-                             'userLevel' => $row->user_type,
+							 // 'userSuperior' => $row->upgradedBy
+        //               );
 
-							 'userSuperior' => $row->upgradedBy
-                      );
-
-
-
-        $this->session->set_userdata('userSession', $sessionData);
-
+        if($row->user_type == "Regular"){
+        	$this->session->set_userdata('userSession', $sessionData);
+        }else{
+        	$this->session->set_userdata('adminSession', $sessionData);
+        }
       }
-
-    //   print_r($sessionData);
-
     }
 
 
 
 	public function viewDashBoard(){
-
-		$this->session->userdata['userSession'] = json_decode(json_encode($this->session->userdata['userSession']));
-
-		if($this->session->userdata['userSession']->userLevel != "Regular"  ){
-
-					redirect('admin/CAdmin');
-
-			}
-
-		//use the loded MUserModel
-
-
-
-		$data['users'] = $this->MUser->getAllUsers();
-
-		$result_data = $this->MEvent->getAllApprovedEvents();
-		//////////////////////////////////////////////////////////////////////////////
-		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->dateStart = $value->dateStart;
-					$arrObj->dateEnd = $value->event_date_end;
-					$arrObj->event_category = $value->event_category;
-					$array[] = $arrObj;
-			}
+		if(isset($this->session->userdata['adminSession'])){
+			redirect('admin/CAdmin');
+		}else if(isset($this->session->userdata['userSession'])){
+			redirect('user/cUser');
+		}else{
+			$this->index();
 		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		$data['events'] = $array;
-
-		$this->data['custom_js']= '<script type="text/javascript">
-
-                              $(function(){
-
-                              	$("#dash").addClass("active");
-
-                              });
-
-                        </script>';
-
-		$this->load->view('imports/vHeaderLandingPage');
-
-		$this->load->view('vLandingPage',$data);
-
-		$this->load->view('imports/vFooterLandingPage',$this->data);
-
 	}
 
 
@@ -183,21 +136,12 @@ class CLogin extends CI_Controller {
 	public function userLogout()
 
 	{
-
-
-
-		$this->session->unset_userdata('userSession');
-
-// 		session_destroy();
-
-    // print_r(redirect('cInitialize','refresh'))		;
-
-        // $this->load->('')
-
+		if(isset($this->session->userdata['adminSession'])){
+			$this->session->unset_userdata('adminSession');
+		}else if(isset($this->session->userdata['userSession'])){
+			$this->session->unset_userdata('userSession');
+		}
         $this->index();
-
-		# code...
-
 	}
 
 
@@ -205,19 +149,12 @@ class CLogin extends CI_Controller {
 	public function login()
 
 	{
-
-		if ($this->session->userdata('userSession')) {
-
+		if (isset($this->session->userdata['adminSession']) || isset($this->session->userdata['userSession'])) {
 			redirect('cLogin/viewDashBoard');
-
 		} else {
-
-			$this->load->view('vLogin');
+			$this->index();
 
 		}
-
-		# code...
-
 	}
 
 
