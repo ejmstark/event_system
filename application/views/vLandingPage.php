@@ -252,7 +252,14 @@
                              <!-- <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" > -->
                              <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
                               <!-- <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p> -->
-                              <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
+                             <!--<p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p> -->
+                             <p> <?php if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                                include_once("vAboutUs.php");
+                            }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+
+                            }else{
+
+                            } ?> </p>
 
                             </div>
                         </div>
@@ -263,10 +270,27 @@
                               <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-adress">
-                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
-                                </ul>
+                                    <!--<li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
+                                        <li><i class="pe-7s-call strong"> </i> 253-2753</li> -->
+                                    <li><i class="pe-7s-mail strong"> </i> 
+                                        <?php if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                                            include_once("vEmail.php");
+                                        }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+                                        
+                                        }else{
 
+                                        } ?> 
+                                    </li>
+                                    <li><i class="pe-7s-call strong"> </i>
+                                        <?php if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                                            include_once("vContactNo.php");
+                                        }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+
+                                        }else{
+
+                                        } ?>
+                                    </li>
+                                </ul>  
                             </div>
                         </div>
 
