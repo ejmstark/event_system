@@ -69,10 +69,10 @@ class CCart extends CI_Controller {
 	public function viewCart(){
 		$result = $this->MCart->getCart();
 		if($result){
-			$this->load->view('vCart.php');
+			$this->load->view('vCart');	
 		}else{
-			redirect('cError404');	
-		}	
+			redirect('cError404');
+		}
 	}
 	//add 1 qty to the cart
 	public function addQty () {
