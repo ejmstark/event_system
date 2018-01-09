@@ -61,53 +61,10 @@
                         <h2>See Events Near You</h2>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                            <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
+                            <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class="form-inline" method="POST">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
+                                    
                                 <div class="form-group">
-                                    <?php
-                                    if(!isset($_POST['searchDateMonth'])){
-                                        echo '<select name="searchDateMonth">
-                                                  <option value="0">-Month-</option>
-                                                  <option value="1">Jan</option>
-                                                  <option value="2">Feb</option>
-                                                  <option value="3">Mar</option>
-                                                  <option value="4">Apr</option>
-                                                  <option value="5">May</option>
-                                                  <option value="6">Jun</option>
-                                                  <option value="7">Jul</option>
-                                                  <option value="8">Aug</option>
-                                                  <option value="9">Sep</option>
-                                                  <option value="10">Oct</option>
-                                                  <option value="11">Nov</option>
-                                                  <option value="12">Dec</option>
-                                                </select>';
-                                    } else {
-                                        echo '<b style="color: black;">'.$_POST['searchDateMonth'].'</b><select name="searchDateMonth" >
-                                                  <option value="0">-Month-</option>
-                                                  <option value="1">Jan</option>
-                                                  <option value="2">Feb</option>
-                                                  <option value="3">Mar</option>
-                                                  <option value="4">Apr</option>
-                                                  <option value="5">May</option>
-                                                  <option value="6">Jun</option>
-                                                  <option value="7">Jul</option>
-                                                  <option value="8">Aug</option>
-                                                  <option value="9">Sep</option>
-                                                  <option value="10">Oct</option>
-                                                  <option value="11">Nov</option>
-                                                  <option value="12">Dec</option>
-                                                </select>';
-                                    }
-                                    ?>
-
-                                    <?php
-                                    if(!isset($_POST['searchDateYear'])){
-                                        echo '<input name="searchDateYear" type="text" class="form-control" placeholder="Year">';
-                                    } else {
-                                        echo '<input name="searchDateYear" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchDateYear'].'">';
-                                    }
-                                    ?>
-
                                     <?php
                                     if(!isset($_POST['searchWord'])){
                                         echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">';
@@ -115,7 +72,6 @@
                                         echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchWord'].'" pattern="[\sa-zA-z0-9]+">';
                                     }
                                     ?>
-                                    
                                 </div>
                                 <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
                             </form>
