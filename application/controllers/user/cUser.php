@@ -91,7 +91,8 @@ class cUser extends CI_Controller {
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		$data = array('user_name' => $this->input->post('uname'),
-					  'password' => hash('sha512',$this->input->post('password')),
+					  'password' => $this->input->post('password'),
+					  'cpassword' => $this->input->post('cpassword'),
 					  'first_name' => $this->input->post('fname'),
 					  'last_name' => $this->input->post('lname'),
 					  'middle_initial' => $this->input->post('miname'),
@@ -103,33 +104,47 @@ class cUser extends CI_Controller {
 					  'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
+		if($this->checkIfEmptyFields($data)){
 
-		$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
-		$res1 = $this->MUser->read_where(array('email' => $data['email']));
+			$res = $this->MUser->read_where(array('user_name' => $data['user_name']));
+			$res1 = $this->MUser->read_where(array('email' => $data['email']));
 
-    	if($res){
-    			$this->session->set_flashdata('error_msg','Username taken');
-    			$this->data = $data;
-    			$this->viewSignUp();
-    			// redirect('user/cUser/viewSignUp',"refresh");
-				//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
+			if($res){
+					$this->session->set_flashdata('error_msg','Username taken');
+					$this->data = $data;
+					$this->viewSignUp();
+					// redirect('user/cUser/viewSignUp',"refresh");
+					//echo "INVALID, EXISTING USERNAME, PLS TRY AGAIN";
 
-		}else if($res1){
-			$this->session->set_flashdata('error_msg','Email taken');
-			$this->data = $data;
+			}else if($res1){
+				$this->session->set_flashdata('error_msg','Email taken');
+				$this->data = $data;
+					$this->viewSignUp();
+					//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+
+			}else if($this->input->post('password') != $this->input->post('cpassword')){
+				$this->session->set_flashdata('error_msg','Password does not match');
+				$this->data = $data;
 				$this->viewSignUp();
-				//echo "INVALID, EXISTING EMAIL, PLS TRY AGAIN";
+			}else{
+				
+				$data['password'] = hash('sha512',$data['password']);
+				unset($data['cpassword']);
+				$result = $user->insert($data);
 
+				if($result){
+					//$this->index();
+					redirect('event/cEvent/viewEvents');
+				}	
+
+			}
 		}else{
-
-			$result = $user->insert($data);
-
-			if($result){
-			//$this->index();
-			redirect('event/cEvent/viewEvents');
+			$this->session->set_flashdata('error_msg','Do not leave the fields to be empty.');
+			$this->data = $data;
+			$this->viewSignUp();
 		}
-
-		}
+		
+		
 
 		# code...
 	}
@@ -181,6 +196,7 @@ class cUser extends CI_Controller {
 		// $this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
 	}
+	
 	public function viewSignUp()
 	{
 		if(!$this->data){
@@ -193,6 +209,19 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vFooterLandingPage');
 		}
 
+	}
+
+	private function checkIfEmptyFields($data){
+
+		if(count($data) > 0){
+			foreach($data as $key => $value){
+				if(empty(trim($value))){
+					return false;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	public function viewAnnouncements()

@@ -17,8 +17,6 @@
 		}
 
 		public function loadAllPrefEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
 			return $query;			             
 		}
@@ -32,7 +30,6 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
 		public function joinEventPrefs($id)
@@ -44,14 +41,9 @@
 			$this->db->where( array($this::DB_TABLE.'.user_id' => $id, ));
 
 			$query = $this->db->get();
-			 return $query->result();
-			# code...
+			return $query->result();
 		}
 
-
-		
-
-		//Class getters and setters.
 
 		public function getUser_preference_id(){
 			return $this->user_preference_id;
@@ -116,8 +108,6 @@
 		public function setUpgradedBy($updatedBy){
 			$this->updatedBy = $updatedBy;
 		}
-		//End of class getters and setters.
-
 		
 	}
 ?>
