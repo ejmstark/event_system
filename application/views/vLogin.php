@@ -60,9 +60,7 @@
         </div>
     </div>
   </div>
-
-
-
+  <div style="position:fixed;top:15px;right:15px;"> <a href="<?php echo base_url()?>" style="color:#ffff;">⟵ Home</a></div>
 </body>
 </html>
 <?php }else{
