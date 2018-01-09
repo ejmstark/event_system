@@ -139,7 +139,7 @@
 
                                 <div class="form-group">
                                     <label for="name">Event Description</label>
-                                    <input type="text" class="form-control" name="event_details" required="">
+                                    <textarea class="form-control" name="event_details" required="" rows="5"></textarea>
                                 </div>
 
                                 <br>
