@@ -27,7 +27,7 @@
 		}
 
 	public function loadEventReviewAverageRating($eventId){
-		$this->db->select('SUM(`rating`)/COUNT(*)');
+		$this->db->select("SUM(`rating`)/COUNT(*) AS 'avg_rating'");
 		$this->db->from("review");
 
 		$query = $this->db->get();
