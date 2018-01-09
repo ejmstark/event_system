@@ -8,7 +8,7 @@
         private $rating;
         private $description;
         private $ticket_id;
-        
+
         public function loadEventReviews($eventId)
 		{
 			$this->db->select('*');
@@ -25,6 +25,16 @@
 			return $query->result();
 			# code...
 		}
+
+	public function loadEventReviewAverageRating($eventId){
+		$this->db->select('SUM(`rating`)/COUNT(*)');
+		$this->db->from("review");
+
+		$query = $this->db->get();
+		return $query->result();
+			# code...
+	}
+
 
         public function getReviewId(){
             return $this->review_id;
