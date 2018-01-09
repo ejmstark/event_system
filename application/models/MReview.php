@@ -27,9 +27,13 @@
 		}
 
 	public function loadEventReviewAverageRating($eventId){
-		$this->db->select("SUM(`rating`)/COUNT(*) AS 'avg_rating'");
-		$this->db->from("review");
-
+		$this->db->select("SUM(`r`.`rating`)/COUNT(*) AS 'avg_rating'");
+		$this->db->from("review as r");
+		$this->db->join("ticket as t","r.ticket_id = t.ticket_id");
+		$this->db->join("ticket_type AS tt","t.ticket_type_id = t.ticket_type_id");
+	        $this->db->join("event_info AS e","e.event_id = tt.event_id");
+		$this->db->where("`event_id` = '$eventId'");
+	
 		$query = $this->db->get();
 		return $query->result();
 			# code...
