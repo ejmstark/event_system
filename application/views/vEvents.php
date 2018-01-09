@@ -316,6 +316,8 @@
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
     <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+    <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
+
   </ul>
 
   <!-- Tab panes -->
@@ -339,7 +341,7 @@
                             <div class="col-sm-6 col-md-4 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
-                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                     </div>
                                        <div class="item-entry overflow">
                                         <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
@@ -433,7 +435,7 @@
                                         <tr>
                                             <td><?php echo $e->event_id;?></td>
                                             <td><?php echo $e->event_name;?></td>
-                                            <td><?php echo $e->event_date_start;?></td>
+                                            <td><?php echo $e->dateStart;?></td>
                                             <td><?php echo $e->event_status;?></td>
                                             <td><?php echo $e->event_venue;?></td>
                                             <td><?php echo $e->event_category;?></td>
@@ -533,23 +535,72 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (isset($hist)) {
-                                        foreach ($hist as $h) {
-                                   ?>
-                                    <tr>
-                                        <td><?php echo $h->Event;?></td>
-                                        <td><?php echo $h->Paid;?></td>
-                                        <td><?php echo $h->DatePaid;?></td>
-                                    </tr>
-                                   <?php }
-                                }?>
+                              
                             </tbody>
                         </table>
                     </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="settings">
     </div>
-          <a href="<?php echo site_url('user/cUser/editAccount/'.$userid);?>"><div>Edit Profile</div></a>
+
+     <div role="tabpanel" class="tab-pane" id="editprofile">
+        <h2>Edit Profile</h2>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="name">First Name</label>
+                 <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+            </div>
+
+             <div class="form-group">
+                 <label for="name">Middle Initial</label>
+                <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+            </div>
+
+           <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
+            </div>
+
+           <div class="form-group">
+                <label for="email">Birthdate</label>
+                <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Gender</label>
+                <select class="form-control" name="gender">
+                    <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
+                    <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
+                    <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Contact Number</label>
+                <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+            </div>
+            <div class="form-group">
+                <label for="email">Username</label>
+                <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit Profile</button>
+            </div>
+
+
+        </div>
+
+    </div>
+          
 
     </div>
 

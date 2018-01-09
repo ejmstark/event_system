@@ -6,7 +6,7 @@
 	    printf("Connect failed: %s\n", mysqli_connect_error());
 	}
 	$year= $_GET['years'];
-	$statement="SELECT COUNT(*) as EventCount FROM `event_info` WHERE `event_status` = 'APPROVED' AND YEAR(`date_created`) = '2017'";
+	$statement="SELECT COUNT(*) as EventCount FROM `event_info` WHERE `event_status` = 'APPROVED' AND YEAR(`addedAt`) = '2017'";
 
 	$res = mysqli_query($mysql,$statement);
 

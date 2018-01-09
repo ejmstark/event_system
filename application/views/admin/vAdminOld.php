@@ -127,9 +127,9 @@
                                              </tr>";  
                             }else {
                               echo " <td>
-                                  You have ".$object->event_status." this event.
+                                    <button  type='button' class='btn btn-info'>VIEW ATTENDEES</button>
                                   </td>
-                                             </tr>";  
+                                </tr>";  
                             }
                           } 
                                   }

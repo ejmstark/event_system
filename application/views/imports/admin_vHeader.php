@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+<?php if(isset($this->session->userdata['adminSession'])){
+    ?><!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -21,10 +23,13 @@
 <link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/adminAssets/css/style5.css')?>" />
 
 <link type="text/css" rel="alternate stylesheet" media="screen" title="style1" href="<?php echo base_url('assets/adminAssets/css/styleTheme1.css')?>" />
+<link type="text/css" rel="stylesheet" href="<?php echo base_url('assets/adminAssets/css/animation.css')?>" />
 
 <script src="<?php echo base_url('assets/jcAssets/js/popper.min.js"')?>"></script>
 <script src="<?php echo base_url('assets/jcAssets/js/jquery-3.2.1.min.js"')?>"></script>
 <script src="<?php echo base_url('assets/jcAssets/js/bootstrap.min.js"')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/adminAssets/js/jquery.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/adminAssets/js/jquery.ui.min.js')?>"></script>
 
 </head>
 <body class="leftMenu nav-collapse">
@@ -101,13 +106,15 @@
 
     <nav id="menu"  >
         <ul>  
-            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewReport"><i class="icon  fa fa-laptop"></i> Dashboard </a></li>
+            <li><a href="<?php echo site_url();?>/admin/cAdmin"><i class="icon  fa fa-laptop"></i> Dashboard </a></li>
 
-            <li><a href="<?php echo site_url();?>/admin/cAdmin"><i class="icon  fa fa-bullhorn"></i>  Events </a></li>
+            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAllEvents"><i class="icon  fa fa-bullhorn"></i>  Events </a></li>
             
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt"><i class="icon  fa fa-users"></i>  User Account </a></li>
             
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAdminAccountMgt"><i class="icon  fa fa-user"></i>  Admin Account </a></li>
+
+            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAnnouncements"><i class="icon  fa fa-user"></i>  Announcements </a></li>            
 
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewFinance"><i class="icon  fa fa-money"></i> Finance </a></li>
 
@@ -118,4 +125,6 @@
         </ul>
     </nav>
     <!-- //nav left menu-->
-    
+    <?php }else{
+        redirect("cLogin/login");
+        }?>

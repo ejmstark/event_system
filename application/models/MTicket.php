@@ -1,9 +1,13 @@
 <?php
-	class MTicket extends MY_model {
+	class MTicket extends MY_Model {
 		private $ticket_id;
 		private $date_sold;
 		private $user_id;
 		private $ticket_type_id;
+		private $addedBy; 
+		private $updatedBy; 
+		private $addedAt; 
+		private $updateAt; 
 
 
 		const DB_TABLE = "ticket";
@@ -24,7 +28,6 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
 		public function joinTicketEventType($id)
@@ -37,22 +40,18 @@
 
 			$query = $this->db->get();
 			 return $query->result();
-			# code...
 		}
 
 		public function generateRevenue($id)
 		{
 			$this->db->select('count(*) as TOTAL_TICKET_SOLD' );
 			$this->db->select_sum('price', 'REVENUE');
-			// $this->db->select_count('*','TOTAL_TICKE_SOLD' );
 			$this->db->from($this::DB_TABLE);
 			$this->db->join('ticket_type as tt', $this::DB_TABLE.'.ticket_type_id = tt.ticket_type_id');
 			$this->db->where( array('tt.event_id' => $id ));
 			$query = $this->db->get();
 
 			return $query->result();
-
-			# code...
 		}
 
 
@@ -96,6 +95,38 @@
 
 		public function setPetition_id($petition_id){
 			$this->petition_id = $petition_id;
+		}
+
+		public function getAddedBy(){
+			return $this->addedBy;
+		}
+
+		public function getUpdatedBy(){
+			return $this->updatedBy;
+		}
+
+		public function getAddedAt(){
+			return $this->addedAt;
+		}
+
+		public function getUpdatedAt(){
+			return $this->updateAt;
+		}
+
+		public function setAddedBy($addedAt){
+			$this->addedBy = $addedAt;
+		}
+
+		public function setUpdatedBy($upgradedAt){
+			$this->updatedBy = $upgradedAt;
+		}
+
+		public function setAddedAt($addedBy){
+			$this->addedBy = $addedBy;
+		}
+
+		public function setUpdateddBy($updateddBy){
+			$this->upgdatedBy = $upgdatedBy;
 		}
 	}
 ?>
