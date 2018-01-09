@@ -15,7 +15,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -59,7 +59,7 @@
             if($announcements!=FALSE){
                 foreach ($announcements as $announcement) {
                     if($announcement->announcementStatus != "Finished") {
-                        $date = date("m-d-Y", strtotime($announcement->datePosted));
+                        $date = date("m-d-Y", strtotime($announcement->addedAt));
                         echo  "
                             <div class='box-container'>
                                 <div class='box-header'>

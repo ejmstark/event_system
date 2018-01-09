@@ -1,5 +1,5 @@
 <?php
-	class MUser extends MY_model {
+	class MUser extends MY_Model {
 		private $account_id;
 		private $user_name;
 		private $user_password;
@@ -20,8 +20,7 @@
 
 		public function Attendance()
 		{	
-
-
+			
 			$this->db->select("ei.event_name as event_id, user_account.user_name as name , count(*) as total");
 			$this->db->from('user_account ');
 			$this->db->join('ticket as t', 'user_account.account_id = t.user_id');
@@ -31,15 +30,14 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
+
 		}
 
 		public function attemptLogin(){
-				//$hashPass=hash('sha512',$this->agentPassword);
 
 			$query= $this->db->get_where($this::DB_TABLE,array('user_name'=>$this->user_name,'password'=>$this->user_password));
-			// $query= $this->db->get_where($this::DB_TABLE,array("user_name like binary"=>$this->user_name,"password like binary"=>$this->user_password));
-			if($query -> num_rows() == 1){
+
+			if($query->num_rows() == 1){
 			    return $query->result();
 			}else{
          		return false;
@@ -55,12 +53,9 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
 		public function getAllUsers(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
 			return $query;			             
 		}
@@ -98,10 +93,14 @@
 		}
 
 		public function setUser_name($user_name){
+			$user_name = trim($user_name);
+			$user_name = filter_var($user_name,FILTER_SANITIZE_STRING);
 			$this->user_name = $user_name;
 		}
 
 		public function setUser_password($user_password){
+			$user_password = trim($user_password);
+			$user_password = filter_var($user_password,FILTER_SANITIZE_STRING);
 			$this->user_password = $user_password;
 		}
 
@@ -114,14 +113,19 @@
 		}
 
 		public function setFirst_name($first_name){
+			$first_name = trim($first_name);
+			$first_name = filter_var($first_name,FILTER_SANITIZE_STRING);
 			$this->first_name = $first_name;
 		}
+
 
 		public function getLast_name(){
 			return $this->last_name;
 		}
 
 		public function setLast_name($last_name){
+			$last_name = trim($last_name);
+			$last_name = filter_var($last_name,FILTER_SANITIZE_STRING);
 			$this->last_name = $last_name;
 		}
 
@@ -130,6 +134,7 @@
 		}
 
 		public function setMiddle_initial($middle_initial){
+			$middle_initial = trim($middle_initial,FILTER_SANITIZE_STRING);
 			$this->middle_initial = $middle_initial;
 		}
 
@@ -138,8 +143,11 @@
 		}
 
 		public function setEmail($email){
+			$email = trim($email);
+			$email = filter_var($email,FILTER_SANITIZE_STRING);
 			$this->email = $email;
 		}
+
 
 		public function getBirthdate(){
 			return $this->birthdate;
@@ -154,6 +162,8 @@
 		}
 
 		public function setGender($gender){
+			$gender = trim($gender);
+			$gender = filter_var($gender,FILTER_SANITIZE_STRING);
 			$this->gender = $gender;
 		}
 
@@ -162,8 +172,10 @@
 		}
 
 		public function setContact_no($contact_no){
+			$contact_no = trim($contact_no);
+			$contact_no = filter_var($contact_no,FILTER_SANITIZE_STRING);
 			$this->contact_no = $contact_no;
-		}	
+		}
 
 	}
 ?>

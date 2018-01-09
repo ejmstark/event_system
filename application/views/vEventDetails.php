@@ -74,7 +74,7 @@ foreach($going as $g){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -113,7 +113,18 @@ foreach($going as $g){
         <!-- property area -->
         <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
             <div class="container">
-
+                <?php if ($this->session->flashdata('error_msg')): ?>
+                                <div class="alert alert-danger" style="margin-top: 15px;">
+                                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                                    <?php echo $this->session->flashdata('error_msg'); ?>
+                                </div>
+                            <?php endif ?>
+                             <?php if ($this->session->flashdata('success_msg')): ?>
+                                <div class="alert alert-success" style="margin-top: 15px;">
+                                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                                    <?php echo $this->session->flashdata('success_msg'); ?>
+                                </div>
+                            <?php endif ?>
                 <div class="clearfix padding-top-40" >
 
                     <div class="col-md-8 single-property-content prp-style-1 ">
@@ -146,22 +157,6 @@ foreach($going as $g){
                                 </div>
                             </div>
                         </div>
-                        <?php if(isset($errorMsg)){?>
-                            <!-- error message / alert handling. -->
-                        <div class="alert px-0 mx-0" style="background-color: #FDC600;">
-                            <span class="pull-right px-0"><button style="background-color: #FDC600; color: gray;">X</button></span>
-                            <p style="color: gray;"><?php echo $errorMsg; ?></p>
-                        </div>
-                        <br><br>
-                        <?php }?>
-                        <?php if(isset($successMsg)){?>
-                            <!-- error message / alert handling. -->
-                        <div class="alert px-0 mx-0" style="background-color: #FDC600;">
-                            <span class="pull-right px-0"><button style="background-color: #FDC600; color: gray;">X</button></span>
-                            <p style="color: gray;"><?php echo $successMsg; ?></p>
-                        </div>
-                        <br><br>
-                        <?php }?>
 
                         <div class="single-property-wrapper">
                             <div class="single-property-header">

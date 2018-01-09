@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+
+<?php if(isset($this->session->userdata['adminSession'])){
+    ?><!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -63,7 +65,7 @@
                     </a>
                     <ul class="dropdown-menu pull-right icon-right arrow">
                         <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="#"><i class="fa fa-cog"></i> Setting </a></li>
+                        <li><a href="<?php echo site_url();?>/admin/cAdmin/adminSettings"><i class="fa fa-cog"></i> Settings </a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo site_url();?>/cLogin/userLogout"><i class="fa fa-sign-out"></i> Signout </a></li>
                     </ul>
@@ -123,4 +125,6 @@
         </ul>
     </nav>
     <!-- //nav left menu-->
-    
+    <?php }else{
+        redirect("cLogin/login");
+        }?>

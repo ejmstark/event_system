@@ -15,7 +15,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -61,19 +61,19 @@
                         <h2>See Events Near You</h2>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
-                            <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
+                            <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class="form-inline" method="POST">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
+                                    
                                 <div class="form-group">
-                                    <input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">
+                                    <?php
+                                    if(!isset($_POST['searchWord'])){
+                                        echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">';
+                                    } else {
+                                        echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchWord'].'" pattern="[\sa-zA-z0-9]+">';
+                                    }
+                                    ?>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <select name="basic" class="form-control">
-                                        <option>Concerts</option>
-                                        <option>Workshops</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div> -->
-                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
                             </form>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                                             <div class="col-sm-6 col-md-4 p0">
                                             <div class="box-two proerty-item">
                                                 <div class="item-thumb">
-                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>
                                                    <div class="item-entry overflow">
                                                         <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php

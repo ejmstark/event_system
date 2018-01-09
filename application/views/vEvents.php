@@ -15,7 +15,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -341,7 +341,7 @@
                             <div class="col-sm-6 col-md-4 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
-                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                     </div>
                                        <div class="item-entry overflow">
                                         <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
@@ -435,7 +435,7 @@
                                         <tr>
                                             <td><?php echo $e->event_id;?></td>
                                             <td><?php echo $e->event_name;?></td>
-                                            <td><?php echo $e->event_date_start;?></td>
+                                            <td><?php echo $e->dateStart;?></td>
                                             <td><?php echo $e->event_status;?></td>
                                             <td><?php echo $e->event_venue;?></td>
                                             <td><?php echo $e->event_category;?></td>

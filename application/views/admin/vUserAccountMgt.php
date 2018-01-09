@@ -54,7 +54,7 @@
                                           <td>".$object->gender."</td>
                                           <td>".$num."</td>
                                           <td>".$object->load_amt."</td>
-                                          <td>".$object->date_account_created."</td>
+                                          <td>".$object->addedAt."</td>
                                           <td>".$object->user_status."</td>
                                           <td>";                        
                                         if($object->user_status == "Active"){

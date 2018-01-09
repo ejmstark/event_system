@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class cEvent extends CI_Controller {
+class CEvent extends CI_Controller {
 
 	public function __Construct(){
       parent::__Construct ();

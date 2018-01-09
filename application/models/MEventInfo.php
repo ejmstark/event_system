@@ -1,5 +1,5 @@
 <?php
-	class MEventInfo extends MY_model {
+	class MEventInfo extends MY_Model {
 		private $event_id;
 		private $event_date_start;
 		private $event_date_end;
@@ -11,6 +11,10 @@
 		private $event_venue;
 		private $date_created;
 		private $user_id;
+		private $addedBy; 
+		private $updatedBy; 
+		private $addedAt; 
+		private $updateAt; 
 
 		const DB_TABLE = "event_info";
     	const DB_TABLE_PK = "event_id";
@@ -32,13 +36,10 @@
 
 		}
 		public function getAllEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
 			return $query;			             
 		}
 
-		//Class getters and setters.
 		public function getTransHistory($id){
 			$this->db->select('e.event_name AS  "Event", y.price AS "Paid", DATE_FORMAT(t.date_sold, "%d-%b-%y") AS "DatePaid"');
         	$this->db->from("event_info AS e");
@@ -137,7 +138,38 @@
 			$this->user_id = $user_id;
 		}
 
-		//End of class getters and setters.
+		public function getAddedBy(){
+			return $this->addedBy;
+		}
+
+		public function getUpdatedBy(){
+			return $this->updatedBy;
+		}
+
+		public function getAddedAt(){
+			return $this->addedAt;
+		}
+
+		public function getUpdatedAt(){
+			return $this->updateAt;
+		}
+
+		public function setAddedBy($addedAt){
+			$this->addedBy = $addedAt;
+		}
+
+		public function setUpdatedBy($upgradedAt){
+			$this->updatedBy = $upgradedAt;
+		}
+
+		public function setAddedAt($addedBy){
+			$this->addedBy = $addedBy;
+		}
+
+		public function setUpgradedBy($updatedBy){
+			$this->updatedBy = $updatedBy;
+		}
+
 
 		public function updateEventStatus($id, $status)
 		{
