@@ -21,8 +21,6 @@
 		}
 		
 		public function getAllApprovedEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$where = array('event_status'=>"Approved");
 			$query = $this->read_where($where);
 			return $query;			             

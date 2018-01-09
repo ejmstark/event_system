@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class cEvent extends CI_Controller {
+class CEvent extends CI_Controller {
 
 	public function __Construct(){
       parent::__Construct ();
@@ -38,6 +38,40 @@ class cEvent extends CI_Controller {
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
+		# code...
+	}
+	public function searchEvent()
+	{
+		$data['users'] = $this->MUser->getAllUsers();
+		$result_data = $this->MEvent->getSearchEvents($_POST['searchWord']);
+		// print_r($data);
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->dateStart = $value->event_date_start;
+					$arrObj->dateEnd = $value->event_date_end;
+					$arrObj->event_category = $value->event_category;
+					$array[] = $arrObj;
+			}
+		}
+		$data['events'] = $array;
+
+		$this->data['custom_js']= '<script type="text/javascript">
+
+                              $(function(){
+
+                              	$("#dash").addClass("active");
+
+                              });
+
+                        </script>';
+		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('vLandingPage', $data);
+		//$this->load->view('user/vListEvents', $data['events']);
+		$this->load->view('imports/vFooterLandingPage');
 		# code...
 	}
 

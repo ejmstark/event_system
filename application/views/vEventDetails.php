@@ -15,6 +15,48 @@ foreach($going as $g){
 }
 // if($isset($tixStat)){foreach ( as $ts) { }}
     }?>
+    <head>
+<style>
+/* The Modal (background) */
+.modal1 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal1-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+</head>
     <body>
 
         <div id="preloader">
@@ -32,7 +74,7 @@ foreach($going as $g){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -47,7 +89,7 @@ foreach($going as $g){
 
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
@@ -71,7 +113,18 @@ foreach($going as $g){
         <!-- property area -->
         <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
             <div class="container">
-
+                <?php if ($this->session->flashdata('error_msg')): ?>
+                                <div class="alert alert-danger" style="margin-top: 15px;">
+                                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                                    <?php echo $this->session->flashdata('error_msg'); ?>
+                                </div>
+                            <?php endif ?>
+                             <?php if ($this->session->flashdata('success_msg')): ?>
+                                <div class="alert alert-success" style="margin-top: 15px;">
+                                    <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+                                    <?php echo $this->session->flashdata('success_msg'); ?>
+                                </div>
+                            <?php endif ?>
                 <div class="clearfix padding-top-40" >
 
                     <div class="col-md-8 single-property-content prp-style-1 ">
@@ -104,22 +157,6 @@ foreach($going as $g){
                                 </div>
                             </div>
                         </div>
-                        <?php if(isset($errorMsg)){?>
-                            <!-- error message / alert handling. -->
-                        <div class="alert px-0 mx-0" style="background-color: #FDC600;">
-                            <span class="pull-right px-0"><button style="background-color: #FDC600; color: gray;">X</button></span>
-                            <p style="color: gray;"><?php echo $errorMsg; ?></p>
-                        </div>
-                        <br><br>
-                        <?php }?>
-                        <?php if(isset($successMsg)){?>
-                            <!-- error message / alert handling. -->
-                        <div class="alert px-0 mx-0" style="background-color: #FDC600;">
-                            <span class="pull-right px-0"><button style="background-color: #FDC600; color: gray;">X</button></span>
-                            <p style="color: gray;"><?php echo $successMsg; ?></p>
-                        </div>
-                        <br><br>
-                        <?php }?>
 
                         <div class="single-property-wrapper">
                             <div class="single-property-header">
@@ -136,6 +173,7 @@ foreach($going as $g){
                                 </span>
 
                             </div>
+
                             <!-- .property-meta -->
 
                             <div class="section">
@@ -186,10 +224,42 @@ foreach($going as $g){
                             </div>
                         <?php }?>
                             <!-- End video area  -->
+                            <?php foreach($events as $x){ if($id == $x->user_id && $x->event_status != "Expired"){
+                                
+                                if($x->event_status == "Approved"){
+                                    echo'
+                                    <div class="button navbar-right">
+                                        <button class="navbar-btn nav-button login"> <a href ="'.site_url("/event/cEvent/editEvent/$e->event_id").'">Edit Event </a></button>
+                                    </div>';
+                                }else if($x->event_status == "Pending"){
+                                    echo'
+                                    <div class="button navbar-right">
+                                        <button class="navbar-btn nav-button login" style="background-color:gray;" id="confirmdelete"><a>Delete Event</a></button>
+                                    </div>
 
+                                    <div class="button navbar-right">
+                                        <button class="navbar-btn nav-button login"> <a href ="'.site_url("/event/cEvent/editEvent/$e->event_id").'">Edit Event </a></button>
+                                    </div>';
+                                }
+                            }} ?>
                         </div>
                     </div>
-
+                    <div class="modal fade bd-example" id="deletemodal" tabindex="-1" role="dialog" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header" style="background-color: #cb6d53;">
+                            <h2 style="color: white;">CONFIRM DELETE!</h2>
+                          </div>
+                          <div class="modal-body">
+                            <h2>Are you sure you want to delete this event?</h2>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" style="background-color: gray;"><a href ="<?php echo site_url('event/cEvent/deleteEvent/'.$e->event_id);?>">Delete</a></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <div class="col-md-4 p0">
                         <aside class="sidebar sidebar-property blog-asside-right">
@@ -255,7 +325,8 @@ foreach($going as $g){
                                                 <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h4> <?php echo  $t->ticket_name;?> </h4>
+                                                <h4> <?php echo  $t->ticket_name;?><button id="myBtn">Buy More Tickets</button></h4>
+                                                
                                                 <span class="property-price"><?php echo "P"." ".$t->price.".00";?></span>
                                                  <?php if($e->event_status == "Approved"){?>
                                                  <!-- <span>&nbsp; &nbsp; &nbsp;
@@ -475,3 +546,83 @@ foreach($going as $g){
                 </div>
             </div>
         </div>
+
+        <!-- Trigger/Open The Modal -->
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form method="POST" id="cartForm" action="<?php echo site_url('finance/cCart/addToCart'); ?>">
+         <span class="input-group-btn">
+            <button class="btn btn-secondary col-1 cardsbtn unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+            <input type="text" id="qty1" name="qty1" class="form-control col-8 qtyinput" placeholder="Quantity" aria-label="Quantity">
+            <button class="btn btn-secondary col-1 cardsbtn unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        </span>
+    
+        <button id="addToCart"  type="submit">Add to Cart</button>
+    </form>
+  </div>
+
+</div>
+
+<script>
+var value=0;
+$(document).ready(function(){
+  var modal = document.getElementById('myModal');
+  var btn = document.getElementById("myBtn");
+  var span = document.getElementsByClassName("close")[0];
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  $('#confirmdelete').click(function(){
+        $('#deletemodal').modal('show');
+    });
+
+  $('.qtyinput').val(value);
+
+  $('.unaM').click(function(){
+    if($('#qty1').val() > 0){
+      var get = $('#qty1').val();
+      get-=1;
+      $('#qty1').val(get);
+    }
+  });
+
+  $('.unaP').click(function(){
+    var get = parseInt($('#qty1').val());
+    get+=1;
+    $('#qty1').val(get);
+  });
+
+  $(document).on('submit','#cartForm', function(e){
+    e.preventDefault();
+    var _url = $(this).attr('action');
+
+    $.ajax({
+        url:_url,
+        method: "POST",
+        data: $(this).serialize(),
+        success: function(){
+          alert('ok');
+          //$(':input').val(0);  
+        },
+        error: function(){
+
+           alert('failed!'+ $("qty1").val());
+        }
+    });
+  });
+});
+</script>

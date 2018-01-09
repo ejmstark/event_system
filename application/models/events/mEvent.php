@@ -1,5 +1,5 @@
 <?php
-	class mEvent extends MY_model {
+	class MEvent extends MY_model {
 		private $event_id;
 		private $event_date_start;
 		private $event_date_end;
@@ -20,22 +20,19 @@
 		}
 
 		public function getAllEvents(){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*,asdasd");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->from($this::DB_TABLE);
 			$query = $this->db->get();
-			return $query;			             
+			return $query;
 		}
-
-		//Class getters and setters.
 
 		public function getEvent_id(){
 			return $this->event_id;
 		}
 
 		public function setEccount_id($event_id){
+			$no_tickets_total = filter_var($no_tickets_total, FILTER_SANITIZE_NUMBER_INT);
 			$this->event_id = $event_id;
 		}
 
@@ -60,6 +57,7 @@
 		}
 
 		public function setNo_tickets_total($no_tickets_total){
+			$no_tickets_total = filter_var($no_tickets_total, FILTER_SANITIZE_NUMBER_INT);
 			$this->no_tickets_total = $no_tickets_total;
 		}
 
@@ -76,6 +74,8 @@
 		}
 
 		public function setEvent_name($event_name){
+			$event_name = filter_var($event_name,FILTER_SANITIZE_STRING);
+			$event_name = trim($event_name,"!@#$%^&*(){}[]");
 			$this->event_name = $event_name;
 		}
 
@@ -84,6 +84,8 @@
 		}
 
 		public function setEvent_details($event_details){
+			$event_details = filter_var($event_details,FILTER_SANITIZE_STRING);
+			$event_details = trim($event_details,"!@#$%^&*(){}[]");
 			$this->event_details = $event_details;
 		}
 
@@ -92,6 +94,8 @@
 		}
 
 		public function setEvent_category($event_category){
+			$event_category = filter_var($event_category,FILTER_SANITIZE_STRING);
+			$event_category = trim($event_category,"!@#$%^&*(){}[]");
 			$this->event_category = $event_category;
 		}
 
@@ -100,6 +104,8 @@
 		}
 
 		public function setEvent_venue($event_venue){
+			$event_venue = filter_var($event_venue,FILTER_SANITIZE_STRING);
+			$event_venue = trim($event_venue,"!@#$%^&*(){}[]");
 			$this->event_venue = $event_venue;
 		}
 
@@ -116,12 +122,9 @@
 		}
 
 		public function setUser_id($user_id){
+			$user_id = filter_var($user_id, FILTER_SANITIZE_NUMBER_INT);
 			$this->user_id = $user_id;
 		}
-
-		//End of class getters and setters.
-
-		
 
 		public function deleteEvent($event_id){
 			$this->db->trans_begin();
@@ -130,7 +133,7 @@
         		$this->db->trans_rollback();
 			}else{
         		$this->db->trans_commit();
-			} 	
+			}
 		}
 
 		public function updateEvent($event_id,$data){

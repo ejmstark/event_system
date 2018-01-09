@@ -5,6 +5,7 @@
         </div>
         <!-- Body content -->
 
+
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -15,7 +16,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -311,13 +312,27 @@
                                         <div class="row">
                                             <div class="col-lg-12 text-center">
                                                 
-                                                <div id="calendar" class="col-centered">
+                                                <div id="calendar" class="col-centered" style="overflow: auto;">
                                                 </div>
                                             </div>
                                             
                                         </div>
                                         <!-- /.row -->
                                         
+
+                                        <!-- LEGEND -->
+                                        
+                                        <div class="calendar-legend">
+                                            <center><h3>L E G E N D</h3></center>
+                                            <ul class="legend">
+                                                <li><span class="approved"></span>Upcoming Events</li>
+                                                <li><span class="pending"></span>Future events</li>
+                                                <li><span class="expired"></span>Expired events</li>
+                                            </ul>
+                                        </div>
+                                        
+
+
                                         <!-- Modal -->
                                         <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                           <div class="modal-dialog" role="document">
@@ -456,16 +471,11 @@
                                           
                                         </div>
                                         
-                                        <?php  
+                                    <?php  
                                         foreach($event_data as $data){
-                                            
-                                            
                                             echo "<br>";
                                         }
-                                        
-                                        // echo date("Ymd",strtotime("-12days",strtotime(20171022))); 
-                                        
-                                        ?>
+                                    ?> 
                                 
                                     </div>
                             </div>
@@ -483,7 +493,7 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month'
+                right: 'month,agendaWeek'
             },
             defaultDate: "<?php date_default_timezone_set('UTC'); echo date('d/M/Y'); ?>",
             editable: false,
@@ -492,7 +502,7 @@
             displayEventTime: true,
             timeFormat: 'hh:mm a:',
             selectHelper: true,
-           select: function(start, end) {
+            select: function(start, end) {
                     var startDate = moment(start).format('MM/DD/YYYY');
                     var endDate = moment(end).format('MM/DD/YYYY');
                     var startTime = moment(start).format('h:mm a');
@@ -504,15 +514,12 @@
 
                     var flag = true;
 
-                    if(start[2] <= date[2] ){
-                        if(start[0] <= date[0]){
-                                if(start[1]< date[1]){
-                                     $('#errmodal').modal('show');
-                                    flag = false;
-                                }
+                    // if(start[2] <= date[2] ){
+                        if(start[2]< date[2] || start[2] == date[2] && (start[0]<date[0] || (start[0] == date[0] && start[1]< date[1]))){
+                            $('#errmodal').modal('show');
+                            flag = false;
                         }
-                       
-                    }
+                    // }
 
 
                     if(flag){
@@ -564,6 +571,9 @@
                     title: '<?php echo $events->event_name; ?>',
                     start: '<?php echo $start; ?>',
                     end: '<?php echo $end; ?>',
+                    details: '<?php echo $events->event_details; ?>',
+                    category: '<?php echo $events->event_category; ?>',
+                    venue: '<?php echo $events->event_venue; ?>',
                     color: '<?php           
                         if($date_now>$date2){
                             echo $newColor = "#808080";
@@ -579,7 +589,46 @@
                     ?>',
                 },
                 <?php endforeach; ?>
-            ]
+            ],
+
+
+            eventClick: function(event) {
+               var id = event.id;
+            //    var title = event.title;
+            //    var details = event.details;
+            //    var category = event.category;
+            //    var venue = event.venue;
+
+            // if(event.end){
+            //     end = event.end.format('YYYY-MM-DD HH:mm:ss');
+            // }else{
+            //     end = start;
+            // }
+           var color = event.color;
+
+                //if(event.color == "#808080"){
+                //        $('#errmodal').modal('show');
+                //    }else{
+                        // var dataSet = "start="+start+"&end="+end+"&title="+title+"&id="+id+"&details="+details+"&category="+category+"&venue="+venue;
+                        var dataSet = "id="+id+"&color="+color;
+                        $.ajax({
+                            type: "POST",
+                            url: '<?php echo site_url()?>/event/cEvent/displayEventDetailsFromCalendar',
+                            data: dataSet,
+                            cache: false,
+                            success: function(result){
+                                if(result){
+                                   $('body').html(result);
+                                }else{
+                                    alert("Error");
+                                }                         
+                            },
+                            error: function(jqXHR, errorThrown){
+                                console.log(errorThrown);
+                            }
+                        });
+                    //}
+             }
         });
         function edit(event){
             start = event.start.format('YYYY-MM-DD HH:mm:ss');
@@ -606,26 +655,26 @@
             });
         }
     });
+
 </script>
 
-<div class="modal fade bd-example-modal-sm" id="errmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade bd-example" id="errmodal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header" style="background-color: red;">
+      <div class="modal-header" style="background-color: #cb6d53;">
         <h2 style="color: white;">ERROR!</h2>
       </div>
       <div class="modal-body">
-        <h2><strong>Cannot add events on past dates!</strong></h2>
-        <h3>Please choose a different date.</h3>
+        <h2>Cannot add events on past dates! Please choose a different date.</h2>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Got it.</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
 
-         <!-- Footer area-->
+          <!-- Footer area-->
         <div class="footer-area">
 
             <div class=" footer">
@@ -677,8 +726,4 @@
             </div>
 
         </div>
-          
-
-
-       
    

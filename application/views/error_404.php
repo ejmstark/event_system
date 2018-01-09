@@ -13,8 +13,11 @@
         </div>
 	   	<div class = "center">
 	 		<div class = "col-md-8 col-md-offset-10 div-content">
-                <h1>Error 404</h1>
+                <h1>Error Code: 404</h1>
                 <p>Can't find the page that you're looking for.</p>
+								<br>
+								<br>
+								<p><u><a href="<?php echo base_url();?> ">Return to Home Page</u></p>
             </div>
         </div>
     </div>

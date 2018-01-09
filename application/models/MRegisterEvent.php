@@ -1,5 +1,5 @@
 <?php
-	class MRegisterEvent extends CI_model {
+	class MRegisterEvent extends MY_Model {
 		private $petition_id;
 		private $petition_status;
 		private $petition_name;

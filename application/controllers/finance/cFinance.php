@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class cFinance extends CI_Controller {
+class CFinance extends CI_Controller {
 
 
 	public function index()

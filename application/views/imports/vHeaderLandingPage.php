@@ -13,7 +13,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
 
     <!-- FullCalendar -->
-    <script  src="<?php echo base_url(); ?>assets/js/moment.min.js"></script>
+    <script  src="<?php echo base_url(); ?>assets/jsKyleAssets/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.js"></script>
     
@@ -38,9 +38,19 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/style.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/normalize.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
+
+    <style>
+        .calendar-legend{ margin-top:5%; max-width: 50%; border-radius: 15px; border: 1px solid #ccc; padding: 5px;}
+        .legend { list-style: none; margin-left:-35px;}
+        .legend span {   border: 1px solid #ccc; float: left; width: 15px; height: 15px; margin: 5px; }
+        .legend .expired{ background-color: #808080; }
+        .legend .approved{ background-color: #ffae00; }
+        .legend .pending { background-color: #337ab7; }
+
+    </style>
 </head>
 
 <?php } else {
-        redirect('cLogin/userLogin');
+        redirect('cLogin/login');
     }
 ?>
