@@ -1,5 +1,5 @@
 <?php 
-    class cError404 extends CI_Controller {
+    class CError404 extends CI_Controller {
         public function __construct() {
             parent::__construct(); 
         } 

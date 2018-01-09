@@ -64,16 +64,60 @@
                             <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
                                 <span style="color: gray;">Search Event</span><span>aaa</span>
                                 <div class="form-group">
-                                    <input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">
+                                    <?php
+                                    if(!isset($_POST['searchDateMonth'])){
+                                        echo '<select name="searchDateMonth">
+                                                  <option value="0">-Month-</option>
+                                                  <option value="1">Jan</option>
+                                                  <option value="2">Feb</option>
+                                                  <option value="3">Mar</option>
+                                                  <option value="4">Apr</option>
+                                                  <option value="5">May</option>
+                                                  <option value="6">Jun</option>
+                                                  <option value="7">Jul</option>
+                                                  <option value="8">Aug</option>
+                                                  <option value="9">Sep</option>
+                                                  <option value="10">Oct</option>
+                                                  <option value="11">Nov</option>
+                                                  <option value="12">Dec</option>
+                                                </select>';
+                                    } else {
+                                        echo '<b style="color: black;">'.$_POST['searchDateMonth'].'</b><select name="searchDateMonth" >
+                                                  <option value="0">-Month-</option>
+                                                  <option value="1">Jan</option>
+                                                  <option value="2">Feb</option>
+                                                  <option value="3">Mar</option>
+                                                  <option value="4">Apr</option>
+                                                  <option value="5">May</option>
+                                                  <option value="6">Jun</option>
+                                                  <option value="7">Jul</option>
+                                                  <option value="8">Aug</option>
+                                                  <option value="9">Sep</option>
+                                                  <option value="10">Oct</option>
+                                                  <option value="11">Nov</option>
+                                                  <option value="12">Dec</option>
+                                                </select>';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if(!isset($_POST['searchDateYear'])){
+                                        echo '<input name="searchDateYear" type="text" class="form-control" placeholder="Year">';
+                                    } else {
+                                        echo '<input name="searchDateYear" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchDateYear'].'">';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if(!isset($_POST['searchWord'])){
+                                        echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">';
+                                    } else {
+                                        echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchWord'].'" pattern="[\sa-zA-z0-9]+">';
+                                    }
+                                    ?>
+                                    
                                 </div>
-                                <!-- <div class="form-group">
-                                    <select name="basic" class="form-control">
-                                        <option>Concerts</option>
-                                        <option>Workshops</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div> -->
-                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
                             </form>
                         </div>
                     </div>
@@ -136,7 +180,7 @@
                                             <div class="col-sm-6 col-md-4 p0">
                                             <div class="box-two proerty-item">
                                                 <div class="item-thumb">
-                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>
                                                    <div class="item-entry overflow">
                                                         <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php

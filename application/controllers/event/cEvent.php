@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class cEvent extends CI_Controller {
+class CEvent extends CI_Controller {
 
 	public function __construct()
 	{
@@ -282,11 +282,12 @@ class cEvent extends CI_Controller {
 					$res = $this->MTicket->insert($data);
 
 					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
-					$this->success = "Bought ticket for ".$res1[0]->price;
+					// $this->success = "Bought ticket for ".$res1[0]->price;
 					// $this->displayEventDetails($eid);
+					$this->session->set_flashdata('success_msg',"Bought ticket for ".$res1[0]->price);
 					redirect('event/cEvent/displayEventDetails/'.$eid);
 				}else{
-					$this->error = "Insufficient balance!";
+					$this->session->set_flashdata('error_msg','Insufficient balance!');
 					$this->displayEventDetails($eid);
 				}
 
@@ -335,7 +336,7 @@ class cEvent extends CI_Controller {
 			// $this->MEvent->do_upload_event($evt_id);
 
 			if(!$photo) {
-				$photo = $this->MEvent->insertPhotoEvent("Default.png",$evt_id);
+				$photo = $this->MEvent->insertPhotoEvent("events1.jpg",$evt_id);
 			}
 			var_dump($photo);
 
