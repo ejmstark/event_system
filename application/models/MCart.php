@@ -8,8 +8,13 @@
 		}
 
 		public function getCart(){
-			$query = $this->read_all();
-			 return $query;
+			if($this->db->table_exists(DB_TABLE)){
+				$query = $this->read_all();
+			 	return $query;
+			}else{
+				redirect('cError404');
+			}
 		}
+			
 	}
 ?>
