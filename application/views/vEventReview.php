@@ -1,5 +1,6 @@
 <?php
 if(isset($events) ){
+<<<<<<< HEAD
     $bought = FALSE;
     // print_r($events);
 foreach ($events as $e) { } foreach ($organizer as $o) { }
@@ -48,6 +49,10 @@ foreach($going as $g){
 
         </style>
     </head>
+=======
+    foreach ($events as $e) { }
+}?>
+>>>>>>> 2a371e00b08f3043e20e113839e78cc01e8f761f
     <body>
 
         <div id="preloader">
@@ -102,41 +107,31 @@ foreach($going as $g){
         <!-- End page header -->
 
         <!-- property area -->
+        
         <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
             <div class="container">
                 <div class="clearfix padding-top-40" >
-                     <div class="container">
-                        <div class="card" style="border: 0.5px solid beige; border-radius: 5px;">
-                            <div class="card-header">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-half.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="float:right; height:32px; width:32px;">
-                                <h2>User Name</h2>
-                                
+                <?php 
+                    if(isset($reviews)){
+                        foreach($reviews as $r){ ?>
+                            <div class="container">
+                                <div class="card" style="border: 0.5px solid beige; border-radius: 5px;">
+                                    <div class="card-header">
+                                        <?php for($x=0; $x<5; $x++){
+                                            if($r->rating>$x){?>
+                                                <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="float:right; height:32px; width:32px;">
+                                        
+                                        <?php }}?>
+                                        <h2><?php echo $r->user_name;?></h2>
+                                    </div>
+                                    <div class="card-block">
+                                        <p class="card-text"><?php echo $r->description;?></p>
+                                   </div>
+                                </div>
                             </div>
-                            <div class="card-block">
-                                <p class="card-text">The event was rad! <3</p>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="container">
-                        <div class="card" style="border: 0.5px solid beige; border-radius: 5px;">
-                            <div class="card-header">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/empty.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/empty.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-half.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="float:right; height:32px; width:32px;">
-                            <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="float:right; height:32px; width:32px;">
-                                <h2>User Name</h2>
-                            </div>
-                            <div class="card-block">
-                                <p class="card-text">The event was ok...</p>
-                            </div>
-                        </div>
-                    </div>
+                            <br>
+                        <?php } ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>

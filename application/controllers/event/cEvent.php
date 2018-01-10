@@ -9,7 +9,8 @@ class cEvent extends CI_Controller {
     	$this->load->model('user/MEvent');
     	$this->load->model('user/MUser');
     	$this->load->model('user/MTicketType');
-    	$this->load->model('user/MTicket');
+		$this->load->model('user/MTicket');
+    	$this->load->model('MReview');
     	$this->load->helper('date');
     	$this->load->model('MEventInfo');
     	$this->error = "";
@@ -290,13 +291,53 @@ class cEvent extends CI_Controller {
 		# code...
 	}
 
-	public function displayEventReviews($eventData)
+	public function displayEventReviews($eventId)
 	{
 		//GET ALL REVIEWS FROM EVENT//
 		//Insert data retrieval here//
-		
+		$array1 = $array2 = array();
+		$result_data = $this->MEvent->loadEventDetails($eventId);
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_details = $value->event_details;
+					$arrObj->event_status = $value->event_status;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->event_category = $value->event_category;
+					$arrObj->user_id = $value->user_id;
+					$array1[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data1 ['events']  = $array1;
+
+		$result_data = $this->MReview->loadEventReviews($eventId);
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->account_id = $value->account_id;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->first_name = $value->first_name;
+					$arrObj->middle_initial = $value->middle_initial;
+					$arrObj->last_name = $value->last_name;
+					$arrObj->rating = $value->rating;
+					$arrObj->description = $value->description;
+					$array2[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE////////////////////////////////////////////////////
+		$data2['reviews'] = $array2;
+		$data = array_merge($data1,$data2);
+
 		$this->load->view('imports/vHeaderLandingPage');
-		$this->load->view('vEventReview',$eventData);
+		$this->load->view('vEventReview', $data);
 		$this->load->view('imports/vFooterLandingPage');
 	}
 

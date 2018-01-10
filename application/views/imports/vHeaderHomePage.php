@@ -6,7 +6,7 @@
     <link href="<?php echo base_url('assets/dianeAssets/css/bootstrap/bootstrap.min.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/dianeAssets/css/bootstrap/bootstrap-themes.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/dianeAssets/css/font-awesome.min.css')?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/dianeAssets/css/style.css')?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/dianeAssets/css/style.php')?>" rel="stylesheet" /> <!-- causes homepage to change --> 
      <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>

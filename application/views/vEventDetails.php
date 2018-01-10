@@ -67,7 +67,8 @@ foreach($going as $g){
                     </div>
                 </div>
                 <div class="row" >
-                    <a href="<?php echo site_url();?>">link to feedback</a>
+                    <a href="<?php echo site_url();?>/event/cEvent/displayEventReviews/<?php echo $e->event_id; ?>">link to feedback</a>
+                        <!--<a id = "feedbackLink">link to feedback</a> -->
                 </div>
             </div>
         </div>

@@ -27,7 +27,7 @@ class CAdmin extends CI_Controller {
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
-		$array = array();
+		$array = array();     
 		if($result_data){
 			foreach ($result_data as $value) {
 					$arrObj = new stdClass;
