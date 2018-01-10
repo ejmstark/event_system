@@ -5,6 +5,8 @@
 </head>
 <body>
 	<h4>SIGN UP</h4>
+    <br>
+    <p><span style="color:red">*</span>Indicates required field</p><br>
   	<form method="POST" action="<?php echo site_url()?>/user/cUser/signup">
 	  	first name: <br>
 	  	<input type="text" name="fname" required=""> <br>
