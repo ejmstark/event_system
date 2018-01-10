@@ -350,6 +350,10 @@ class CEvent extends CI_Controller {
 			$photo = $this->MEvent->do_upload_event($evt_id);
 			// $this->MEvent->do_upload_event($evt_id);
 
+
+			if($data['event_date_start'] > $data['event_date_end']) {
+				redirect('event/cEvent/viewCreateEvent');
+			} else {
 			if(!$photo) {
 				$photo = $this->MEvent->insertPhotoEvent("events1.jpg",$evt_id);
 			}
@@ -396,8 +400,9 @@ class CEvent extends CI_Controller {
 			}else{
 				redirect('event/cEvent/viewCreateEvent');
 			}
+		  }
 
-		}
+	    }
 
 
 		public function deleteEvent($id){
