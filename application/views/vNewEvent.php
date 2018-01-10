@@ -27,12 +27,12 @@
                     <div class="button navbar-right">
                         <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
                     </div>
-                    
+
 
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                        
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li><!-- 
+
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li><!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
                     </ul>
@@ -42,17 +42,17 @@
         <!-- End of nav bar -->
 
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Create Event</h1>               
+                        <h1 class="page-title">Create Event</h1>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End page header -->
- 
+
 
         <!-- register-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
@@ -61,7 +61,7 @@
                 <div class="col-md-6">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
-                            <h2>Event Details : </h2> 
+                            <h2>Event Details : </h2>
                             <form action="<?php echo site_url();?>/event/cEvent/createEvent " method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="name">Event Picture</label>
@@ -82,7 +82,7 @@
                                         echo $start_date." ".$start_time;
                                     }else{
                                         echo "";
-                                    }; 
+                                    };
                                     ?>" name="dateStart" id="datetimepicker1" required="">
 
                                     <script>
@@ -96,14 +96,14 @@
                                         <input type="text" id="time1" name="event_time_start" placeholder="Event starts">
                                     </div> -->
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="name">ENDS</label>
                                     <input  class="form-control" type="text" value="<?php if(!empty($end_date)){
                                         echo $end_date." ".$end_time;
                                     }else{
                                         echo "";
-                                    }; 
+                                    };
                                     ?>" name="dateEnd" id="datetimepicker2" required="">
 
                                     <script>
@@ -111,10 +111,11 @@
                                     </script>
                                 </div>
 
- 
+
                                 <div class="form-group">
                                     <label for="email">Category</label>
                                         <select Class="form-control" name="event_category" required>
+                                            <option></option>
                                             <option>Attraction</option>
                                             <option>Appearance</option>
                                             <option>Competition</option>
@@ -140,11 +141,11 @@
                                 </div>
 
                                 <br>
-                                <h2>Ticket Details : </h2> 
+                                <h2>Ticket Details : </h2>
                                  <div class="ticketContainer">
-                                    <span>TICKET TYPE </span> <br>
+                                    <label>TICKET TYPE </label> <br>
                                     <div class="select-field">
-                                         <input type="text" class="form-control" required="" name="ticketType1" placeholder="Ticket type"> 
+                                         <input type="text" class="form-control" required="" name="ticketType1">
                                        <!--  <select name="ticketType">
                                             <option value="">Free</option>
                                             <option value="">VIP</option>
@@ -152,25 +153,25 @@
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <span>NUMBER OF TICKETS</span>
-                                    <div class="select-field">  
-                                        <input type="number" class="form-control" min="1" required="" name="no_tickets_total1" placeholder="Ticket count"> 
+                                    <label>NUMBER OF TICKETS</label>
+                                    <div class="select-field">
+                                        <input type="number" class="form-control" min="1" required="" name="no_tickets_total1">
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <span>PRICE OF TICKET</span>
-                                    <div class="select-field">  
-                                        <input type="number" class="form-control" min="0" required="" name="price_tickets_total1" placeholder="Ticket price"> 
+                                    <label>PRICE OF TICKET</label>
+                                    <div class="select-field">
+                                        <input type="number" class="form-control" min="0" required="" name="price_tickets_total1">
                                     </div>
                                 </div>
-                                   
+
 
                                 <br><br>
-                                
+
                                 <div class="ticketContainer">
-                                    <span>TICKET TYPE </span> <br>
+                                    <label>TICKET TYPE </label> <br>
                                     <div class="select-field">
-                                         <input type="text" class="form-control" name="ticketType2" placeholder="Ticket type"> 
+                                         <input type="text" class="form-control" name="ticketType2">
                                        <!--  <select name="ticketType">
                                             <option value="">Free</option>
                                             <option value="">VIP</option>
@@ -178,25 +179,25 @@
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <span>NUMBER OF TICKETS</span>
-                                    <div class="select-field">  
-                                        <input type="number" min="1" class="form-control" name="no_tickets_total2" placeholder="Ticket count"> 
+                                    <label>NUMBER OF TICKETS</label>
+                                    <div class="select-field">
+                                        <input type="number" min="1" class="form-control" name="no_tickets_total2">
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <span>PRICE OF TICKET</span>
-                                    <div class="select-field">  
-                                        <input type="number" min="1" class="form-control" name="price_tickets_total2" placeholder="Ticket price"> 
+                                    <label>PRICE OF TICKET</label>
+                                    <div class="select-field">
+                                        <input type="number" min="1" class="form-control" name="price_tickets_total2">
                                     </div>
                                 </div>
-                                    
+
 
                                 <br><br>
-                                
+
                                 <div class="ticketContainer">
-                                    <span>TICKET TYPE </span> <br>
+                                    <label>TICKET TYPE </label> <br>
                                     <div class="select-field">
-                                         <input type="text" class="form-control" name="ticketType3" placeholder="Ticket type"> 
+                                         <input type="text" class="form-control" name="ticketType3">
                                        <!--  <select name="ticketType">
                                             <option value="">Free</option>
                                             <option value="">VIP</option>
@@ -204,18 +205,18 @@
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <span>NUMBER OF TICKETS</span>
-                                    <div class="select-field">  
-                                        <input type="number" min="1" class="form-control" name="no_tickets_total3" placeholder="Ticket count"> 
+                                    <label>NUMBER OF TICKETS</label>
+                                    <div class="select-field">
+                                        <input type="number" min="1" class="form-control" name="no_tickets_total3">
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <span>PRICE OF TICKET</span>
-                                    <div class="select-field">  
-                                        <input type="number" min="1" class="form-control" name="price_tickets_total3" placeholder="Ticket price"> 
+                                    <label>PRICE OF TICKET</label>
+                                    <div class="select-field">
+                                        <input type="number" min="1" class="form-control" name="price_tickets_total3">
                                     </div>
                                 </div>
-                                   
+
                                 <br><br>
 
                                 <div class="text-center">
@@ -228,7 +229,7 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
 
          <!-- Footer area-->
         <div class="footer-area">
@@ -244,10 +245,10 @@
 
                                <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                                
+
                             </div>
                         </div>
-                    
+
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
@@ -268,14 +269,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                            <ul>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -284,11 +285,11 @@
         </div>
 
 
-        
+
         <script type="text/javascript">
             $("#datetime").datepicker();
         </script>
-        
+
         <script type="text/javascript">
             $("#date1").datepicker();
         </script>
