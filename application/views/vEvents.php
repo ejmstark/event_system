@@ -344,7 +344,7 @@
                                         <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                     </div>
                                        <div class="item-entry overflow">
-                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
+                                        <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> <?php
                                                 if(strlen($event->event_name)>=26){
                                                     echo substr($event->event_name,0,23)."...";
                                                 }else{
