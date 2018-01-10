@@ -80,6 +80,15 @@
 			$query = $this->db->get();
 			return $query->result();			             
 		}
+		public function getTicketsOfEvent($event_id){
+			//Sample code
+			//find read_all function at application/core/MY_Model.php
+			$this->db->select("tt.ticket_name as 'name',tt.price as 'price'");
+			$this->db->from("ticket_type as tt");
+			$this->db->where("tt.event_id='".$event_id."'");
+			$query = $this->db->get();
+			return $query->result();
+		}
 		public function getAllEvents(){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php

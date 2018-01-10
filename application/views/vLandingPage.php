@@ -214,6 +214,24 @@
                                                             }
 
                                                     ?>
+                                                    <h2>Price List</h2>
+                                                            <table class="table-condensed table-responsive">
+                                                                <thead>
+                                                                    <th>Ticket Name</th>
+                                                                    <th>Ticket Price</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    foreach ($event->tix as $key) {?>
+                                                                    <tr>
+                                                                        <td><?php echo$key->name;?></td>
+                                                                        <td><?php echo$key->price;?></td>
+                                                                    </tr>
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
                                                         <div class="dot-hr"></div>
                                                         <!-- <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span> -->
                                                         <span class="proerty-price pull-right"></span>
