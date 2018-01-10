@@ -16,7 +16,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -31,11 +31,8 @@
 
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
-                        <!--
+                        
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li><!-- 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
                     </ul>
@@ -60,8 +57,8 @@
         <!-- register-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
             <div class="container">
-
-                <div class="col-md-6">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 ">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
                             <h2>Event Details : </h2> 
@@ -139,7 +136,7 @@
 
                                 <div class="form-group">
                                     <label for="name">Event Description</label>
-                                    <textarea class="form-control" name="event_details" required="" rows="5"></textarea>
+                                    <input type="text" class="form-control" name="event_details" required="">
                                 </div>
 
                                 <br>
@@ -230,6 +227,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>      
 
@@ -275,9 +273,8 @@
                         </div> 
                         <div class="bottom-menu pull-right"> 
                             <ul> 
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
+                            
                             </ul> 
                         </div>
                     </div>

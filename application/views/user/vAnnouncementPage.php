@@ -15,7 +15,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -169,9 +169,8 @@
                         </div>
                         <div class="bottom-menu pull-right">
                             <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
+                                
                             </ul>
                         </div>
                     </div>
