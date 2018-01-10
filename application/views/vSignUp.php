@@ -52,7 +52,7 @@
                                     <?php echo $this->session->flashdata('error_msg'); ?>
                                 </div>
                             <?php endif ?>
-                            <form action="<?php echo site_url();?>/user/cUser/signup" method="post">
+                            <form id="signup" action="<?php echo site_url();?>/user/cUser/signup" method="post" >
                                 <div class="form-group">
                                     <label for="name">First Name</label>
                                     <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
@@ -101,7 +101,7 @@
                                     <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword">
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
+                                    <button type="submit" onclick="return confirm('Are you sure you want to submit this form?');" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
                                 </div>
                             </form>
                         </div>
@@ -162,7 +162,8 @@
             </div>
 
         </div>
-          
+
+
 
 
     
