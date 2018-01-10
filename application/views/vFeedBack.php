@@ -144,7 +144,7 @@
     
                 for (i = 0; i < onStar; i++) {
                     $(stars[i]).addClass('selected');
-                }  
+                }
             });
         });
 
