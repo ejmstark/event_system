@@ -353,7 +353,8 @@ class CEvent extends CI_Controller {
 
 			if($data['event_date_start'] > $data['event_date_end']) {
 				redirect('event/cEvent/viewCreateEvent');
-			} else {
+				//$_SESSION['Error'] = "You left one or more of the required fields.";
+			} else if ($data['event_date_start'] < $data['event_date_end']) {
 			if(!$photo) {
 				$photo = $this->MEvent->insertPhotoEvent("events1.jpg",$evt_id);
 			}
