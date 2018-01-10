@@ -101,8 +101,7 @@ class cUser extends CI_Controller {
 					  'birthdate' => $this->input->post('bdate'),
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
-					  'user_type' => 'Regular',
-					  'addedAt' => $now->format('Y-m-d H:i:s')
+					  'user_type' => 'Regular'
 					);
 
 		if($this->checkIfEmptyFields($data)){

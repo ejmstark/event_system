@@ -63,8 +63,12 @@ class CLogin extends CI_Controller {
 				$this->viewDashBoard();
 
 			}else {
+				$data = array(
+					"errorTitle" => "Account not yet activated!",
+					"errorMessage" => "Check your email to activate your account."
+				);
 
-				$this->load->view('vLogin');
+				$this->load->view('vLogin', $data);
 
 				// redirect('cInitialize','refresh');
 
@@ -73,8 +77,12 @@ class CLogin extends CI_Controller {
 
 
 		} else {
+			$data = array(
+				"errorTitle" => "User not found!",
+				"errorMessage" => "Incorrect username or password! Please make sure you have signed up."
+			);
 
-			$this->load->view('vLogin');
+			$this->load->view('vLogin', $data);
 
 			// redirect('cInitialize','refresh');
 
