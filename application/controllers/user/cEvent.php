@@ -54,6 +54,8 @@ class CEvent extends CI_Controller {
 					$arrObj->dateStart = $value->event_date_start;
 					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
+					$arrObj->event_picture = $value->event_picture;
+
 					$array[] = $arrObj;
 			}
 		}
