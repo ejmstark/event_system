@@ -355,10 +355,10 @@ class CEvent extends CI_Controller {
 				redirect('event/cEvent/viewCreateEvent');
 				//$_SESSION['Error'] = "You left one or more of the required fields.";
 			} else if ($data['event_date_start'] < $data['event_date_end']) {
-			if(!$photo) {
+			  if(!$photo) {
 				$photo = $this->MEvent->insertPhotoEvent("events1.jpg",$evt_id);
-			}
-			var_dump($photo);
+			  }
+			  var_dump($photo);
 
 				// print_r($photo);
 
