@@ -565,6 +565,7 @@
 
            <div class="form-group">
                 <label for="email">Email</label>
+                <i>(example: johndoe@XXXX.com)</i>
                 <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
             </div>
 
@@ -584,14 +585,17 @@
 
             <div class="form-group">
                 <label for="email">Contact Number</label>
+                <i>(if mobile no.: 09XXXXXXXXX; if telephone no.: XXX-XXXX)</i>
                 <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
             </div>
             <div class="form-group">
                 <label for="email">Username</label>
+                <i>(must contain at least 3 characters, maximum of 50 characters)</i>
                 <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
+                <i>(must contain at least 8 characters, maximum of 50 characters)</i>
                 <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
             </div>
             <div class="text-center">

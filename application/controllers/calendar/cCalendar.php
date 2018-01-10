@@ -194,6 +194,7 @@ class CCalendar extends CI_Controller {
 							</div>
 							<div class="form-group">
 								<label for="event_ticket_type" class="col-sm-2 control-label">Type</label>
+								<i>(e.g. Genral Admission, Gold, Silver, VIP)</i>
 								<div class="col-sm-10">
 								  <input type="text"  value="" name="event_ticket_type" class="form-control" id="event_ticket_type" placeholder="Ticket Type (optional)">
 								</div>

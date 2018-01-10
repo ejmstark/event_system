@@ -145,7 +145,8 @@
                                 <br>
                                 <h2>Ticket Details : </h2> 
                                  <div class="ticketContainer">
-                                    <span>TICKET TYPE </span> <br>
+                                    <span>TICKET TYPE </span>
+                                    <i>(e.g. Genral Admission, Gold, Silver, VIP)</i> <br>
                                     <div class="select-field">
                                          <input type="text" class="form-control" required="" name="ticketType1" placeholder="Ticket type"> 
                                        <!--  <select name="ticketType">
@@ -171,7 +172,8 @@
                                 <br><br>
                                 
                                 <div class="ticketContainer">
-                                    <span>TICKET TYPE </span> <br>
+                                    <span>TICKET TYPE </span>
+                                    <i>(e.g. Genral Admission, Gold, Silver, VIP)</i> <br>
                                     <div class="select-field">
                                          <input type="text" class="form-control" name="ticketType2" placeholder="Ticket type"> 
                                        <!--  <select name="ticketType">
@@ -197,7 +199,8 @@
                                 <br><br>
                                 
                                 <div class="ticketContainer">
-                                    <span>TICKET TYPE </span> <br>
+                                    <span>TICKET TYPE </span>
+                                    <i>(e.g. Genral Admission, Gold, Silver, VIP)</i> <br>
                                     <div class="select-field">
                                          <input type="text" class="form-control" name="ticketType3" placeholder="Ticket type"> 
                                        <!--  <select name="ticketType">
