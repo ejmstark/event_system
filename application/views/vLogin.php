@@ -22,6 +22,9 @@
 <div class="main-agileits">
 <!--form-stars-here-->
     <div class="right-map-w3-agile">
+      <a href="<?php echo site_url(); ?>">
+        <img src="<?php echo base_url(); ?>/assets/customizationAssets/RobinAssets/arrow-left.png">
+      </a>
       <span class = "messageOne">Get acquainted with the people around you.</span>
       <p class="messageTwo"> Know the latest events. </p>
         <p class="messageThree"> <span class="orange">Join</span> them. <span class="orange">Create</span> them. </p> 
