@@ -380,9 +380,15 @@ class CAdmin extends CI_Controller {
 		$result = $user->update($this->session->userdata['adminSession']->userID, $data);
 
 		if($result){
-			//$this->index();
-			redirect('admin/cAdmin/viewAdminAccountMgt');
+			$message = "Succesful update";
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			header('refresh:1;viewAdminAccountMgt');
+		}else{
+			$message = "Update fail";
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			header('refresh:;viewAdminAccountMgt');
 		}
+
 	}
 
 	public function Delete($id,$frm){
