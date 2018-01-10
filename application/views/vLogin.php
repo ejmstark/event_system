@@ -41,7 +41,7 @@
               </div>
 
               <input type="submit" name="" value="Log in">
-                <a href="#"> Forgot your password? </a>
+                <a href="<?php echo base_url('/index.php/cError404') ?>"> Forgot your password? </a>
                 <br>Don't have an account? <a href="<?php echo site_url();?>/user/cUser/viewSignUp"> Sign up here! </a>
             </form>
           </center>
