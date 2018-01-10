@@ -2598,6 +2598,11 @@ textarea.form-control {
 input[type="search"] {
   -webkit-appearance: none;
 }
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   input[type="date"].form-control,
   input[type="time"].form-control,
