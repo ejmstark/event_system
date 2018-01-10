@@ -373,13 +373,24 @@ class CEvent extends CI_Controller {
 
 			$where =  array('no_tickets_total' => $totalNumTix );
 			$res = $this->MEvent->update($evt_id,$where);
-
-
-
 			if($res){
-				redirect('event/cEvent/viewEvents');
+				echo'
+					<div id="addAdmin" class="modal fade"  data-header-color="#34495e">
+						<div class="modal-header">
+								<h1 class="modal-title" align="center">Create Event Successful</h1>
+						</div>
+					</div>
+				';
+				header( "refresh:1; viewEvents" );
 			}else{
-				redirect('event/cEvent/viewCreateEvent');
+				echo'
+					<div id="addAdmin" class="modal fade"  data-header-color="#34495e">
+						<div class="modal-header">
+								<h1 class="modal-title" align="center">Create Event Not Successful</h1>
+						</div>
+					</div>
+				';
+				header( "refresh:1; viewCreateEvent" );
 			}
 
 		}

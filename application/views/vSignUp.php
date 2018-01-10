@@ -1,5 +1,9 @@
 <body>
-
+<style>
+    #example{
+        font-size: 10px;
+    }
+</style>
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
@@ -85,8 +89,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Contact Number</label>
-                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                                    <label for="email">Contact Number<p id = 'example'>eg. (09XX-XXX-XXXX) | (XXX-XXXX)</p></label>
+                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Username</label>
