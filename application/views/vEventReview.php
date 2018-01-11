@@ -1,14 +1,65 @@
 <?php
 if(isset($events) ){
+<<<<<<< HEAD
+    $bought = FALSE;
+    // print_r($events);
+foreach ($events as $e) { } foreach ($organizer as $o) { }
+    foreach ($user as $u) { }
+
+
+foreach($going as $g){
+    if($this->session->userdata['userSession']->userID == $g->account_id){
+        $bought = TRUE;
+
+    }
+
+}
+// if($isset($tixStat)){foreach ( as $ts) { }}
+    }?>
+<html>
+    <head>
+        <style>
+            .rating-stars ul {
+                list-style-type:none;
+                padding:0;
+  
+                -moz-user-select:none;
+                -webkit-user-select:none;
+            }
+            
+            .rating-stars ul > li.star {
+                display:inline-block;  
+            }
+
+/* Idle State of the stars */
+            .rating-stars ul > li.star > i.fa {
+              font-size:1.5em; /* Change the size of the stars */
+              color:#ccc; /* Color on idle state */
+            }
+
+            /* Hover state of the stars */
+            .rating-stars ul > li.star.hover > i.fa {
+              color:#FFCC36;
+            }
+
+            /* Selected state of the stars */
+            .rating-stars ul > li.star.selected > i.fa {
+              color:#FF912C;
+            }
+
+        </style>
+    </head>
+=======
     foreach ($events as $e) { }
 }?>
+>>>>>>> 2a371e00b08f3043e20e113839e78cc01e8f761f
     <body>
 
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
         <!-- Body content -->
-
+    </body>
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->

@@ -3,31 +3,6 @@
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
-         <!-- Body content -->
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <!-- <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> +1 234 567 7890</span>
-                                <span><i class="pe-7s-mail"></i> your@company.com</span>
-                            </p>
-                        </div> -->
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>       
-        <!--End top header -->
 
         <nav class="navbar navbar-default ">
             <div class="container">
@@ -77,9 +52,10 @@
                                     <?php echo $this->session->flashdata('error_msg'); ?>
                                 </div>
                             <?php endif ?>
+                            <p><span style="color:red">*</span><i> Indicates required field</i></p>
                             <form action="<?php echo site_url();?>/user/cUser/signup" method="post">
                                 <div class="form-group">
-                                    <label for="name">First Name</label>
+                                    <label for="name">First Name<span style="color:red">*</span></label>
                                     <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
                                 </div>
                                 <div class="form-group">
@@ -87,22 +63,22 @@
                                     <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Last Name</label>
+                                    <label for="name">Last Name<span style="color:red">*</span></label>
                                     <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email</label>
+                                    <label for="email">Email<span style="color:red">*</span></label>
                                     <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Birthdate</label>
+                                    <label for="email">Birthdate<span style="color:red">*</span></label>
                                     <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
 
 
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Gender</label>
+                                    <label for="email">Gender<span style="color:red">*</span></label>
                                     <select class="form-control" name="gender">
                                         <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
                                         <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
@@ -114,12 +90,16 @@
                                     <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Username</label>
+                                    <label for="email">Username<span style="color:red">*</span></label>
                                     <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">Password<span style="color:red">*</span></label>
                                     <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cpass">Confirm Password<span style="color:red">*</span></label>
+                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword">
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
@@ -131,7 +111,7 @@
             </div>
         </div>      
 
-            <!-- Footer area-->
+             <!-- Footer area-->
         <div class="footer-area">
 
             <div class=" footer">
@@ -143,13 +123,9 @@
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                                <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
-                                <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
-                                <ul class="footer-adress">
-                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 the adress</li>
-                                    <li><i class="pe-7s-mail strong"> </i> email@eventsys.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> +63 123 456 7890</li>
-                                </ul>
+                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
+                                
                             </div>
                         </div>
                     
@@ -157,25 +133,11 @@
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
                                 <div class="footer-title-line"></div>
-                                <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
+                                <ul class="footer-adress">
+                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
+                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
+                                </ul>
 
-                                <form>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </form> 
-
-                                <div class="social pull-right"> 
-                                    <ul>
-                                        <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                    </ul> 
-                                </div>
                             </div>
                         </div>
 
@@ -201,4 +163,9 @@
             </div>
 
         </div>
-        
+          
+
+
+    
+     
+
