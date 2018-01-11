@@ -28,7 +28,7 @@
 			$this->db->select('event_name');
 			$this->db->from('event_info');
 			$this->db->where("event_status = 'APPROVED'");
-			$this->db->where("date_created BETWEEN '".$startDate."' AND '".$endDate."'");
+			$this->db->where("addedAt BETWEEN '".$startDate."' AND '".$endDate."'");
 			$query = $this->db->get();
 			return $query->num_rows();
 			///////////////////////////////////////
@@ -37,7 +37,7 @@
 
 
 		public function numEventPerMonth($year){
-			$query = "SELECT COUNT(*) as EventCount FROM `event_info` WHERE `event_status` = 'APPROVED' AND YEAR(`date_created`) = '2017'";
+			$query = "SELECT COUNT(*) as EventCount FROM `event_info` WHERE `event_status` = 'APPROVED' AND YEAR(`addedAt`) = '2017'";
 			$result = $this->db->query($query);
 
 
@@ -103,7 +103,7 @@
 			// $this->db->select('COUNT(*) as EventCount');
 			// $this->db->from('event_info');
 			// $this->db->where("event_status = 'APPROVED'");
-			// $this->db->where("YEAR(date_created)",$year);
+			// $this->db->where("YEAR(addedAt)",$year);
 			// $query = $this->db->get();
 			// $result = $query->result();
 			// $arr_data = array();
