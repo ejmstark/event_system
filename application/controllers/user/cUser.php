@@ -58,8 +58,7 @@ class cUser extends CI_Controller {
 	}
 
 
-	public function signup()
-	{
+	public function signup(){
 		$user = new MUser();
 
 		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
@@ -74,7 +73,7 @@ class cUser extends CI_Controller {
 					  'gender' => $this->input->post('gender'),					  
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' => 'Regular',
-					  'date_account_created' => $now->format('Y-m-d H:i:s')	
+					  'addedAt' => $now->format('Y-m-d H:i:s')	
 					);
 	
 		
@@ -101,7 +100,7 @@ class cUser extends CI_Controller {
 			if($result){
 			//$this->index();
 			redirect('event/cEvent/viewEvents');
-		}
+			}
 
 		}
 
