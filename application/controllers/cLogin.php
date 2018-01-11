@@ -131,7 +131,7 @@ class CLogin extends CI_Controller {
 
 		if($this->session->userdata['userSession']->userLevel != "Regular"  ){
 
-					redirect('admin/CAdmin');
+					redirect('admin/cAdmin');
 
 			}
 

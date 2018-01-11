@@ -12,10 +12,10 @@
 		public function getUserCountMonthly($year){
 			$statement="SELECT    COUNT(*) as UserCount
 						FROM      user_account
-						WHERE     YEAR(user_account.date_account_created) = ".$year."
+						WHERE     YEAR(user_account.addedAt) = ".$year."
 						AND user_account.user_status = 'Active'
 						AND user_account.user_type = 'Regular'
-						GROUP BY  MONTH(user_account.date_account_created)";
+						GROUP BY  MONTH(user_account.addedAt)";
 			$query = $this->db->query($statement);
 
 			return $query->result_array();
@@ -68,12 +68,12 @@
 			///////////////////////////////////////
 			///////Interface New Implementation////
 			///////////////////////////////////////
-			// $this->db->select('COUNT(*) as UserCount, MONTHNAME(user_account.date_account_created) as monthname');
+			// $this->db->select('COUNT(*) as UserCount, MONTHNAME(user_account.addedAt) as monthname');
 			// $this->db->from('user_account');
-			// $this->db->where("YEAR(user_account.date_account_created) = '".$year."'
+			// $this->db->where("YEAR(user_account.addedAt) = '".$year."'
 		 	// 									AND user_account.user_status = 'Active'
 			// 									AND user_account.user_type = 'Regular'
-			// 									GROUP BY  MONTH(user_account.date_account_created)");
+			// 									GROUP BY  MONTH(user_account.addedAt)");
 			// $query = $this->db->get();
 			// $result = $query->result();
 			// $arr_data = array();
@@ -83,12 +83,12 @@
 			// return $arr_data;
 			/////////////////////////////////////
 			/////////////////////////////////////
-			// $where = array('YEAR(user_account.date_account_created)' => $year,
+			// $where = array('YEAR(user_account.addedAt)' => $year,
 			// 							 'user_account.user_status' => 'Active',
 			// 							 'user_account.user_type' => 'Regular'
 			// 						 );
-			// $result = $this->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount, MONTHNAME(user_account.date_account_created) as monthname',
-			// 					$where,"user_account",FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+			// $result = $this->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount, MONTHNAME(user_account.addedAt) as monthname',
+			// 					$where,"user_account",FALSE,FALSE,"MONTH(user_account.addedAt)",FALSE);
 			// $arr_data = array();
 			// foreach ($result as $value) {
 			// 	$arr_data[] = [$value->UserCount,$value->monthname];

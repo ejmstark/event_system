@@ -53,7 +53,7 @@ class CAdmin extends CI_Controller {
 	}
 
 	public function getUserCount(){
-		$result = $this->MReports->getUserCountMonthly("2017");
+		$result = $this->MReports->getUserCountMonthly("2018");
 		if($result){
 			return $result;
 		}else{
@@ -257,7 +257,7 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' =>  $this->input->post('userType'),
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 
@@ -307,7 +307,7 @@ class CAdmin extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt = $value->addedAt;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -337,7 +337,7 @@ class CAdmin extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt = $value->addedAt;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -372,7 +372,7 @@ class CAdmin extends CI_Controller {
 					$arrObj->email= $value->email;
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
-					$arrObj->date_account_created = $value->date_account_created;
+					$arrObj->addedAt = $value->addedAt;
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -431,7 +431,7 @@ class CAdmin extends CI_Controller {
 					// $arrObj->email= $value->email;
 					// $arrObj->contact_no= $value->contact_no;
 					// $arrObj->birthdate= $value->birthdate;
-					// $arrObj->date_account_created = $value->date_account_created;
+					// $arrObj->addedAt = $value->addedAt;
 					// $arrObj->gender = $value->gender;
 					// $arrObj->user_type = $value->user_type;
 					// $arrObj->user_status = $value->user_status;
@@ -469,7 +469,7 @@ class CAdmin extends CI_Controller {
 					  'gender' => $this->input->post('ugender'),
 					  'contact_no' => $this->input->post('ucontact'),
 					  'user_type' =>  $this->input->post('uuserType'),
-					  'date_account_created' => $now->format('Y-m-d H:i:s')
+					  'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 		$result = $user->update($this->session->userdata['userSession']->userID, $data);
@@ -538,13 +538,13 @@ class CAdmin extends CI_Controller {
 		///////////////////////////////////////
 		$year = $_GET['years'];
 		$userModel = new MUser();
-		$where = array('YEAR(user_account.date_account_created)' => $year,
+		$where = array('YEAR(user_account.addedAt)' => $year,
 									 'user_account.user_status' => 'Active',
 									 'user_account.user_type' => 'Regular'
 								 );
 		$result = $userModel->select_certain_where_isDistict_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
-							MONTHNAME(user_account.date_account_created) as monthname',
-							$where,FALSE,FALSE,"MONTH(user_account.date_account_created)",FALSE);
+							MONTHNAME(user_account.addedAt) as monthname',
+							$where,FALSE,FALSE,"MONTH(user_account.addedAt)",FALSE);
 		$arr_data = array();
 		foreach ($result as $value) {
 			$arr_data[] = [$value->UserCount, $value->monthname];
