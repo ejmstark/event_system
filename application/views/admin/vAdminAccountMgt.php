@@ -55,7 +55,7 @@
                                         <td>".$date."</td>
                                         <td>".$object->gender."</td>
                                         <td>".$num."</td>
-                                        <td>".$object->date_account_created."</td>
+                                        <td>".$object->addedAt."</td>
                                         <td>".$object->user_type."</td>
                                         <td>".$object->user_status."</td>
                                         <td>";

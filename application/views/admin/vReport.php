@@ -123,12 +123,13 @@
 
 
              function getData(){
+                $year = new Date().getYear;
                $.ajax({
                       url:"<?php echo site_url()?>/admin/cAdmin/getUserMonthly",
                       method:"GET",
                       dataType:"json",
                       data: {
-                        'years': '2017'
+                        'years': $year
                       },
                       success: function(data){
                         var display = Array();
@@ -154,12 +155,13 @@
 
 
              function getEventsData(){
+                $year = new Date().getYear;
                $.ajax({
                       url:"<?php echo site_url()?>/admin/cAdmin/getEvents",
                       method:"GET",
                       dataType:"text json",
                       data: {
-                        'years':'2017'
+                        'years': $year
                       },
                       success: function(data){
                         var display = Array();
