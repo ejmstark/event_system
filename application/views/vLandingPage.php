@@ -183,7 +183,7 @@
                                                     <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>
                                                    <div class="item-entry overflow">
-                                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
+                                                      <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> <?php
                                                     if(strlen($event->event_name)>=42){
                                                         echo substr($event->event_name,0,39)."...";
                                                     }else{
@@ -294,9 +294,7 @@
                         </div>
                         <div class="bottom-menu pull-right">
                             <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
                             </ul>
                         </div>
                     </div>

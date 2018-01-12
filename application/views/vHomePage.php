@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="col-md-12">
 				<div class="row">
-					<div class="list-of-events">
+					<div class="list-of-events"  id="targ2">
 						<?php
 	                    	$cnt =1;
 	                        if(isset($events)){

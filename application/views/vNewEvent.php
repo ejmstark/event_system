@@ -57,8 +57,8 @@
         <!-- register-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
             <div class="container">
-
-                <div class="col-md-6">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 ">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
                             <h2>Event Details : </h2>
@@ -228,6 +228,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
@@ -269,14 +270,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span>
-                        </div>
-                        <div class="bottom-menu pull-right">
-                            <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul>
+                            <span> (C) UI Module , All rights reserved 2017  </span> 
+                        </div> 
+                        <div class="bottom-menu pull-right"> 
+                            <ul> 
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
+                            
+                            </ul> 
                         </div>
                     </div>
                 </div>

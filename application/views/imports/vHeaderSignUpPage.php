@@ -13,6 +13,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 
     <!--start of datetime picker styling -------->
+    <link href="<?php echo base_url('assets/nikkiAssets/bootstrap/css/bootstrap.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
 
