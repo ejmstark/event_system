@@ -1,5 +1,9 @@
 <body>
-
+<style>
+    #example{
+        font-size: 10px;
+    }
+</style>
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
@@ -26,17 +30,17 @@
         <!-- End of nav bar -->
 
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Sign Up / Sign In</h1>               
+                        <h1 class="page-title">Sign Up / Sign In</h1>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End page header -->
- 
+
 
         <!-- register-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
@@ -45,7 +49,7 @@
                 <div class="col-md-6">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
-                            <h2>New account : </h2> 
+                            <h2>New account : </h2>
                             <?php if ($this->session->flashdata('error_msg')): ?>
                                 <div class="alert alert-danger" style="margin-top: 15px;">
                                     <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
@@ -85,8 +89,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Contact Number</label>
-                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                                    <label for="email">Contact Number<p id = 'example'>eg. (09XX-XXX-XXXX) | (XXX-XXXX)</p></label>
+                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Username</label>
@@ -108,7 +112,7 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
 
              <!-- Footer area-->
         <div class="footer-area">
@@ -124,10 +128,10 @@
 
                                <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                                
+
                             </div>
                         </div>
-                    
+
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
                                 <h4>Contact Us</h4>
@@ -148,24 +152,10 @@
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
+                            <span> (C) UI Module , All rights reserved 2017  </span>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
-
-
-
-
-    
-     
-
