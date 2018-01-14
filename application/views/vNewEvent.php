@@ -137,9 +137,8 @@
 
                                 <div class="form-group">
                                     <label for="name">Event Description</label>
-                                    <input type="text" class="form-control" name="event_details" required="">
+                                    <textarea class="form-control" name="event_details" required="" rows="3"></textarea>
                                 </div>
-
                                 <br>
                                 <h2>Ticket Details : </h2>
                                  <div class="ticketContainer">

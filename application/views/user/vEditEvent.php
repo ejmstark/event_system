@@ -122,7 +122,7 @@
     
                                     <div class="form-group">
                                         <label for="name">Event Description</label>
-                                        <input type="text" class="form-control" value="<?php echo $ev->event_details;?>" name="event_details" required="">
+                                        <textarea class="form-control" name="event_details" required="" rows="3"><?php echo $ev->event_details;?></textarea>
                                     </div>
     
         
