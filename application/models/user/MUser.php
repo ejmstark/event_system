@@ -19,8 +19,8 @@
 		}
 
 		public function Attendance()
-		{	
-			
+		{
+
 			$this->db->select("ei.event_name as event_id, user_account.user_name as name , count(*) as total");
 			$this->db->from('user_account ');
 			$this->db->join('ticket as t', 'user_account.account_id = t.user_id');
@@ -61,7 +61,7 @@
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
 			$query = $this->read_all();
-			return $query;			             
+			return $query;
 		}
 
 		public function updateSpecificEvent($id, $data){
@@ -83,7 +83,14 @@
 
 			return $this->db->get();
 		}
-		
+
+		// Customization Team 1 added this
+		public function getUpcomingEvents($id, $days){
+			$sql = "SELECT COUNT(e.event_id) AS num FROM ticket AS t JOIN ticket_type AS p ON t.ticket_type_id = p.ticket_type_id JOIN event_info AS e ON p.event_id = e.event_id JOIN user_account AS u ON t.user_id = u.account_id WHERE u.account_id = ? AND DATEDIFF(e.event_date_start, NOW()) BETWEEN 0 AND ?";
+
+			return $this->db->query($sql, array($id, $days));
+		}
+
 		public function getAccount_id(){
 			return $this->account_id;
 		}

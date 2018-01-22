@@ -116,6 +116,9 @@ class CEvent extends CI_Controller {
 
 		$data['userid'] = $userid;
 
+		// Customization 1 Team added this
+		$data['dynamicTitle'] = $this->getUpcomingEvents(rand(0, 2));
+
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEvents',$data);
 		$this->load->view('imports/vFooterLandingPage');
@@ -269,7 +272,7 @@ class CEvent extends CI_Controller {
 			// $data['tickets'] = $type->loadType($id);
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
-				
+
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
 				$result = $res[0]->load_amt - $res1[0]->price;
 
@@ -480,6 +483,52 @@ class CEvent extends CI_Controller {
 			$this->load->view('imports/vHeaderSignUpPage');
 			$this->load->view('user/vEditEvent', $v);
 			$this->load->view('imports/vFooterLandingPage');
+		}
+
+		// Customization Team 1 added this.
+		public function getUpcomingEvents($preset){
+			$userId = $this->session->userdata['userSession']->userID;
+
+			$query;
+
+			switch($preset){
+				case 0:
+				$query = $this->MUser->getUpcomingEvents($userId, 1);
+				break;
+				case 1:
+				$query = $this->MUser->getUpcomingEvents($userId, 7);
+				break;
+				case 2:
+				$query = $this->MUser->getUpcomingEvents($userId, 30);
+				break;
+			}
+
+			$row = $query->result();
+			$numEvents = $row[0]->num;
+
+			$retVal = "You have " . $numEvents;
+
+			if($numEvents == 1){
+				$retVal .= " event";
+			}else{
+				$retVal .= " events";
+			}
+
+			$retVal .= " coming up ";
+
+			switch($preset){
+				case 0:
+				$retVal .= " tomorrow.";
+				break;
+				case 1:
+				$retVal .= " this week.";
+				break;
+				case 2:
+				$retVal .= " this month";
+				break;
+			}
+
+			return $retVal;
 		}
 }
 ?>

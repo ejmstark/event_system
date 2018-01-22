@@ -56,7 +56,15 @@
                 <div class="row">
                     <div class="page-head-content">
                         <!-- <h1 class="page-title">Profile</h1> -->
-                        <h1 class="page-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TITLE ?></h1>
+                        <h1 class="page-title">
+                          <?php
+                            if(isset($dynamicTitle)){
+                              echo $dynamicTitle;
+                            }else{
+                              echo CustomizationManager::$strings->PROFILE_PAGE_TITLE;
+                            }
+                          ?>
+                        </h1>
                     </div>
                 </div>
             </div>
@@ -343,7 +351,7 @@
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_REPORTS ?></a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_PAYMENT_HISTORY ?></a></li>
     <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_SETTINGS ?></a></li>
-  
+
     <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
 
   </ul>
@@ -563,7 +571,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
+
                             </tbody>
                         </table>
                     </div>
@@ -628,7 +636,7 @@
         </div>
 
     </div>
-          
+
 
     </div>
 
