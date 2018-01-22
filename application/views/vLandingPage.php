@@ -30,13 +30,10 @@
                         <!-- <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a> -->
                         <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->LANDING_PAGE_LOGOUT_BUTTON ?> </button></a>
                     </div>
-
                     <div class="button navbar-right">
                         <!-- <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a> -->
                         <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->LANDING_PAGE_CREATE_EVENT_BUTTON ?> </button></a>
                     </div>
-
-
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
@@ -82,17 +79,64 @@
                                 <!-- <span style="color: gray;">Search Event</span><span>aaa</span> -->
                                 <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?></span><span>aaa</span>
                                 <div class="form-group">
+
                                     <!-- <input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+"> -->
                                     <input name="searchWord" type="text" class="form-control" placeholder="<?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_PLACEHOLDER ?>" pattern="[\sa-zA-z0-9]+">
+
+                                    <?php
+                                    if(!isset($_POST['searchDateMonth'])){
+                                        echo '<select name="searchDateMonth">
+                                                  <option value="0">-Month-</option>
+                                                  <option value="1">Jan</option>
+                                                  <option value="2">Feb</option>
+                                                  <option value="3">Mar</option>
+                                                  <option value="4">Apr</option>
+                                                  <option value="5">May</option>
+                                                  <option value="6">Jun</option>
+                                                  <option value="7">Jul</option>
+                                                  <option value="8">Aug</option>
+                                                  <option value="9">Sep</option>
+                                                  <option value="10">Oct</option>
+                                                  <option value="11">Nov</option>
+                                                  <option value="12">Dec</option>
+                                                </select>';
+                                    } else {
+                                        echo '<b style="color: black;">'.$_POST['searchDateMonth'].'</b><select name="searchDateMonth" >
+                                                  <option value="0">-Month-</option>
+                                                  <option value="1">Jan</option>
+                                                  <option value="2">Feb</option>
+                                                  <option value="3">Mar</option>
+                                                  <option value="4">Apr</option>
+                                                  <option value="5">May</option>
+                                                  <option value="6">Jun</option>
+                                                  <option value="7">Jul</option>
+                                                  <option value="8">Aug</option>
+                                                  <option value="9">Sep</option>
+                                                  <option value="10">Oct</option>
+                                                  <option value="11">Nov</option>
+                                                  <option value="12">Dec</option>
+                                                </select>';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if(!isset($_POST['searchDateYear'])){
+                                        echo '<input name="searchDateYear" type="text" class="form-control" placeholder="Year">';
+                                    } else {
+                                        echo '<input name="searchDateYear" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchDateYear'].'">';
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if(!isset($_POST['searchWord'])){
+                                        echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-z0-9]+">';
+                                    } else {
+                                        echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchWord'].'" pattern="[\sa-zA-z0-9]+">';
+                                    }
+                                    ?>
+
                                 </div>
-                                <!-- <div class="form-group">
-                                    <select name="basic" class="form-control">
-                                        <option>Concerts</option>
-                                        <option>Workshops</option>
-                                        <option>Other</option>
-                                    </select>
-                                </div> -->
-                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
                             </form>
                         </div>
                     </div>
@@ -108,7 +152,12 @@
                     <div class="col-md-12  padding-top-40 properties-page">
                         <div class="col-md-12 ">
                             <div class="col-xs-10 page-subheader sorting pl0">
-
+                                <div class="noti-container">
+                                    <button id="noti-button" data-toggle="collapse" data-target="#noti">Notifications</button>
+                                    <div id="noti" class="collapse">
+                                        
+                                    </div>
+                                </div>
                                 <ul class="sort-by-list">
                                     <li class="active">
                                         <!-- <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
@@ -162,7 +211,7 @@
                                             <div class="col-sm-6 col-md-4 p0">
                                             <div class="box-two proerty-item">
                                                 <div class="item-thumb">
-                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 70px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>
                                                    <div class="item-entry overflow">
                                                         <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
@@ -250,7 +299,14 @@
                              <!-- <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" > -->
                              <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
                               <!-- <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p> -->
-                              <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
+                             <!--<p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p> -->
+                             <p> <?php if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                                include_once("vAboutUs.php");
+                            }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+
+                            }else{
+
+                            } ?> </p>
 
                             </div>
                         </div>
@@ -261,10 +317,27 @@
                               <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-adress">
-                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
-                                </ul>
+                                    <!--<li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
+                                        <li><i class="pe-7s-call strong"> </i> 253-2753</li> -->
+                                    <li><i class="pe-7s-mail strong"> </i> 
+                                        <?php if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                                            include_once("vEmail.php");
+                                        }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+                                        
+                                        }else{
 
+                                        } ?> 
+                                    </li>
+                                    <li><i class="pe-7s-call strong"> </i>
+                                        <?php if(CustomizationManager::$currentConfigName == 'configurations 1'){
+                                            include_once("vContactNo.php");
+                                        }else if(CustomizationManager::$currentConfigName == 'configurations 2'){
+
+                                        }else{
+
+                                        } ?>
+                                    </li>
+                                </ul>  
                             </div>
                         </div>
 

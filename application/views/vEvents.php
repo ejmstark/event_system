@@ -12,33 +12,6 @@
         </div>
         <!-- Body content -->
 
-
-
-        <div class="header-connect">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-5 col-sm-8  col-xs-12">
-                        <!-- <div class="header-half header-call">
-                            <p>
-                                <span><i class="pe-7s-call"></i> +1 234 567 7890</span>
-                                <span><i class="pe-7s-mail"></i> your@company.com</span>
-                            </p>
-                        </div> -->
-                    </div>
-                    <div class="col-md-2 col-md-offset-5  col-sm-3 col-sm-offset-1  col-xs-12">
-                        <div class="header-half header-social">
-                            <ul class="list-inline">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--End top header -->
-
         <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -186,7 +159,7 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Key word" pattern="[\sa-zA-Z0-9]+">
+                                                <input type="text" class="form-control" placeholder="Key word">
                                             </div>
                                         </div>
                                     </fieldset>
@@ -364,11 +337,15 @@
     <!-- <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
+
     <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_EVENTS ?></a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_REPORTS ?></a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_PAYMENT_HISTORY ?></a></li>
     <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_SETTINGS ?></a></li>
+  
+    <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
+
   </ul>
 
   <!-- Tab panes -->
@@ -392,7 +369,7 @@
                             <div class="col-sm-6 col-md-4 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
-                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?>assets/dianeAssets/img/events<?php echo $cnt++; ?>.jpg"></a>
+                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                     </div>
                                        <div class="item-entry overflow">
                                         <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
@@ -486,7 +463,7 @@
                                         <tr>
                                             <td><?php echo $e->event_id;?></td>
                                             <td><?php echo $e->event_name;?></td>
-                                            <td><?php echo $e->event_date_start;?></td>
+                                            <td><?php echo $e->dateStart;?></td>
                                             <td><?php echo $e->event_status;?></td>
                                             <td><?php echo $e->event_venue;?></td>
                                             <td><?php echo $e->event_category;?></td>
@@ -586,23 +563,72 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if (isset($hist)) {
-                                        foreach ($hist as $h) {
-                                   ?>
-                                    <tr>
-                                        <td><?php echo $h->Event;?></td>
-                                        <td><?php echo $h->Paid;?></td>
-                                        <td><?php echo $h->DatePaid;?></td>
-                                    </tr>
-                                   <?php }
-                                }?>
+                              
                             </tbody>
                         </table>
                     </div>
     </div>
     <div role="tabpanel" class="tab-pane" id="settings">
     </div>
-          <a href="<?php echo site_url('user/cUser/editAccount/'.$userid);?>"><div>Edit Profile</div></a>
+
+     <div role="tabpanel" class="tab-pane" id="editprofile">
+        <h2>Edit Profile</h2>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="name">First Name</label>
+                 <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+            </div>
+
+             <div class="form-group">
+                 <label for="name">Middle Initial</label>
+                <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="name">Last Name</label>
+                <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+            </div>
+
+           <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
+            </div>
+
+           <div class="form-group">
+                <label for="email">Birthdate</label>
+                <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Gender</label>
+                <select class="form-control" name="gender">
+                    <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
+                    <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
+                    <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Contact Number</label>
+                <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+            </div>
+            <div class="form-group">
+                <label for="email">Username</label>
+                <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit Profile</button>
+            </div>
+
+
+        </div>
+
+    </div>
+          
 
     </div>
 
@@ -694,6 +720,11 @@
                                     <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
                                     <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
                                 </ul>
+
+                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
+
+
                             </div>
                         </div>
 
@@ -702,6 +733,7 @@
                                 <!-- <h4>Contact Us</h4> -->
                                 <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
+
                                 <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
 
                                 <form>
@@ -723,6 +755,11 @@
                                         <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
                                     </ul>
                                 </div>
+
+                                <ul class="footer-adress">
+                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
+                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
+                                </ul>
                             </div>
                         </div>
 
