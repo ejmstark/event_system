@@ -133,7 +133,7 @@ class cUser extends CI_Controller {
 
 				if($result){
 					//$this->index();
-					redirect('event/cEvent/viewEvents');
+					redirect('user/cUser/viewRegistrationConfirmation');
 				}	
 
 			}
@@ -241,5 +241,11 @@ class cUser extends CI_Controller {
 		$this->load->view('user/vAnnouncementPage.php', $data);
 		$this->load->view('imports/vFooterLandingPage');
 
+	}
+
+	public function viewRegistrationConfirmation() {
+		$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('vRegistrationConfirmation.php');
+		$this->load->view('imports/vFooterLandingPage');
 	}
 }
