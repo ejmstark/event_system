@@ -104,6 +104,7 @@ $sessionData = new stdClass;
 					$sessionData->userLogName =  $row->user_name;
 					$sessionData->userPassword =  $row->userPassword;
 					$sessionData->userFName =  $row->first_name;
+					$sessionData->userLName = $row->last_name;
 					$sessionData->userLevel =  $row->user_type;
 					$sessionData->userSuperior =  $row->upgradedBy;
         // $sessionData = array('userID' => $row->account_id,
