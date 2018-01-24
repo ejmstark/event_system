@@ -46,9 +46,9 @@
                                 <?php if(isset($announcements)){
                                         foreach ($announcements as $key) {
                                             ?>
-                                                <li style="width: 550px; z-index: 1;"><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  >
-                                                    <h1 style="display: inline-block;"><?php echo$key->announcementDetails;?> </h1>
-                                                </li>
+                                            <li style="width: 550px; z-index: 1;"><a href="<?php echo site_url().'/user/cUser/viewAnnouncements/'.$key->announcementID;?> "><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  >
+                                                <h1 style="display: inline-block;"><?php echo$key->announcementDetails;?> </h1></a>
+                                            </li>
                                             <?php
                                         }
                                     }?>
