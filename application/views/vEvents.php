@@ -547,31 +547,31 @@
      <div role="tabpanel" class="tab-pane" id="editprofile">
         <h2>Edit Profile</h2>
         <?php
-            foreach($userinfo as $row){ ?>
+            foreach($info as $in){ ?>
         <div class="col-md-8">
             <div class="form-group">
                 <label for="name">First Name</label>
-                 <input type="text" <?php  echo 'value="'.$row->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+                 <input type="text" <?php  echo 'value="'.$in->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
             </div>
 
              <div class="form-group">
                  <label for="name">Middle Initial</label>
-                <input type="text"  <?php  echo 'value="'.$row->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+                <input type="text"  <?php  echo 'value="'.$in->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
             </div>
 
             <div class="form-group">
                 <label for="name">Last Name</label>
-                <input type="text"  <?php  echo 'value="'.$row->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+                <input type="text"  <?php  echo 'value="'.$in->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
             </div>
 
            <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email"  <?php  echo 'value="'.$row->email.'"';?> class="form-control" name="email" id="email" required="">
+                <input type="email"  <?php  echo 'value="'.$in->email.'"';?> class="form-control" name="email" id="email" required="">
             </div>
 
            <div class="form-group">
                 <label for="email">Birthdate</label>
-                <input type="date"  <?php  echo 'value="'.$row->birthdate.'"';?> name="bdate" required="">
+                <input type="date"  <?php  echo 'value="'.$in->birthdate.'"';?> name="bdate" required="">
             </div>
 
             <div class="form-group">
@@ -585,15 +585,15 @@
 
             <div class="form-group">
                 <label for="email">Contact Number</label>
-                <input type="text" <?php  echo 'value="'.$row->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                <input type="text" <?php  echo 'value="'.$in->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
             </div>
             <div class="form-group">
                 <label for="email">Username</label>
-                <input type="text" minlength="6"<?php  echo 'value="'.$row->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+                <input type="text" minlength="6"<?php  echo 'value="'.$in->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" <?php  echo 'value="'.$row->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+                <input type="password" <?php  echo 'value="'.$in->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit Profile</button>
