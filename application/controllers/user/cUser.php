@@ -38,6 +38,9 @@ class cUser extends CI_Controller {
 		$data['events'] = $array;
 		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
 		$data['announcementCount'] = count($data['announcements']);
+		if(count($data['announcements']) == 0){
+			$data['announcements'] = $this->MAnnouncement->getViewedOfUser($this->session->userdata['userSession']->userID);
+		}
 		$this->data['custom_js']= '<script type="text/javascript">
 
                               $(function(){
