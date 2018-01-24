@@ -40,17 +40,14 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!-- End of nav bar -->
-
-
-        <div class="page-head">
-            <div class="container">
-                <div class="row">
-                    <div class="page-head-content">
-                        <h1 class="page-title">Profile</h1>
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title">Profile</h1>
                 </div>
             </div>
         </div>
+            
         <!-- End page header -->
 
         <!-- property area -->
@@ -133,72 +130,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                            <br><br>
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Search</h3>
-                            </div>
-                            <div class="panel-body search-widget">
-                                <form action="" class=" form-inline">
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Key word">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-
-                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
-                                                    <option>Attraction</option>
-                                                    <option>Appearance</option>
-                                                    <option>Competition</option>
-                                                    <option>Concert</option>
-                                                    <option>Conference</option>
-                                                    <option>Convention</option>
-                                                    <option>Festival</option>
-                                                    <option>Gala</option>
-                                                    <option>Meeting</option>
-                                                    <option>Party</option>
-                                                    <option>Rally</option>
-                                                    <option>Retreat</option>
-                                                    <option>Screening</option>
-                                                    <option>Seminar</option>
-                                                    <option>Tour</option>
-                                                    <option>Others</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <label for="price-range">Price range (P):</label>
-                                                <span id="price-value-slider">0</span>
-
-
-                                                <input type="text" class="span2" value="" data-slider-min="0"
-                                                       data-slider-max="10000" data-slider-step="5"
-                                                       data-slider-value="[0,1000]" id="price-slider"><br />
-                                                <b class="pull-left color">P0.00</b>
-                                                <b class="pull-right color">P10,000.00</b>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset >
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <input class="button btn largesearch-btn" value="Search" type="submit">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
+                            <br><br>                            
                         </div>
 
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
@@ -252,13 +184,61 @@
 
                 <div class="col-md-9  pr0 padding-top-40 properties-page">
 
-<div>
-
+<div >
+    <div class="container">
+        <div class="row es-wrap">
+            <div class="event-search">
+                <div class="panel-body search-widget">
+                    <form action="" class=" form-inline">
+                        <fieldset>
+                            <div class="col-xs-4 col-lg-2">
+                                <input type="text" class="form-control" placeholder="Key word">
+                            </div>
+                            <div class="col-xs-4 col-lg-2">
+                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
+                                    <option>Attraction</option>
+                                    <option>Appearance</option>
+                                    <option>Competition</option>
+                                    <option>Concert</option>
+                                    <option>Conference</option>
+                                    <option>Convention</option>
+                                    <option>Festival</option>
+                                    <option>Gala</option>
+                                    <option>Meeting</option>
+                                    <option>Party</option>
+                                    <option>Rally</option>
+                                    <option>Retreat</option>
+                                    <option>Screening</option>
+                                    <option>Seminar</option>
+                                    <option>Tour</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-2">
+                                <div class="price-range-wrap">
+                                    <label for="price-range" style="color:#000">Price range (P):</label>
+                                        <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5"
+                                                        data-slider-value="[0,1000]" id="price-range" ><br />
+                                        <b class="pull-left color" style="color:#000">P0.00</b>
+                                        <b class="pull-right color" style="color:#000" >P10,000.00</b>
+                                </div>
+                            </div>
+                            <div class="col-xs-2 col-lg-2">
+                                <input class="button btn smallsearch-btn" value="Search" type="submit">
+                             </div>
+                        </fieldset>
+                    </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+ 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs" role="tablist">
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
+    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
     <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
 
   </ul>
@@ -554,19 +534,31 @@
 
   <script type="text/javascript">
 
-    $('.tab a').on('click', function (e) {
-      e.preventDefault();
-      console.log('clicked');
-      $(this).parent().addClass('active');
-      $(this).parent().siblings().removeClass('active');
+    
+    $(document).ready(function(){
+        var wrap = $(this).find('.es-wrap');
+        $('.tab a').on('click', function (e) {
+            e.preventDefault();
+            console.log('clicked');
+            $(this).parent().addClass('active');
+            $(this).parent().siblings().removeClass('active');
 
-      target = $(this).attr('href');
+            target = $(this).attr('href');
 
-      $('.tab-content > div').not(target).hide();
+            $('.tab-content > div').not(target).hide();
 
-      $(target).fadeIn(600);
+            $(target).fadeIn(600);
 
-});
+        });
+    
+        $(this).scroll(function(e){
+            if($(this).scrollTop() > 225){
+                wrap.addClass("fix-search");
+            }else{
+                wrap.removeClass("fix-search");
+            }
+        });
+    });
 </script>
 
 </div>
@@ -665,4 +657,3 @@
             </div>
 
         </div>
-
