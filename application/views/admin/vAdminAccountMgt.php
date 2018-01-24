@@ -5,7 +5,7 @@
      ?>
 
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo site_url();?>/admin/cAdmin">Home</a></li>
         <li class="active">Admin Account Management</li>
     </ol>
       <!-- //breadcrumb-->
