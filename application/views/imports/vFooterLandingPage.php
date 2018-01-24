@@ -22,6 +22,7 @@
 <script>
     $("#price-slider").slider();
     $("#price-slider").on("slide", function(slideEvt) {
-        $("#price-value-slider").text(slideEvt.value);
+        var str = slideEvt.value.toString().replace(/\,/g, '-');;
+        $("#price-value-slider").text(str);
     });
 </script>
