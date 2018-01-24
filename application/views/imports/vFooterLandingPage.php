@@ -18,3 +18,10 @@
 
     </body>
 </html>
+
+<script>
+    $("#price-slider").slider();
+    $("#price-slider").on("slide", function(slideEvt) {
+        $("#price-value-slider").text(slideEvt.value);
+    });
+</script>
