@@ -79,8 +79,7 @@
 			$this->db->where('notification_item.isViewed = "0"');
 			$this->db->where('notification_item.user = "'.$user.'"');
 			$this->db->where('announcement.announcementStatus = "OnGoing"');
-			$this->db->order_by('announcement.addedBy', 'ASC');
-			$this->db->limit(5);
+			$this->db->order_by('announcement.announcementID', 'ASC');
 
 			$query = $this->db->get();
 
@@ -95,7 +94,7 @@
 			$this->db->where('notification_item.isViewed = "1"');
 			$this->db->where('notification_item.user = "'.$user.'"');
 			$this->db->where('announcement.announcementStatus = "OnGoing"');
-			$this->db->order_by('announcement.addedBy', 'ASC');
+			$this->db->order_by('announcement.announcementID', 'ASC');
 			$this->db->limit(5);
 
 			$query = $this->db->get();
