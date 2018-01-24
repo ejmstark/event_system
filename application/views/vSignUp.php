@@ -13,7 +13,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <div class="navbar-brand">
+                        <img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>">
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
