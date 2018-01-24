@@ -147,7 +147,8 @@
 
                                     <input type="text" name="<?php echo 'ticketID'.$x;?>" value="<?php echo $t->ticket_type_id;?>" hidden>
                                      <div class="ticketContainer">
-                                        <span>TICKET TYPE </span> <br>
+                                        <span>TICKET TYPE </span>
+                                        <i>(e.g. Genral Admission, Gold, Silver, VIP)</i> <br>
                                         <div class="select-field">
                                              <input type="text" value="<?php echo $t->ticket_name;?>" class="form-control" required="" name="<?php echo 'ticketType'.$x; ?>" placeholder="Ticket type"> 
                                            <!--  <select name="ticketType">

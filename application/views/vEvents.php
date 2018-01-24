@@ -149,7 +149,7 @@
 
                                     <fieldset>
                                         <div class="row">
-                                            <div class="col-xs-6">
+                                            <div class="col-xs-12">
 
                                                 <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
                                                     <option>Attraction</option>
@@ -178,72 +178,14 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <label for="price-range">Price range (P):</label>
+                                                <span id="price-value-slider">0</span>
+
+
                                                 <input type="text" class="span2" value="" data-slider-min="0"
                                                        data-slider-max="10000" data-slider-step="5"
-                                                       data-slider-value="[0,1000]" id="price-range" ><br />
+                                                       data-slider-value="[0,1000]" id="price-slider"><br />
                                                 <b class="pull-left color">P0.00</b>
                                                 <b class="pull-right color">P10,000.00</b>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Workshops</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Parties</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Food Bazaar</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Fashion Shows</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"> Concerts </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Exhibits</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox" checked> Sports Event </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Others </label>
-                                                </div>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -317,7 +259,6 @@
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
-    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
     <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
 
   </ul>
@@ -724,3 +665,4 @@
             </div>
 
         </div>
+

@@ -18,3 +18,11 @@
 
     </body>
 </html>
+
+<script>
+    $("#price-slider").slider();
+    $("#price-slider").on("slide", function(slideEvt) {
+        var str = slideEvt.value.toString().replace(/\,/g, ' - ');;
+        $("#price-value-slider").text(str);
+    });
+</script>
