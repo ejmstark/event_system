@@ -155,6 +155,17 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vFooter');
 	}
 
+	public function checkAllUsername()
+	{
+		$username = $this->input->post('username');
+		$check  = $this->MUser->checkAllUsers($username);
+		if($check == 0){
+			echo "<h4 style='color:green'>Username is available<h4>";
+		}else{
+			echo "<h4 style='color:red'>Username is taken</h4>";
+		}
+	}
+
 	public function displayEvent()
 	{
 

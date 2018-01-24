@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Username</label>
-                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname"><h4 id="availability-status"></h4>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
@@ -162,15 +162,7 @@
             </div>
 
         </div>
-<<<<<<< Updated upstream
 
-
-
-
-    
-     
-
-=======
 <script type="text/javascript">
    $(document).ready(function(){
         $('#cpassword').on('keyup', function () {
@@ -182,6 +174,24 @@
                $('#sub').prop('disabled',true); 
             } 
         });
+
+       
+
+        $('#uname').on('keyup', function () {
+            
+            $.ajax({
+            url: "<?php echo site_url()?>/user/cUser/checkAllUsername",
+            data:'username='+$("#uname").val(),
+            type: "POST",
+            success:function(data){
+                $("#availability-status").html(data);
+            },
+            error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+            }
+           });
+        });
     });
+            
 </script>
->>>>>>> Stashed changes
+
