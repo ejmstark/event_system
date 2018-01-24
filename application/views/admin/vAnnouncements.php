@@ -103,7 +103,7 @@
 
                 <div class="form-group" >
                   <div class="col-8">
-                    <input class="form-control " type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
+                    <input class="form-control hidden" type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
                   </div>
                 </div>
 

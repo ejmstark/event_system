@@ -35,7 +35,7 @@
                         <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li> -->
                         <li class="wow dropdown" data-wow-delay="0.1s" id="announcement">
                             <a  class="dropdown-toggle" data-toggle="dropdown" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>' >
-                              <em> Announcements </em> <i class="dropdown-icon fa fa-angle-down">
+                              <em> Announcements </em> 
                                 <?php if($announcementCount > 0){?>
                                     <span id="bdg" class="ballons"><?php echo $announcementCount;?></span></i>
                                 <?php }  else { ?>
