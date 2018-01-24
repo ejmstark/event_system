@@ -98,10 +98,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="cpass">Confirm Password</label>
-                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword">
+                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword"><h4 id="message"></h4>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" onclick="return confirm('Are you sure you want to submit this form?');" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
+                                    <button type="submit" onclick="return confirm('Are you sure you want to submit this form?');" class="btn btn-default" id="sub"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
                                 </div>
                             </form>
                         </div>
@@ -162,6 +162,7 @@
             </div>
 
         </div>
+<<<<<<< Updated upstream
 
 
 
@@ -169,3 +170,18 @@
     
      
 
+=======
+<script type="text/javascript">
+   $(document).ready(function(){
+        $('#cpassword').on('keyup', function () {
+            if ($(this).val() == $('#password').val()) {
+                $('#message').html('password matched').css('color', 'green');
+                $("#sub").removeAttr("disabled");      
+            } else {
+               $('#message').html('password mismatch').css('color', 'red');
+               $('#sub').prop('disabled',true); 
+            } 
+        });
+    });
+</script>
+>>>>>>> Stashed changes
