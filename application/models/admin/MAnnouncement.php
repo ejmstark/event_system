@@ -70,5 +70,18 @@
 
 			return $query->result();
 		}
+		
+		public function getUnviewedOfUser($user){
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('notification_item', 'notification_item.announcement = announcement.announcementID');
+			$this->db->join('user_account', $this::DB_TABLE . '.addedBy = user_account.account_id');
+			$this->db->where('notification_item.isViewed = "0"');
+			$this->db->where('notification_item.user = "'.$user.'"');
+			$this->db->where('announcement.announcementStatus = "OnGoing"');
+			$query = $this->db->get();
+
+			return $query->result();
+		}
 	}
 ?>

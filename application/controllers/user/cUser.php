@@ -35,7 +35,8 @@ class cUser extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data['events'] = $array;
-
+		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
+		$data['announcementCount'] = count($data['announcements']);
 		$this->data['custom_js']= '<script type="text/javascript">
 
                               $(function(){

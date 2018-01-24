@@ -591,6 +591,17 @@ class CAdmin extends CI_Controller {
 
 		if($result){
 			//$this->index();
+			//$this->index();
+			$notif = new MNotificationItem();
+			$user = $users->getAllUsers();
+			foreach ($user as $key) {
+				$data = array('user' => $key->account_id,
+							  'announcement' => $id
+							);
+
+				$result = $notif->insert($data);	
+			}
+			
 			redirect('admin/cAdmin/viewAnnouncements');
 		}
 	}

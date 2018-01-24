@@ -32,7 +32,26 @@
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li> -->
+                        <li class="wow dropdown" data-wow-delay="0.1s" id="announcement">
+                            <a  class="dropdown-toggle" data-toggle="dropdown" >
+                              <em> Announcements </em> <i class="dropdown-icon fa fa-angle-down"><?php if($announcementCount >0){?><span id="bdg" class="ballons"><?php echo $announcementCount;?></span></i><?php }?>
+                            </a>
+                            <ul class="dropdown-menu " style="position: absolute;">
+                                <?php if(isset($announcements)){
+                                        foreach ($announcements as $key) {
+                                            ?>
+                                            <li style="width: 550px; z-index: 1;"><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  >
+                                                <h1 style="display: inline-block;"><?php echo$key->announcementDetails;?> </h1>
+                                            </li>
+                                            <?php
+                                        }
+                                    }?>
+                                <?php ?>
+                                <li class="divider"></li>
+                                <li style="text-align: center;"><a href ="<?php echo site_url();?>/user/cUser/viewAnnouncements" >View All</a></li>
+                            </ul>
+                        </li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
