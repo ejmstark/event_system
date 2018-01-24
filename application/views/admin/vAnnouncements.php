@@ -1,7 +1,7 @@
 <div id="main">
 
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo site_url();?>/admin/cAdmin">Home</a></li>
         <li class="active">Admin Account Management</li>
     </ol>
       <!-- //breadcrumb-->
@@ -103,7 +103,7 @@
 
                 <div class="form-group" >
                   <div class="col-8">
-                    <input class="form-control " type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
+                    <input class="hidden " type="text" name="postedBy" value="<?php echo $ownAccount->account_id; ?>">
                   </div>
                 </div>
 

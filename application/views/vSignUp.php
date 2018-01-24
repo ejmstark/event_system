@@ -17,7 +17,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <div class="navbar-brand">
+                        <img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>">
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -71,6 +73,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
+                                    <i>(example: johndoe@XXXX.com)</i>
                                     <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
                                 </div>
                                 <div class="form-group">
@@ -98,6 +101,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
+                                    <i>(must contain at least 8 characters, maximum of 50 characters)</i>
                                     <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
                                 </div>
                                 <div class="form-group">
