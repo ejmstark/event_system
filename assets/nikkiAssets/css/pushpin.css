@@ -8,12 +8,11 @@
 
 .fix-search .event-search{
     position: fixed;
-    margin: auto;
-    padding:50px;
+    padding:10px;
     top: 0px;
-    left: 0px;
-    right:0px;
-    background-color:#777; 
+    right:5px;
+    width: 910px;
+    background-color: #f4b841;
     z-index: 9999 !important;
 }
 

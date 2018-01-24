@@ -40,135 +40,14 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!-- End of nav bar -->
-
-
-        <div class="page-head">
-            <div class="container">
-                <div class="row">
-                    <div class="page-head-content es-wrap">
-                        <h1 class="page-title">Profile</h1>
-                        
-                        <div class="event-search">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Search</h3>
-                            </div>
-                            <div class="panel-body search-widget">
-                                <form action="" class=" form-inline">
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-lg-4">
-                                                <input type="text" class="form-control" placeholder="Key word">
-                                            </div>
-                                            <div class="col-xs-6 col-lg-4">
-
-                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
-                                                    <option>Attraction</option>
-                                                    <option>Appearance</option>
-                                                    <option>Competition</option>
-                                                    <option>Concert</option>
-                                                    <option>Conference</option>
-                                                    <option>Convention</option>
-                                                    <option>Festival</option>
-                                                    <option>Gala</option>
-                                                    <option>Meeting</option>
-                                                    <option>Party</option>
-                                                    <option>Rally</option>
-                                                    <option>Retreat</option>
-                                                    <option>Screening</option>
-                                                    <option>Seminar</option>
-                                                    <option>Tour</option>
-                                                    <option>Others</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-xs-12 col-lg-4">
-                                                <div class="price-range-wrap">
-                                                    <label for="price-range">Price range (P):</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                                        data-slider-max="10000" data-slider-step="5"
-                                                        data-slider-value="[0,1000]" id="price-range" ><br />
-                                                    <b class="pull-left color">P0.00</b>
-                                                    <b class="pull-right color">P10,000.00</b>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Workshops</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Parties</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Food Bazaar</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Fashion Shows</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"> Concerts </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Exhibits</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox" checked> Sports Event </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Others </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset >
-                                        <div class="row">
-                                            <div class="col-xs-12 col-lg-4 col-lg-offset-4">
-                                                <input class="button btn largesearch-btn" value="Search" type="submit">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                        </div>
-                        
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title">Profile</h1>
                 </div>
             </div>
         </div>
+            
         <!-- End page header -->
 
         <!-- property area -->
@@ -305,8 +184,55 @@
 
                 <div class="col-md-9  pr0 padding-top-40 properties-page">
 
-<div>
-
+<div >
+    <div class="container">
+        <div class="row es-wrap">
+            <div class="event-search">
+                <div class="panel-body search-widget">
+                    <form action="" class=" form-inline">
+                        <fieldset>
+                            <div class="col-xs-4 col-lg-2">
+                                <input type="text" class="form-control" placeholder="Key word">
+                            </div>
+                            <div class="col-xs-4 col-lg-2">
+                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
+                                    <option>Attraction</option>
+                                    <option>Appearance</option>
+                                    <option>Competition</option>
+                                    <option>Concert</option>
+                                    <option>Conference</option>
+                                    <option>Convention</option>
+                                    <option>Festival</option>
+                                    <option>Gala</option>
+                                    <option>Meeting</option>
+                                    <option>Party</option>
+                                    <option>Rally</option>
+                                    <option>Retreat</option>
+                                    <option>Screening</option>
+                                    <option>Seminar</option>
+                                    <option>Tour</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-2">
+                                <div class="price-range-wrap">
+                                    <label for="price-range" style="color:#000">Price range (P):</label>
+                                        <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5"
+                                                        data-slider-value="[0,1000]" id="price-range" ><br />
+                                        <b class="pull-left color" style="color:#000">P0.00</b>
+                                        <b class="pull-right color" style="color:#000" >P10,000.00</b>
+                                </div>
+                            </div>
+                            <div class="col-xs-2 col-lg-2">
+                                <input class="button btn smallsearch-btn" value="Search" type="submit">
+                             </div>
+                        </fieldset>
+                    </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+ 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs" role="tablist">
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
