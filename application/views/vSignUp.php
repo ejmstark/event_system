@@ -17,7 +17,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <div class="navbar-brand">
+                        <img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>">
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -59,29 +61,30 @@
                             <form id="signup" action="<?php echo site_url();?>/user/cUser/signup" method="post" >
                                 <div class="form-group">
                                     <label for="name">First Name</label>
-                                    <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+                                    <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="fname" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Middle Initial</label>
-                                    <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+                                    <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="miname" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Last Name</label>
-                                    <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+                                    <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="lname" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
+                                    <i>(example: johndoe@XXXX.com)</i>
                                     <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Birthdate</label>
+                                    <label for="bdate">Birthdate</label>
                                     <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
 
 
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Gender</label>
+                                    <label for="gender">Gender</label>
                                     <select class="form-control" name="gender">
                                         <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
                                         <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
@@ -89,15 +92,16 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Contact Number<p id = 'example'>eg. (09XX-XXX-XXXX) | (XXX-XXXX)</p></label>
-                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="email" required="">
+                                    <label for="contact">Contact Number<p id = 'example'>eg. (09XX-XXX-XXXX) | (XXX-XXXX)</p></label>
+                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="contact" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Username</label>
-                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+                                    <label for="uname">Username</label>
+                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
+                                    <i>(must contain at least 8 characters, maximum of 50 characters)</i>
                                     <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
                                 </div>
                                 <div class="form-group">
@@ -105,7 +109,7 @@
                                     <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword">
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" onclick="return confirm('Are you sure you want to submit this form?');" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
+                                    <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
                                 </div>
                             </form>
                         </div>
