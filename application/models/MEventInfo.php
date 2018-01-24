@@ -174,7 +174,6 @@
 		public function updateEventStatus($id, $status)
 		{
 			$data = array('event_status' => $status );
-
 			return $this->update($id,$data);
 
 		}
