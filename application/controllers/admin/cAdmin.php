@@ -588,12 +588,12 @@ class CAdmin extends CI_Controller {
 					);
 
 		$result = $announcement->insert($data);
-
+		 $id= $announcement->db->insert_id();
 		if($result){
 			//$this->index();
 			//$this->index();
 			$notif = new MNotificationItem();
-			$user = $users->getAllUsers();
+			$user = $this->MUser->getAllUsers();
 			foreach ($user as $key) {
 				$data = array('user' => $key->account_id,
 							  'announcement' => $id
