@@ -28,4 +28,12 @@ class CInitialize extends CI_Controller {
 			//redirect('cInitialize');
 		}
 	}
+
+	public function viewAboutUs(){
+		$this->load->view('vAboutUs');
+	}
+
+	public function viewEventsHomepage(){
+		$this->load->view('vEvents');
+	}	
 }

@@ -546,31 +546,32 @@
 
      <div role="tabpanel" class="tab-pane" id="editprofile">
         <h2>Edit Profile</h2>
+        <?php
+            foreach($userinfo as $row){ ?>
         <div class="col-md-8">
             <div class="form-group">
                 <label for="name">First Name</label>
-                 <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+                 <input type="text" <?php  echo 'value="'.$row->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
             </div>
 
              <div class="form-group">
                  <label for="name">Middle Initial</label>
-                <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+                <input type="text"  <?php  echo 'value="'.$row->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
             </div>
 
             <div class="form-group">
                 <label for="name">Last Name</label>
-                <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+                <input type="text"  <?php  echo 'value="'.$row->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
             </div>
 
            <div class="form-group">
                 <label for="email">Email</label>
-                <i>(example: johndoe@XXXX.com)</i>
-                <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
+                <input type="email"  <?php  echo 'value="'.$row->email.'"';?> class="form-control" name="email" id="email" required="">
             </div>
 
            <div class="form-group">
                 <label for="email">Birthdate</label>
-                <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
+                <input type="date"  <?php  echo 'value="'.$row->birthdate.'"';?> name="bdate" required="">
             </div>
 
             <div class="form-group">
@@ -584,18 +585,15 @@
 
             <div class="form-group">
                 <label for="email">Contact Number</label>
-                <i>(if mobile no.: 09XXXXXXXXX; if telephone no.: XXX-XXXX)</i>
-                <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                <input type="text" <?php  echo 'value="'.$row->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
             </div>
             <div class="form-group">
                 <label for="email">Username</label>
-                <i>(must contain at least 3 characters, maximum of 50 characters)</i>
-                <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+                <input type="text" minlength="6"<?php  echo 'value="'.$row->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <i>(must contain at least 8 characters, maximum of 50 characters)</i>
-                <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+                <input type="password" <?php  echo 'value="'.$row->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit Profile</button>
@@ -603,7 +601,9 @@
 
 
         </div>
-
+        <?php
+            }
+        ?>
     </div>
           
 
@@ -714,9 +714,8 @@
                         </div>
                         <div class="bottom-menu pull-right">
                             <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
+                               
                             </ul>
                         </div>
                     </div>
