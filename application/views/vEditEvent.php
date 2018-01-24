@@ -123,7 +123,7 @@
                     </div>
              <br><br>
            <span>EVENT DESCRIPTION</span> <br>
-            <input type="text" name="event_details" placeholder="Tell what your event is all about." required="" value="<?php echo $details; ?>"> <br><br>
+            <textarea class="form-control" name="event_details" placeholder="Tell what your event is all about." required="" value="<?php echo $details; ?>" rows="3"></textarea>
             
 
         </div>
