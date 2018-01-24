@@ -10,6 +10,7 @@ class cUser extends CI_Controller {
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
 	  $this->load->model('MAnnouncement'); //admin module functionality
+	  $this->load->model('MNotificationItem');
       $this->load->library('session');
       $this->data = null;
   	}
@@ -231,5 +232,18 @@ class cUser extends CI_Controller {
 		$this->load->view('user/vAnnouncementPage.php', $data);
 		$this->load->view('imports/vFooterLandingPage');
 
+	}
+
+	public function updateAnnounce($id)
+	{
+		$result = $this->MAnnouncement->getUnviewedOfUser($id);
+
+		foreach ($result as $key) {
+			$where = array('isViewed' => 1);
+			$query = $this->MNotificationItem->update($key->notifID, $where);
+		}
+		
+		echo $key->notifID;
+		# code...
 	}
 }

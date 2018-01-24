@@ -34,16 +34,16 @@
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li> -->
                         <li class="wow dropdown" data-wow-delay="0.1s" id="announcement">
-                            <a  class="dropdown-toggle" data-toggle="dropdown" >
+                            <a  class="dropdown-toggle" data-toggle="dropdown" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>' >
                               <em> Announcements </em> <i class="dropdown-icon fa fa-angle-down"><?php if($announcementCount >0){?><span id="bdg" class="ballons"><?php echo $announcementCount;?></span></i><?php }?>
                             </a>
                             <ul class="dropdown-menu " style="position: absolute;">
                                 <?php if(isset($announcements)){
                                         foreach ($announcements as $key) {
                                             ?>
-                                            <li style="width: 550px; z-index: 1;"><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  >
-                                                <h1 style="display: inline-block;"><?php echo$key->announcementDetails;?> </h1>
-                                            </li>
+                                                <li style="width: 550px; z-index: 1;"><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  >
+                                                    <h1 style="display: inline-block;"><?php echo$key->announcementDetails;?> </h1>
+                                                </li>
                                             <?php
                                         }
                                     }?>
@@ -321,3 +321,27 @@
             </div>
 
         </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(document).on('click', '#aDropdown', function(){
+            var id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo site_url()?>/user/cUser/updateAnnounce/"+id,
+                data: { id:id },
+                type: "POST",
+                success: function(data){
+                    var d=data.split('/');
+                    $('#bdg').remove();
+                    // alert(d[0].trim());
+                   
+                },
+                error: function(data){
+                    alert("error");
+                }
+            });
+        });
+    } );
+</script>
+
+
