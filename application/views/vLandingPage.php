@@ -46,8 +46,19 @@
                                 <?php if(isset($announcements)){
                                         foreach ($announcements as $key) {
                                             ?>
-                                            <li style="width: 550px; z-index: 1;"><a href="<?php echo site_url().'/user/cUser/viewAnnouncements/'.$key->announcementID;?> "><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  >
-                                                <h1 style="display: inline-block;"><?php echo$key->announcementDetails;?> </h1></a>
+                                            <li style="width: 550px; z-index: 1;">
+                                                <a href="<?php echo site_url().'/user/cUser/viewAnnouncements/'.$key->announcementID;?> ">
+                                                    <div class="row">
+                                                        <div class="col col-xs-4">
+                                                            <img src="<?php echo base_url('assets/adminAssets/img/admin.png')?>"  class="circle" style="width: 50px;height: 50px;">
+                                                        
+                                                        </div>
+                                                        <div class="col col-xs-4"><h1><?php echo$key->announcementDetails;?> </h1><h5><?php echo $key->ago." ".$key->agoU;?></h5></div>
+                                                        <div class="col col-xs-4"><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  ></div>
+                                                    </div>
+                                                    
+                                                
+                                            </a>
                                             </li>
                                             <?php
                                         }

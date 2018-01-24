@@ -72,14 +72,15 @@
 		}
 		
 		public function getUnviewedOfUser($user){
-			$this->db->select('*');
-			$this->db->from($this::DB_TABLE);
-			$this->db->join('notification_item', 'notification_item.announcement = announcement.announcementID');
-			$this->db->join('user_account', $this::DB_TABLE . '.addedBy = user_account.account_id');
+			$this->db->select('*,a.addedAt,IF(TIMESTAMPDIFF(SECOND,a.addedAt,NOW()) < 60 ,TIMESTAMPDIFF(SECOND,a.addedAt,NOW()), NULL) as sec,IF(TIMESTAMPDIFF(Minute,a.addedAt,NOW()) < 60 ,TIMESTAMPDIFF(Minute,a.addedAt,NOW()), NULL) as min,IF(TIMESTAMPDIFF(Hour,a.addedAt,NOW()) < 60 ,TIMESTAMPDIFF(Hour,a.addedAt,NOW()), NULL) as hr,
+IF(TIMESTAMPDIFF(Day,a.addedAt,NOW()) < 30 ,TIMESTAMPDIFF(Day,a.addedAt,NOW()), NULL) as day,');
+			$this->db->from($this::DB_TABLE.' a');
+			$this->db->join('notification_item', 'notification_item.announcement = a.announcementID');
+			$this->db->join('user_account', 'a.addedBy = user_account.account_id');
 			$this->db->where('notification_item.isViewed = "0"');
 			$this->db->where('notification_item.user = "'.$user.'"');
-			$this->db->where('announcement.announcementStatus = "OnGoing"');
-			$this->db->order_by('announcement.announcementID', 'ASC');
+			$this->db->where('a.announcementStatus = "OnGoing"');
+			$this->db->order_by('a.announcementID', 'DESC');
 
 			$query = $this->db->get();
 
@@ -87,14 +88,15 @@
 		}
 
 		public function getViewedOfUser($user){
-			$this->db->select('*');
-			$this->db->from($this::DB_TABLE);
-			$this->db->join('notification_item', 'notification_item.announcement = announcement.announcementID');
-			$this->db->join('user_account', $this::DB_TABLE . '.addedBy = user_account.account_id');
+			$this->db->select('*,a.addedAt,IF(TIMESTAMPDIFF(SECOND,a.addedAt,NOW()) < 60 ,TIMESTAMPDIFF(SECOND,a.addedAt,NOW()), NULL) as sec,IF(TIMESTAMPDIFF(Minute,a.addedAt,NOW()) < 60 ,TIMESTAMPDIFF(Minute,a.addedAt,NOW()), NULL) as min,IF(TIMESTAMPDIFF(Hour,a.addedAt,NOW()) < 60 ,TIMESTAMPDIFF(Hour,a.addedAt,NOW()), NULL) as hr,
+IF(TIMESTAMPDIFF(Day,a.addedAt,NOW()) < 30 ,TIMESTAMPDIFF(Day,a.addedAt,NOW()), NULL) as day,');
+			$this->db->from($this::DB_TABLE.' a');
+			$this->db->join('notification_item', 'notification_item.announcement = a.announcementID');
+			$this->db->join('user_account', 'a.addedBy = user_account.account_id');
 			$this->db->where('notification_item.isViewed = "1"');
 			$this->db->where('notification_item.user = "'.$user.'"');
-			$this->db->where('announcement.announcementStatus = "OnGoing"');
-			$this->db->order_by('announcement.announcementID', 'ASC');
+			$this->db->where('a.announcementStatus = "OnGoing"');
+			$this->db->order_by('a.announcementID', 'DESC');
 			$this->db->limit(5);
 
 			$query = $this->db->get();
