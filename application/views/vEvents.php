@@ -317,7 +317,6 @@
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
-    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
     <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
 
   </ul>
