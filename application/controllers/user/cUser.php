@@ -256,7 +256,7 @@ class cUser extends CI_Controller {
 		return true;
 	}
 
-	public function viewAnnouncements($announcementID)
+	public function viewClickedAnnouncement($announcementID)
 	{
 		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
 		$data['clickedAnnouncement'] = $announcementID;
@@ -266,7 +266,7 @@ class cUser extends CI_Controller {
 
 	}
 
-	public function viewAllAnnouncements()
+	public function viewAnnouncements()
 	{
 		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
 		$this->load->view('imports/vHeaderSignUpPage');

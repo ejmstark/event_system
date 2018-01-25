@@ -47,7 +47,7 @@
                                         foreach ($announcements as $key) {
                                             ?>
                                             <li style="width: 550px; z-index: 1;">
-                                                <a href="<?php echo site_url().'/user/cUser/viewAnnouncements/'.$key->announcementID;?> ">
+                                                <a href="<?php echo site_url().'/user/cUser/viewClickedAnnouncement/'.$key->announcementID;?> ">
                                                     <div class="row">
                                                         <div class="col col-xs-4">
                                                             <img src="<?php echo base_url('assets/adminAssets/img/admin.png')?>"  class="circle" style="width: 50px;height: 50px;">
@@ -65,7 +65,7 @@
                                     }?>
                                 <?php ?>
                                 <li class="divider"></li>
-                                <li style="text-align: center;"><a href ="<?php echo site_url();?>/user/cUser/viewAllAnnouncements" >View All</a></li>
+                                <li style="text-align: center;"><a href ="<?php echo site_url();?>/user/cUser/viewAnnouncements" >View All</a></li>
                             </ul>
                         </li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
