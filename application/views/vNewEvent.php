@@ -71,16 +71,16 @@
                                    <input type="file" name="userfile"  id="fileToUpload" accept="image/*">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Event Title</label>
+                                    <label for="name" class="require">Event Title</label>
                                     <input type="text" class="form-control" name="event_name" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="name">Location</label>
+                                    <label for="name" class="require">Location</label>
                                     <input type="text" class="form-control" name="event_venue" required="">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">STARTS</label>
+                                    <label for="name" class="require">STARTS</label>
                                     <input  class="form-control" type="text"  value="<?php if(!empty($start_date)){
                                         echo $start_date." ".$start_time;
                                     }else{
@@ -101,7 +101,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">ENDS</label>
+                                    <label for="name" class="require">ENDS</label>
                                     <input  class="form-control" type="text" value="<?php if(!empty($end_date)){
                                         echo $end_date." ".$end_time;
                                     }else{
@@ -116,8 +116,8 @@
 
 
                                 <div class="form-group">
-                                    <label for="email">Category</label>
-                                        <select Class="form-control" name="event_category" required>
+                                    <label for="email" class="require">Category</label>
+                                        <select Class="form-control" name="event_category" required="">
                                             <option></option>
                                             <option>Attraction</option>
                                             <option>Appearance</option>
@@ -139,13 +139,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Event Description</label>
+                                    <label for="name" class="require">Event Description</label>
                                     <textarea class="form-control" name="event_details" required="" rows="3"></textarea>
                                 </div>
                                 <br>
                                 <h2>Ticket Details : </h2>
                                  <div class="ticketContainer">
-                                    <label>TICKET TYPE </label> <br>
+                                    <label class="require">TICKET TYPE </label> <br>
                                     <div class="select-field">
                                          <input type="text" class="form-control" required="" name="ticketType1">
                                        <!--  <select name="ticketType">
@@ -155,13 +155,13 @@
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <label>NUMBER OF TICKETS</label>
+                                    <label class="require">NUMBER OF TICKETS</label>
                                     <div class="select-field">
                                         <input type="number" class="form-control" min="1" required="" name="no_tickets_total1">
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <label>PRICE OF TICKET</label>
+                                    <label class="require">PRICE OF TICKET</label>
                                     <div class="select-field">
                                         <input type="number" class="form-control" min="0" required="" name="price_tickets_total1">
                                     </div>
