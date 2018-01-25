@@ -228,9 +228,10 @@ class cUser extends CI_Controller {
 		return true;
 	}
 
-	public function viewAnnouncements()
+	public function viewAnnouncements($announcementID)
 	{
 		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
+		$data['clickedAnnouncement'] = $announcementID;
 		$this->load->view('imports/vHeaderSignUpPage');
 		$this->load->view('user/vAnnouncementPage.php', $data);
 		$this->load->view('imports/vFooterLandingPage');
