@@ -10,6 +10,7 @@ class cUser extends CI_Controller {
       $this->load->model('user/MEvent');
       $this->load->model('MCardLoad');
 	  $this->load->model('MAnnouncement'); //admin module functionality
+	  $this->load->model('MNotificationItem');
       $this->load->library('session');
       $this->data = null;
   	}
@@ -36,7 +37,39 @@ class cUser extends CI_Controller {
 		}
 		////////////STOPS HERE///////////////////////////////////////////////////
 		$data['events'] = $array;
-
+		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
+		$data['announcementCount'] = count($data['announcements']);
+		if(count($data['announcements']) == 0){
+			$data['announcements'] = $this->MAnnouncement->getViewedOfUser($this->session->userdata['userSession']->userID);
+			// die();
+		}
+		
+			$array1 = array();
+			if($data['announcements']){
+				foreach ($data['announcements'] as $value) {
+						$arrObj = new stdClass;
+						$arrObj->announcementID = $value->announcementID;
+						$arrObj->announcementDetails = $value->announcementDetails;
+						$arrObj->first_name = $value->first_name;
+						$arrObj->last_name = $value->last_name;
+						if($value->sec){
+							$arrObj->ago =$value->sec;  
+							$arrObj->agoU ="seconds ago";  
+						}else if($value->min){
+							$arrObj->ago =$value->min; 
+							$arrObj->agoU ="minutes ago";   
+						}else if($value->hr){
+							$arrObj->ago =$value->hr;  
+							$arrObj->agoU ="hours ago";  
+						}else if($value->day){
+							$arrObj->ago =$value->day; 
+							$arrObj->agoU ="days ago";   
+						}
+						$array1[] = $arrObj;
+				}
+			}
+			$data['announcements'] = $array1;
+			
 		$this->data['custom_js']= '<script type="text/javascript">
 
                               $(function(){
@@ -156,6 +189,17 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vFooter');
 	}
 
+	public function checkAllUsername()
+	{
+		$username = $this->input->post('username');
+		$check  = $this->MUser->checkAllUsers($username);
+		if($check == 0){
+			echo "<h4 style='color:green'>Username is available<h4>";
+		}else{
+			echo "<h4 style='color:red'>Username is taken</h4>";
+		}
+	}
+
 	public function displayEvent()
 	{
 
@@ -224,6 +268,16 @@ class cUser extends CI_Controller {
 		return true;
 	}
 
+	public function viewClickedAnnouncement($announcementID)
+	{
+		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
+		$data['clickedAnnouncement'] = $announcementID;
+		$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('user/vAnnouncementPage.php', $data);
+		$this->load->view('imports/vFooterLandingPage');
+
+	}
+
 	public function viewAnnouncements()
 	{
 		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
@@ -233,9 +287,21 @@ class cUser extends CI_Controller {
 
 	}
 
-	public function viewRegistrationConfirmation() {
-		$this->load->view('imports/vHeaderSignUpPage');
-		$this->load->view('vRegistrationConfirmation.php');
-		$this->load->view('imports/vFooterLandingPage');
-	}
+
+	public function updateAnnounce($id)
+	{
+		$result = $this->MAnnouncement->getUnviewedOfUser($id);
+
+		foreach ($result as $key) {
+			$where = array('isViewed' => 1);
+			$query = $this->MNotificationItem->update($key->notifID, $where);
+		}
+		
+		echo $key->notifID;
+  }
+  public function viewRegistrationConfirmation() {
+		  $this->load->view('imports/vHeaderSignUpPage');
+	  	$this->load->view('vRegistrationConfirmation.php');
+  		$this->load->view('imports/vFooterLandingPage');
+	 }
 }

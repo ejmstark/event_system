@@ -38,6 +38,7 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/style.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/normalize.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/nikkiAssets/css/pushpin.css')?>" rel="stylesheet" />
 
     <style>
         .calendar-legend{ margin-top:5%; max-width: 50%; border-radius: 15px; border: 1px solid #ccc; padding: 5px;}
@@ -46,7 +47,22 @@
         .legend .expired{ background-color: #808080; }
         .legend .approved{ background-color: #ffae00; }
         .legend .pending { background-color: #337ab7; }
-
+        .ballons {
+            float:right;
+            margin:-20px 8px 0 0;
+            line-height:30px;
+            padding:0 10px;
+            border-radius: 30px;
+            border:3px solid #fff;
+            -moz-border-radius: 30px; 
+            -webkit-border-radius: 305px;
+            background:red;
+            color:#fff;
+            text-align:center;
+            -moz-box-shadow:    1px 1px 3px 3px #ccc;
+            -webkit-box-shadow: 1px 1px 3px 3px #ccc;
+            box-shadow:         1px 1px 3px 3px #ccc;
+        }
     </style>
 </head>
 

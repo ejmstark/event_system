@@ -96,8 +96,9 @@
                                     <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="contact" required="">
                                 </div>
                                 <div class="form-group">
+
                                     <label for="uname">Username</label>
-                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname">
+                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname"><h4 id="availability-status"></h4>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
@@ -106,10 +107,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="cpass">Confirm Password</label>
-                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword">
+                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword"><h4 id="message"></h4>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
+                                    <button type="submit" class="btn btn-default" id="sub"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
                                 </div>
                             </form>
                         </div>
@@ -161,5 +162,36 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+        $('#cpassword').on('keyup', function () {
+            if ($(this).val() == $('#password').val()) {
+                $('#message').html('password matched').css('color', 'green');
+                $("#sub").removeAttr("disabled");      
+            } else {
+               $('#message').html('password mismatch').css('color', 'red');
+               $('#sub').prop('disabled',true); 
+            } 
+        });
+
+       
+
+        $('#uname').on('keyup', function () {
+            
+            $.ajax({
+            url: "<?php echo site_url()?>/user/cUser/checkAllUsername",
+            data:'username='+$("#uname").val(),
+            type: "POST",
+            success:function(data){
+                $("#availability-status").html(data);
+            },
+            error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+            }
+           });
+        });
+    });
+            
+</script>
