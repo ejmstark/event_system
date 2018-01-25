@@ -40,17 +40,14 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!-- End of nav bar -->
-
-
-        <div class="page-head">
-            <div class="container">
-                <div class="row">
-                    <div class="page-head-content">
-                        <h1 class="page-title">Profile</h1>
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title">Profile</h1>
                 </div>
             </div>
         </div>
+            
         <!-- End page header -->
 
         <!-- property area -->
@@ -133,130 +130,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                            <br><br>
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Search</h3>
-                            </div>
-                            <div class="panel-body search-widget">
-                                <form action="" class=" form-inline">
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Key word">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-
-                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
-                                                    <option>Attraction</option>
-                                                    <option>Appearance</option>
-                                                    <option>Competition</option>
-                                                    <option>Concert</option>
-                                                    <option>Conference</option>
-                                                    <option>Convention</option>
-                                                    <option>Festival</option>
-                                                    <option>Gala</option>
-                                                    <option>Meeting</option>
-                                                    <option>Party</option>
-                                                    <option>Rally</option>
-                                                    <option>Retreat</option>
-                                                    <option>Screening</option>
-                                                    <option>Seminar</option>
-                                                    <option>Tour</option>
-                                                    <option>Others</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <label for="price-range">Price range (P):</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0"
-                                                       data-slider-max="10000" data-slider-step="5"
-                                                       data-slider-value="[0,1000]" id="price-range" ><br />
-                                                <b class="pull-left color">P0.00</b>
-                                                <b class="pull-right color">P10,000.00</b>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Workshops</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Parties</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Food Bazaar</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Fashion Shows</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"> Concerts </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Exhibits</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox" checked> Sports Event </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Others </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset >
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <input class="button btn largesearch-btn" value="Search" type="submit">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
+                            <br><br>                            
                         </div>
 
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
@@ -310,8 +184,55 @@
 
                 <div class="col-md-9  pr0 padding-top-40 properties-page">
 
-<div>
-
+<div >
+    <div class="container">
+        <div class="row es-wrap">
+            <div class="event-search">
+                <div class="panel-body search-widget">
+                    <form action="" class=" form-inline">
+                        <fieldset>
+                            <div class="col-xs-4 col-lg-2">
+                                <input type="text" class="form-control" placeholder="Key word">
+                            </div>
+                            <div class="col-xs-4 col-lg-2">
+                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
+                                    <option>Attraction</option>
+                                    <option>Appearance</option>
+                                    <option>Competition</option>
+                                    <option>Concert</option>
+                                    <option>Conference</option>
+                                    <option>Convention</option>
+                                    <option>Festival</option>
+                                    <option>Gala</option>
+                                    <option>Meeting</option>
+                                    <option>Party</option>
+                                    <option>Rally</option>
+                                    <option>Retreat</option>
+                                    <option>Screening</option>
+                                    <option>Seminar</option>
+                                    <option>Tour</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-6 col-lg-2">
+                                <div class="price-range-wrap">
+                                    <label for="price-range" style="color:#000">Price range (P):</label>
+                                        <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5"
+                                                        data-slider-value="[0,1000]" id="price-range" ><br />
+                                        <b class="pull-left color" style="color:#000">P0.00</b>
+                                        <b class="pull-right color" style="color:#000" >P10,000.00</b>
+                                </div>
+                            </div>
+                            <div class="col-xs-2 col-lg-2">
+                                <input class="button btn smallsearch-btn" value="Search" type="submit">
+                             </div>
+                        </fieldset>
+                    </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+ 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs" role="tablist">
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
@@ -548,31 +469,31 @@
      <div role="tabpanel" class="tab-pane" id="editprofile">
         <h2>Edit Profile</h2>
         <?php
-            foreach($userinfo as $row){ ?>
+            foreach($info as $in){ ?>
         <div class="col-md-8">
             <div class="form-group">
                 <label for="name">First Name</label>
-                 <input type="text" <?php  echo 'value="'.$row->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+                 <input type="text" <?php  echo 'value="'.$in->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
             </div>
 
              <div class="form-group">
                  <label for="name">Middle Initial</label>
-                <input type="text"  <?php  echo 'value="'.$row->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+                <input type="text"  <?php  echo 'value="'.$in->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
             </div>
 
             <div class="form-group">
                 <label for="name">Last Name</label>
-                <input type="text"  <?php  echo 'value="'.$row->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+                <input type="text"  <?php  echo 'value="'.$in->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
             </div>
 
            <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email"  <?php  echo 'value="'.$row->email.'"';?> class="form-control" name="email" id="email" required="">
+                <input type="email"  <?php  echo 'value="'.$in->email.'"';?> class="form-control" name="email" id="email" required="">
             </div>
 
            <div class="form-group">
                 <label for="email">Birthdate</label>
-                <input type="date"  <?php  echo 'value="'.$row->birthdate.'"';?> name="bdate" required="">
+                <input type="date"  <?php  echo 'value="'.$in->birthdate.'"';?> name="bdate" required="">
             </div>
 
             <div class="form-group">
@@ -586,15 +507,15 @@
 
             <div class="form-group">
                 <label for="email">Contact Number</label>
-                <input type="text" <?php  echo 'value="'.$row->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                <input type="text" <?php  echo 'value="'.$in->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
             </div>
             <div class="form-group">
                 <label for="email">Username</label>
-                <input type="text" minlength="6"<?php  echo 'value="'.$row->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
+                <input type="text" minlength="6"<?php  echo 'value="'.$in->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" <?php  echo 'value="'.$row->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+                <input type="password" <?php  echo 'value="'.$in->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit Profile</button>
@@ -613,19 +534,31 @@
 
   <script type="text/javascript">
 
-    $('.tab a').on('click', function (e) {
-      e.preventDefault();
-      console.log('clicked');
-      $(this).parent().addClass('active');
-      $(this).parent().siblings().removeClass('active');
+    
+    $(document).ready(function(){
+        var wrap = $(this).find('.es-wrap');
+        $('.tab a').on('click', function (e) {
+            e.preventDefault();
+            console.log('clicked');
+            $(this).parent().addClass('active');
+            $(this).parent().siblings().removeClass('active');
 
-      target = $(this).attr('href');
+            target = $(this).attr('href');
 
-      $('.tab-content > div').not(target).hide();
+            $('.tab-content > div').not(target).hide();
 
-      $(target).fadeIn(600);
+            $(target).fadeIn(600);
 
-});
+        });
+    
+        $(this).scroll(function(e){
+            if($(this).scrollTop() > 225){
+                wrap.addClass("fix-search");
+            }else{
+                wrap.removeClass("fix-search");
+            }
+        });
+    });
 </script>
 
 </div>

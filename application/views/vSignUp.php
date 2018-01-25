@@ -17,7 +17,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <div class="navbar-brand">
+                        <img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>">
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -71,6 +73,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
+                                    <i>(example: johndoe@XXXX.com)</i>
                                     <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
                                 </div>
                                 <div class="form-group">
@@ -93,19 +96,21 @@
                                     <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="contact" required="">
                                 </div>
                                 <div class="form-group">
+
                                     <label for="uname">Username</label>
-                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname">
+                                    <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname"><h4 id="availability-status"></h4>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
+                                    <i>(must contain at least 8 characters, maximum of 50 characters)</i>
                                     <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
                                 </div>
                                 <div class="form-group">
                                     <label for="cpass">Confirm Password</label>
-                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword">
+                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword"><h4 id="message"></h4>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
+                                    <button type="submit" class="btn btn-default" id="sub"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Register</button>
                                 </div>
                             </form>
                         </div>
@@ -157,5 +162,36 @@
                     </div>
                 </div>
             </div>
-
         </div>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+        $('#cpassword').on('keyup', function () {
+            if ($(this).val() == $('#password').val()) {
+                $('#message').html('password matched').css('color', 'green');
+                $("#sub").removeAttr("disabled");      
+            } else {
+               $('#message').html('password mismatch').css('color', 'red');
+               $('#sub').prop('disabled',true); 
+            } 
+        });
+
+       
+
+        $('#uname').on('keyup', function () {
+            
+            $.ajax({
+            url: "<?php echo site_url()?>/user/cUser/checkAllUsername",
+            data:'username='+$("#uname").val(),
+            type: "POST",
+            success:function(data){
+                $("#availability-status").html(data);
+            },
+            error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+            }
+           });
+        });
+    });
+            
+</script>

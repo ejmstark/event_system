@@ -166,7 +166,7 @@ class cUser extends CI_Controller {
 
 				if($result){
 					//$this->index();
-					redirect('event/cEvent/viewEvents');
+					redirect('user/cUser/viewRegistrationConfirmation');
 				}	
 
 			}
@@ -186,6 +186,17 @@ class cUser extends CI_Controller {
 		$this->load->view('imports/vHeader');
 		$this->load->view('user/vEventRegistration.php');
 		$this->load->view('imports/vFooter');
+	}
+
+	public function checkAllUsername()
+	{
+		$username = $this->input->post('username');
+		$check  = $this->MUser->checkAllUsers($username);
+		if($check == 0){
+			echo "<h4 style='color:green'>Username is available<h4>";
+		}else{
+			echo "<h4 style='color:red'>Username is taken</h4>";
+		}
 	}
 
 	public function displayEvent()
@@ -275,6 +286,7 @@ class cUser extends CI_Controller {
 
 	}
 
+
 	public function updateAnnounce($id)
 	{
 		$result = $this->MAnnouncement->getUnviewedOfUser($id);
@@ -285,6 +297,10 @@ class cUser extends CI_Controller {
 		}
 		
 		echo $key->notifID;
-		# code...
-	}
+  }
+  public function viewRegistrationConfirmation() {
+		  $this->load->view('imports/vHeaderSignUpPage');
+	  	$this->load->view('vRegistrationConfirmation.php');
+  		$this->load->view('imports/vFooterLandingPage');
+	 }
 }
