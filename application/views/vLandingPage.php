@@ -32,7 +32,42 @@
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li> -->
+                        <li class="wow dropdown" data-wow-delay="0.1s" id="announcement">
+                            <a  class="dropdown-toggle" data-toggle="dropdown" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>' >
+                              <em> Announcements </em> 
+                                <?php if($announcementCount > 0){?>
+                                    <span id="bdg" class="ballons"><?php echo $announcementCount;?></span></i>
+                                <?php }  else { ?>
+                                    <span class="ballons hidden"></span></i>
+                                <?php }  ?>
+                            </a>
+                            <ul class="dropdown-menu " style="position: absolute;">
+                                <?php if(isset($announcements)){
+                                        foreach ($announcements as $key) {
+                                            ?>
+                                            <li style="width: 550px; z-index: 1;">
+                                                <a href="<?php echo site_url().'/user/cUser/viewClickedAnnouncement/'.$key->announcementID;?> ">
+                                                    <div class="row">
+                                                        <div class="col col-xs-4">
+                                                            <img src="<?php echo base_url('assets/adminAssets/img/admin.png')?>"  class="circle" style="width: 50px;height: 50px;">
+                                                        
+                                                        </div>
+                                                        <div class="col col-xs-4"><h1><?php echo$key->announcementDetails;?> </h1><h5><?php echo $key->ago." ".$key->agoU;?></h5></div>
+                                                        <div class="col col-xs-4"><img style="width: 250px;height: 100px;" src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"  ></div>
+                                                    </div>
+                                                    
+                                                
+                                            </a>
+                                            </li>
+                                            <?php
+                                        }
+                                    }?>
+                                <?php ?>
+                                <li class="divider"></li>
+                                <li style="text-align: center;"><a href ="<?php echo site_url();?>/user/cUser/viewAnnouncements" >View All</a></li>
+                            </ul>
+                        </li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
@@ -302,3 +337,27 @@
             </div>
 
         </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(document).on('click', '#aDropdown', function(){
+            var id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo site_url()?>/user/cUser/updateAnnounce/"+id,
+                data: { id:id },
+                type: "POST",
+                success: function(data){
+                    var d=data.split('/');
+                    $('#bdg').remove();
+                    // alert(d[0].trim());
+                   
+                },
+                error: function(data){
+                    alert("error");
+                }
+            });
+        });
+    } );
+</script>
+
+
