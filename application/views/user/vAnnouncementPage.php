@@ -54,7 +54,6 @@
         </div>
         <!-- End page header -->
  
-
         <?php
             if($announcements!=FALSE){
                 foreach ($announcements as $announcement) {
@@ -63,7 +62,7 @@
                         echo  "
                             <div class='box-container'>
                                 <div class='box-header'>
-                                    <div class='box-author--no-cover'  id='announcementID'>
+                                    <div class='box-author--no-cover'  id='".$announcement->announcementID."'>
                                         <h3>".$announcement->first_name." ".$announcement->last_name."</h3>
                                     </div>
                                   </div>
@@ -178,3 +177,10 @@
             </div>
 
         </div>
+
+<script>
+    $(document).ready(function() { 
+        $('html, body').animate({ scrollTop: $('#<?php echo $clickedAnnouncement; ?>').offset().top}, 'slow');
+    });
+</script>
+
