@@ -579,12 +579,12 @@ class CAdmin extends CI_Controller {
 	public function createAnnouncement() {
 		$announcement = new MAnnouncement();
 
-		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+		// $now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		$data = array('announcementDetails' => $this->input->post('announcementDetails'),
 					  'announcementStatus' => 'OnGoing',
 					  'addedBy' => $this->input->post('postedBy'),
-					  'addedAt' => $now->format('Y-m-d H:i:s')
+					  // 'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 		$result = $announcement->insert($data);
