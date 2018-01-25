@@ -266,6 +266,15 @@ class cUser extends CI_Controller {
 
 	}
 
+	public function viewAllAnnouncements()
+	{
+		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
+		$this->load->view('imports/vHeaderSignUpPage');
+		$this->load->view('user/vAnnouncementPage.php', $data);
+		$this->load->view('imports/vFooterLandingPage');
+
+	}
+
 	public function updateAnnounce($id)
 	{
 		$result = $this->MAnnouncement->getUnviewedOfUser($id);
