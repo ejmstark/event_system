@@ -98,6 +98,14 @@ class CAdmin extends CI_Controller {
 	public function searchUsers(){
 		$user_module = new MUserInfo();
 		if(isset($_POST['search_val'])){
+			if (trim($_POST['search_val']) == ""){
+				$result = $this->readAllUsers();
+				if($result){
+					return $result;
+				}else{
+					return false;
+				}
+			}
 			$data = array('user_name' => $_POST['search_val']);
 			$result= $this->MUserInfo->read_where($data);
 			if($result){
