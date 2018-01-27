@@ -19,11 +19,11 @@ class CAdmin extends CI_Controller {
 	public function index()
 	{
 		redirect('admin/cAdmin/viewReport');
-		
+
 	}
 
 	public function getUserCount(){
-		$result = $this->MReports->getUserCountMonthly("2018");
+		$result = $this->MReports->getUserCountMonthly("2017");
 		if($result){
 			return $result;
 		}else{
@@ -378,7 +378,7 @@ class CAdmin extends CI_Controller {
 					// $arrObj->email= $value->email;
 					// $arrObj->contact_no= $value->contact_no;
 					// $arrObj->birthdate= $value->birthdate;
-					// $arrObj->addedAt = $value->addedAt;
+					// $arrObj->date_account_created = $value->date_account_created;
 					// $arrObj->gender = $value->gender;
 					// $arrObj->user_type = $value->user_type;
 					// $arrObj->user_status = $value->user_status;
