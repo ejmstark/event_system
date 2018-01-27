@@ -66,7 +66,7 @@
 			$this->db->select('*');
 			$this->db->from($this::DB_TABLE);
 			$this->db->join('user_account', $this::DB_TABLE . '.addedBy = user_account.account_id');
-			$this->db->order_by($this::DB_TABLE.'.announcementID', 'DESC');
+			$this->db->order_by($this::DB_TABLE.'.announcementID', 'ASC');
 			$query = $this->db->get();
 
 			return $query->result();
@@ -81,7 +81,7 @@ IF(TIMESTAMPDIFF(Day,a.addedAt,NOW()) < 30 ,TIMESTAMPDIFF(Day,a.addedAt,NOW()), 
 			$this->db->where('notification_item.isViewed = "0"');
 			$this->db->where('notification_item.user = "'.$user.'"');
 			$this->db->where('a.announcementStatus = "OnGoing"');
-			$this->db->order_by('a.announcementID', 'DESC');
+			$this->db->order_by('a.announcementID', 'ASC');
 
 			$query = $this->db->get();
 
