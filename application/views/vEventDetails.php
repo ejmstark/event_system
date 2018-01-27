@@ -304,7 +304,13 @@ foreach($going as $g){
                                             </ul>
                                             <div class="text-center">
                                             <?php if($e->event_status == "Approved"){?>
-                                                <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button>
+                                                <!-- <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button> -->
+                                                <?php if(!$interested){?>
+                                                <a href="<?php echo site_url();?>/event/cEvent/interested/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button></a>
+                                                <?php }else {?>
+                                                <a href="<?php echo site_url();?>/event/cEvent/interestedRemove/<?php echo $user_event_preference_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Remove Interested</button></a>
+                                                <?php }?>
+            <!-- <a href="<?php echo site_url();?>/user/cEvent/going/<?php echo $e->event_id;?>"><button>Going</button></a> -->
                                                 <!-- <a href="<?php echo site_url();?>/event/cEvent/going/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" >Going</button></a> -->                                            <?php }?>
                                             </div>
 
