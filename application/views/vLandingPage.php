@@ -371,7 +371,7 @@
               type: 'info',
               animate: {
                     enter: 'animated fadeInUp',
-                exit: 'animated fadeOutRight'
+                exit: 'animated fadeOutDown'
               },
               placement: {
                 from: "bottom",
