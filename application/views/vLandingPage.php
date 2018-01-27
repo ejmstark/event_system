@@ -32,8 +32,8 @@
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
-                        <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li> -->
-                        <li class="wow dropdown" data-wow-delay="0.1s" id="announcement">
+                        <li class="wow fadeInDown" data-wow-delay="0.1s" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>'><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements<?php if($announcementCount>0) {?><span id="bdg" class="ballons"><?php echo $announcementCount;?></span><?php }?></a></li>
+                        <!-- <li class="wow dropdown" data-wow-delay="0.1s" id="announcement">
                             <a  class="dropdown-toggle" data-toggle="dropdown" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>' >
                               <em> Announcements </em> 
                                 <?php if($announcementCount > 0){?>
@@ -67,7 +67,7 @@
                                 <li class="divider"></li>
                                 <li style="text-align: center;"><a href ="<?php echo site_url();?>/user/cUser/viewAnnouncements" >View All</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
@@ -376,6 +376,36 @@
             });
         });
     } );
+    
+    $(document).ready(function(){
+        <?php if(isset($announcements)){
+        foreach ($announcements as $key) {
+            ?>
+             $.notify({
+              title: "<?php echo '<strong>'.$key->announcementDetails.'</strong><br>';?>",              
+              icon: 'glyphicon glyphicon-info-sign',
+              message: '<?php echo $key->ago." ".$key->agoU;?><a href="<?php echo site_url();?>/user/cUser/viewClickedAnnouncement/<?php echo $key->announcementID; ?>" >Click here...</a> '
+            },{
+              type: 'info',
+              animate: {
+                    enter: 'animated fadeInUp',
+                exit: 'animated fadeOutDown'
+              },
+              placement: {
+                from: "bottom",
+                align: "left"
+              },
+              offset: 20,
+              spacing: 10,
+              z_index: 1031,
+            });
+            <?php
+        }
+       
+       
+    }?>
+<?php ?>
+    });
 </script>
 
 
