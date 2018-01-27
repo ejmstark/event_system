@@ -19,6 +19,7 @@ class CAdmin extends CI_Controller {
 	public function index()
 	{
 		redirect('admin/cAdmin/viewReport');
+		
 	}
 
 	public function getUserCount(){
