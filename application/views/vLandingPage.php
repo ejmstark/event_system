@@ -358,6 +358,36 @@
             });
         });
     } );
+    
+    $(document).ready(function(){
+        <?php if(isset($announcements)){
+        foreach ($announcements as $key) {
+            ?>
+             $.notify({
+              title: "<?php echo '<strong>'.$key->announcementDetails.'</strong><br>';?>",              
+              icon: 'glyphicon glyphicon-info-sign',
+              message: '<?php echo $key->ago." ".$key->agoU;?><a href="<?php echo site_url();?>/user/cUser/viewClickedAnnouncement/<?php echo $key->announcementID; ?>" >Click here...</a> '
+            },{
+              type: 'info',
+              animate: {
+                    enter: 'animated fadeInUp',
+                exit: 'animated fadeOutRight'
+              },
+              placement: {
+                from: "bottom",
+                align: "left"
+              },
+              offset: 20,
+              spacing: 10,
+              z_index: 1031,
+            });
+            <?php
+        }
+       
+       
+    }?>
+<?php ?>
+    });
 </script>
 
 
