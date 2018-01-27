@@ -136,7 +136,6 @@ $sessionData = new stdClass;
 			redirect('user/cUser');
 		}else{
 			$this->index();
-
 		}
 	}
 
