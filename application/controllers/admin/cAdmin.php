@@ -19,8 +19,6 @@ class CAdmin extends CI_Controller {
 	public function index()
 	{
 		redirect('admin/cAdmin/viewReport');
-
-
 	}
 
 	public function getUserCount(){
@@ -239,7 +237,6 @@ class CAdmin extends CI_Controller {
 					  'user_type' =>  $this->input->post('userType'),
 					  'upgradedBy' => $this->session->userdata['adminSession']->userID,
 					  'addedAt	' => $now->format('Y-m-d H:i:s')
-
 					);
 		} else {
 			$data = array('user_name' => $this->input->post('uname'),
@@ -291,7 +288,6 @@ class CAdmin extends CI_Controller {
 		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
 		$data2['users']=$this->readAllUsers();
-
 		////////////STOPS HERE////////////////////////////////////////////////////
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vUserAccountMgt', $data2);
@@ -314,7 +310,6 @@ class CAdmin extends CI_Controller {
 					$arrObj->contact_no= $value->contact_no;
 					$arrObj->birthdate= $value->birthdate;
 					$arrObj->addedAt	 = $value->addedAt	;
-
 					$arrObj->gender = $value->gender;
 					$arrObj->user_type = $value->user_type;
 					$arrObj->user_status = $value->user_status;
@@ -337,7 +332,6 @@ class CAdmin extends CI_Controller {
 		//================Sprint 3 INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
 		$data2['admin']=$this->readAllAdmin();
-
 		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
 		////////////STOPS HERE///////////////////////////////////////////////////
 
@@ -421,7 +415,6 @@ class CAdmin extends CI_Controller {
 					  'contact_no' => $this->input->post('ucontact'),
 					  'user_type' =>  $this->input->post('uuserType'),
 					  'addedAt	' => $now->format('Y-m-d H:i:s')
-
 					);
 
 		$result = $user->update($this->session->userdata['adminSession']->userID, $data);
@@ -502,7 +495,6 @@ class CAdmin extends CI_Controller {
 		$result = $userModel->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray('COUNT(*) as UserCount,
 							MONTHNAME(user_account.addedAt	) as monthname',
 							$where,FALSE,FALSE,"MONTH(user_account.addedAt	)",FALSE);
-
 		$arr_data = array();
 		foreach ($result as $value) {
 			$arr_data[] = [$value->UserCount, $value->monthname];
