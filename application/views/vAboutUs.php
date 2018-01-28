@@ -1,3 +1,10 @@
-Gagabayan ka naming makarating sa mga kawili-wili na mga pangyayari.
-Ang mga pagkakataon na iyong hinahangad ay pwede mong masalihan sa iilang pindot lamang.
-Huwag mag-alala dahil handa ka naming tulungan tuklasin ang mga bagong pangyayari saan man sa mundo.
+<html>
+    <head>
+    </head>
+
+    <body>
+        <h2>About us page here.</h2>
+        <div><a href="<?php echo site_url();?>"><button type="button">Back to home</button></a></div>
+    </body>
+</html>
+

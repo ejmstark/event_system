@@ -10,7 +10,6 @@ class CCart extends CI_Controller {
 	}
 
 	public function index() {
-		
 	}
 
 	public function addToCart () {
@@ -69,7 +68,11 @@ class CCart extends CI_Controller {
 
 	public function viewCart(){
 		$result = $this->MCart->getCart();
-		$this->load->view('vCart');
+		if($result){
+			$this->load->view('vCart');	
+		}else{
+			redirect('cError404');
+		}
 	}
 	//add 1 qty to the cart
 	public function addQty () {

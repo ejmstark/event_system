@@ -1,6 +1,6 @@
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 1");
+  CustomizationManager::SetTheme("configurations 0");
 ?>
     <body>
 
@@ -19,8 +19,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a> -->
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
+
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -34,12 +34,10 @@
 
 
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li> -->
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_NAV_HOME ?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_NAV_PROFILE ?></a></li>
-                        <!--<li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -51,7 +49,6 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <!-- <h1 class="page-title">Create Event</h1> -->
                         <h1 class="page-title"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_TITLE ?></h1>
                     </div>
                 </div>
@@ -63,11 +60,10 @@
         <!-- register-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
             <div class="container">
-
-                <div class="col-md-6">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 ">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
-                            <!-- <h2>Event Details : </h2> -->
                             <h2><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_DETAILS ?></h2>
                             <form action="<?php echo site_url();?>/event/cEvent/createEvent " method="post" accept-charset="utf-8" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -128,6 +124,7 @@
                                     <!-- <label for="email">Category</label> -->
                                     <label for="email"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_CATEGORY ?></label>
                                         <select Class="form-control" name="event_category" required>
+                                            <option></option>
                                             <option>Attraction</option>
                                             <option>Appearance</option>
                                             <option>Competition</option>
@@ -148,13 +145,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <!-- <label for="name">Event Description</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_DESCRIPTION ?></label>
-                                    <input type="text" class="form-control" name="event_details" required="">
+                                    <textarea class="form-control" name="event_details" required="" rows="3"></textarea>
                                 </div>
-
                                 <br>
-                                <!-- <h2>Ticket Details : </h2> -->
                                 <h2><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_TICKET_DETAILS ?></h2>
                                  <div class="ticketContainer">
                                     <!-- <span>TICKET TYPE </span> <br> -->
@@ -168,14 +162,12 @@
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <!-- <span>NUMBER OF TICKETS</span> -->
                                     <span><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_TICKET_QUANTITY ?></span>
                                     <div class="select-field">
                                         <input type="number" class="form-control" min="1" required="" name="no_tickets_total1" placeholder="Ticket count">
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <!-- <span>PRICE OF TICKET</span> -->
                                     <span><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_TICKET_PRICE ?></span>
                                     <div class="select-field">
                                         <input type="number" class="form-control" min="0" required="" name="price_tickets_total1" placeholder="Ticket price">
@@ -197,7 +189,6 @@
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <!-- <span>NUMBER OF TICKETS</span> -->
                                     <span><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_TICKET_QUANTITY ?></span>
                                     <div class="select-field">
                                         <input type="number" min="1" class="form-control" name="no_tickets_total2" placeholder="Ticket count">
@@ -215,7 +206,6 @@
                                 <br><br>
 
                                 <div class="ticketContainer">
-                                    <!-- <span>TICKET TYPE </span> <br> -->
                                     <span><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_TICKET_TYPE ?></span> <br>
                                     <div class="select-field">
                                          <input type="text" class="form-control" name="ticketType3" placeholder="Ticket type">
@@ -226,7 +216,7 @@
                                     </div>
                                 </div>
                                 <div class="ticketContainer">
-                                    <!-- <span>NUMBER OF TICKETS</span> -->
+
                                     <span><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_TICKET_QUANTITY ?></span>
                                     <div class="select-field">
                                         <input type="number" min="1" class="form-control" name="no_tickets_total3" placeholder="Ticket count">
@@ -252,6 +242,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
 
@@ -301,12 +292,7 @@
                          </div>
                          <div class="bottom-menu pull-right">
                              <ul>
-                               <!-- <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                               <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                               <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li> -->
                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
-                               <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><?php echo CustomizationManager::$strings->FOOTER_NAV_EVENTS ?></a></li>
-                               <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><?php echo CustomizationManager::$strings->FOOTER_NAV_CONTACT ?></a></li>
                              </ul>
                          </div>
                      </div>
@@ -314,9 +300,7 @@
              </div>
 
          </div>
-
-
-
+       
         <script type="text/javascript">
             $("#datetime").datepicker();
         </script>

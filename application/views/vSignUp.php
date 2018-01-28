@@ -1,11 +1,15 @@
 <!-- Add these lines below to pages with customizable elements -->
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 1");
+  CustomizationManager::SetTheme("configurations 0");
 ?>
 <!-- Up to here -->
 <body>
-
+<style>
+    #example{
+        font-size: 10px;
+    }
+</style>
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
@@ -19,8 +23,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a> -->
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
+                    <div class="navbar-brand">
+                        <img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>">
+                    </div>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -38,7 +43,6 @@
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <!-- <h1 class="page-title">Sign Up / Sign In</h1> -->
                         <h1 class="page-title"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_TITLE ?></h1>
                     </div>
                 </div>
@@ -50,19 +54,19 @@
         <!-- register-area -->
         <div class="register-area" style="background-color: rgb(249, 249, 249);">
             <div class="container">
-
+                <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <div class="box-for overflow">
                         <div class="col-md-12 col-xs-12 register-blocks">
-                            <!-- <h2>New account : </h2> -->
                             <h2><?php echo CustomizationManager::$strings->SIGNUP_PAGE_NEW_ACCOUNT ?></h2>
+
                             <?php if ($this->session->flashdata('error_msg')): ?>
                                 <div class="alert alert-danger" style="margin-top: 15px;">
                                     <button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
                                     <?php echo $this->session->flashdata('error_msg'); ?>
                                 </div>
                             <?php endif ?>
-                            <form action="<?php echo site_url();?>/user/cUser/signup" method="post">
+                            <form id="signup" action="<?php echo site_url();?>/user/cUser/signup" method="post" >
                                 <div class="form-group">
                                     <!-- <label for="name">First Name</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_FIRST_NAME ?></label>
@@ -86,13 +90,13 @@
                                 <div class="form-group">
                                     <!-- <label for="email">Birthdate</label> -->
                                     <label for="email"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_BIRTHDATE ?></label>
+
                                     <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
 
 
 
                                 </div>
                                 <div class="form-group">
-                                    <!-- <label for="email">Gender</label> -->
                                     <label for="email"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_GENDER ?></label>
                                     <select class="form-control" name="gender">
                                         <!-- <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
@@ -104,8 +108,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <!-- <label for="email">Contact Number</label> -->
-                                    <label for="email"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_CONTACT_NUMBER ?></label>
+                                    <label for="email"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_CONTACT_NUMBER ?> eg. (09XX-XXX-XXXX) | (XXX-XXXX)</label>
                                     <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
@@ -118,8 +121,11 @@
                                     <label for="password"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_PASSWORD ?></label>
                                     <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
                                 </div>
+                                <div class="form-group">
+                                    <label for="cpass">Confirm Password</label>
+                                    <input type="password" class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="cpassword" id="cpassword"><h4 id="message"></h4>
+                                </div>
                                 <div class="text-center">
-                                    <!-- <button type="submit" class="btn btn-default"><a href="<?php echo site_url();?>/cLogin/viewEvents">Register</button> -->
                                     <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> --><?php echo CustomizationManager::$strings->SIGNUP_PAGE_SIGNUP_BUTTON ?></button>
                                 </div>
                             </form>
@@ -141,12 +147,8 @@
                                 <!-- <h4>About us </h4> -->
                                 <h4><?php echo CustomizationManager::$strings->ABOUT_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
-
-                               <!-- <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" > -->
                                <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
-                                <!-- <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p> -->
                                 <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
-
                             </div>
                         </div>
 
@@ -175,16 +177,42 @@
                         </div>
                         <div class="bottom-menu pull-right">
                             <ul>
-                                <!-- <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li> -->
                                 <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><?php echo CustomizationManager::$strings->FOOTER_NAV_EVENTS ?></a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><?php echo CustomizationManager::$strings->FOOTER_NAV_CONTACT ?></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+        $('#cpassword').on('keyup', function () {
+            if ($(this).val() == $('#password').val()) {
+                $('#message').html('password matched').css('color', 'green');
+                $("#sub").removeAttr("disabled");      
+            } else {
+               $('#message').html('password mismatch').css('color', 'red');
+               $('#sub').prop('disabled',true); 
+            } 
+        });
+
+       
+
+        $('#uname').on('keyup', function () {
+            
+            $.ajax({
+            url: "<?php echo site_url()?>/user/cUser/checkAllUsername",
+            data:'username='+$("#uname").val(),
+            type: "POST",
+            success:function(data){
+                $("#availability-status").html(data);
+            },
+            error: function(jqXHR, errorThrown){
+              console.log(errorThrown);
+            }
+           });
+        });
+    });
+            
+</script>
