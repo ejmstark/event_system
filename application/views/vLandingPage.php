@@ -1,3 +1,9 @@
+<!-- Add these lines below to pages with customizable elements -->
+<?php
+  require('assets/CustomizationManager.php');
+  CustomizationManager::SetTheme("configurations ");
+?>
+<!-- Up to here -->
 
     <body>
 
@@ -14,26 +20,25 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    </button>    
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
+                        <!-- <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a> -->
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->LANDING_PAGE_LOGOUT_BUTTON ?> </button></a>
                     </div>
-
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
+                        <!-- <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a> -->
+                        <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->LANDING_PAGE_CREATE_EVENT_BUTTON ?> </button></a>
                     </div>
-
-
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
+                       
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_HOME ?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_PROFILE ?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>'><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_ANNOUNCEMENTS ?><?php if($announcementCount>0) {?><span id="bdg" class="ballons"><?php echo $announcementCount;?></span><?php }?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_VIEW_CART ?></a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
@@ -49,20 +54,26 @@
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
 
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div>
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div>
-                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>
+                    <!-- <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>"></div>
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"></div>
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>"></div> -->
+
+                    <?php echo '<div class="item"><img src= "' . base_url(CustomizationManager::$images->LANDING_PAGE_CAROUSEL_BACKGROUND_1) . '"></div>'?>
+                    <?php echo '<div class="item"><img src= "' . base_url(CustomizationManager::$images->LANDING_PAGE_CAROUSEL_BACKGROUND_2) . '"></div>'?>
+                    <?php echo '<div class="item"><img src= "' . base_url(CustomizationManager::$images->LANDING_PAGE_CAROUSEL_BACKGROUND_3) . '"></div>'?>
 
                 </div>
             </div>
             <div class="container slider-content">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                        <h2>See Events Near You</h2>
+                        <!-- <h2>See Events Near You</h2> -->
+                        <h2><?php echo CustomizationManager::$strings->LANDING_PAGE_CAROUSEL_MESSAGE ?></h2>
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                             <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
-                                <span style="color: gray;">Search Event</span><span>aaa</span>
+                                <!-- <span style="color: gray;">Search Event</span><span>aaa</span> -->
+                                <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?></span><span>aaa</span>
                                 <div class="form-group">
                                     <?php
                                     if(!isset($_POST['searchDateMonth'])){
@@ -115,7 +126,7 @@
                                         echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchWord'].'" pattern="[\sa-zA-z0-9]+">';
                                     }
                                     ?>
-                                    
+
                                 </div>
                                 <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
                             </form>
@@ -133,22 +144,34 @@
                     <div class="col-md-12  padding-top-40 properties-page">
                         <div class="col-md-12 ">
                             <div class="col-xs-10 page-subheader sorting pl0">
-
+                                <div class="noti-container">
+                                    <button id="noti-button" data-toggle="collapse" data-target="#noti">Notifications</button>
+                                    <div id="noti" class="collapse">
+                                        
+                                    </div>
+                                </div>
                                 <ul class="sort-by-list">
                                     <li class="active">
-                                        <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
+                                        <!-- <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
                                             Sort By Date <i class="fa fa-sort-amount-asc"></i>
+                                        </a> -->
+                                        <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
+                                            <?php echo CustomizationManager::$strings->LANDING_PAGE_SORT_BY_DATE ?> <i class="fa fa-sort-amount-asc"></i>
                                         </a>
                                     </li>
                                     <li class="">
-                                        <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
+                                        <!-- <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
                                             Sort By Price <i class="fa fa-sort-numeric-desc"></i>
+                                        </a> -->
+                                        <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
+                                            <?php echo CustomizationManager::$strings->LANDING_PAGE_SORT_BY_PRICE ?> <i class="fa fa-sort-numeric-desc"></i>
                                         </a>
                                     </li>
                                 </ul>
 
                                 <div class="items-per-page">
-                                    <label for="items_per_page"><b>Events per page :</b></label>
+                                    <!-- <label for="items_per_page"><b>Events per page :</b></label> -->
+                                    <label for="items_per_page"><b><?php echo CustomizationManager::$strings->LANDING_PAGE_EVENTS_PER_PAGE ?></b></label>
                                     <div class="sel">
                                         <select id="items_per_page" name="per_page">
                                             <option value="3">3</option>
@@ -253,6 +276,7 @@
 
 
         <!-- Footer area-->
+        <!-- Footer area-->
         <div class="footer-area">
 
             <div class=" footer">
@@ -261,24 +285,28 @@
 
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer">
-                                <h4>About us </h4>
+                                <!-- <h4>About us </h4> -->
+                                <h4><?php echo CustomizationManager::$strings->ABOUT_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
 
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
-                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
+                               <!-- <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" > -->
+                               <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                                <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
 
+                                <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
                             </div>
                         </div>
 
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
-                                <h4>Contact Us</h4>
+                                <!-- <h4>Contact Us</h4> -->
+                                <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-adress">
-                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
-                                </ul>
-
+                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
+                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
+                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
+                                </ul>        
                             </div>
                         </div>
 
@@ -293,12 +321,65 @@
                             <span> (C) UI Module , All rights reserved 2017  </span>
                         </div>
                         <div class="bottom-menu pull-right">
-                            <ul>
-                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
-                            </ul>
+                         <ul>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                          </ul>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(document).on('click', '#aDropdown', function(){
+            var id = $(this).data('id');
+            $.ajax({
+                url: "<?php echo site_url()?>/user/cUser/updateAnnounce/"+id,
+                data: { id:id },
+                type: "POST",
+                success: function(data){
+                    var d=data.split('/');
+                    $('#bdg').remove();
+                    // alert(d[0].trim());
+                   
+                },
+                error: function(data){
+                    alert("error");
+                }
+            });
+        });
+    } );
+    
+    $(document).ready(function(){
+        <?php if(isset($announcements)){
+        foreach ($announcements as $key) {
+            ?>
+             $.notify({
+              title: "<?php echo '<strong>'.$key->announcementDetails.'</strong><br>';?>",              
+              icon: 'glyphicon glyphicon-info-sign',
+              message: '<?php echo $key->ago." ".$key->agoU;?><a href="<?php echo site_url();?>/user/cUser/viewClickedAnnouncement/<?php echo $key->announcementID; ?>" >Click here...</a> '
+            },{
+              type: 'info',
+              animate: {
+                    enter: 'animated fadeInUp',
+                exit: 'animated fadeOutDown'
+              },
+              placement: {
+                from: "bottom",
+                align: "left"
+              },
+              offset: 20,
+              spacing: 10,
+              z_index: 1031,
+            });
+            <?php
+        }
+       
+       
+    }?>
+<?php ?>
+    });
+</script>
+
+
