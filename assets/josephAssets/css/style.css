@@ -254,8 +254,8 @@ input.checkbox:checked:after {
 		border-bottom-color: #fff;
 		border-left-color: #fff;
 	}
-} 
-/*-- //checkbox --*/ 
+}
+/*-- //checkbox --*/
 /*--main-content-ends-here--*/
 /*--copy-right-starts-here--*/
 .copyright p {
@@ -383,7 +383,7 @@ input.checkbox:checked:after {
 	.right-map-w3-agile {
 		width: 53.12%;
 	}
-	
+
 	.wthree-text ul li:nth-child(1) {
 		margin-right: 22px;
 	}
@@ -738,7 +738,7 @@ input.checkbox:checked:after {
 	h1 {
 		font-size: 31px;
 	}
-	
+
 	.copyright p {
 		margin: 20px 25px;
 		line-height: 29px;
