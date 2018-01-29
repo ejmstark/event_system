@@ -68,6 +68,7 @@
                                 <li style="text-align: center;"><a href ="<?php echo site_url();?>/user/cUser/viewAnnouncements" >View All</a></li>
                             </ul>
                         </li> -->
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
@@ -77,7 +78,7 @@
             </div><!-- /.container-fluid -->
         </nav>
         <!-- End of nav bar -->
-        <div class="container">
+        <div class="container" style="background-color:#777;color:#fff;margin-top:25px;">
             <div class="row">
                 <div class="page-head-content">
                     <h1 class="page-title">Interested Events</h1>

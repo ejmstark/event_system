@@ -31,6 +31,7 @@
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
@@ -191,7 +192,7 @@
                 <div class="panel-body search-widget">
                     <form action="" class=" form-inline">
                         <fieldset>
-                            <div class="col-xs-4 col-lg-2">
+                            <div class="col-xs-4 col-lg-4">
                                 <input type="text" class="form-control" placeholder="Key word">
                             </div>
                             <div class="col-xs-4 col-lg-2">
@@ -214,7 +215,7 @@
                                     <option>Others</option>
                                 </select>
                             </div>
-                            <div class="col-xs-6 col-lg-2">
+                            <div class="col-xs-6 col-lg-4">
                                 <div class="price-range-wrap">
                                     <label for="price-range" style="color:#000">Price range (P):</label>
                                         <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5"
