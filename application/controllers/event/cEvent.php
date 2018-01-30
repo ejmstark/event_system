@@ -10,6 +10,7 @@ class CEvent extends CI_Controller {
     	$this->load->model('user/MUser');
     	$this->load->model('user/MTicketType');
     	$this->load->model('user/MTicket');
+    	$this->load->model('MNotification');
     	$this->load->helper('date');
     	$this->load->model('MEventInfo');
     	$this->error = "";
@@ -268,6 +269,7 @@ class CEvent extends CI_Controller {
 			// $data['tickets'] = $type->loadType($id);
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
+				
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
 				$result = $res[0]->load_amt - $res1[0]->price;
 
@@ -284,7 +286,10 @@ class CEvent extends CI_Controller {
 					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
 					// $this->success = "Bought ticket for ".$res1[0]->price;
 					// $this->displayEventDetails($eid);
-					$this->session->set_flashdata('success_msg',"Bought ticket for ".$res1[0]->price);
+
+					$uid = $this->session->userdata['userSession']->userID;
+					$res = $this->MNotification->insertNotif($uid, $eid, NULL);
+
 					redirect('event/cEvent/displayEventDetails/'.$eid);
 				}else{
 					$this->session->set_flashdata('error_msg','Insufficient balance!');

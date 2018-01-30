@@ -19,7 +19,7 @@ body
 
 body::after 
 {
-	background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3) ), url(../img/LoginBg.jpg);
+	background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3) ), url(../img/LoginBg2.jpg);
 	content: "";
 	background-size: cover;
 	opacity: 1;
@@ -39,6 +39,7 @@ body::after
 	color: white;
 	margin: 0;
 	text-align: center;
+	text-transform: none;
 }
 
 .loginBox
@@ -52,6 +53,7 @@ body::after
 	height: 420px;
 	padding: 30px 40px 80px;
 	box-sizing: border-box;
+	text-transform: none;
 	/*background: rgba(0,0,0,0.5);*/
 }
 
@@ -203,8 +205,44 @@ h2
 .orange
 {
 	color: #e2624b;
+	font-weight: bold;
+	text-shadow: 2px 2px 0px #1e0d09;
 }
 
 .eventLogo {
     max-height: 100px;
+}
+
+
+.messageOne {
+	text-shadow: 2px 2px 0px #000000;
+	text-align: right;
+	text-transform: none;
+	font-size: 30pt;
+	margin: 0;
+	padding: 0 0 20px;
+	color: white;
+}
+
+.messageTwo {
+	text-shadow: 2px 2px 0px #000000;
+	text-align: right;
+	text-transform: none;
+	font-size: 18pt;
+	margin-top: 40px;
+	padding: 0 0 20px;
+	color: white;
+	letter-spacing: 2px;
+}
+
+.messageThree {
+	text-shadow: 2px 2px 0px #000000;
+	text-align: right;
+	text-transform: none;
+	font-size: 14pt;
+	margin: 0;
+	padding: 0 0 20px;
+	color: white;
+	letter-spacing: 2px;
+	text-transform: none;
 }
