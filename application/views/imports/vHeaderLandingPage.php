@@ -40,6 +40,11 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/pushpin.css')?>" rel="stylesheet" />
 
+    <!--Customization module-->
+    <!--<link href="<?php echo base_url('assets/nikkiAssets/css/style.php')?>" rel="stylesheet" />-->
+    <link href="<?php echo base_url('assets/customization1Assets/css/notification.css')?>" rel="stylesheet" />
+    <script src="<?php echo base_url('assets/customization1Assets/js/notification.js')?>"></script>
+
     <style>
         .calendar-legend{ margin-top:5%; max-width: 50%; border-radius: 15px; border: 1px solid #ccc; padding: 5px;}
         .legend { list-style: none; margin-left:-35px;}
