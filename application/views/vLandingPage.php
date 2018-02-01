@@ -144,12 +144,6 @@
                     <div class="col-md-12  padding-top-40 properties-page">
                         <div class="col-md-12 ">
                             <div class="col-xs-10 page-subheader sorting pl0">
-                                <div class="noti-container">
-                                    <button id="noti-button" data-toggle="collapse" data-target="#noti">Notifications</button>
-                                    <div id="noti" class="collapse">
-                                        
-                                    </div>
-                                </div>
                                 <ul class="sort-by-list">
                                     <li class="active">
                                         <!-- <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
@@ -196,55 +190,73 @@
                         <div class="col-md-12 ">
                             <div id="list-type" class="proerty-th">
                             <?php
-                            $cnt =1;
-                                        if(isset($events)){
-                                            foreach ($events as $event) {
-                                               ?>
-                                            <div class="col-sm-6 col-md-4 p0">
-                                            <div class="box-two proerty-item">
-                                                <div class="item-thumb">
+                                $cnt =1;
+                                if(isset($events)){
+                                    foreach ($events as $event) {
+                                            date_default_timezone_set('Asia/Manila');
+                                            $now = new DateTime("now");
+                                            $end = new DateTime($event->dateEnd);
+                                            $start = new DateTime($event->dateStart);
+                                            $interval = date_diff($now, $start);
+
+                                            if($now < $start){
+                                                echo ' <div class="col-sm-6 col-md-4 p0">';
+                                                echo '<div class="box-two proerty-item">';
+                                                echo '<div class="item-thumb">
                                                     <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
-                                                </div>
-                                                   <div class="item-entry overflow">
-                                                      <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> <?php
+                                                </div>'; 
+                                                echo '<div class="item-entry overflow">
+                                                      <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
+
                                                     if(strlen($event->event_name)>=42){
                                                         echo substr($event->event_name,0,39)."...";
                                                     }else{
-                                                            echo $event->event_name;
-                                                    }
-                                                    ?></a></h5>
-                                                    <?php
                                                         echo $event->event_name;
+                                                    }
+                                                    
+                                                    echo '</a></h5>';
+                                                    if($now < $start){
+                                                        if($interval->days == 0){
+                                                          echo '<h5>Less than a day!</h5>';
+                                                        }else{
+                                                            echo '<h5>'.$interval->days;
+                                                            echo ' day/s left!';
+                                                            echo '</h5>';      
+                                                        }
 
-                                                            date_default_timezone_set('Asia/Manila');
-                                                            $now = new DateTime("now");
-                                                            $end = new DateTime($event->dateEnd);
-                                                            $start = new DateTime($event->dateStart);
-                                                            $interval = date_diff($now, $start);
+                                                    }
+                                                   echo '<div class="dot-hr"></div></div>';
 
-                                                            if($now > $start && $now > $end){
-                                                                echo "<h5>Expired!</h5>";
+                                            }else if($now >= $start && $now <= $end){
+                                                echo ' <div class="col-sm-6 col-md-4 p0">';
+                                                echo '<div class="box-two proerty-item">';
+                                                echo '<div class="item-thumb">
+                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
+                                                </div>'; 
+                                                echo '<div class="item-entry overflow">
+                                                      <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
 
-                                                            }else if($now < $start){
-                                                                if($interval->days == 0){
-                                                                    echo "<h5>Less than a day!</h5>";
-                                                                }else{
-                                                                    echo "<h5>$interval->days day/s left!</h5>";
-                                                                }
+                                                    if(strlen($event->event_name)>=42){
+                                                        echo substr($event->event_name,0,39)."...";
+                                                    }else{
+                                                        echo $event->event_name;
+                                                    }
+                                                    
+                                                    echo '</a></h5>';
+                                                    if($now < $start){
+                                                        if($interval->days == 0){
+                                                          echo '<h5>Less than a day!</h5>';
+                                                        }else{
+                                                            echo '<h5>'.$interval->days;
+                                                            echo ' day/s left!';
+                                                            echo '</h5>';      
+                                                        }
 
-                                                            }else if($now >= $start && $now <= $end){
-                                                                echo "<h5>Happening now!</h5>";
-                                                            }
-
-                                                    ?>
-                                                        <div class="dot-hr"></div>
-                                                        <!-- <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span> -->
-                                                        <span class="proerty-price pull-right"></span>
-                                                        <!-- <p><?php echo $event->event_details;?> </p> -->
-                                                        <!-- <div class="property-icon pull-right">
-                                                            <a>Read More</a>
-                                                        </div> -->
-                                                    </div>
+                                                    }
+                                                    echo '<h5>Happening now!</h5>';
+                                                    echo '<div class="dot-hr"></div></div>';
+                                            }
+                                        ?>
                                             </div>
                                         </div>
                                     <?php
