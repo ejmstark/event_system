@@ -144,12 +144,6 @@
                     <div class="col-md-12  padding-top-40 properties-page">
                         <div class="col-md-12 ">
                             <div class="col-xs-10 page-subheader sorting pl0">
-                                <div class="noti-container">
-                                    <button id="noti-button" data-toggle="collapse" data-target="#noti">Notifications</button>
-                                    <div id="noti" class="collapse">
-                                        
-                                    </div>
-                                </div>
                                 <ul class="sort-by-list">
                                     <li class="active">
                                         <!-- <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
