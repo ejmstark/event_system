@@ -164,6 +164,9 @@ class CAdmin extends CI_Controller {
 		$data = array('user_type !=' => 'Regular');
 		$result = $this->MUserInfo->read_where($data);
 		if($result){
+			// echo "<pre>";
+			// var_dump($result);
+			// die();
 			return $result;
 		}else{
 			return false;

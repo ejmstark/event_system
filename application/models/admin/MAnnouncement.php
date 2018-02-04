@@ -66,7 +66,7 @@
 			$this->db->select('*');
 			$this->db->from($this::DB_TABLE);
 			$this->db->join('user_account', $this::DB_TABLE . '.addedBy = user_account.account_id');
-			$this->db->order_by($this::DB_TABLE.'.announcementID', 'ASC');
+			$this->db->order_by($this::DB_TABLE.'.announcementID', 'DESC');
 			$query = $this->db->get();
 
 			return $query->result();

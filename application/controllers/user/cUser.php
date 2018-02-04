@@ -31,6 +31,8 @@ class cUser extends CI_Controller {
 					$arrObj->dateStart = $value->dateStart;
 					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
 					$array[] = $arrObj;
 			}
 		}

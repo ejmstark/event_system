@@ -92,6 +92,7 @@ foreach($going as $g){
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
@@ -304,7 +305,13 @@ foreach($going as $g){
                                             </ul>
                                             <div class="text-center">
                                             <?php if($e->event_status == "Approved"){?>
-                                                <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button>
+                                                <!-- <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button> -->
+                                                <?php if(!$interested){?>
+                                                <a href="<?php echo site_url();?>/event/cEvent/interested/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Interested</button></a>
+                                                <?php }else {?>
+                                                <a href="<?php echo site_url();?>/event/cEvent/interestedRemove/<?php echo $user_event_preference_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Remove Interested</button></a>
+                                                <?php }?>
+            <!-- <a href="<?php echo site_url();?>/user/cEvent/going/<?php echo $e->event_id;?>"><button>Going</button></a> -->
                                                 <!-- <a href="<?php echo site_url();?>/event/cEvent/going/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" >Going</button></a> -->                                            <?php }?>
                                             </div>
 
