@@ -93,9 +93,24 @@ class CEvent extends CI_Controller {
 		$strEventWhere = array("user_id" => $userid,
 													 "event_isActive" => TRUE
 													);
-
-		$data['events']  = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strEventSelect,
+		$result = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strEventSelect,
 							$strEventWhere,FALSE,FALSE,FALSE,FALSE);
+		// echo"<pre>";
+		// var_dump($result);
+		$array = array();
+		foreach ($result as $value) {
+			$arrObj = new stdClass;
+			$arrObj->data = $value;
+			$arrObj->data->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+			$array[] = $arrObj;
+		}
+		$val = array();
+		foreach ($array as $key) {
+			$arrObj = new stdClass;
+			$arrObj = $key->data;
+			$val[] = $arrObj;
+		}
+		$data['events']  = $val;
 		////////////STOPS HERE///////////////////////////////////////////////////
 
 
@@ -180,7 +195,14 @@ class CEvent extends CI_Controller {
 			$data['successMsg']= $this->success;
 		 // print_r($data);
 		}
-
+		$result = $this->MPreference->checkIfInterestedAlready($this->session->userdata['userSession']->userID,$eid);
+		
+		if($result){
+			$data['interested']	= TRUE;
+			$data['user_event_preference_id'] = $result[0]->user_event_preference_id;
+		}else{
+			$data['interested']	= FALSE;
+		}
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
@@ -491,6 +513,78 @@ class CEvent extends CI_Controller {
 			$this->load->view('imports/vHeaderSignUpPage');
 			$this->load->view('user/vEditEvent', $v);
 			$this->load->view('imports/vFooterLandingPage');
+		}
+		public function interested($id)
+		{
+			$uid = $this->session->userdata['userSession']->userID;
+			$pref = new MPreference();
+			
+			$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+			$data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
+						  'user_id' => $uid ,
+						  'event_id' => $id
+		 				  );
+
+			$result = $pref->insert($data);
+
+			if($result){
+				redirect("event/cEvent/viewPreferenceEvents");
+				// $this->viewPreferenceEvents();
+			}
+			
+			# code...
+		}
+		public function interestedRemove($id)
+		{
+			// $uid = $this->session->userdata['userSession']->userID;
+			// $pref = new MPreference();
+			
+			// $now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+			// $data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
+			// 			  'user_id' => $uid ,
+			// 			  'event_id' => $id
+		 // 				  );
+
+			$result = $this->MPreference->delete($id);
+
+			if($result){
+				redirect("event/cEvent/viewPreferenceEvents");
+				// $this->viewPreferenceEvents();
+			}
+			
+			# code...
+		}
+		public function viewPreferenceEvents()
+		{
+
+			$uid = $this->session->userdata['userSession']->userID;
+
+			$result_data = $this->MPreference->joinEventPrefs($uid);
+			$array = array();
+			if($result_data){
+				foreach ($result_data as $value) {
+						$arrObj = new stdClass;
+						$arrObj->event_id = $value->event_id;
+						$arrObj->event_name = $value->event_name;
+						$arrObj->event_picture = $value->event_picture;
+						$arrObj->dateStart = $value->dateStart;
+						$arrObj->dateEnd = $value->event_date_end;
+						$arrObj->event_category = $value->event_category;
+						$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+						$array[] = $arrObj;
+				}
+			}
+			
+			$data['events'] = $array;
+			$this->load->view('imports/vHeaderLandingPage');
+			$this->load->view('user/vPrefEvents', $data);
+
+			$this->load->view('imports/vFooterLandingPage');
+
+			// $this->load->view('imports/vHeader');
+			
+			// $this->load->view('imports/vFooter');
+			# code...
 		}
 }
 ?>

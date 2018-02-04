@@ -39,6 +39,7 @@
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_HOME ?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_PROFILE ?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -208,7 +209,7 @@
                 <div class="panel-body search-widget">
                     <form action="" class=" form-inline">
                         <fieldset>
-                            <div class="col-xs-4 col-lg-2">
+                            <div class="col-xs-4 col-lg-4">
                                 <input type="text" class="form-control" placeholder="Key word">
                             </div>
                             <div class="col-xs-4 col-lg-2">
@@ -231,7 +232,7 @@
                                     <option>Others</option>
                                 </select>
                             </div>
-                            <div class="col-xs-6 col-lg-2">
+                            <div class="col-xs-6 col-lg-4">
                                 <div class="price-range-wrap">
                                     <label for="price-range" style="color:#000">Price range (P):</label>
                                         <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5"
@@ -321,11 +322,27 @@
                                                         }
                                                     }else{
                                                         echo "<h5>Not yet Approved!</h5>";
-                                                    }
-
-
-                                                ?>
-
+                                                    }    
+                                                        
+                                                            
+                                                ?>   
+                                             <table class="table-condensed table-responsive">
+                                                                <thead>
+                                                                    <th>Ticket Name</th>
+                                                                    <th>Ticket Price</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    foreach ($event->tix as $key) {?>
+                                                                    <tr>
+                                                                        <td><?php echo$key->name;?></td>
+                                                                        <td><?php echo$key->price;?></td>
+                                                                    </tr>
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
                                             <span class="proerty-price pull-right"><?php echo $event->event_status;?> </span>

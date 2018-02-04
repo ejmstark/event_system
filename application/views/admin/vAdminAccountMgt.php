@@ -74,7 +74,7 @@
                                       echo "<a  href='".site_url()."/admin/cAdmin/SuperAdmin/".$object->account_id."'>
                                         <button type='button' class='btn btn-info fa fa-user'></button></a>";
                                     }else{
-                                        if($this->session->userdata['adminSession']->userID == $object->upgraded_by){
+                                        if($this->session->userdata['adminSession']->userID == $object->upgradedBy){
                                             //upgrade type to Admin
                                               echo "<a  href='".site_url()."/admin/cAdmin/Admin/".$object->account_id."'>
                                                <button  type='button' class='btn btn-warning fa fa-user'></button></a>";
@@ -90,7 +90,7 @@
                                           <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
                                     }
 
-                                    if($this->session->userdata['adminSession']->userID == $object->upgraded_by || $object->user_type == "Admin") {
+                                    if($this->session->userdata['adminSession']->userID == $object->upgradedBy || $object->user_type == "Admin") {
                                         //update status
                                         if($object->user_status == "Active"){
                                           echo "<a  href='".site_url()."/admin/cAdmin/Ban/".$object->account_id."/admin'>
