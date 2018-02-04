@@ -228,23 +228,14 @@
                                                             echo '</h5>';      
                                                         }
 
+                                                    }                                                 
+                                                    
+                                                    $mintix = 0;
+                                                    foreach ($event->tix as $key) {
+                                                        $mintix = ($key->price >= $mintix)? $key->price : $mintix;
                                                     }
-
-                                                    echo '<h2>Price List</h2>';
-                                                    echo '<table class="table-condensed table-responsive">
-                                                                <thead>
-                                                                    <th>Ticket Name</th>
-                                                                    <th>Ticket Price</th>
-                                                                </thead>
-                                                                <tbody>';
-                                                                    foreach ($event->tix as $key) {
-                                                                    echo '<tr> <td>';
-                                                                    echo $key->name;
-                                                                    echo '</td><td>';
-                                                                    echo $key->price;
-                                                                    echo '</td></tr></tbody></table>';
-                                                                }
-                                                   echo '<div class="dot-hr"></div></div>';
+                                                    echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';          
+                                                    echo '<div class="dot-hr"></div></div>';
 
                                             }else if($now >= $start && $now <= $end){
                                                 echo ' <div class="col-sm-6 col-md-4 p0">';
@@ -276,21 +267,12 @@
 
                                                     }
 
-                                                    echo '<h5>Happening now!</h5>';
-                                                    echo '<h2>Price List</h2>';
-                                                    echo '<table class="table-condensed table-responsive">
-                                                                <thead>
-                                                                    <th>Ticket Name</th>
-                                                                    <th>Ticket Price</th>
-                                                                </thead>
-                                                                <tbody>';
-                                                                    foreach ($event->tix as $key) {
-                                                                    echo '<tr> <td>';
-                                                                    echo $key->name;
-                                                                    echo '</td><td>';
-                                                                    echo $key->price;
-                                                                    echo '</td></tr></tbody></table>';
-                                                                }
+                                                    echo '<h5>Happening now!</h5>';                                                   
+                                                    $mintix = 0;
+                                                    foreach ($event->tix as $key) {
+                                                        $mintix = ($key->price >= $mintix)? $key->price : $mintix;
+                                                    }
+                                                    echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';
                                                     echo '<div class="dot-hr"></div></div>';
                                             }
                                         ?>
