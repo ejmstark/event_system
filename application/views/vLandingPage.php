@@ -219,14 +219,17 @@
                                                     <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>'; 
                                                 echo '<h5>Where: '.$event->event_venue.'</h5>';
-                                                echo '<h5>When: '.$event->dateStart.'-'.$event->dateEnd.'</h5>';
+
+                                                $dateS = date_create($event->dateStart);
+                                                $dateE = date_create($event->dateEnd);
+                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateS, 'M d Y').'</h5>';
                                                     if($now < $start){
                                                         if($interval->days == 0){
-                                                          echo '<h5>Less than a day!</h5>';
+                                                          echo '<span class="badge badge-danger">Less than a day!</span>';
                                                         }else{
-                                                            echo '<h5>'.$interval->days;
+                                                            echo '<span class="badge badge-danger">'.$interval->days;
                                                             echo ' day/s left!';
-                                                            echo '</h5>';      
+                                                            echo '</span>';      
                                                         }
 
                                                     }                                                 
@@ -257,25 +260,16 @@
                                                     <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>'; 
                                                 echo '<h5>Where: '.$event->event_venue.'</h5>';
-                                                echo '<h5>When: '.$event->dateStart.'-'.$event->dateEnd.'</h5>';
-                                                    if($now < $start){
-                                                        if($interval->days == 0){
-                                                          echo '<h5>Less than a day!</h5>';
-                                                        }else{
-                                                            echo '<h5>'.$interval->days;
-                                                            echo ' day/s left!';
-                                                            echo '</h5>';      
-                                                        }
+                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateS, 'M d Y').'</h5>';
 
-                                                    }
+                                                echo '<span class="badge badge-danger">Happening now!</span>';      
 
-                                                    echo '<h5>Happening now!</h5>';                                                   
-                                                    $mintix = 0;
-                                                    foreach ($event->tix as $key) {
-                                                        $mintix = ($key->price >= $mintix)? $key->price : $mintix;
-                                                    }
-                                                    echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';
-                                                    echo '<div class="dot-hr"></div></div>';
+                                                $mintix = 0;
+                                                foreach ($event->tix as $key) {
+                                                    $mintix = ($key->price >= $mintix)? $key->price : $mintix;
+                                                }
+                                                echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';
+                                                echo '<div class="dot-hr"></div></div>';
                                             }
                                         ?>
                                             </div>
