@@ -207,7 +207,7 @@
 
                                                                 $dateS = date_create($event->dateStart);
                                                                 $dateE = date_create($event->dateEnd);
-                                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateS, 'M d Y').'</h5>';
+                                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
 
                                                                 if($now < $start){
                                                                     if($interval->days == 0){
@@ -247,7 +247,7 @@
                                                                         <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                                         </div>'; 
                                                                 echo '<h5>Where: '.$event->event_venue.'</h5>';
-                                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateS, 'M d Y').'</h5>';
+                                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
 
                                                                 echo '<span class="badge badge-danger">Happening now!</span>';      
 
