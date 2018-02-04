@@ -202,19 +202,22 @@
                                             if($now < $start){
                                                 echo ' <div class="col-sm-6 col-md-4 p0">';
                                                 echo '<div class="box-two proerty-item">';
+
+                                                echo '<div class="item-entry overflow" >
+                                                      <h4><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
+
+                                                if(strlen($event->event_name)>=42){
+                                                    echo substr($event->event_name,0,39)."...";
+                                                }else{
+                                                    echo $event->event_name;
+                                                }
+                                                
+                                                echo '</a></h4>';
+
                                                 echo '<div class="item-thumb">
                                                     <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>'; 
-                                                echo '<div class="item-entry overflow">
-                                                      <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
-
-                                                    if(strlen($event->event_name)>=42){
-                                                        echo substr($event->event_name,0,39)."...";
-                                                    }else{
-                                                        echo $event->event_name;
-                                                    }
-                                                    
-                                                    echo '</a></h5>';
+                                                
                                                     if($now < $start){
                                                         if($interval->days == 0){
                                                           echo '<h5>Less than a day!</h5>';
@@ -230,19 +233,22 @@
                                             }else if($now >= $start && $now <= $end){
                                                 echo ' <div class="col-sm-6 col-md-4 p0">';
                                                 echo '<div class="box-two proerty-item">';
+
+                                                echo '<div class="item-entry overflow" >
+                                                      <h4><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
+
+                                                if(strlen($event->event_name)>=42){
+                                                    echo substr($event->event_name,0,39)."...";
+                                                }else{
+                                                    echo $event->event_name;
+                                                }
+                                                
+                                                echo '</a></h4>';
+
                                                 echo '<div class="item-thumb">
                                                     <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                 </div>'; 
-                                                echo '<div class="item-entry overflow">
-                                                      <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
-
-                                                    if(strlen($event->event_name)>=42){
-                                                        echo substr($event->event_name,0,39)."...";
-                                                    }else{
-                                                        echo $event->event_name;
-                                                    }
-                                                    
-                                                    echo '</a></h5>';
+                                               
                                                     if($now < $start){
                                                         if($interval->days == 0){
                                                           echo '<h5>Less than a day!</h5>';
