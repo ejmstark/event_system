@@ -1,6 +1,6 @@
         <script src="<?php echo base_url('assets/nikkiAssets/js/modernizr-2.6.2.min.js')?>" rel="stylesheet" /> </script>
         <script src="<?php echo base_url('assets/nikkiAssets/js/jquery-1.10.2.min.js')?>" rel="stylesheet" /> </script>
-        <script src="<?php echo base_url('assets/nikkiAssets/bootstrap/js/bootstrap.min.j')?>" rel="stylesheet" /> </script>
+        <script src="<?php echo base_url('assets/nikkiAssets/bootstrap/js/bootstrap.min.js')?>" rel="stylesheet" /> </script>
        
         <script src="<?php echo base_url('assets/nikkiAssets/js/bootstrap-select.min.js')?>" rel="stylesheet" /> </script>
         <script src="<?php echo base_url('assets/nikkiAssets/js/bootstrap-hover-dropdown.js')?>" rel="stylesheet" /> </script>
@@ -16,5 +16,15 @@
         <script src="<?php echo base_url('assets/jsKyleAssets/bootstrap.min.js')?>" rel="stylesheet" /> </script>
         <script src="<?php echo base_url('assets/jsKyleAssets/fullcalendar.js')?>" rel="stylesheet" /> </script>
 
+        <script src="<?php echo base_url('assets/dianeAssets/js/bootstrap-notify.min.js')?>" rel="stylesheet" /> </script>
+
     </body>
 </html>
+
+<script>
+    $("#price-slider").slider();
+    $("#price-slider").on("slide", function(slideEvt) {
+        var str = slideEvt.value.toString().replace(/\,/g, ' - ');;
+        $("#price-value-slider").text(str);
+    });
+</script>

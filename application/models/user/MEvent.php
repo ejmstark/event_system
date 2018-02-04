@@ -1,5 +1,5 @@
 <?php
-	class MEvent extends MY_model {
+	class MEvent extends MY_Model {
 		private $event_id;
 		private $event_date_start;
 		private $event_date_end;
@@ -26,7 +26,7 @@
         		$this->db->trans_rollback();
 			}else{
         		$this->db->trans_commit();
-			} 	
+			}
 			return $this->db->insert_id();
 		}
 		public function getGoingToEvent($eId){
@@ -34,13 +34,24 @@
 			$this->db->from("event_info as ei");
 			$this->db->join('ticket_type  as tt ', "tt.event_id = ei.event_id");
 			$this->db->join('ticket as t', 't.ticket_type_id = tt.ticket_type_id');
-			
+
 			$this->db->join("user_account as ua", "ua.account_id = t.user_id");
 			$this->db->where("ei.event_id",$eId);
 
 			$query = $this->db->get();
 
 			return $query->result();
+		}
+		public function joinEventTicketType($id)
+		{
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->join('ticket_type as t', $this::DB_TABLE.'.event_id = t.event_id');
+			$this->db->where( array($this::DB_TABLE.'.event_id' => $id, ));
+
+			$query = $this->db->get();
+			 return $query->result();
+			# code...
 		}
 		public function Performance()
 		{
@@ -53,38 +64,59 @@
 
 			$query = $this->db->get();
 
-			return $query->result();	
-			# code...
+			return $query->result();
 		}
 
 		public function getAllEventsByUser($id){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
+			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
 			$this->db->from("event_info");
 			$this->db->where("user_id = $id");
+			$this->db->where(" event_info.event_isActive!=FALSE");
 			$query = $this->db->get();
-			return $query->result();			             
+			return $query->result();
 		}
-		public function getAllEvents(){
+		public function getTicketsOfEvent($event_id){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
+			$this->db->select("tt.ticket_name as 'name',tt.price as 'price'");
+			$this->db->from("ticket_type as tt");
+			$this->db->where("tt.event_id='".$event_id."'");
+			$query = $this->db->get();
+			return $query->result();
+		}
+		public function getAllEvents(){
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->from("event_info");
+			$this->db->where("event_info.event_isActive!=FALSE");
 			$query = $this->db->get();
-			return $query->result();			             
+			return $query->result();
 		}
-		public function getAllApprovedEvents(){
+
+		//get events that match the search word
+		public function getSearchEvents($searchWord){
 			//Sample code
 			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
+			$this->db->from("event_info");
+			
+			$this->db->where("event_name LIKE '%".$searchWord."%'");
+			
+
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+		public function getAllApprovedEvents(){
+			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
+			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
 			$this->db->from("event_info");
 			$this->db->where("event_info.event_status = 'Approved'");
 			$query = $this->db->get();
-			return $query->result();			             
+			return $query->result();
 		}
 
 
@@ -97,10 +129,48 @@
 			$query = $this->db->get();
 
 			return $query->result();
-			# code...
 		}
 
-		//Class getters and setters.
+		public function do_upload_event($id)
+	    {
+	        $config = array(
+				'upload_path' => "./images/events",
+				'allowed_types' => "gif|jpg|png|jpeg",
+				'overwrite' => TRUE,
+				'max_size' => "100000000000000000000000000000000000000000000000000000",
+				'max_height' => "1000000000000",
+				'max_width' => "1000000000"
+			);
+
+	        $this->load->library('upload', $config);
+
+	        if ( ! $this->upload->do_upload('userfile'))
+	        {
+                $error = array('error' => $this->upload->display_errors());
+                return false;
+	        }
+	        else
+	        {
+                $data = array('upload_data' => $this->upload->data());
+
+                if($this->insertPhotoEvent($this->upload->data()['file_name'], $id)) {
+                	return true;
+                } else {
+                	return false;
+                }
+	        }
+	    }
+
+	    public function insertPhotoEvent($filename,$id) {
+
+			$where = array(
+				"event_picture" =>  "images/events/".$filename,
+			);
+
+
+			return $result = $this->update($id, $where);
+	    }
+
 
 		public function getEvent_id(){
 			return $this->event_id;
@@ -190,8 +260,6 @@
 			$this->user_id = $user_id;
 		}
 
-		//End of class getters and setters.
 
-		
 	}
 ?>

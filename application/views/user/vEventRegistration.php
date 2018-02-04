@@ -48,7 +48,7 @@
 					
 				</tbody>
 			</table>
-			<a href="<?php echo site_url();?>/user/cEvent/interested/<?php echo $e->event_id;?>"><button>Interested</button></a>
+			<a href="<?php echo site_url();?>/event/cEvent/interested/<?php echo $e->event_id;?>"><button>Interested</button></a>
 			<a href="<?php echo site_url();?>/user/cEvent/going/<?php echo $e->event_id;?>"><button>Going</button></a>
 		<?php } ?>
 	
