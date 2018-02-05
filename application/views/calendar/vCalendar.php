@@ -1,3 +1,10 @@
+<!-- Add these lines below to pages with customizable elements -->
+<?php
+  require('assets/CustomizationManager.php');
+  CustomizationManager::SetTheme("configurations 0");
+?>
+<!-- Up to here -->
+
  <body>
 
         <div id="preloader">
@@ -16,36 +23,37 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
-                    <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
-                    </div>
-                    <div class="button navbar-right">
-                        <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
-                    </div>
+                  <div class="button navbar-right">
+                      <!-- <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a> -->
+                      <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->PROFILE_PAGE_LOGOUT_BUTTON ?> </button></a>
+                  </div>
+                  <div class="button navbar-right">
+                      <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->PROFILE_PAGE_CREATE_EVENT_BUTTON ?> </button></a>
+                  </div>
 
-                    <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                        
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
-                        <!-- 
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
-                    </ul>
+                  <ul class="main-nav nav navbar-nav navbar-right">
+                      <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_HOME ?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_PROFILE ?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
+                  </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
         <!-- End of nav bar -->
 
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">Profile</h1>               
+                      <!-- <h1 class="page-title">Profile</h1> -->
+                      <h1 class="page-title"><?php echo CustomizationManager::$strings->CALENDAR_PAGE_TITLE ?></h1>
                     </div>
                 </div>
             </div>
@@ -54,10 +62,10 @@
 
         <!-- property area -->
         <div class="properties-area recent-property" style="background-color: #FFF;">
-            <div class="container">  
-                <div class="row">  
+            <div class="container">
+                <div class="row">
                     <div class="col-md-3 p0 padding-top-40">
-                        <div class="blog-asside-right pr0">   
+                        <div class="blog-asside-right pr0">
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated" >
                                 <div class="panel-body search-widget">
                                    <div class="col-md-12">
@@ -69,9 +77,9 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <p>Insufficient balance? 
-                                                 <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" >Load Now</a> 
-      
+                                             <p><?php echo CustomizationManager::$strings->PROFILE_PAGE_INSUFFICIENT_BALANCE ?>
+                                                  <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" ><?php echo CustomizationManager::$strings->PROFILE_PAGE_LOAD_NOW ?></a>
+
                                                  <script>
                                                      $("#load").click(function(){
                                                         $("#some").toggle(500);
@@ -79,17 +87,18 @@
                                                  </script>
                                             </p>
                                             <div class="row">
-                                                
+
                                                     <div class="col-xs-12" id="some" hidden="">
                                                         <form action="<?php echo site_url(); ?>/user/cUser/redeemCode" method="post">
                                                             <input type="text" class="form-control" name="ccode" placeholder="Enter code">
-                                                            <button type="submit" class="navbar-btn nav-button pull-right"   >Redeem Code</button>
+                                                            <!-- <button type="submit" class="navbar-btn nav-button pull-right"   >Redeem Code</button> -->
+                                                            <button type="submit" class="navbar-btn nav-button pull-right"   ><?php echo CustomizationManager::$strings->PROFILE_PAGE_REDEEM_CODE ?></button>
                                                         </form>
                                                     </div>
-                                                
+
                                             </div>
-                                        </div>    
-                                    </div>                                    
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="modal fade" id="lmodal">
@@ -99,10 +108,10 @@
                                                 <h3><img src="img/credit-card.png" class="elogo"> eLoad</h3>
                                             </div>
                                             <div class="modal-body">
-                                                
+
                                                 <label class="label-control">Card Number</label>
                                                 <input type="text" class="form-control" name="" placeholder="Enter Card Number">
-                                                
+
                                                 <h6 class="note">*Note: you only have 3 attemps to enter correct values</h6>
                                             </div>
                                             <div class="modal-footer">
@@ -116,26 +125,29 @@
                                 <div class="panel-body search-widget">
                                     <fieldset >
                                         <div class="row">
-                                            <div class="col-md-12">  
+                                            <div class="col-md-12">
                                                  <a href="<?php echo site_url()?>/calendar/cCalendar">
-                                                <button class = "button btn largesearch-btn">Calendar</button></a>
-                                            </div>  
+                                                   <!-- <button class = "button btn largesearch-btn">Calendar</button></a> -->
+                                                   <button class = "button btn largesearch-btn"><?php echo CustomizationManager::$strings->PROFILE_PAGE_CALENDAR_BUTTON ?></button></a>
+                                            </div>
                                         </div>
-                                    </fieldset>   
+                                    </fieldset>
                                     <fieldset >
                                         <div class="row">
-                                            <div class="col-md-12">  
-                                                <button class = "button btn largesearch-btn">Payment Summary</button>
-                                            </div>  
+                                            <div class="col-md-12">
+                                              <!-- <button class = "button btn largesearch-btn">Payment Summary</button> -->
+                                              <button class = "button btn largesearch-btn"><?php echo CustomizationManager::$strings->PROFILE_PAGE_PAYMENT_SUMMARY_BUTTON ?></button>
+                                            </div>
                                         </div>
-                                    </fieldset>                                     
+                                    </fieldset>
                                 </div>
                                 <br><br>
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Search</h3>
+                                  <!-- <h3 class="panel-title">Search</h3> -->
+                                  <h3 class="panel-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_HEADER ?></h3>
                                 </div>
                                 <div class="panel-body search-widget">
-                                    <form action="" class=" form-inline"> 
+                                    <form action="" class=" form-inline">
                                         <fieldset>
                                             <div class="row">
                                                 <div class="col-xs-12">
@@ -174,91 +186,94 @@
                                         <fieldset class="padding-5">
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <label for="price-range">Price range (P):</label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                                           data-slider-max="10000" data-slider-step="5" 
+                                                  <!-- <label for="price-range">Price range (P):</label> -->
+                                                  <label for="price-range"><?php echo CustomizationManager::$strings->PROFILE_PAGE_PRICE_RANGE ?></label>
+                                                    <input type="text" class="span2" value="" data-slider-min="0"
+                                                           data-slider-max="10000" data-slider-step="5"
                                                            data-slider-value="[0,1000]" id="price-range" ><br />
-                                                    <b class="pull-left color">P0.00</b> 
-                                                    <b class="pull-right color">P10,000.00</b>                                       
-                                                </div>                                      
+                                                    <b class="pull-left color">P0.00</b>
+                                                    <b class="pull-right color">P10,000.00</b>
+                                                </div>
                                             </div>
-                                        </fieldset>                                
-                                        
+                                        </fieldset>
+
                                         <fieldset class="padding-5">
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label> <input type="checkbox" checked> Workshops</label>
-                                                    </div> 
+                                                    </div>
                                                 </div>
 
                                                 <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label> <input type="checkbox"> Parties</label>
                                                     </div>
-                                                </div>                                            
+                                                </div>
                                             </div>
                                         </fieldset>
 
                                         <fieldset class="padding-5">
                                             <div class="row">
-                                                <div class="col-xs-6"> 
+                                                <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label> <input type="checkbox" checked> Food Bazaar</label>
                                                     </div>
-                                                </div>  
-                                                <div class="col-xs-6"> 
+                                                </div>
+                                                <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label> <input type="checkbox" checked> Fashion Shows</label>
                                                     </div>
-                                                </div>  
+                                                </div>
                                             </div>
                                         </fieldset>
 
                                         <fieldset class="padding-5">
                                             <div class="row">
-                                                <div class="col-xs-6"> 
+                                                <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label><input type="checkbox"> Concerts </label>
                                                     </div>
-                                                </div>  
-                                                <div class="col-xs-6"> 
+                                                </div>
+                                                <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label> <input type="checkbox"> Exhibits</label>
                                                     </div>
-                                                </div>  
+                                                </div>
                                             </div>
                                         </fieldset>
 
                                         <fieldset class="padding-5">
                                             <div class="row">
-                                                <div class="col-xs-6"> 
+                                                <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label>  <input type="checkbox" checked> Sports Event </label>
                                                     </div>
-                                                </div>  
-                                                <div class="col-xs-6"> 
+                                                </div>
+                                                <div class="col-xs-6">
                                                     <div class="checkbox">
                                                         <label>  <input type="checkbox"> Others </label>
                                                     </div>
-                                                </div>  
+                                                </div>
                                             </div>
                                         </fieldset>
 
                                         <fieldset >
                                             <div class="row">
-                                                <div class="col-xs-12">  
-                                                    <input class="button btn largesearch-btn" value="Search" type="submit">
-                                                </div>  
+                                                <div class="col-xs-12">
+                                                  <!-- <input class="button btn largesearch-btn" value="Search" type="submit"> -->
+                                                  <input class="button btn largesearch-btn" value="<?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_BUTTON ?>" type="submit">
+                                                </div>
                                             </div>
-                                        </fieldset>                                     
+                                        </fieldset>
                                     </form>
                                 </div>
                             </div>
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title">Recommended</h3>
+                                  <!-- <h3 class="panel-title">Recommended</h3> -->
+                                  <h3 class="panel-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_RECOMMENDED_HEADER ?></h3>
                                 </div>
                                 <div class="panel-body recent-property-widget">
                                             <ul>
@@ -306,16 +321,16 @@
                     </div>
 
                     <div class="col-md-9  pr0 padding-top-40 properties-page">
-                        <div class="col-md-12 clear"> 
+                        <div class="col-md-12 clear">
                             <div class="col-xs-10 page-subheader sorting pl0">
-                                    <div class="content"> 
+                                    <div class="content">
                                         <div class="row">
                                             <div class="col-lg-12 text-center">
-                                                
+
                                                 <div id="calendar" class="col-centered" style="overflow: auto;">
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                         <!-- /.row -->
                                         
@@ -330,7 +345,6 @@
                                                 <li><span class="expired"></span>Expired events</li>
                                             </ul>
                                         </div>
-                                        
 
 
                                         <!-- Modal -->
@@ -338,27 +352,27 @@
                                           <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <form class="form-horizontal" method="POST" action="<?php echo site_url()?>/calendar/cCalendar/AddEvent">
-                                            
+
                                               <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                 <h4 class="modal-title" id="myModalLabel">Add Event</h4>
                                               </div>
                                               <div class="modal-body">
-                                                
+
                                                   <div class="form-group">
                                                     <label for="title" class="col-sm-2 control-label">Title</label>
                                                     <div class="col-sm-10">
                                                       <input type="text" name="title" class="form-control" id="title" placeholder="Title" required="true">
                                                     </div>
                                                   </div>
-                                
+
                                                   <div class="form-group">
                                                     <label for="event_detail" class="col-sm-2 control-label">Details</label>
                                                         <div class="col-sm-10">
                                                             <textarea class="form-control" rows="5" name="event_detail" id="event_detail" placeholder="Event Details" required="true"></textarea>
                                                         </div>
                                                   </div>
-                                
+
                                                   <div class="form-group">
                                                     <label for="color" class="col-sm-2 control-label">Color</label>
                                                     <div class="col-sm-10">
@@ -366,11 +380,11 @@
                                                           <option value="">Choose</option>
                                                           <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
                                                           <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-                                                          <option style="color:#008000;" value="#008000">&#9724; Green</option>                       
+                                                          <option style="color:#008000;" value="#008000">&#9724; Green</option>
                                                           <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
                                                           <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
                                                           <option style="color:#000;" value="#000">&#9724; Black</option>
-                                                          
+
                                                         </select>
                                                     </div>
                                                   </div>
@@ -380,14 +394,14 @@
                                                       <input type="text" name="start" class="form-control" id="start" readonly>
                                                     </div>
                                                   </div>
-                                
+
                                                   <div class="form-group">
                                                     <label for="end" class="col-sm-2 control-label">End date</label>
                                                     <div class="col-sm-10">
                                                       <input type="text" name="end" class="form-control" id="end" readonly>
                                                     </div>
                                                   </div>
-                                
+
                                                   <div class="form-group">
                                                     <label for="event_category" class="col-sm-2 control-label">Category</label>
                                                     <div class="col-sm-10">
@@ -412,15 +426,15 @@
                                                           <option value="Other">Other</option>
                                                         </select>
                                                     </div>
-                                                  </div>                                            
-                                                    
+                                                  </div>
+
                                                 <div class="form-group">
                                                     <label for="event_venue" class="col-sm-2 control-label">Venue</label>
                                                     <div class="col-sm-10">
                                                       <input type="text" name="event_venue" class="form-control" id="event_venue" placeholder="Venue" required="true">
                                                     </div>
                                                 </div>
-                                
+
                                                 <hr>
                                                 <div class="modal-header">
                                                     <h4 class="modal-title" id="myModalLabel">Ticket Details</h4>
@@ -438,22 +452,22 @@
                                                       <input type="text" name="event_ticket_type" class="form-control" id="event_ticket_type" placeholder="Ticket Type (optional)">
                                                     </div>
                                                 </div>
-                                
+
                                                 <div class="form-group">
                                                     <label for="event_ticket_total_no" class="col-sm-2 control-label">Total Number</label>
                                                     <div class="col-sm-10">
                                                       <input type="number" name="event_ticket_total_no" class="form-control" id="event_ticket_total_no" placeholder="Ticket Total Number" required="true">
                                                     </div>
                                                 </div>
-                                
+
                                                 <div class="form-group">
                                                     <label for="event_ticket_discount" class="col-sm-2 control-label">Discount</label>
                                                     <div class="col-sm-10">
                                                       <input type="number" name="event_ticket_discount" class="form-control" id="event_ticket_discount" placeholder="Ticket Discount" required="true">
                                                     </div>
                                                 </div>
-                                                
-                                
+
+
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -463,32 +477,32 @@
                                             </div>
                                           </div>
                                         </div>
-                                        
-                                        
-                                        
+
+
+
                                         <!-- Modal -->
                                         <div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                          
+
                                         </div>
-                                        
-                                    <?php  
+
+                                    <?php
                                         foreach($event_data as $data){
                                             echo "<br>";
                                         }
-                                    ?> 
-                                
+                                    ?>
+
                                     </div>
                             </div>
                         </div>
-                    </div>  
-                </div>              
+                    </div>
+                </div>
             </div>
         </div>
 
         <script >
 
     $(document).ready(function() {
-        
+
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -538,16 +552,16 @@
                         });
                     }
             },
- 
-            eventDrop: function(event, delta, revertFunc) { // 
+
+            eventDrop: function(event, delta, revertFunc) { //
                 edit(event);
             },
             eventResize: function(event,dayDelta,minuteDelta,revertFunc) { //
                 edit(event);
             },
             events: [
-                <?php foreach($event_data as $events): 
-                
+                <?php foreach($event_data as $events):
+
                     $start = explode(" ", $events->event_date_start);
                     $end = explode(" ", $events->event_date_end);
                     if($start[1] == '00:00:00'){
@@ -566,7 +580,7 @@
                       $date3 = new DateTime($start);
                       $newColor;
                 ?>
-                {   
+                {
                     id: '<?php echo $events->event_id; ?>',
                     title: '<?php echo $events->event_name; ?>',
                     start: '<?php echo $start; ?>',
@@ -574,7 +588,7 @@
                     details: '<?php echo $events->event_details; ?>',
                     category: '<?php echo $events->event_category; ?>',
                     venue: '<?php echo $events->event_venue; ?>',
-                    color: '<?php           
+                    color: '<?php
                         if($date_now>$date2){
                             echo $newColor = "#808080";
                         }else{
@@ -584,7 +598,7 @@
                                 echo $newColor = $events->color;
                             }else{
                                 echo $newColor = "#ffae00";
-                            }   
+                            }
                         }
                     ?>',
                 },
@@ -621,7 +635,7 @@
                                    $('body').html(result);
                                 }else{
                                     alert("Error");
-                                }                         
+                                }
                             },
                             error: function(jqXHR, errorThrown){
                                 console.log(errorThrown);
@@ -675,55 +689,56 @@
 </div>
 
           <!-- Footer area-->
-        <div class="footer-area">
+          <div class="footer-area">
 
-            <div class=" footer">
-                <div class="container">
-                    <div class="row">
+              <div class=" footer">
+                  <div class="container">
+                      <div class="row">
 
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer">
-                                <h4>About us </h4>
+                          <div class="col-md-3 col-sm-6 wow fadeInRight animated">
+                              <div class="single-footer">
+                                <!-- <h4>About us </h4> -->
+                                <h4><?php echo CustomizationManager::$strings->ABOUT_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
 
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
-                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-                                
-                            </div>
-                        </div>
-                    
-                        <div class="col-md-3 col-sm-6 wow fadeInRight animated">
-                            <div class="single-footer news-letter">
-                                <h4>Contact Us</h4>
-                                <div class="footer-title-line"></div>
-                                <ul class="footer-adress">
-                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
-                                </ul>
+                               <!-- <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" > -->
+                               <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                                <!-- <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p> -->
+                                <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
 
-                            </div>
-                        </div>
+                              </div>
+                          </div>
 
-                    </div>
-                </div>
-            </div>
+                          <div class="col-md-3 col-sm-6 wow fadeInRight animated">
+                              <div class="single-footer news-letter">
+                                <!-- <h4>Contact Us</h4> -->
+                                <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
+                                  <div class="footer-title-line"></div>
+                                  <ul class="footer-adress">
+                                      <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
+                                      <li><i class="pe-7s-call strong"> </i> 253-2753</li>
+                                  </ul>
 
-            <div class="footer-copy text-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="pull-left">
-                            <span> (C) UI Module , All rights reserved 2017  </span> 
-                        </div> 
-                        <div class="bottom-menu pull-right"> 
-                            <ul> 
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
-                            </ul> 
-                        </div>
-                    </div>
-                </div>
-            </div>
+                              </div>
+                          </div>
 
-        </div>
-   
+                      </div>
+                  </div>
+              </div>
+
+              <div class="footer-copy text-center">
+                  <div class="container">
+                      <div class="row">
+                          <div class="pull-left">
+                              <span> (C) UI Module , All rights reserved 2017  </span>
+                          </div>
+                          <div class="bottom-menu pull-right">
+                              <ul>
+                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+          </div>

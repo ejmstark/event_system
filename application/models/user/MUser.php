@@ -59,6 +59,12 @@
 			$query = $this->read_all();
 			return $query;			             
 		}
+		public function checkAllUsers($username){
+			$query= $this->db->get_where($this::DB_TABLE,array('user_name'=>$username));
+			return $query->num_rows();
+			         
+		}
+		
 
 		public function updateSpecificEvent($id, $data){
 			$this->db->where('event_id', $id);
