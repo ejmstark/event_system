@@ -68,6 +68,13 @@
             -webkit-box-shadow: 1px 1px 3px 3px #ccc;
             box-shadow:         1px 1px 3px 3px #ccc;
         }        
+
+                .details{
+                  display:inline-block;
+                  position: absolute;
+                  overflow:hidden;
+                }
+
                 .corner-ribbon{
                   width: 200px;
                   background: #e43; 
@@ -98,8 +105,8 @@
 
                 /* Different positions */
                 .corner-ribbon.top-right{
-                  top: 20px;
-                  right: -200px;
+                  top: 15px;
+                  right: -210px;
                   left: auto;
                   transform: rotate(45deg);
                   -webkit-transform: rotate(45deg);
