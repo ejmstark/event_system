@@ -69,8 +69,7 @@
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                             <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
-                                <!-- <span style="color: gray;">Search Event</span><span>aaa</span> -->
-                                <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?></span><span>aaa</span>
+                                <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?>
                                 <div class="form-group">
                                     <?php
                                     if(!isset($_POST['searchDateMonth'])){
@@ -90,7 +89,7 @@
                                                   <option value="12">Dec</option>
                                                 </select>';
                                     } else {
-                                        echo '<b style="color: black;">'.$_POST['searchDateMonth'].'</b><select name="searchDateMonth" >
+                                        echo '<select name="searchDateMonth" class="form-control">
                                                   <option value="0">-Month-</option>
                                                   <option value="1">Jan</option>
                                                   <option value="2">Feb</option>
@@ -253,6 +252,8 @@
                                                                         <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                                         </div>'; 
                                                                 echo '<h5>Where: '.$event->event_venue.'</h5>';
+                                                                $dateS = date_create($event->dateStart);
+                                                                $dateE = date_create($event->dateEnd);
                                                                 echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
                                                                 $mintix = $event->tix;
                                                                 foreach ($event->tix as $key) {
