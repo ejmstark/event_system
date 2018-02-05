@@ -4,7 +4,8 @@ if(isset($events) ){
     // print_r($events);
 foreach ($events as $e) { } foreach ($organizer as $o) { }
     foreach ($user as $u) { }
-
+    //location
+    foreach($location as $locate){}
 
 foreach($going as $g){
     if($this->session->userdata['userSession']->userID == $g->account_id){
@@ -195,7 +196,8 @@ foreach($going as $g){
                                 <ul class="additional-details-list clearfix">
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Location</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue; ?></span>
+                                        
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue.', '.$locate->location_name.', '.$locate->region_code; ?></span>
                                     </li>
 
                                     <li>

@@ -78,6 +78,44 @@
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_TITLE ?></label>
                                     <input type="text" class="form-control" name="event_name" required="">
                                 </div>
+
+                                <!-- Added a location_code -->
+                                <div class="form-group">
+
+                                    <!-- <label for="email">Location_code</label> -->
+                                    <label for="region_code">Region Code</label>
+                                        <select Class="form-control" id="region_code" name="region_code" required>
+                                            <option></option>
+                                            <option>NCR</option>
+                                            <option>CAR</option>
+                                            <option>MIMAROPA</option>
+                                            <option>ARMM</option>
+                                            <option>Region I</option>
+                                            <option>Region II</option>
+                                            <option>Region III</option>
+                                            <option>Region IV-A</option>
+                                            <option>Region V</option>
+                                            <option>Region VI</option>
+                                            <option>Region VII</option>
+                                            <option>Region VIII</option>
+                                            <option>Region IX</option>
+                                            <option>Region X</option>
+                                            <option>Region XI</option>
+                                            <option>Region XII</option>
+                                            <option>Region XIII</option>
+                                        </select>
+                                </div>
+
+                                <!-- Added a city group -->
+                                <div class="form-group">
+
+                                    <!-- <label for="email">Location_code</label> -->
+                                    <label for="municipal-name">CITY/MUNICIPAL</label>
+                                        <select Class="form-control" id="municipal-name" name="municipal-name" required>
+                                            <option>Make sure you have selected a region first...</option>
+                                        </select>
+                                </div>
+
                                 <div class="form-group">
                                     <!-- <label for="name">Location</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_LOCATION ?></label>
@@ -327,3 +365,47 @@
                 $('#datetimepicker1').datetimepicker();
             });
         </script>
+
+        <script>
+            $('#region_code').on('change', function(){
+                if(this.value != ""){
+                    // alert(this.value);
+                    $('#municipal-name').empty().append('<option>Select CITY/MUNICIPAL below...</option>');
+                    var code = this.value;
+                    var dataSet = "region_code="+code;
+                        $.ajax({
+                            type: "POST",
+                            url: '<?php echo site_url()?>/event/cEvent/displayMunicipal',
+                            data: dataSet,
+                            cache: true,
+                            success: function(result){
+                                if(result){
+                                //    $('body').html(result);
+                                    var output = $.parseJSON(result);
+                                    $.each(output, function(i, d) {
+                                        // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
+                                        $('#municipal-name').append('<option value="' + d.location_id+ '">' + d.location_name + '</option>');
+                                        
+                                    });
+                                }else{
+                                    alert("Error");
+                                }
+                            },
+                            error: function(jqXHR, errorThrown){
+                                console.log(errorThrown);
+                            }
+                        });
+                }else{
+                    $('#municipal-name').empty().append('<option>Make sure you have selected a region first...</option>');
+                }
+            });
+
+            // $('#municipal-name').on('change', function(){
+            //     if(this.value != "Select CITY/MUNICIPAL below..."){
+            //         var city = this.value;
+            //         alert(city);
+            //     }
+            // });
+        </script>
+
+

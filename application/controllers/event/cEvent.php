@@ -12,7 +12,8 @@ class CEvent extends CI_Controller {
     	$this->load->model('user/MTicket');
     	$this->load->model('MNotification');
     	$this->load->helper('date');
-    	$this->load->model('MEventInfo');
+		$this->load->model('MEventInfo');
+		$this->load->model('location/MLocation');
     	$this->error = "";
     	$this->success = "";
     }
@@ -21,6 +22,21 @@ class CEvent extends CI_Controller {
 	public function index()
 	{
 
+	}
+
+	public function displayMunicipal(){
+		if(isset($_POST['region_code'])){
+			$code = $_POST['region_code'];
+			$where = array("region_code" => $code);
+			$result = $this->MLocation->read_where($where);
+			// foreach($result as $muni){
+			// 	var_dump($muni->location_name);
+			// }
+			echo json_encode($result);
+			die();
+		}else{
+			echo false;
+		}
 	}
 
 		//This function gets the date from the Calendar Module and sends in to the VCreateEvent.php
@@ -141,7 +157,7 @@ class CEvent extends CI_Controller {
 
 		$uid = null; //to get organize name
 		$eid = null;
-
+		$location_id = null; //get location ID
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
@@ -151,7 +167,10 @@ class CEvent extends CI_Controller {
 		foreach ($gID as $k) {
 			$eid = $k->event_id;
 			$uid = $k->user_id; //retrieve
+			$location_id = $k->location_id;
 		}
+		
+		
 
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 INTERFACE MODULE============//
@@ -182,6 +201,7 @@ class CEvent extends CI_Controller {
 		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
 		$data['user'] = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID));
+		$data['location'] = $this->MLocation->read_where('location_id ='.$location_id.'');
 		////////////STOPS HERE////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////
@@ -353,7 +373,10 @@ class CEvent extends CI_Controller {
 			$data['event_venue'] = $this->input->post('event_venue');
 			$data['addedAt'] = date('Y-m-d H:i:s');
 
-			 $data['user_id'] = $this->session->userdata['userSession']->userID;
+			$data['user_id'] = $this->session->userdata['userSession']->userID;
+			
+			//Added location 
+			$data['location_id'] = $this->input->post('municipal-name');
 
 			$affectedRows = $this->MEvent->insert($data);
 

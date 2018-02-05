@@ -203,7 +203,7 @@
                                                                 echo '<div class="item-thumb">
                                                                 <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a></div>'; 
 
-                                                                echo '<h5>Where: '.$event->event_venue.'</h5>';
+                                                                echo '<h5>Where: '.$event->event_venue.', '.$event->location_name.', '.$event->region_code.'</h5>';
 
                                                                 $dateS = date_create($event->dateStart);
                                                                 $dateE = date_create($event->dateEnd);
