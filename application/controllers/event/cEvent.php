@@ -589,6 +589,7 @@ class CEvent extends CI_Controller {
 						$arrObj = new stdClass;
 						$arrObj->event_id = $value->event_id;
 						$arrObj->event_name = $value->event_name;
+						$arrObj->event_venue = $value->event_venue;
 						$arrObj->event_picture = $value->event_picture;
 						$arrObj->dateStart = $value->dateStart;
 						$arrObj->dateEnd = $value->event_date_end;
