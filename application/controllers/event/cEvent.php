@@ -10,7 +10,8 @@ class CEvent extends CI_Controller {
     	$this->load->model('user/MUser');
     	$this->load->model('user/MTicketType');
     	$this->load->model('user/MTicket');
-    	$this->load->model('MNotification');
+    	$this->load->model('MNotification');    	
+	  $this->load->model('MAnnouncement'); //admin module functionalit
     	$this->load->helper('date');
     	$this->load->model('MEventInfo');
     	$this->error = "";
@@ -556,35 +557,73 @@ class CEvent extends CI_Controller {
 		}
 		public function viewPreferenceEvents()
 		{
-
 			$uid = $this->session->userdata['userSession']->userID;
-
 			$result_data = $this->MPreference->joinEventPrefs($uid);
-			$array = array();
-			if($result_data){
-				foreach ($result_data as $value) {
+			//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->event_picture = $value->event_picture;
+					$arrObj->dateStart = $value->dateStart;
+					$arrObj->dateEnd = $value->event_date_end;
+					$arrObj->event_category = $value->event_category;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+					$array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['events'] = $array;
+		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
+		$data['announcementCount'] = count($data['announcements']);
+		if(count($data['announcements']) == 0){
+			$data['announcements'] = NULL;
+		}
+		
+			$array1 = array();
+			if($data['announcements']){
+				foreach ($data['announcements'] as $value) {
 						$arrObj = new stdClass;
-						$arrObj->event_id = $value->event_id;
-						$arrObj->event_name = $value->event_name;
-						$arrObj->event_venue = $value->event_venue;
-						$arrObj->event_picture = $value->event_picture;
-						$arrObj->dateStart = $value->dateStart;
-						$arrObj->dateEnd = $value->event_date_end;
-						$arrObj->event_category = $value->event_category;
-						$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
-						$array[] = $arrObj;
+						$arrObj->announcementID = $value->announcementID;
+						$arrObj->announcementDetails = $value->announcementDetails;
+						$arrObj->first_name = $value->first_name;
+						$arrObj->last_name = $value->last_name;
+						if($value->sec){
+							$arrObj->ago =$value->sec;  
+							$arrObj->agoU ="seconds ago";  
+						}else if($value->min){
+							$arrObj->ago =$value->min; 
+							$arrObj->agoU ="minutes ago";   
+						}else if($value->hr){
+							$arrObj->ago =$value->hr;  
+							$arrObj->agoU ="hours ago";  
+						}else if($value->day){
+							$arrObj->ago =$value->day; 
+							$arrObj->agoU ="days ago";   
+						}
+						$array1[] = $arrObj;
 				}
 			}
+			$data['announcements'] = $array1;
 			
-			$data['events'] = $array;
+			$this->data['custom_js']= '<script type="text/javascript">
+
+                              $(function(){
+
+                              	$("#dash").addClass("active");
+
+                              });
+
+                        </script>';
 			$this->load->view('imports/vHeaderLandingPage');
 			$this->load->view('user/vPrefEvents', $data);
 
 			$this->load->view('imports/vFooterLandingPage');
-
-			// $this->load->view('imports/vHeader');
-			
-			// $this->load->view('imports/vFooter');
 			# code...
 		}
 }
