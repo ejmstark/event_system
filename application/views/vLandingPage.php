@@ -211,7 +211,7 @@
                                                                 echo '</a></h3>';
 
                                                                 echo '<div class="item-thumb">
-                                                                <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a></div>'; 
+                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="max-height: 1000px;" src="'.base_url($event->event_picture).'"></a></div>'; 
 
                                                                 echo '<h5>Where: '.$event->event_venue.'</h5>';
 
