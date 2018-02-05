@@ -41,8 +41,6 @@ class cUser extends CI_Controller {
 		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
 		$data['announcementCount'] = count($data['announcements']);
 		if(count($data['announcements']) == 0){
-			// $data['announcements'] = $this->MAnnouncement->getViewedOfUser($this->session->userdata['userSession']->userID);
-			// die();
 			$data['announcements'] = NULL;
 		}
 		
@@ -88,6 +86,7 @@ class cUser extends CI_Controller {
 
 		$this->load->view('imports/vFooterLandingPage',$this->data);
 	}
+
   	public function redeemCode(){
 
 		$code = $this->input->post('ccode');
