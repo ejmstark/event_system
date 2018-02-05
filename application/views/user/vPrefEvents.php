@@ -175,85 +175,100 @@
                 <div class="row">
                     <div class="col-md-12  padding-top-40 properties-page">
                     	<div class="col-md-12 ">
-                            <div id="list-type" class="proerty-th">
-                            <?php
+                    <div id="list-type" class="proerty-th">
+                        <?php
                             $cnt =1;
-                                        if(isset($events)){
-                                            foreach ($events as $event) {
-                                               ?>
-                                            <div class="col-sm-6 col-md-4 p0">
-                                            <div class="box-two proerty-item">
-                                                <div class="item-thumb">
-                                                    <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
-                                                </div>
-                                                   <div class="item-entry overflow">
-                                                      <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> <?php
-                                                    if(strlen($event->event_name)>=42){
-                                                        echo substr($event->event_name,0,39)."...";
-                                                    }else{
-                                                            echo $event->event_name;
-                                                    }
-                                                    ?></a></h5>
-                                                    <?php
-                                                        echo $event->event_name;
+                            if(isset($events)){
+                                 foreach ($events as $event) {
+                                    date_default_timezone_set('Asia/Manila');
+                                    $now = new DateTime("now");
+                                    $end = new DateTime($event->dateEnd);
+                                    $start = new DateTime($event->dateStart);
+                                    $interval = date_diff($now, $start);
 
-                                                            date_default_timezone_set('Asia/Manila');
-                                                            $now = new DateTime("now");
-                                                            $end = new DateTime($event->dateEnd);
-                                                            $start = new DateTime($event->dateStart);
-                                                            $interval = date_diff($now, $start);
+                                    if($now < $start){
+                                                echo '<div class="col-sm-6 col-md-4 p0">';
+                                                    echo '<div class="box-two proerty-item">';
+                                                        echo '<div class="item-entry overflow" >';
 
-                                                            if($now > $start && $now > $end){
-                                                                echo "<h5>Expired!</h5>";
+                                                                if($now < $start){
+                                                                    if($interval->days == 0){
+                                                                        echo '<div class="corner-ribbon top-right sticky red">Less than a day!</div>';
+                                                                    }else{
+                                                                        echo '<div class="corner-ribbon top-right sticky red">'.$interval->days;
+                                                                        echo ' day/s left!';
+                                                                        echo '</div>';      
+                                                                    }
+                                                                }   
 
-                                                            }else if($now < $start){
-                                                                if($interval->days == 0){
-                                                                    echo "<h5>Less than a day!</h5>";
+                                                                echo '<h3 class="text-center"><a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"> ';
+
+                                                                if(strlen($event->event_name)>=42){
+                                                                    echo substr($event->event_name,0,39)."...";
                                                                 }else{
-                                                                    echo "<h5>$interval->days day/s left!</h5>";
+                                                                    echo $event->event_name;
                                                                 }
+                                                
+                                                                echo '</a></h3>';
 
-                                                            }else if($now >= $start && $now <= $end){
-                                                                echo "<h5>Happening now!</h5>";
-                                                            }
+                                                                echo '<div class="item-thumb">
+                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="max-height: 1000px;" src="'.base_url($event->event_picture).'"></a></div>'; 
 
-                                                    ?>
-                                                    <h2>Price List</h2>
-                                                            <table class="table-condensed table-responsive">
-                                                                <thead>
-                                                                    <th>Ticket Name</th>
-                                                                    <th>Ticket Price</th>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <?php
-                                                                    foreach ($event->tix as $key) {?>
-                                                                    <tr>
-                                                                        <td><?php echo$key->name;?></td>
-                                                                        <td><?php echo$key->price;?></td>
-                                                                    </tr>
-                                                                    <?php
-                                                                        }
-                                                                    ?>
-                                                                </tbody>
-                                                            </table>
-                                                        <div class="dot-hr"></div>
-                                                        <!-- <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span> -->
-                                                        <span class="proerty-price pull-right"></span>
-                                                        <!-- <p><?php echo $event->event_details;?> </p> -->
-                                                        <!-- <div class="property-icon pull-right">
-                                                            <a>Read More</a>
-                                                        </div> -->
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    <?php
+                                                                echo '<h5>Where: '.$event->event_venue.'</h5>';
+
+                                                                $dateS = date_create($event->dateStart);
+                                                                $dateE = date_create($event->dateEnd);
+                                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
+
+                                                                                                              
+                                                    
+                                                                $mintix = $event->tix;
+                                                                foreach ($event->tix as $key) {
+                                                                    $mintix = ($key->price <= $mintix)? $key->price : $mintix;
+                                                                }
+                                                                echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';          
+                                                                echo '<div class="dot-hr"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>';
+
+                                            }else if($now >= $start && $now <= $end){
+                                                echo ' <div class="col-sm-6 col-md-4 p0">';
+                                                    echo '<div class="box-two proerty-item">';
+                                                        echo '<div class="item-entry overflow" >';
+                                                                echo '<div class="corner-ribbon top-right sticky red">Happening now!</div>';
+                                                                    
+
+                                                                echo '<h3 class="text-center"><a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"> ';
+
+                                                                if(strlen($event->event_name)>=42){
+                                                                    echo substr($event->event_name,0,39)."...";
+                                                                }else{
+                                                                    echo $event->event_name;
+                                                                }
+                                                
+                                                                echo '</a></h3>';
+
+                                                                echo '<div class="item-thumb">
+                                                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
+                                                                        </div>'; 
+                                                                echo '<h5>Where: '.$event->event_venue.'</h5>';
+                                                                echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
+                                                                $mintix = $event->tix;
+                                                                foreach ($event->tix as $key) {
+                                                                    $mintix = ($key->price <= $mintix)? $key->price : $mintix;
+                                                                }
+                                                                echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';
+                                                                echo '<div class="dot-hr"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>';
                                             }
-                                        }
-                                    ?>
-
-
-                            </div>
-                        </div>
+                                }
+                            }
+                        ?>
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>
