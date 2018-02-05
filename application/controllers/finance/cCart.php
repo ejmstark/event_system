@@ -15,28 +15,35 @@ class CCart extends CI_Controller {
 	public function addToCart () {
 		$cart = new MCart();
 		//$qty = $this->input->post('qty1')
-		$qty= 5;
-		$id = 1; //ticket id
-		$cartId = 0;
+		$qty= $this->input->post('qty1');
+		$id = $this->input->post('ticket'); //ticket id
+		$cart_id = 0;
 
+
+		
 		//check if ticket already exist!
-		$data = $cart->read_where(array ('cartTicId'=>$id));
+		$data = $cart->read_where(array ("ticket_id"=>$id,
+										 "account_id"=>$this->session->userdata['userSession']->userID,
+										 "status"=>'active'
+										)
+								);
 		foreach ($data as $datum) {
-			$cartId = $datum->cartId;
+			$cart_id = $datum->cart_id;
 		}
 
-		//check if cartId != 0, if the data exist!
-		if ($cartId != 0) {
+		//check if cart_id != 0, if the data exist!
+		if ($cart_id != 0) {
 			//add to existing
-			echo $cartId;
-			$this->addToExisting($cartId, $qty);
+			echo $cart_id;
+			$this->addToExisting($cart_id, $qty);
 		} else { //add new cart item
-			$data = array ('cartId'=>null,
-				'cartTicId'=>$id,
-				'cartQty'=>$qty);
+			$data = array ('cart_id'=>null,
+				'ticket_id'=>$id,
+				'quantity'=>$qty,
+				"account_id"=>$this->session->userdata['userSession']->userID);
 
 			if ($cart->insert($data) > 0) {
-				echo 'Success!';
+				redirect("finance/cCart/viewCart");
 			} else {
 				echo 'Failed!';
 			}
@@ -45,31 +52,34 @@ class CCart extends CI_Controller {
 
 	//add to existing cart item
 	public function addToExisting ($id, $qty1) {
-		$cart = new MCart();
+		
 		//$id = 1; //cart id here
 		$qty = 0;
 
 		//get the current ticket qty
-		$data = $cart->read($id);
+		$data = $this->MCart->read($id);
 		foreach ($data as $datum) {
-			$qty = $datum->cartQty;
+			$qty = $datum->quantity;
 		}
 		$qty += $qty1;
 
-		$affectedFields = array ('cartQty'=>$qty);
-		$where = array ('cartId'=>$id);
+		$affectedFields = array ('quantity'=>$qty);
+		$where = array ('cart_id'=>$id);
 
-		if ($cart->update1($where, $affectedFields) > 0) {
-			echo 'Sucess!';
+		if ($this->MCart->update1($where, $affectedFields) > 0) {
+			redirect("finance/cCart/viewCart");
 		} else {
 			echo 'Failed!';
 		}
 	}
 
 	public function viewCart(){
-		$result = $this->MCart->getCart();
-		if($result){
-			$this->load->view('vCart');	
+
+		$data['events'] = $this->MCart->getCart();
+		if($data['events']){
+			$this->load->view('imports/vHeaderLandingPage');
+			$this->load->view('vCart',$data);	
+			$this->load->view('imports/vFooterLandingPage');
 		}else{
 			redirect('cError404');
 		}
@@ -88,7 +98,7 @@ class CCart extends CI_Controller {
 		$qty++;
 
 		$affectedFields = array ('cartQty'=>$qty);
-		$where = array ('cartId'=>$id);
+		$where = array ('cart_id'=>$id);
 
 		if ($cart->update1($where, $affectedFields) > 0) {
 			echo 'Sucess!';
@@ -116,7 +126,7 @@ class CCart extends CI_Controller {
 			$cart->delete($id);
 		} else {
 			$affectedFields = array ('cartQty'=>$qty);
-			$where = array ('cartId'=>$id);
+			$where = array ('cart_id'=>$id);
 
 			if ($cart->update1($where, $affectedFields) > 0) {
 				echo 'Sucess!';

@@ -37,7 +37,6 @@
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_HOME ?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_PROFILE ?></a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>'><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_ANNOUNCEMENTS ?><?php if($announcementCount>0) {?><span id="bdg" class="ballons"><?php echo $announcementCount;?></span><?php }?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_VIEW_CART ?></a></li>
                     </ul>
@@ -62,7 +61,28 @@
              <div class="row">
                 <div class="col-md-12 ">
                     <div id="list-type" class="proerty-th">
-                       
+                       <?php if(isset($events)){
+                              foreach ($events as $event) {
+                                   ?>
+                                   <div class="container">
+                                        <h1>Event Name :<?php echo $event[0]->event_name;?></h1>
+                                   <?php
+                                   foreach ($event as $cart) {                     
+                                   ?>
+                                   
+                                     <div class="panel panel-info">
+                                       <div class="panel-heading">Ticket Name:<?php echo $cart->ticket_name;?><span class="pull-right"> Price:<?php echo $cart->price;?> </span></div>
+                                       <div class="panel-body">
+                                             Count:<?php echo $cart->quantity;?>
+                                       </div>
+                                     </div>
+                                   
+                                   <?php
+                                   }?>
+                                   </div>
+                                   <?php
+                              }
+                       }?>
                     </div>
                 </div>
              </div><!-- END OF ROW-->

@@ -335,7 +335,7 @@ foreach($going as $g){
                                                 <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h4> <?php echo  $t->ticket_name;?><button id="myBtn">Buy More Tickets</button></h4>
+                                                <h4> <?php echo  $t->ticket_name;?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
                                                 
                                                 <span class="property-price"><?php echo "P"." ".$t->price.".00";?></span>
                                                  <?php if($e->event_status == "Approved"){?>
@@ -568,12 +568,13 @@ foreach($going as $g){
     <span class="close">&times;</span>
     <form method="POST" id="cartForm" action="<?php echo site_url('finance/cCart/addToCart'); ?>">
          <span class="input-group-btn">
-            <button class="btn btn-secondary col-1 cardsbtn unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
-            <input type="text" id="qty1" name="qty1" class="form-control col-8 qtyinput" placeholder="Quantity" aria-label="Quantity">
-            <button class="btn btn-secondary col-1 cardsbtn unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button class="btn" id="unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+            <input type="text" id="qty1" name="qty1" class="form-control" value="1" aria-label="Quantity">
+            <button class="btn" id="unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <input type="text" id="ticID" name="ticket" class="form-control col-8" placeholder="Quantity" aria-label="Quantity">
         </span>
     
-        <button id="addToCart"  type="submit">Add to Cart</button>
+        <button class="btn btn-success" id="addToCart"  type="submit">Add to Cart</button>
     </form>
   </div>
 
@@ -585,54 +586,75 @@ $(document).ready(function(){
   var modal = document.getElementById('myModal');
   var btn = document.getElementById("myBtn");
   var span = document.getElementsByClassName("close")[0];
-  btn.onclick = function() {
-    modal.style.display = "block";
-  }
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-  $('#confirmdelete').click(function(){
-        $('#deletemodal').modal('show');
-    });
-
-  $('.qtyinput').val(value);
-
-  $('.unaM').click(function(){
-    if($('#qty1').val() > 0){
+  $(".myBtn").click(function(){
+    $("#myModal").modal();
+    $("#ticID").val($(this).data('id')) ;
+  });
+  $("#unaM").click(function(){
+    if($('#qty1').val() > 1){
       var get = $('#qty1').val();
       get-=1;
       $('#qty1').val(get);
     }
   });
-
-  $('.unaP').click(function(){
+  $("#unaP").click(function(){
     var get = parseInt($('#qty1').val());
     get+=1;
     $('#qty1').val(get);
   });
 
-  $(document).on('submit','#cartForm', function(e){
-    e.preventDefault();
-    var _url = $(this).attr('action');
 
-    $.ajax({
-        url:_url,
-        method: "POST",
-        data: $(this).serialize(),
-        success: function(){
-          alert('ok');
-          //$(':input').val(0);  
-        },
-        error: function(){
 
-           alert('failed!'+ $("qty1").val());
-        }
-    });
-  });
+
+  // btn.onclick = function() {
+  //   modal.style.display = "block";
+    
+  // }
+  // span.onclick = function() {
+  //   modal.style.display = "none";
+  // }
+  // window.onclick = function(event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
+  // $('#confirmdelete').click(function(){
+  //       $('#deletemodal').modal('show');
+  //   });
+
+  // $('.qtyinput').val(value);
+
+  // $('.unaM').click(function(){
+  //   if($('#qty1').val() > 1){
+  //     var get = $('#qty1').val();
+  //     get-=1;
+  //     $('#qty1').val(get);
+  //   }
+  // });
+
+  // $('.unaP').click(function(){
+  //   var get = parseInt($('#qty1').val());
+  //   get+=1;
+  //   $('#qty1').val(get);
+  // });
+
+  // $(document).on('submit','#cartForm', function(e){
+  //   e.preventDefault();
+  //   var _url = $(this).attr('action');
+
+  //   $.ajax({
+  //       url:_url,
+  //       method: "POST",
+  //       data: $(this).serialize(),
+  //       success: function(){
+  //         alert('ok');
+  //         //$(':input').val(0);  
+  //       },
+  //       error: function(){
+
+  //          alert('failed!'+ $("qty1").val());
+  //       }
+  //   });
+  // });
 });
 </script>
