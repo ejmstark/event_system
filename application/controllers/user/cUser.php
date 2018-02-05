@@ -11,6 +11,7 @@ class cUser extends CI_Controller {
       $this->load->model('MCardLoad');
 	  $this->load->model('MAnnouncement'); //admin module functionality
 	  $this->load->model('MNotificationItem');
+	  $this->load->model('location/MLocation');
       $this->load->library('session');
       $this->data = null;
   	}
@@ -32,6 +33,10 @@ class cUser extends CI_Controller {
 					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
 					$arrObj->event_venue = $value->event_venue;
+					//Location
+					$arrObj->location_name =$value->location_name;
+					$arrObj->region_code = $value->region_code;
+					
 					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
 					$array[] = $arrObj;
 			}
