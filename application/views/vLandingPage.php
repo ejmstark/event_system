@@ -69,8 +69,7 @@
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                             <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
-                                <!-- <span style="color: gray;">Search Event</span><span>aaa</span> -->
-                                <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?></span><span>aaa</span>
+                                <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?>
                                 <div class="form-group">
                                     <?php
                                     if(!isset($_POST['searchDateMonth'])){
@@ -90,7 +89,7 @@
                                                   <option value="12">Dec</option>
                                                 </select>';
                                     } else {
-                                        echo '<b style="color: black;">'.$_POST['searchDateMonth'].'</b><select name="searchDateMonth" >
+                                        echo '<select name="searchDateMonth" class="form-control">
                                                   <option value="0">-Month-</option>
                                                   <option value="1">Jan</option>
                                                   <option value="2">Feb</option>
@@ -152,7 +151,7 @@
                             </li>
                         </ul> <!-- END OF SORT BY LIST-->
 
-                         <div class="items-per-page">
+                        <!--  <div class="items-per-page">
                                     <label for="items_per_page"><b><?php echo CustomizationManager::$strings->LANDING_PAGE_EVENTS_PER_PAGE ?></b></label>
                                     <div class="sel">
                                         <select id="items_per_page" name="per_page">
@@ -166,12 +165,12 @@
                                             <option value="60">60</option>
                                         </select>
                                     </div><!--/ .sel-->
-                         </div><!--/ .items-per-page-->
+                        <!--  </div> --><!--/ .items-per-page--> 
                     </div>
-                    <div class="col-xs-2 layout-switcher">
+                   <!--  <div class="col-xs-2 layout-switcher">
                             <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
                             <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                    </div><!--/ .layout-switcher-->
+                    </div><!--/ .layout-switcher--> 
                 </div>
 
                 <div class="col-md-12 ">
@@ -189,8 +188,19 @@
                                     if($now < $start){
                                                 echo '<div class="col-sm-6 col-md-4 p0">';
                                                     echo '<div class="box-two proerty-item">';
-                                                        echo '<div class="item-entry overflow" >
-                                                                <h4><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
+                                                        echo '<div class="item-entry overflow" >';
+
+                                                                if($now < $start){
+                                                                    if($interval->days == 0){
+                                                                        echo '<div class="corner-ribbon top-right sticky red">Less than a day!</div>';
+                                                                    }else{
+                                                                        echo '<div class="corner-ribbon top-right sticky red">'.$interval->days;
+                                                                        echo ' day/s left!';
+                                                                        echo '</div>';      
+                                                                    }
+                                                                }   
+
+                                                                echo '<h3 class="text-center"><a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"> ';
 
                                                                 if(strlen($event->event_name)>=42){
                                                                     echo substr($event->event_name,0,39)."...";
@@ -198,10 +208,10 @@
                                                                     echo $event->event_name;
                                                                 }
                                                 
-                                                                echo '</a></h4>';
+                                                                echo '</a></h3>';
 
                                                                 echo '<div class="item-thumb">
-                                                                <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a></div>'; 
+                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="max-height: 1000px;" src="'.base_url($event->event_picture).'"></a></div>'; 
 
                                                                 echo '<h5>Where: '.$event->event_venue.'</h5>';
 
@@ -209,15 +219,7 @@
                                                                 $dateE = date_create($event->dateEnd);
                                                                 echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
 
-                                                                if($now < $start){
-                                                                    if($interval->days == 0){
-                                                                        echo '<span class="badge badge-danger">Less than a day!</span>';
-                                                                    }else{
-                                                                        echo '<span class="badge badge-danger">'.$interval->days;
-                                                                        echo ' day/s left!';
-                                                                        echo '</span>';      
-                                                                    }
-                                                                }                                                 
+                                                                                                              
                                                     
                                                                 $mintix = $event->tix;
                                                                 foreach ($event->tix as $key) {
@@ -232,25 +234,27 @@
                                             }else if($now >= $start && $now <= $end){
                                                 echo ' <div class="col-sm-6 col-md-4 p0">';
                                                     echo '<div class="box-two proerty-item">';
-                                                        echo '<div class="item-entry overflow" >
-                                                                <h4><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> ';
+                                                        echo '<div class="item-entry overflow" >';
+                                                                echo '<div class="corner-ribbon top-right sticky red">Happening now!</div>';
+                                                                    
+
+                                                                echo '<h3 class="text-center"><a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"> ';
 
                                                                 if(strlen($event->event_name)>=42){
                                                                     echo substr($event->event_name,0,39)."...";
                                                                 }else{
                                                                     echo $event->event_name;
                                                                 }
-                                                                
-                                                                echo '</a></h4>';
+                                                
+                                                                echo '</a></h3>';
 
                                                                 echo '<div class="item-thumb">
                                                                         <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                                                         </div>'; 
                                                                 echo '<h5>Where: '.$event->event_venue.'</h5>';
+                                                                $dateS = date_create($event->dateStart);
+                                                                $dateE = date_create($event->dateEnd);
                                                                 echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
-
-                                                                echo '<span class="badge badge-danger">Happening now!</span>';      
-
                                                                 $mintix = $event->tix;
                                                                 foreach ($event->tix as $key) {
                                                                     $mintix = ($key->price <= $mintix)? $key->price : $mintix;
