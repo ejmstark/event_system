@@ -98,6 +98,14 @@ class CAdmin extends CI_Controller {
 	public function searchUsers(){
 		$user_module = new MUserInfo();
 		if(isset($_POST['search_val'])){
+			if (trim($_POST['search_val']) == ""){
+				$result = $this->readAllUsers();
+				if($result){
+					return $result;
+				}else{
+					return false;
+				}
+			}
 			$data = array('user_name' => $_POST['search_val']);
 			$result= $this->MUserInfo->read_where($data);
 			if($result){
@@ -156,6 +164,9 @@ class CAdmin extends CI_Controller {
 		$data = array('user_type !=' => 'Regular');
 		$result = $this->MUserInfo->read_where($data);
 		if($result){
+			// echo "<pre>";
+			// var_dump($result);
+			// die();
 			return $result;
 		}else{
 			return false;
@@ -579,18 +590,29 @@ class CAdmin extends CI_Controller {
 	public function createAnnouncement() {
 		$announcement = new MAnnouncement();
 
-		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+		// $now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		$data = array('announcementDetails' => $this->input->post('announcementDetails'),
 					  'announcementStatus' => 'OnGoing',
 					  'addedBy' => $this->input->post('postedBy'),
-					  'addedAt' => $now->format('Y-m-d H:i:s')
+					  // 'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 		$result = $announcement->insert($data);
-
+		 $id= $announcement->db->insert_id();
 		if($result){
 			//$this->index();
+			//$this->index();
+			$notif = new MNotificationItem();
+			$user = $this->MUser->getAllUsers();
+			foreach ($user as $key) {
+				$data = array('user' => $key->account_id,
+							  'announcement' => $id
+							);
+
+				$result = $notif->insert($data);	
+			}
+			
 			redirect('admin/cAdmin/viewAnnouncements');
 		}
 	}

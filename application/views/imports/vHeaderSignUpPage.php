@@ -7,6 +7,12 @@
     <title>Event System | Home page</title>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+    <style>
+        .require:after {
+          content:" *";
+          color:red;
+        }
+    </style>
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">

@@ -27,11 +27,7 @@ class CLogin extends CI_Controller {
 	}
 
 	public function index(){
-
-
-
 		$this->load->view('vLogin');
-
 	}
 
 
@@ -150,7 +146,7 @@ $sessionData = new stdClass;
 		}else if(isset($this->session->userdata['userSession'])){
 			$this->session->unset_userdata('userSession');
 		}
-        $this->index();
+        redirect("cLogin");
 	}
 
 

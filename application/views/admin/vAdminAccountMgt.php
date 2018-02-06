@@ -5,7 +5,7 @@
      ?>
 
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo site_url();?>/admin/cAdmin">Home</a></li>
         <li class="active">Admin Account Management</li>
     </ol>
       <!-- //breadcrumb-->
@@ -156,6 +156,7 @@
 
                     <div class="form-group" >
                     	<label for="" class="col-8 control-label">Email:</label>
+                      <i>(example: johndoe@XXXX.com)</i>
                     	<div class="col-8">
                     		<input class="form-control" type="text" name="email" required="">
                     	</div>
@@ -198,6 +199,7 @@
 
                     <div class="form-group" >
                     	<label for="" class="col-8 control-label">Contact no:</label>
+                      <i>(if mobile no.: 09XXXXXXXXX; if telephone no.: XXX-XXXX)</i>
                     	<div class="col-8">
                     		<input class="form-control" type="text" pattern="^(09)\d{9}$" name="contact" required="">
                     	</div>
@@ -205,6 +207,7 @@
 
                     <div class="form-group" >
                     	<label for="" class="col-8 control-label">Username:</label>
+                      <i>(must contain at least 3 characters, maximum of 50 characters)</i>
                     	<div class="col-8">
                     		<input class="form-control" pattern="[a-zA-Z0-9]{6,}" type="text" name="uname" required="">
                     	</div>
@@ -212,6 +215,7 @@
 
                     <div class="form-group" >
                     	<label for="" class="col-8 control-label">Password:</label>
+                      <i>(must contain at least 8 characters, maximum of 50 characters)</i>
                     	<div class="col-8">
                     		<input class="form-control" pattern="[a-zA-Z0-9]{8,}" type="password" name="password" required="">
                     	</div>
@@ -264,6 +268,7 @@
 
                     <div class="form-group" >
                       <label for="" class="col-8 control-label">Email:</label>
+                      <i>(example: johndoe@XXXX.com)</i>
                       <div class="col-8">
                         <input class="form-control" type="text" name="uemail" required="" value="<?php echo $updateAdmin->email; ?>">
                       </div>
@@ -289,6 +294,7 @@
 
                     <div class="form-group" >
                       <label for="" class="col-8 control-label">Contact no:</label>
+                      <i>(if mobile no.: 09XXXXXXXXX; if telephone no.: XXX-XXXX)</i>
                       <div class="col-8">
                         <input class="form-control" type="number" min="11" name="ucontact" required="" value="<?php echo $updateAdmin->contact_no; ?>">
                       </div>
@@ -298,6 +304,7 @@
 
                     <div class="form-group" >
                       <label for="" class="col-8 control-label">Username:</label>
+                      <i>(must contain at least 3 characters, maximum of 50 characters)</i>
                       <div class="col-8">
                         <input class="form-control" type="text" name="uuname" required="" value="<?php echo $updateAdmin->user_name; ?>">
                       </div>
@@ -305,6 +312,7 @@
 
                     <div class="form-group" >
                       <label for="" class="col-8 control-label">Password:</label>
+                      <i>(must contain at least 8 characters, maximum of 50 characters)</i>
                       <div class="col-8">
                         <input class="form-control" type="password" name="upassword" required="" value="<?php echo $updateAdmin->password; ?>">
                       </div>
