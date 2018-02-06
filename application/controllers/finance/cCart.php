@@ -76,13 +76,11 @@ class CCart extends CI_Controller {
 	public function viewCart(){
 
 		$data['events'] = $this->MCart->getCart();
-		if($data['events']){
-			$this->load->view('imports/vHeaderLandingPage');
-			$this->load->view('vCart',$data);	
-			$this->load->view('imports/vFooterLandingPage');
-		}else{
-			redirect('cError404');
-		}
+		
+		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('vCart',$data);	
+		$this->load->view('imports/vFooterLandingPage');
+		
 	}
 	//add 1 qty to the cart
 	public function addQty () {
@@ -118,5 +116,20 @@ class CCart extends CI_Controller {
 				echo 'Failed!';
 			}
 		}
+	}
+	//minus 1 qty to the cart
+	public function deleteCartItem () {
+		$cart = new MCart();
+		$id = $this->input->post("id"); //cart id here
+		
+		$affectedFields = array ('status'=>"deleted");
+		$where = array ('cart_id'=>$id);
+
+		if ($cart->update1($where, $affectedFields) > 0) {
+			echo 'Sucess!';
+		} else {
+			echo 'Failed!';
+		}
+
 	}
 }

@@ -62,7 +62,7 @@
              <div class="row">
                 <div class="col-md-12 ">
                     <div id="list-type" class="proerty-th">
-                       <?php if(isset($events)){
+                       <?php if(isset($events) && count($events)>0){
                               foreach ($events as $event) {
                                    ?>
                                     <div style="padding:1%; margin-top: 2%;">
@@ -75,7 +75,7 @@
                                    foreach ($event as $cart) {                     
                                    ?>
                                       <div class="panel panel-default" style="margin-left:3%;">
-                                      <input type="text" class="cartID" value="<?php echo $cart->cart_id;?>" >
+                                      <input type="hidden" class="cartID" value="<?php echo $cart->cart_id;?>" >
                                        <div class="panel-heading">
 
                                               <input type="checkbox" class="<?php echo 'tix'.key($events);?>" id="<?php echo $cart->ticket_type_id;?>" checked="">
@@ -99,7 +99,7 @@
                                                     </form>
                                                   </td>
                                                   <td> <button class="btn btn-primary pull-right" type="button">
-                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                    <span class="glyphicon glyphicon-trash delete"></span>
                                                   </button></td>     
                                                 </tr>
                                               </tbody>
@@ -113,7 +113,9 @@
                                    <?php
                                    next($events);
                               }
-                       }?>
+                       }else{?>
+                          <h1>Nothing in your cart. Shop for tickets now!</h1>
+                       <?php }?>
                     </div>
                 </div>
              </div><!-- END OF ROW-->
@@ -178,7 +180,25 @@
         </div>
 
 <script type="text/javascript">
+  var panel;
     $(document).ready(function() {
+      $(".delete").click(function(){
+         panel= $(this).closest("div.panel");
+        var id = panel.find("input.cartID").val();
+        $(this).attr("disabled",true);
+        $.ajax({
+                url: "<?php echo site_url()?>/finance/cCart/deleteCartItem",
+                data: { "id":id},
+                type: "POST",
+                success: function(e){
+                  panel.remove();
+                },
+                error: function(e){
+                    // console.log(e);
+                    // alert(e.responseText);
+                }
+            });
+      });
       $('input').on('ifChecked', function (event){
           $(this).closest("input").attr('checked', true);          
           var id = $(this).closest("input").attr('id');
