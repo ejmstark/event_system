@@ -152,7 +152,7 @@
                             </li>
                         </ul> <!-- END OF SORT BY LIST-->
 
-                         <div class="items-per-page">
+                         <div class="items-per-page" style="margin-top:15;">
                                     <label for="items_per_page"><b><?php echo CustomizationManager::$strings->LANDING_PAGE_EVENTS_PER_PAGE ?></b></label>
                                     <div class="sel">
                                         <select id="items_per_page" name="per_page">
