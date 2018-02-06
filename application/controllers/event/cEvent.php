@@ -351,6 +351,8 @@ class CEvent extends CI_Controller {
 		}
 		public function createEvent(){
 			// $this->load->model('events/mEvent','event');
+			$flag = true;
+
 			$event = new mEvent();
 			$data['event_date_start'] = $this->input->post('dateStart');
 			$data['event_date_end'] = $this->input->post('dateEnd');
@@ -379,52 +381,59 @@ class CEvent extends CI_Controller {
 			//Added location 
 			$data['location_id'] = $this->input->post('municipal-name');
 
-			$affectedRows = $this->MEvent->insert($data);
+			$constraint = array('event_venue' => $data['event_venue']);
+			$res = $this->MEvent->read_where($constraint);
+		
+			if(count($res) > 0){
+				$flag = false;
+			}else{
+				$affectedRows = $this->MEvent->insert($data);
+				$evt_id = $this->MEvent->db->insert_id();
+				// print_r($evt_id);
+				$photo = $this->MEvent->do_upload_event($evt_id);
+				// $this->MEvent->do_upload_event($evt_id);
 
-			$evt_id = $this->MEvent->db->insert_id();
-			// print_r($evt_id);
-			$photo = $this->MEvent->do_upload_event($evt_id);
-			// $this->MEvent->do_upload_event($evt_id);
+				if(!$photo) {
+					$photo = $this->MEvent->insertPhotoEvent("events1.jpg",$evt_id);
+				}
+				var_dump($photo);
 
-			if(!$photo) {
-				$photo = $this->MEvent->insertPhotoEvent("events1.jpg",$evt_id);
-			}
-			var_dump($photo);
+					// print_r($photo);
 
-				// print_r($photo);
-
-			$totalNumTix = 0;
-			$data1['ticket_name'] = $this->input->post('ticketType1');
-			$data1['ticket_count'] = $this->input->post('no_tickets_total1');
-			$data1['price'] = $this->input->post('price_tickets_total1');
-
-			$data1['event_id'] = $evt_id;
-			$totalNumTix += $data1['ticket_count'];
-			$this->MTicketType->insert($data1);
-
-			if($this->input->post('ticketType2')||$this->input->post('no_tickets_total2')||$this->input->post('no_tickets_total2')){
-				$data1['ticket_name'] = $this->input->post('ticketType2');
-				$data1['ticket_count'] = $this->input->post('no_tickets_total2');
-				$data1['price'] = $this->input->post('price_tickets_total2');
+				$totalNumTix = 0;
+				$data1['ticket_name'] = $this->input->post('ticketType1');
+				$data1['ticket_count'] = $this->input->post('no_tickets_total1');
+				$data1['price'] = $this->input->post('price_tickets_total1');
 
 				$data1['event_id'] = $evt_id;
 				$totalNumTix += $data1['ticket_count'];
 				$this->MTicketType->insert($data1);
+
+				if($this->input->post('ticketType2')||$this->input->post('no_tickets_total2')||$this->input->post('no_tickets_total2')){
+					$data1['ticket_name'] = $this->input->post('ticketType2');
+					$data1['ticket_count'] = $this->input->post('no_tickets_total2');
+					$data1['price'] = $this->input->post('price_tickets_total2');
+
+					$data1['event_id'] = $evt_id;
+					$totalNumTix += $data1['ticket_count'];
+					$this->MTicketType->insert($data1);
+				}
+
+				if($this->input->post('ticketType3')||$this->input->post('no_tickets_total3')||$this->input->post('no_tickets_total3')){
+					$data1['ticket_name'] = $this->input->post('ticketType3');
+					$data1['ticket_count'] = $this->input->post('no_tickets_total3');
+					$data1['price'] = $this->input->post('price_tickets_total3');
+
+					$data1['event_id'] = $evt_id;
+					$totalNumTix += $data1['ticket_count'];
+					$this->MTicketType->insert($data1);
+				}
+
+				$where =  array('no_tickets_total' => $totalNumTix );
+				$res = $this->MEvent->update($evt_id,$where);
+				$flag = $res;
 			}
-
-			if($this->input->post('ticketType3')||$this->input->post('no_tickets_total3')||$this->input->post('no_tickets_total3')){
-				$data1['ticket_name'] = $this->input->post('ticketType3');
-				$data1['ticket_count'] = $this->input->post('no_tickets_total3');
-				$data1['price'] = $this->input->post('price_tickets_total3');
-
-				$data1['event_id'] = $evt_id;
-				$totalNumTix += $data1['ticket_count'];
-				$this->MTicketType->insert($data1);
-			}
-
-			$where =  array('no_tickets_total' => $totalNumTix );
-			$res = $this->MEvent->update($evt_id,$where);
-			if($res){
+			if($flag){
 				echo'
 					<div id="addAdmin" class="modal fade"  data-header-color="#34495e">
 						<div class="modal-header">
