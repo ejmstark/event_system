@@ -76,28 +76,19 @@ class CCart extends CI_Controller {
 	public function viewCart(){
 
 		$data['events'] = $this->MCart->getCart();
-		if($data['events']){
-			$this->load->view('imports/vHeaderLandingPage');
-			$this->load->view('vCart',$data);	
-			$this->load->view('imports/vFooterLandingPage');
-		}else{
-			redirect('cError404');
-		}
+		
+		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('vCart',$data);	
+		$this->load->view('imports/vFooterLandingPage');
+		
 	}
 	//add 1 qty to the cart
 	public function addQty () {
 		$cart = new MCart();
-		$id = 1; //cart id here
-		$qty = 0;
-
-		//get the current ticket qty
-		$data = $cart->read($id);
-		foreach ($data as $datum) {
-			$qty = $datum->cartQty;
-		}
-		$qty++;
-
-		$affectedFields = array ('cartQty'=>$qty);
+		$id = $this->input->post("id"); //cart id here
+		$qty = $this->input->post("quantity");
+		
+		$affectedFields = array ('quantity'=>$qty);
 		$where = array ('cart_id'=>$id);
 
 		if ($cart->update1($where, $affectedFields) > 0) {
@@ -110,22 +101,13 @@ class CCart extends CI_Controller {
 	//minus 1 qty to the cart
 	public function minusQty () {
 		$cart = new MCart();
-		$id = 1; //cart id here
-		$qty = 0;
-
-		//get the current ticket qty
-		$data = $cart->read($id);
-		foreach ($data as $datum) {
-			$qty = $datum->cartQty;
-		}
-		$qty--;
-
-		//delete the item in the cart if 0
+		$id = $this->input->post("id"); //cart id here
+		$qty = $this->input->post("quantity");
+		
 		if ($qty == 0) {
-			//delete here
 			$cart->delete($id);
 		} else {
-			$affectedFields = array ('cartQty'=>$qty);
+			$affectedFields = array ('quantity'=>$qty);
 			$where = array ('cart_id'=>$id);
 
 			if ($cart->update1($where, $affectedFields) > 0) {
@@ -134,5 +116,20 @@ class CCart extends CI_Controller {
 				echo 'Failed!';
 			}
 		}
+	}
+	//minus 1 qty to the cart
+	public function deleteCartItem () {
+		$cart = new MCart();
+		$id = $this->input->post("id"); //cart id here
+		
+		$affectedFields = array ('status'=>"deleted");
+		$where = array ('cart_id'=>$id);
+
+		if ($cart->update1($where, $affectedFields) > 0) {
+			echo 'Sucess!';
+		} else {
+			echo 'Failed!';
+		}
+
 	}
 }
