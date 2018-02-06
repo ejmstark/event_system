@@ -66,7 +66,7 @@
                               foreach ($events as $event) {
                                    ?>
                                     <div style="padding:1%; margin-top: 2%;">
-                                      <input type="checkbox" checked="" style="margin-bottom:2%;">
+                                      <input type="checkbox" checked="" class="evt" id="<?php echo key($events); ?>"  style="margin-bottom:2%;">
                                       <span class="h4">
                                         <strong>Event Name :<?php echo $event[0]->event_name;?></strong>
                                       </span>
@@ -75,8 +75,10 @@
                                    foreach ($event as $cart) {                     
                                    ?>
                                       <div class="panel panel-default" style="margin-left:3%;">
+                                      <input type="text" class="cartID" value="<?php echo $cart->cart_id;?>" >
                                        <div class="panel-heading">
-                                              <input type="checkbox" checked="">
+
+                                              <input type="checkbox" class="<?php echo 'tix'.key($events);?>" id="<?php echo $cart->ticket_type_id;?>" checked="">
                                               <span> Ticket Name:<?php echo $cart->ticket_name;?></span>
                                               <span class="pull-right"> Price:<?php echo $cart->price;?> </span>                       
                                         </div>
@@ -88,11 +90,11 @@
                                                   <td class="pull-right">
                                                     <form class="offset-md-3">
                                                         <div class="form-group row">
-                                                          <button class="btn btn-default pull-left" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+                                                          <button class="btn btn-default pull-left plus" type="button"><span class="glyphicon glyphicon-plus"></span></button>
                                                           <div class="col-sm-6">
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" class="qty" value ="<?php echo $cart->quantity;?>" class="form-control">
                                                           </div>
-                                                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+                                                          <button class="btn btn-default minus" type="button"><span class="glyphicon glyphicon-minus"></span></button>
                                                         </div>
                                                     </form>
                                                   </td>
@@ -109,6 +111,7 @@
                                    }?>
                                    </div>
                                    <?php
+                                   next($events);
                               }
                        }?>
                     </div>
@@ -176,6 +179,57 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+      $('input').on('ifChecked', function (event){
+          $(this).closest("input").attr('checked', true);          
+          var id = $(this).closest("input").attr('id');
+          $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").addClass("checked");
+      });
+      $('input').on('ifUnchecked', function (event) {
+          $(this).closest("input").attr('checked', false);
+          var id = $(this).closest("input").attr('id');
+          $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").removeClass("checked");
+      });
+
+      $(".minus").click(function(){
+        var input = $(this).closest("div.row").find("input");
+        if(input.val() > 1){
+          var get = input.val();
+          get-=1;
+          input.val(get);
+          updateTicketCount("minus",$(this).closest("div.panel").find("input.cartID").val(),get);
+        }
+      });
+      $(".plus").click(function(){
+        var input = $(this).closest("div.row").find("input");
+        var get = parseInt(input.val());
+        get+=1;
+        input.val(get);
+        updateTicketCount("plus",$(this).closest("div.panel").find("input.cartID").val(),get);
+      });
+
+      function updateTicketCount(type,id,quantity){
+        var link ="";
+        if(type == "plus"){
+          var link =  "<?php echo site_url()?>/finance/cCart/addQty";
+        }else{
+          var link = "<?php echo site_url()?>/finance/cCart/minusQty";
+        }
+        $(document).find(".plus").attr("disabled", true);
+        $(document).find(".minus").attr("disabled", true);
+        $.ajax({
+                url: link,
+                data: { "id":id,"quantity":quantity },
+                type: "POST",
+                success: function(e){
+                     $(document).find(".plus").attr("disabled", false);
+                     $(document).find(".minus").attr("disabled", false);
+                },
+                error: function(e){
+                    // console.log(e);
+                    // alert(e.responseText);
+                }
+            });
+      }
         $(document).on('click', '#aDropdown', function(){
             var id = $(this).data('id');
             $.ajax({
