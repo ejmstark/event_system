@@ -381,7 +381,7 @@ class CEvent extends CI_Controller {
 			//Added location 
 			$data['location_id'] = $this->input->post('municipal-name');
 
-			$constraint = array('event_venue' => $data['event_venue']);
+			$constraint = array('event_venue' => $data['event_venue'], 'location_id' => $data['location_id'], 'event_date_start' => $data['event_date_start'], 'event_date_end' => $data['event_date_end']);
 			$res = $this->MEvent->read_where($constraint);
 		
 			if(count($res) > 0){
