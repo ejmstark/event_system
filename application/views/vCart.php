@@ -54,9 +54,10 @@
                 </div>
             </div>
         </div>
+      </div>
 
         <!-- property area -->
-         <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
+      <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
          <div class="container">
              <div class="row">
                 <div class="col-md-12 ">
@@ -64,14 +65,21 @@
                        <?php if(isset($events)){
                               foreach ($events as $event) {
                                    ?>
-                                   <div class="container">
-                                        <h1>Event Name :<?php echo $event[0]->event_name;?></h1>
+                                    <div style="padding:1%; margin-top: 2%;">
+                                      <input type="checkbox" checked="" style="margin-bottom:2%;">
+                                      <span class="h4">
+                                        <strong>Event Name :<?php echo $event[0]->event_name;?></strong>
+                                      </span>
+                                    </div>
                                    <?php
                                    foreach ($event as $cart) {                     
                                    ?>
-                                   
-                                     <div class="panel panel-info">
-                                       <div class="panel-heading">Ticket Name:<?php echo $cart->ticket_name;?><span class="pull-right"> Price:<?php echo $cart->price;?> </span></div>
+                                      <div class="panel panel-default" style="margin-left:3%;">
+                                       <div class="panel-heading">
+                                              <input type="checkbox" checked="">
+                                              <span> Ticket Name:<?php echo $cart->ticket_name;?></span>
+                                              <span class="pull-right"> Price:<?php echo $cart->price;?> </span>                       
+                                        </div>
                                        <div class="panel-body">
                                              Count:<?php echo $cart->quantity;?>
                                        </div>
@@ -87,7 +95,6 @@
                 </div>
              </div><!-- END OF ROW-->
          </div>
-      </div>
      <!--- END OF CONTENT AREA-->
       
         <!-- Footer area-->
