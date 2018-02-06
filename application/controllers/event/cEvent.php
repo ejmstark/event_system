@@ -10,7 +10,7 @@ class CEvent extends CI_Controller {
     	$this->load->model('user/MUser');
     	$this->load->model('user/MTicketType');
     	$this->load->model('user/MTicket');
-    	$this->load->model('MNotification');    	
+    	$this->load->model('MNotification');
 	  $this->load->model('MAnnouncement'); //admin module functionalit
     	$this->load->helper('date');
 		$this->load->model('MEventInfo');
@@ -49,7 +49,9 @@ class CEvent extends CI_Controller {
 			$data['start_time'] = $_POST['startTime'];
 			$data['end_date'] = $_POST['endDate'];
 			$data['end_time'] = $_POST['endTime'];
+			$this->load->view('imports/vHeaderSignUpPage');
 			$result = $this->load->view('vEventForCalendar',$data,TRUE);
+			$this->load->view('imports/vHeaderSignUpPage');
 			//$this->viewCreateEvent();
 			echo $result;
 		}
@@ -93,7 +95,7 @@ class CEvent extends CI_Controller {
                               	$("#user").addClass("active");
                         </script>';
 
-        $this->load->view('imports/vHeaderSignUpPage');
+  	$this->load->view('imports/vHeaderSignUpPage');
 		$this->load->view('vNewEvent');
 		$this->load->view('imports/vFooterLandingPage');
 
@@ -119,8 +121,13 @@ class CEvent extends CI_Controller {
 			$arrObj = new stdClass;
 			$arrObj->data = $value;
 			$arrObj->data->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+
+			//Adding of location
+			$arrObj->data->location = $this->MLocation->read_where("location_id = ".$value->location_id."");
+
 			$array[] = $arrObj;
 		}
+
 		$val = array();
 		foreach ($array as $key) {
 			$arrObj = new stdClass;
@@ -170,8 +177,8 @@ class CEvent extends CI_Controller {
 			$uid = $k->user_id; //retrieve
 			$location_id = $k->location_id;
 		}
-		
-		
+
+
 
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 INTERFACE MODULE============//
@@ -217,7 +224,7 @@ class CEvent extends CI_Controller {
 		 // print_r($data);
 		}
 		$result = $this->MPreference->checkIfInterestedAlready($this->session->userdata['userSession']->userID,$eid);
-		
+
 		if($result){
 			$data['interested']	= TRUE;
 			$data['user_event_preference_id'] = $result[0]->user_event_preference_id;
@@ -312,7 +319,7 @@ class CEvent extends CI_Controller {
 			// $data['tickets'] = $type->loadType($id);
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
-				
+
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
 				$result = $res[0]->load_amt - $res1[0]->price;
 
@@ -375,8 +382,8 @@ class CEvent extends CI_Controller {
 			$data['addedAt'] = date('Y-m-d H:i:s');
 
 			$data['user_id'] = $this->session->userdata['userSession']->userID;
-			
-			//Added location 
+
+			//Added location
 			$data['location_id'] = $this->input->post('municipal-name');
 
 			$affectedRows = $this->MEvent->insert($data);
@@ -542,9 +549,9 @@ class CEvent extends CI_Controller {
 		{
 			$uid = $this->session->userdata['userSession']->userID;
 			$pref = new MPreference();
-			
+
 			$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
-			$data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
+			$data = array('preference_date' => $now->format('Y-m-d H:i:s'),
 						  'user_id' => $uid ,
 						  'event_id' => $id
 		 				  );
@@ -555,16 +562,16 @@ class CEvent extends CI_Controller {
 				redirect("event/cEvent/viewPreferenceEvents");
 				// $this->viewPreferenceEvents();
 			}
-			
+
 			# code...
 		}
 		public function interestedRemove($id)
 		{
 			// $uid = $this->session->userdata['userSession']->userID;
 			// $pref = new MPreference();
-			
+
 			// $now = NEW DateTime(NULL, new DateTimeZone('UTC'));
-			// $data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
+			// $data = array('preference_date' => $now->format('Y-m-d H:i:s'),
 			// 			  'user_id' => $uid ,
 			// 			  'event_id' => $id
 		 // 				  );
@@ -575,7 +582,7 @@ class CEvent extends CI_Controller {
 				redirect("event/cEvent/viewPreferenceEvents");
 				// $this->viewPreferenceEvents();
 			}
-			
+
 			# code...
 		}
 		public function viewPreferenceEvents()
@@ -607,7 +614,7 @@ class CEvent extends CI_Controller {
 		if(count($data['announcements']) == 0){
 			$data['announcements'] = NULL;
 		}
-		
+
 			$array1 = array();
 			if($data['announcements']){
 				foreach ($data['announcements'] as $value) {
@@ -617,23 +624,23 @@ class CEvent extends CI_Controller {
 						$arrObj->first_name = $value->first_name;
 						$arrObj->last_name = $value->last_name;
 						if($value->sec){
-							$arrObj->ago =$value->sec;  
-							$arrObj->agoU ="seconds ago";  
+							$arrObj->ago =$value->sec;
+							$arrObj->agoU ="seconds ago";
 						}else if($value->min){
-							$arrObj->ago =$value->min; 
-							$arrObj->agoU ="minutes ago";   
+							$arrObj->ago =$value->min;
+							$arrObj->agoU ="minutes ago";
 						}else if($value->hr){
-							$arrObj->ago =$value->hr;  
-							$arrObj->agoU ="hours ago";  
+							$arrObj->ago =$value->hr;
+							$arrObj->agoU ="hours ago";
 						}else if($value->day){
-							$arrObj->ago =$value->day; 
-							$arrObj->agoU ="days ago";   
+							$arrObj->ago =$value->day;
+							$arrObj->agoU ="days ago";
 						}
 						$array1[] = $arrObj;
 				}
 			}
 			$data['announcements'] = $array1;
-			
+
 			$this->data['custom_js']= '<script type="text/javascript">
 
                               $(function(){

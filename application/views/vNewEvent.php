@@ -79,6 +79,12 @@
                                     <input type="text" class="form-control" name="event_name" required="">
                                 </div>
 
+                                <div class="form-group">
+                                    <!-- <label for="name">Location</label> -->
+                                    <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_LOCATION ?></label>
+                                    <input type="text" class="form-control" name="event_venue" required="">
+                                </div>
+
                                 <!-- Added a location_code -->
                                 <div class="form-group">
 
@@ -112,14 +118,8 @@
                                     <!-- <label for="email">Location_code</label> -->
                                     <label for="municipal-name">CITY/MUNICIPAL</label>
                                         <select Class="form-control" id="municipal-name" name="municipal-name" required>
-                                            <option>Make sure you have selected a region first...</option>
+                                            <option></option>
                                         </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <!-- <label for="name">Location</label> -->
-                                    <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_LOCATION ?></label>
-                                    <input type="text" class="form-control" name="event_venue" required="">
                                 </div>
 
                                 <div class="form-group">
@@ -342,7 +342,7 @@
              </div>
 
          </div>
-       
+
         <script type="text/javascript">
             $("#datetime").datepicker();
         </script>
@@ -368,9 +368,9 @@
 
         <script>
             $('#region_code').on('change', function(){
+              $('#municipal-name').empty().append('<option></option>');
                 if(this.value != ""){
                     // alert(this.value);
-                    $('#municipal-name').empty().append('<option>Select CITY/MUNICIPAL below...</option>');
                     var code = this.value;
                     var dataSet = "region_code="+code;
                         $.ajax({
@@ -385,7 +385,7 @@
                                     $.each(output, function(i, d) {
                                         // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
                                         $('#municipal-name').append('<option value="' + d.location_id+ '">' + d.location_name + '</option>');
-                                        
+
                                     });
                                 }else{
                                     alert("Error");
@@ -395,8 +395,6 @@
                                 console.log(errorThrown);
                             }
                         });
-                }else{
-                    $('#municipal-name').empty().append('<option>Make sure you have selected a region first...</option>');
                 }
             });
 
@@ -407,5 +405,3 @@
             //     }
             // });
         </script>
-
-
