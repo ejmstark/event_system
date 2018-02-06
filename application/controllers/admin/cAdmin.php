@@ -70,7 +70,7 @@ class CAdmin extends CI_Controller {
 		$event_module = new MEventInfo();
 
 		$data = array('event_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $this->MEventInfo->read_where($data);
 
 		if($results){
 			$response = $event_module-> updateEventStatus($id, "Rejected");
