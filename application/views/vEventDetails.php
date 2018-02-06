@@ -319,9 +319,6 @@ foreach($going as $g){
                                     <input  id="cLoad" hidden value="<?php echo $u->load_amt; ?>">
                                         <?php foreach ($types as $t) { ?>
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
-                                            </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h4> <?php echo  $t->ticket_name;?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
                                                 

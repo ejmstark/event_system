@@ -31,7 +31,7 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/bootstrap-select.min.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/icheck.min_all.css')?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/nikkiAssets/css/price-range.css')?>" rel="stylesheet" />
+   <link href="<?php echo base_url('assets/nikkiAssets/css/price-range.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/owl.carousel.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/owl.theme.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/owl.transitions.css')?>" rel="stylesheet" />
@@ -52,6 +52,15 @@
         .legend .expired{ background-color: #808080; }
         .legend .approved{ background-color: #ffae00; }
         .legend .pending { background-color: #337ab7; }
+
+        .table-borderless > tbody > tr > td,
+        .table-borderless > tbody > tr > th,
+        .table-borderless > tfoot > tr > td,
+        .table-borderless > tfoot > tr > th,
+        .table-borderless > thead > tr > td,
+        .table-borderless > thead > tr > th {
+            border: none;
+        }
         .ballons {
             float:right;
             margin:-20px 8px 0 0;
@@ -68,6 +77,17 @@
             -webkit-box-shadow: 1px 1px 3px 3px #ccc;
             box-shadow:         1px 1px 3px 3px #ccc;
         }        
+
+      .checkoutContainer {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        margin:0px !important;
+        color:white;
+      }
 
                 .details{
                   display:inline-block;

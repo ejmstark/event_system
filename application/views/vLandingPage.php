@@ -182,7 +182,7 @@
                                     $interval = date_diff($now, $start);
 
                                     if($now < $start){
-                                                echo '<div class="col-sm-6 col-md-4 p0">';
+                                                echo '<div class="col-sm-6 col-md-4 p0" >';
                                                     echo '<div class="box-two proerty-item">';
                                                         echo '<div class="item-entry overflow" >';
 
@@ -207,7 +207,7 @@
                                                                 echo '</a></h3>';
 
                                                                 echo '<div class="item-thumb">
-                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="max-height: 1000px;" src="'.base_url($event->event_picture).'"></a></div>'; 
+                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="clip: rect(0px,100px,100px,0px); height:100px;" src="'.base_url($event->event_picture).'"></a></div>'; 
 
                                                                 echo '<h5>Where: '.$event->event_venue.', '.$event->location_name.', '.$event->region_code.'</h5>';
 
@@ -245,9 +245,10 @@
                                                                 echo '</a></h3>';
 
                                                                 echo '<div class="item-thumb">
-                                                                        <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img style="max-height: 1000px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
-                                                                        </div>'; 
-                                                                echo '<h5>Where: '.$event->event_venue.'</h5>';
+                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="clip: rect(0px,100px,100px,0px); height:100px;" src="'.base_url($event->event_picture).'"></a></div>'; 
+
+                                                                echo '<h5>Where: '.$event->event_venue.', '.$event->location_name.', '.$event->region_code.'</h5>';
+
                                                                 $dateS = date_create($event->dateStart);
                                                                 $dateE = date_create($event->dateEnd);
                                                                 echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
