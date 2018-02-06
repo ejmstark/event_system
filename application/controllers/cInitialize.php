@@ -21,11 +21,19 @@ class CInitialize extends CI_Controller {
 			$data['events'] = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($stringSelect,$stringWhere,false,false,false,false);
 			////////////STOPS HERE///////////////////////////////////////////////////
 
-			$this->load->view('imports/vHeaderHomepage');
-			$this->load->view('vHomepage',$data);
-			$this->load->view('imports/vFooterHomepage');
+			$this->load->view('imports/vHeaderHomePage');
+			$this->load->view('vHomePage',$data);
+			$this->load->view('imports/vFooterHomePage');
 			// $this->load->view('vLogin');
 			//redirect('cInitialize');
 		}
 	}
+
+	public function viewAboutUs(){
+		$this->load->view('vAboutUs');
+	}
+
+	public function viewEventsHomepage(){
+		$this->load->view('vEvents');
+	}	
 }

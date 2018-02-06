@@ -1,10 +1,11 @@
 <div id="main">
 
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo site_url();?>/admin/cAdmin">Home</a></li>
         <li class="active">Events</li>
     </ol>
       <!-- //breadcrumb-->
+
 
     <div id="content">
         <div class="row">
@@ -45,39 +46,52 @@
                                                   </tr>";
                                             }else {
                                              echo "<td>
-                                                <button name='button' data-toggle='modal' data-target='#updateAccount' type='button' class='btn btn-info'>VIEW ATTENDEES</button>
-                                              </td>
+                                                <button name='button' data-toggle='modal' data-target='#updateAccount' type='button' class='btn btn-info'>VIEW ATTENDEES </button>
+                                                <input type = 'hidden' value = '".$object->event_id." id = 'pass' name = 'pass'>
+                                                </td>
                                             </tr>";  
                                             }
+                                            echo " <div id='updateAccount' class='modal' tabindex'-1' data-width='500'>
+                                            <div class='modal-header bg-inverse bd-inverse-darken'>
+                                                    <button type='button' class='close' data-dismiss='modal' aria-hidden='true'><i class='fa fa-times'></i></button>
+                                                    <h1 class='modal-title' align='center'>Event: ". $object->event_name."</h1>
+                                            </div>
+                                   
+                                            <div class='modal-body'>
+                                                <div class='panel-body'>
+                                                ";
+                                              
+                                              $result = $this->MReports->nameAttendees( $object->event_id);
+                                              foreach($result as $obj){
+                                                  echo"
+                                                      <tr>
+                                                      
+                                                      <td>".$obj['user_name']."</td>
+                                                      <tr>
+                                                  ";
+                                              }
+                                              $num = $this->MReports->countAttendees( $object->event_id);
+                                              echo"
+		                 <hr><h4 class='modal-title' align='left'>TOTAL : ".$num."</h4>
+		              <!-- Modal content-->
+		              </div>
+		          </div>
+
+		          <div class='modal-footer'>
+		              <button id='closeEditAccount' type='button' class='btn btn-danger' data-dismiss='modal' >Close</button>
+		          </div>
+		        </div>
+		";
                                         }
                                     }
-                                ?>
+                                echo"
                             </tbody>
                         </table>
                     </div>
                 </section>
             </div>
-        </div>
-
-        <div id="updateAccount" class="modal" tabindex="-1" data-width="500">
-          <div class="modal-header bg-inverse bd-inverse-darken">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-                  <h1 class="modal-title" align="center">TITLE OF EVENT HERE</h1>
-          </div>
- 
-          <div class="modal-body">
-              <div class="panel-body">
-                table here
-
-                 <h4 class="modal-title" align="center">TOTAL NUMBER OF ATTENDEES : 00000</h4>
-              <!-- Modal content-->
-              </div>
-          </div>
-
-          <div class="modal-footer">
-              <button id="closeEditAccount" type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
-          </div>
-        </div>
+        </div>";
+		 ?>
     </div>
 
 </div>
