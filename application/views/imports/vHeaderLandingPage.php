@@ -78,17 +78,16 @@
             box-shadow:         1px 1px 3px 3px #ccc;
         }        
 
-        !important
-        .cartInput {
-            outline: 0;
-            width: 100%;
-            height: inherit;
-            color: #333333; 
-            font-size: 16px; 
-            padding: 5px 15px;
-            border-radius: 3px;
-        }        
-
+      .checkoutContainer {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        margin:0px !important;
+        color:white;
+      }
 
                 .details{
                   display:inline-block;
