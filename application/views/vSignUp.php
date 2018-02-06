@@ -13,7 +13,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Birthdate</label>
-                                    <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
+                                    <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" max="<?php echo date('Y-m-d'); ?>" required="">
 
 
 
@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Contact Number</label>
-                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Username</label>
