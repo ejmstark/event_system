@@ -19,8 +19,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
+<<<<<<< HEAD
+                    </button>
+                    <a class="navbar-brand" href="<?php echo base_url();?>"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+=======
                     </button>    
                     <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
+>>>>>>> 3a4ec3ee21ec5163c497c74e9f1da1822da5939d
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
