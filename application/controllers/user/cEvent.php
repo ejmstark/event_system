@@ -13,6 +13,7 @@ class CEvent extends CI_Controller {
       $this->load->model('user/MTicket');
       $this->load->model('MAnnouncement'); //admin module functionality
 	  $this->load->model('MNotificationItem');
+	  $this->load->model('location/MLocation');
 	  $this->load->library('session');	
   	}
 
@@ -47,7 +48,6 @@ class CEvent extends CI_Controller {
 	{
 		$data['users'] = $this->MUser->getAllUsers();
 		$result_data = $this->MEvent->getSearchEvents($_POST['searchWord']);
-
 		//////////////////////////////////////////////////////////////////////////////
 		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
 		/////////////////////////////////////////////////////////////////////////////
@@ -62,6 +62,10 @@ class CEvent extends CI_Controller {
 					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
 					$arrObj->event_venue = $value->event_venue;
+					//Location
+					$arrObj->location_name =$value->location_name;
+					$arrObj->region_code = $value->region_code;
+					
 					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
 					$array[] = $arrObj;
 			}
@@ -111,7 +115,9 @@ class CEvent extends CI_Controller {
                         </script>';
 
 		$this->load->view('imports/vHeaderLandingPage');
+
 		$this->load->view('vLandingPage',$data);
+
 		$this->load->view('imports/vFooterLandingPage',$this->data);
 	}
 
