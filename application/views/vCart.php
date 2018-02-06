@@ -81,7 +81,27 @@
                                               <span class="pull-right"> Price:<?php echo $cart->price;?> </span>                       
                                         </div>
                                        <div class="panel-body">
-                                             Count:<?php echo $cart->quantity;?>
+                                          <table class="table table-sm table-borderless">
+                                              <tbody>
+                                                <tr>
+                                                  <th scope="row"> Count:<?php echo $cart->quantity;?></th>
+                                                  <td class="pull-right">
+                                                    <form class="offset-md-3">
+                                                        <div class="form-group row">
+                                                          <button class="btn btn-default pull-left" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+                                                          <div class="col-sm-6">
+                                                            <input type="text" class="form-control">
+                                                          </div>
+                                                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+                                                        </div>
+                                                    </form>
+                                                  </td>
+                                                  <td> <button class="btn btn-primary pull-right" type="button">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                  </button></td>     
+                                                </tr>
+                                              </tbody>
+                                            </table>                                           
                                        </div>
                                      </div>
                                    

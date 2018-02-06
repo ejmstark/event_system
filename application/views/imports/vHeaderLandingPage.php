@@ -52,6 +52,15 @@
         .legend .expired{ background-color: #808080; }
         .legend .approved{ background-color: #ffae00; }
         .legend .pending { background-color: #337ab7; }
+
+        .table-borderless > tbody > tr > td,
+        .table-borderless > tbody > tr > th,
+        .table-borderless > tfoot > tr > td,
+        .table-borderless > tfoot > tr > th,
+        .table-borderless > thead > tr > td,
+        .table-borderless > thead > tr > th {
+            border: none;
+        }
         .ballons {
             float:right;
             margin:-20px 8px 0 0;
@@ -68,6 +77,18 @@
             -webkit-box-shadow: 1px 1px 3px 3px #ccc;
             box-shadow:         1px 1px 3px 3px #ccc;
         }        
+
+        !important
+        .cartInput {
+            outline: 0;
+            width: 100%;
+            height: inherit;
+            color: #333333; 
+            font-size: 16px; 
+            padding: 5px 15px;
+            border-radius: 3px;
+        }        
+
 
                 .details{
                   display:inline-block;
