@@ -77,6 +77,15 @@
 			$query = $this->db->get();
 			return $query->result();
 		}
+		public function getTicketsOfEvent($event_id){
+			//Sample code
+			//find read_all function at application/core/MY_Model.php
+			$this->db->select("tt.ticket_name as 'name',tt.price as 'price'");
+			$this->db->from("ticket_type as tt");
+			$this->db->where("tt.event_id='".$event_id."'");
+			$query = $this->db->get();
+			return $query->result();
+		}
 		public function getAllEvents(){
 			$this->db->select("*");
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
@@ -88,11 +97,10 @@
 
 		//get events that match the search word
 		public function getSearchEvents($searchWord){
-			//Sample code
-			//find read_all function at application/core/MY_Model.php
 			$this->db->select("*");
-			$this->db->from("event_info");
-			
+			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
+			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
+			$this->db->from("event_info");			
 			$this->db->where("event_name LIKE '%".$searchWord."%'");
 			
 
@@ -105,6 +113,7 @@
 			$this->db->select("DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart");
 			$this->db->select("DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
 			$this->db->from("event_info");
+			$this->db->join("location", "event_info.location_id = location.location_id");
 			$this->db->where("event_info.event_status = 'Approved'");
 			$query = $this->db->get();
 			return $query->result();

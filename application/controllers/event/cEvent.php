@@ -10,8 +10,11 @@ class CEvent extends CI_Controller {
     	$this->load->model('user/MUser');
     	$this->load->model('user/MTicketType');
     	$this->load->model('user/MTicket');
+    	$this->load->model('MNotification');    	
+	  $this->load->model('MAnnouncement'); //admin module functionalit
     	$this->load->helper('date');
-    	$this->load->model('MEventInfo');
+		$this->load->model('MEventInfo');
+		$this->load->model('location/MLocation');
     	$this->error = "";
     	$this->success = "";
     }
@@ -20,6 +23,21 @@ class CEvent extends CI_Controller {
 	public function index()
 	{
 
+	}
+
+	public function displayMunicipal(){
+		if(isset($_POST['region_code'])){
+			$code = $_POST['region_code'];
+			$where = array("region_code" => $code);
+			$result = $this->MLocation->read_where($where);
+			// foreach($result as $muni){
+			// 	var_dump($muni->location_name);
+			// }
+			echo json_encode($result);
+			die();
+		}else{
+			echo false;
+		}
 	}
 
 		//This function gets the date from the Calendar Module and sends in to the VCreateEvent.php
@@ -92,9 +110,24 @@ class CEvent extends CI_Controller {
 		$strEventWhere = array("user_id" => $userid,
 													 "event_isActive" => TRUE
 													);
-
-		$data['events']  = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strEventSelect,
+		$result = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($strEventSelect,
 							$strEventWhere,FALSE,FALSE,FALSE,FALSE);
+		// echo"<pre>";
+		// var_dump($result);
+		$array = array();
+		foreach ($result as $value) {
+			$arrObj = new stdClass;
+			$arrObj->data = $value;
+			$arrObj->data->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+			$array[] = $arrObj;
+		}
+		$val = array();
+		foreach ($array as $key) {
+			$arrObj = new stdClass;
+			$arrObj = $key->data;
+			$val[] = $arrObj;
+		}
+		$data['events']  = $val;
 		////////////STOPS HERE///////////////////////////////////////////////////
 
 
@@ -106,7 +139,7 @@ class CEvent extends CI_Controller {
 		////////////STOPS HERE///////////////////////////////////////////////////
 
 
-
+		$data['info'] = $this->MUser->loadUserDetails($userid);
 		//////////////////////////////////////////////////////////////////////////////
 		//================Sprint 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
@@ -125,7 +158,7 @@ class CEvent extends CI_Controller {
 
 		$uid = null; //to get organize name
 		$eid = null;
-
+		$location_id = null; //get location ID
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
@@ -135,7 +168,10 @@ class CEvent extends CI_Controller {
 		foreach ($gID as $k) {
 			$eid = $k->event_id;
 			$uid = $k->user_id; //retrieve
+			$location_id = $k->location_id;
 		}
+		
+		
 
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 INTERFACE MODULE============//
@@ -166,6 +202,7 @@ class CEvent extends CI_Controller {
 		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
 		$data['user'] = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID));
+		$data['location'] = $this->MLocation->read_where('location_id ='.$location_id.'');
 		////////////STOPS HERE////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////
@@ -179,7 +216,14 @@ class CEvent extends CI_Controller {
 			$data['successMsg']= $this->success;
 		 // print_r($data);
 		}
-
+		$result = $this->MPreference->checkIfInterestedAlready($this->session->userdata['userSession']->userID,$eid);
+		
+		if($result){
+			$data['interested']	= TRUE;
+			$data['user_event_preference_id'] = $result[0]->user_event_preference_id;
+		}else{
+			$data['interested']	= FALSE;
+		}
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
@@ -268,6 +312,7 @@ class CEvent extends CI_Controller {
 			// $data['tickets'] = $type->loadType($id);
 			$res = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID  ));
 			if($res){
+				
 				$res1 = $this->MTicketType->read_where( array('ticket_type_id' =>$tId  ));
 				$result = $res[0]->load_amt - $res1[0]->price;
 
@@ -284,7 +329,10 @@ class CEvent extends CI_Controller {
 					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
 					// $this->success = "Bought ticket for ".$res1[0]->price;
 					// $this->displayEventDetails($eid);
-					$this->session->set_flashdata('success_msg',"Bought ticket for ".$res1[0]->price);
+
+					$uid = $this->session->userdata['userSession']->userID;
+					$res = $this->MNotification->insertNotif($uid, $eid, NULL);
+
 					redirect('event/cEvent/displayEventDetails/'.$eid);
 				}else{
 					$this->session->set_flashdata('error_msg','Insufficient balance!');
@@ -326,7 +374,10 @@ class CEvent extends CI_Controller {
 			$data['event_venue'] = $this->input->post('event_venue');
 			$data['addedAt'] = date('Y-m-d H:i:s');
 
-			 $data['user_id'] = $this->session->userdata['userSession']->userID;
+			$data['user_id'] = $this->session->userdata['userSession']->userID;
+			
+			//Added location 
+			$data['location_id'] = $this->input->post('municipal-name');
 
 			$affectedRows = $this->MEvent->insert($data);
 
@@ -373,13 +424,24 @@ class CEvent extends CI_Controller {
 
 			$where =  array('no_tickets_total' => $totalNumTix );
 			$res = $this->MEvent->update($evt_id,$where);
-
-
-
 			if($res){
-				redirect('event/cEvent/viewEvents');
+				echo'
+					<div id="addAdmin" class="modal fade"  data-header-color="#34495e">
+						<div class="modal-header">
+								<h1 class="modal-title" align="center">Create Event Successful</h1>
+						</div>
+					</div>
+				';
+				header( "refresh:1; viewEvents" );
 			}else{
-				redirect('event/cEvent/viewCreateEvent');
+				echo'
+					<div id="addAdmin" class="modal fade"  data-header-color="#34495e">
+						<div class="modal-header">
+								<h1 class="modal-title" align="center">Create Event Not Successful</h1>
+						</div>
+					</div>
+				';
+				header( "refresh:1; viewCreateEvent" );
 			}
 
 		}
@@ -475,6 +537,117 @@ class CEvent extends CI_Controller {
 			$this->load->view('imports/vHeaderSignUpPage');
 			$this->load->view('user/vEditEvent', $v);
 			$this->load->view('imports/vFooterLandingPage');
+		}
+		public function interested($id)
+		{
+			$uid = $this->session->userdata['userSession']->userID;
+			$pref = new MPreference();
+			
+			$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+			$data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
+						  'user_id' => $uid ,
+						  'event_id' => $id
+		 				  );
+
+			$result = $pref->insert($data);
+
+			if($result){
+				redirect("event/cEvent/viewPreferenceEvents");
+				// $this->viewPreferenceEvents();
+			}
+			
+			# code...
+		}
+		public function interestedRemove($id)
+		{
+			// $uid = $this->session->userdata['userSession']->userID;
+			// $pref = new MPreference();
+			
+			// $now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+			// $data = array('preference_date' => $now->format('Y-m-d H:i:s'), 
+			// 			  'user_id' => $uid ,
+			// 			  'event_id' => $id
+		 // 				  );
+
+			$result = $this->MPreference->delete($id);
+
+			if($result){
+				redirect("event/cEvent/viewPreferenceEvents");
+				// $this->viewPreferenceEvents();
+			}
+			
+			# code...
+		}
+		public function viewPreferenceEvents()
+		{
+			$uid = $this->session->userdata['userSession']->userID;
+			$result_data = $this->MPreference->joinEventPrefs($uid);
+			//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->event_picture = $value->event_picture;
+					$arrObj->dateStart = $value->dateStart;
+					$arrObj->dateEnd = $value->event_date_end;
+					$arrObj->event_category = $value->event_category;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+					$array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['events'] = $array;
+		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
+		$data['announcementCount'] = count($data['announcements']);
+		if(count($data['announcements']) == 0){
+			$data['announcements'] = NULL;
+		}
+		
+			$array1 = array();
+			if($data['announcements']){
+				foreach ($data['announcements'] as $value) {
+						$arrObj = new stdClass;
+						$arrObj->announcementID = $value->announcementID;
+						$arrObj->announcementDetails = $value->announcementDetails;
+						$arrObj->first_name = $value->first_name;
+						$arrObj->last_name = $value->last_name;
+						if($value->sec){
+							$arrObj->ago =$value->sec;  
+							$arrObj->agoU ="seconds ago";  
+						}else if($value->min){
+							$arrObj->ago =$value->min; 
+							$arrObj->agoU ="minutes ago";   
+						}else if($value->hr){
+							$arrObj->ago =$value->hr;  
+							$arrObj->agoU ="hours ago";  
+						}else if($value->day){
+							$arrObj->ago =$value->day; 
+							$arrObj->agoU ="days ago";   
+						}
+						$array1[] = $arrObj;
+				}
+			}
+			$data['announcements'] = $array1;
+			
+			$this->data['custom_js']= '<script type="text/javascript">
+
+                              $(function(){
+
+                              	$("#dash").addClass("active");
+
+                              });
+
+                        </script>';
+			$this->load->view('imports/vHeaderLandingPage');
+			$this->load->view('user/vPrefEvents', $data);
+
+			$this->load->view('imports/vFooterLandingPage');
+			# code...
 		}
 }
 ?>
