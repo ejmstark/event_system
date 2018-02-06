@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-            
+
         <!-- End page header -->
 
         <!-- property area -->
@@ -147,7 +147,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                            <br><br>                
+                            <br><br>
                         </div>
 
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
@@ -250,7 +250,7 @@
             </div>
         </div>
     </div>
- 
+
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs" role="tablist">
     <!-- <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
@@ -262,7 +262,7 @@
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_REPORTS ?></a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_PAYMENT_HISTORY ?></a></li>
     <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_SETTINGS ?></a></li>
-  
+
     <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
 
   </ul>
@@ -322,10 +322,10 @@
                                                         }
                                                     }else{
                                                         echo "<h5>Not yet Approved!</h5>";
-                                                    }    
-                                                        
-                                                            
-                                                ?>   
+                                                    }
+
+
+                                                ?>
                                              <table class="table-condensed table-responsive">
                                                                 <thead>
                                                                     <th>Ticket Name</th>
@@ -400,7 +400,7 @@
                                             <td><?php echo $e->event_name;?></td>
                                             <td><?php echo $e->dateStart;?></td>
                                             <td><?php echo $e->event_status;?></td>
-                                            <td><?php echo $e->event_venue;?></td>
+                                            <td><?php echo $e->event_venue.', '.$e->location[0]->location_name.', '.$e->location[0]->region_code.'';?></td>
                                             <td><?php echo $e->event_category;?></td>
                                             <td>
                                                 <div class="panel-body search-widget">
@@ -498,7 +498,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              
+
                             </tbody>
                         </table>
                     </div>
@@ -569,7 +569,7 @@
             }
         ?>
     </div>
-          
+
 
     </div>
 
@@ -592,7 +592,7 @@
             $(target).fadeIn(600);
 
         });
-    
+
         $(this).scroll(function(e){
             if($(this).scrollTop() > 225){
                 wrap.addClass("fix-search");
@@ -641,7 +641,7 @@
                                     <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
                                     <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
                                     <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
-                                </ul>        
+                                </ul>
                             </div>
                         </div>
 
