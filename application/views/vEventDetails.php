@@ -295,7 +295,7 @@ foreach($going as $g){
                                             <?php if($e->event_status == "Approved"){?>
                                                 <!-- <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button> -->
                                                 <?php if(!$interested){?>
-                                                <a href="<?php echo site_url();?>/event/cEvent/interested/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Interested</button></a>
+                                                <a href="<?php echo site_url();?>/event/cEvent/interested/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" id="intrstd" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Interested</button></a>
                                                 <?php }else {?>
                                                 <a href="<?php echo site_url();?>/event/cEvent/interestedRemove/<?php echo $user_event_preference_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Remove Interested</button></a>
                                                 <?php }?>
@@ -603,8 +603,9 @@ $(document).ready(function(){
     $('#qty1').val(get);
   });
 
-
-
+  $("#intrstd").click(function(){
+    $(this).attr("disabled",true);
+  });
 
   // btn.onclick = function() {
   //   modal.style.display = "block";
