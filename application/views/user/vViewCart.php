@@ -37,6 +37,7 @@
                     <ul class="main-nav nav navbar-nav navbar-right">
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_HOME ?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_PROFILE ?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s" id="aDropdown" data-id='<?php echo $this->session->userdata['userSession']->userID; ?>'><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_ANNOUNCEMENTS ?><?php if($announcementCount>0) {?><span id="bdg" class="ballons"><?php echo $announcementCount;?></span><?php }?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart"><?php echo CustomizationManager::$strings->LANDING_PAGE_NAV_VIEW_CART ?></a></li>
                     </ul>
@@ -54,78 +55,19 @@
                 </div>
             </div>
         </div>
-      </div>
 
         <!-- property area -->
-      <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
+         <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
          <div class="container">
              <div class="row">
                 <div class="col-md-12 ">
                     <div id="list-type" class="proerty-th">
-                       <?php if(isset($events) && count($events)>0){
-                              foreach ($events as $event) {
-                                   ?>
-                                    <div style="padding:1%; margin-top: 2%;">
-                                      <input type="checkbox" checked="" class="evt" id="<?php echo key($events); ?>"  style="margin-bottom:2%;">
-                                      <span class="h4">
-                                        <strong>Event Name :<?php echo $event[0]->event_name;?></strong>
-                                      </span>
-                                    </div>
-                                   <?php
-                                   foreach ($event as $cart) {                     
-                                   ?>
-                                      <div class="panel panel-default" style="margin-left:3%;">
-                                      <input type="hidden" class="cartID" value="<?php echo $cart->cart_id;?>" >
-                                       <div class="panel-heading">
-
-                                              <input type="checkbox" class="<?php echo 'tix'.key($events);?>" id="<?php echo $cart->ticket_type_id;?>" checked="">
-                                              <span> Ticket Name:<?php echo $cart->ticket_name;?></span>
-                                              <span class="pull-right"> Price:<?php echo $cart->price;?> </span>                       
-                                        </div>
-                                       <div class="panel-body">
-                                          <table class="table table-sm table-borderless">
-                                              <tbody>
-                                                <tr>
-                                                  <th scope="row"> Count:<?php echo $cart->quantity;?></th>
-                                                  <td class="pull-right">
-                                                    <form class="offset-md-3">
-                                                        <div class="form-group row">
-                                                          <button class="btn btn-default pull-left plus" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-                                                          <div class="col-sm-6">
-                                                            <input type="text" class="qty" value ="<?php echo $cart->quantity;?>" class="form-control">
-                                                          </div>
-                                                          <button class="btn btn-default minus" type="button"><span class="glyphicon glyphicon-minus"></span></button>
-                                                        </div>
-                                                    </form>
-                                                  </td>
-                                                  <td> <button class="btn btn-primary pull-right" type="button">
-                                                    <span class="glyphicon glyphicon-trash delete"></span>
-                                                  </button></td>     
-                                                </tr>
-                                              </tbody>
-                                            </table>                                           
-                                       </div>
-                                     </div>
-                                   
-                                   <?php
-                                   }?>
-                                   </div>
-                                   <?php
-                                   next($events);
-                              }
-                       }else{?>
-                          <h1>Nothing in your cart. Shop for tickets now!</h1>
-                       <?php }?>
+                       
                     </div>
                 </div>
              </div><!-- END OF ROW-->
-
-             <div class="checkoutContainer" style="margin-left:3%;">
-                   <input type="checkbox" checked="">
-                   <span class="h4"><strong>SELECT ALL</strong><span style="margin: 10px;" class="badge badge-light h5">4</span> </span>
-                  <button class="btn btn-default pull-right" type="button">CHECKOUT</button>
-             </div>
          </div>
+      </div>
      <!--- END OF CONTENT AREA-->
       
         <!-- Footer area-->
@@ -180,76 +122,7 @@
         </div>
 
 <script type="text/javascript">
-  var panel;
     $(document).ready(function() {
-      $(".delete").click(function(){
-         panel= $(this).closest("div.panel");
-        var id = panel.find("input.cartID").val();
-        $(this).attr("disabled",true);
-        $.ajax({
-                url: "<?php echo site_url()?>/finance/cCart/deleteCartItem",
-                data: { "id":id},
-                type: "POST",
-                success: function(e){
-                  panel.remove();
-                },
-                error: function(e){
-                    // console.log(e);
-                    // alert(e.responseText);
-                }
-            });
-      });
-      $('input').on('ifChecked', function (event){
-          $(this).closest("input").attr('checked', true);          
-          var id = $(this).closest("input").attr('id');
-          $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").addClass("checked");
-      });
-      $('input').on('ifUnchecked', function (event) {
-          $(this).closest("input").attr('checked', false);
-          var id = $(this).closest("input").attr('id');
-          $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").removeClass("checked");
-      });
-
-      $(".minus").click(function(){
-        var input = $(this).closest("div.row").find("input");
-        if(input.val() > 1){
-          var get = input.val();
-          get-=1;
-          input.val(get);
-          updateTicketCount("minus",$(this).closest("div.panel").find("input.cartID").val(),get);
-        }
-      });
-      $(".plus").click(function(){
-        var input = $(this).closest("div.row").find("input");
-        var get = parseInt(input.val());
-        get+=1;
-        input.val(get);
-        updateTicketCount("plus",$(this).closest("div.panel").find("input.cartID").val(),get);
-      });
-
-      function updateTicketCount(type,id,quantity){
-        var link ="";
-        if(type == "plus"){
-          var link =  "<?php echo site_url()?>/finance/cCart/addQty";
-        }else{
-          var link = "<?php echo site_url()?>/finance/cCart/minusQty";
-        }
-        $(document).find(".plus").attr("disabled", true);
-        $(document).find(".minus").attr("disabled", true);
-        $.ajax({
-                url: link,
-                data: { "id":id,"quantity":quantity },
-                type: "POST",
-                success: function(e){
-                     $(document).find(".plus").attr("disabled", false);
-                     $(document).find(".minus").attr("disabled", false);
-                },
-                error: function(e){
-                    // console.log(e);
-                    // alert(e.responseText);
-                }
-            });
-      }
         $(document).on('click', '#aDropdown', function(){
             var id = $(this).data('id');
             $.ajax({

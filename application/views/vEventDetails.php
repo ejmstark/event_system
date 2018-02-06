@@ -4,7 +4,8 @@ if(isset($events) ){
     // print_r($events);
 foreach ($events as $e) { } foreach ($organizer as $o) { }
     foreach ($user as $u) { }
-
+    //location
+    foreach($location as $locate){}
 
 foreach($going as $g){
     if($this->session->userdata['userSession']->userID == $g->account_id){
@@ -144,20 +145,6 @@ foreach($going as $g){
                                         </a>
                                     </div>
 
-                                    <ul id="image-gallery" class="gallery list-unstyled cS-hidden" >
-                                        <li data-thumb="assets/img/property-1/property1.jpg">
-                                            <img src="assets/img/property-1/property1.jpg" />
-                                        </li>
-                                        <li data-thumb="assets/img/property-1/property2.jpg">
-                                            <img src="assets/img/property-1/property3.jpg" />
-                                        </li>
-                                        <li data-thumb="assets/img/property-1/property3.jpg">
-                                            <img src="assets/img/property-1/property3.jpg" />
-                                        </li>
-                                        <li data-thumb="assets/img/property-1/property4.jpg">
-                                            <img src="assets/img/property-1/property4.jpg" />
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -195,7 +182,8 @@ foreach($going as $g){
                                 <ul class="additional-details-list clearfix">
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Location</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue; ?></span>
+                                        
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue.', '.$locate->location_name.', '.$locate->region_code; ?></span>
                                     </li>
 
                                     <li>
@@ -331,11 +319,8 @@ foreach($going as $g){
                                     <input  id="cLoad" hidden value="<?php echo $u->load_amt; ?>">
                                         <?php foreach ($types as $t) { ?>
                                         <li>
-                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
-                                            </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h4> <?php echo  $t->ticket_name;?><button id="myBtn">Buy More Tickets</button></h4>
+                                                <h4> <?php echo  $t->ticket_name;?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
                                                 
                                                 <span class="property-price"><?php echo "P"." ".$t->price.".00";?></span>
                                                  <?php if($e->event_status == "Approved"){?>
@@ -559,80 +544,117 @@ foreach($going as $g){
 
         <!-- Trigger/Open The Modal -->
 
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form method="POST" id="cartForm" action="<?php echo site_url('finance/cCart/addToCart'); ?>">
-         <span class="input-group-btn">
-            <button class="btn btn-secondary col-1 cardsbtn unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
-            <input type="text" id="qty1" name="qty1" class="form-control col-8 qtyinput" placeholder="Quantity" aria-label="Quantity">
-            <button class="btn btn-secondary col-1 cardsbtn unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
-        </span>
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
     
-        <button id="addToCart"  type="submit">Add to Cart</button>
-    </form>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add to Cart</h4>
+        </div>
+        <div class="modal-body">
+            <form method="POST" id="cartForm" action="<?php echo site_url('finance/cCart/addToCart'); ?>">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button class="btn" id="unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" id="qty1" name="qty1" class="form-control" value="1" aria-label="Quantity">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn" id="unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                
+                
+                <input type="hidden" id="ticID" name="ticket" class="form-control col-8" placeholder="Quantity" aria-label="Quantity">            
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" id="addToCart"  type="submit">Add to Cart</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </form>
+        </div>
+      </div>
+      
+    </div>
   </div>
-
-</div>
-
 <script>
 var value=0;
 $(document).ready(function(){
   var modal = document.getElementById('myModal');
   var btn = document.getElementById("myBtn");
   var span = document.getElementsByClassName("close")[0];
-  btn.onclick = function() {
-    modal.style.display = "block";
-  }
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
-  $('#confirmdelete').click(function(){
-        $('#deletemodal').modal('show');
-    });
-
-  $('.qtyinput').val(value);
-
-  $('.unaM').click(function(){
-    if($('#qty1').val() > 0){
+  $(".myBtn").click(function(){
+    $("#myModal").modal();
+    $("#ticID").val($(this).data('id')) ;
+  });
+  $("#unaM").click(function(){
+    if($('#qty1').val() > 1){
       var get = $('#qty1').val();
       get-=1;
       $('#qty1').val(get);
     }
   });
-
-  $('.unaP').click(function(){
+  $("#unaP").click(function(){
     var get = parseInt($('#qty1').val());
     get+=1;
     $('#qty1').val(get);
   });
 
-  $(document).on('submit','#cartForm', function(e){
-    e.preventDefault();
-    var _url = $(this).attr('action');
 
-    $.ajax({
-        url:_url,
-        method: "POST",
-        data: $(this).serialize(),
-        success: function(){
-          alert('ok');
-          //$(':input').val(0);  
-        },
-        error: function(){
 
-           alert('failed!'+ $("qty1").val());
-        }
-    });
-  });
+
+  // btn.onclick = function() {
+  //   modal.style.display = "block";
+    
+  // }
+  // span.onclick = function() {
+  //   modal.style.display = "none";
+  // }
+  // window.onclick = function(event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
+  // $('#confirmdelete').click(function(){
+  //       $('#deletemodal').modal('show');
+  //   });
+
+  // $('.qtyinput').val(value);
+
+  // $('.unaM').click(function(){
+  //   if($('#qty1').val() > 1){
+  //     var get = $('#qty1').val();
+  //     get-=1;
+  //     $('#qty1').val(get);
+  //   }
+  // });
+
+  // $('.unaP').click(function(){
+  //   var get = parseInt($('#qty1').val());
+  //   get+=1;
+  //   $('#qty1').val(get);
+  // });
+
+  // $(document).on('submit','#cartForm', function(e){
+  //   e.preventDefault();
+  //   var _url = $(this).attr('action');
+
+  //   $.ajax({
+  //       url:_url,
+  //       method: "POST",
+  //       data: $(this).serialize(),
+  //       success: function(){
+  //         alert('ok');
+  //         //$(':input').val(0);  
+  //       },
+  //       error: function(){
+
+  //          alert('failed!'+ $("qty1").val());
+  //       }
+  //   });
+  // });
 });
 </script>
