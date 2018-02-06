@@ -232,7 +232,7 @@
                                     <option>Others</option>
                                 </select>
                             </div>
-                            <div class="col-xs-6 col-lg-4">
+                            <div class="col-xs-2 col-lg-2">
                                 <div class="price-range-wrap">
                                     <label for="price-range" style="color:#000">Price range (P):</label>
                                         <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5"
@@ -574,7 +574,7 @@
 
   <script type="text/javascript">
 
-    
+    /*
     $(document).ready(function(){
         var wrap = $(this).find('.es-wrap');
         $('.tab a').on('click', function (e) {
@@ -598,7 +598,7 @@
                 wrap.removeClass("fix-search");
             }
         });
-    });
+    });/*
 </script>
 
 </div>
