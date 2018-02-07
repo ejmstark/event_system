@@ -34,26 +34,26 @@
 </head>
 <body class="leftMenu nav-collapse">
 <div id="wrapper">
-    
+
     <!-- HEADER CONTENT -->
     <div id="header">
-    
+
         <div class="logo-area clearfix">
             <a href="#" class="logo"></a>
         </div>
         <!-- //logo-area-->
-        
+
         <div class="tools-bar">
             <ul class="nav navbar-nav nav-main-xs">
                 <li><a href="#" class="icon-toolsbar nav-mini"><i class="fa fa-bars"></i></a></li>
 
                 <li><button class="btn btn-circle btn-header-search" ><i class="fa fa-search"></i></button></li>
             </ul>
-            
-              
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right tooltip-area">
-                               
+
                 <li><a class="avatar-header">
                         <img alt="" src="<?php echo base_url('assets/adminAssets/img/admin.png')?>"  class="circle">
                     </a>
@@ -61,7 +61,7 @@
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
-                      <em> ADMIN </em> <i class="dropdown-icon fa fa-angle-down"></i>
+                      <em> <?php echo $this->session->userdata['adminSession']->userFName." ".$this->session->userdata['adminSession']->userLName; ?> </em> <i class="dropdown-icon fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu pull-right icon-right arrow">
                         <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
@@ -79,11 +79,11 @@
             </ul>
         </div>
         <!-- //tools-bar-->
-        
+
     </div>
     <!-- //header-->
-    
-  
+
+
     <!-- TOP HEADER CONTENT -->
     <div class="widget-top-search">
       <span class="icon"><a href="#" class="close-header-search"><i class="fa fa-times"></i></a></span>
@@ -105,23 +105,22 @@
     <!-- LEFT NAV CONTENT  -->
 
     <nav id="menu"  >
-        <ul>  
+        <ul>
             <li><a href="<?php echo site_url();?>/admin/cAdmin"><i class="icon  fa fa-laptop"></i> Dashboard </a></li>
 
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAllEvents"><i class="icon  fa fa-bullhorn"></i>  Events </a></li>
-            
+
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewUserAccountMgt"><i class="icon  fa fa-users"></i>  User Account </a></li>
-            
+
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAdminAccountMgt"><i class="icon  fa fa-user"></i>  Admin Account </a></li>
 
-            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAnnouncements"><i class="icon  fa fa-user"></i>  Announcements </a></li>            
+            <li><a href="<?php echo site_url();?>/admin/cAdmin/viewAnnouncements"><i class="icon  fa fa-user"></i>  Announcements </a></li>
 
             <li><a href="<?php echo site_url();?>/admin/cAdmin/viewFinance"><i class="icon  fa fa-money"></i> Finance </a></li>
 
             <li><a href ="<?php echo site_url();?>/admin/cAdmin/generateCard" data-wow-delay="0.1s"><i class="icon  fa fa-credit-card"></i> Cards </a></li>
 
-            <li><a href ="<?php echo site_url();?>/admin/cAdmin/viewReport" data-wow-delay="0.1s"><i class="icon  fa fa-bar-chart-o"></i> Reports </a></li>
-            
+
         </ul>
     </nav>
     <!-- //nav left menu-->

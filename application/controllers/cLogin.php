@@ -27,11 +27,7 @@ class CLogin extends CI_Controller {
 	}
 
 	public function index(){
-
-
-
 		$this->load->view('vLogin');
-
 	}
 
 
@@ -63,8 +59,12 @@ class CLogin extends CI_Controller {
 				$this->viewDashBoard();
 
 			}else {
+				$data = array(
+					"errorTitle" => "Account not yet activated!",
+					"errorMessage" => "Check your email to activate your account."
+				);
 
-				$this->load->view('vLogin');
+				$this->load->view('vLogin', $data);
 
 				// redirect('cInitialize','refresh');
 
@@ -73,8 +73,12 @@ class CLogin extends CI_Controller {
 
 
 		} else {
+			$data = array(
+				"errorTitle" => "User not found!",
+				"errorMessage" => "Incorrect username or password! Please make sure you have signed up."
+			);
 
-			$this->load->view('vLogin');
+			$this->load->view('vLogin', $data);
 
 			// redirect('cInitialize','refresh');
 
@@ -96,6 +100,7 @@ $sessionData = new stdClass;
 					$sessionData->userLogName =  $row->user_name;
 					$sessionData->userPassword =  $row->userPassword;
 					$sessionData->userFName =  $row->first_name;
+					$sessionData->userLName = $row->last_name;
 					$sessionData->userLevel =  $row->user_type;
 					$sessionData->userSuperior =  $row->upgradedBy;
         // $sessionData = array('userID' => $row->account_id,
@@ -141,7 +146,7 @@ $sessionData = new stdClass;
 		}else if(isset($this->session->userdata['userSession'])){
 			$this->session->unset_userdata('userSession');
 		}
-        $this->index();
+        redirect("cLogin");
 	}
 
 

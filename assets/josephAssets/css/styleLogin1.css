@@ -205,6 +205,8 @@ h2
 .orange
 {
 	color: #e2624b;
+	font-weight: bold;
+	text-shadow: 2px 2px 0px #1e0d09;
 }
 
 .eventLogo {
@@ -213,6 +215,7 @@ h2
 
 
 .messageOne {
+	text-shadow: 2px 2px 0px #000000;
 	text-align: right;
 	text-transform: none;
 	font-size: 30pt;
@@ -222,6 +225,7 @@ h2
 }
 
 .messageTwo {
+	text-shadow: 2px 2px 0px #000000;
 	text-align: right;
 	text-transform: none;
 	font-size: 18pt;
@@ -232,6 +236,7 @@ h2
 }
 
 .messageThree {
+	text-shadow: 2px 2px 0px #000000;
 	text-align: right;
 	text-transform: none;
 	font-size: 14pt;

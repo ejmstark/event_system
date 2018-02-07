@@ -6,6 +6,7 @@ class CInitialize extends CI_Controller {
 		parent::__construct();
 	 	$this->load->library('session');
 	 	$this->load->model('user/MEvent');
+		$this->load->model('location/MLocation');
 	}
 
 	public function index()
@@ -18,14 +19,36 @@ class CInitialize extends CI_Controller {
 			/////////////////////////////////////////////////////////////////////////////
 			$stringSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
 			$stringWhere = "event_info.event_status = 'Approved'";
-			$data['events'] = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($stringSelect,$stringWhere,false,false,false,false);
+			$result = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($stringSelect,$stringWhere,false,false,false,false);
 			////////////STOPS HERE///////////////////////////////////////////////////
+			$array = array();
+			foreach ($result as $value) {
+				$arrObj = new stdClass;
+				$arrObj->data = $value;
+				$arrObj->data->location = $this->MLocation->read_where("location_id = ".$value->location_id."");
+				$array[] = $arrObj;
+			}
 
+			$val = array();
+			foreach ($array as $key) {
+				$arrObj = new stdClass;
+				$arrObj = $key->data;
+				$val[] = $arrObj;
+			}
+			$data['events'] = $val;
 			$this->load->view('imports/vHeaderHomePage');
 			$this->load->view('vHomePage',$data);
 			$this->load->view('imports/vFooterHomePage');
 			// $this->load->view('vLogin');
 			//redirect('cInitialize');
 		}
+	}
+
+	public function viewAboutUs(){
+		$this->load->view('vAboutUs');
+	}
+
+	public function viewEventsHomepage(){
+		$this->load->view('vEvents');
 	}
 }
