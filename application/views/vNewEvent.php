@@ -73,14 +73,12 @@
                                    <input type="file" name="userfile"  id="fileToUpload" accept="image/*">
                                 </div>
                                 <div class="form-group">
-
-                                    <!-- <label for="name">Event Title</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_TITLE ?></label>
+
                                     <input type="text" class="form-control" name="event_name" required="">
                                 </div>
 
                                 <div class="form-group">
-                                    <!-- <label for="name">Location</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_LOCATION ?></label>
                                     <input type="text" class="form-control" name="event_venue" required="">
                                 </div>
@@ -114,17 +112,16 @@
 
                                 <!-- Added a city group -->
                                 <div class="form-group">
-
                                     <!-- <label for="email">Location_code</label> -->
                                     <label for="municipal-name">CITY/MUNICIPAL</label>
                                         <select Class="form-control" id="municipal-name" name="municipal-name" required>
-                                            <option></option>
                                         </select>
                                 </div>
 
                                 <div class="form-group">
                                     <!-- <label for="name">STARTS</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_START ?></label>
+
                                     <input  class="form-control" type="text"  value="<?php if(!empty($start_date)){
                                         echo $start_date." ".$start_time;
                                     }else{
@@ -145,7 +142,6 @@
                                 </div>
 
                                 <div class="form-group">
-
                                     <!-- <label for="name">ENDS</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_END ?></label>
                                     <input  class="form-control" type="text" value="<?php if(!empty($end_date)){
@@ -162,7 +158,6 @@
 
 
                                 <div class="form-group">
-
                                     <!-- <label for="email">Category</label> -->
                                     <label for="email"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_CATEGORY ?></label>
                                         <select Class="form-control" name="event_category" required>
@@ -326,20 +321,20 @@
                  </div>
              </div>
 
-             <div class="footer-copy text-center">
-                 <div class="container">
-                     <div class="row">
-                         <div class="pull-left">
-                             <span> (C) UI Module , All rights reserved 2017  </span>
-                         </div>
-                         <div class="bottom-menu pull-right">
-                             <ul>
-                               <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
-                             </ul>
-                         </div>
-                     </div>
-                 </div>
-             </div>
+            <div class="footer-copy text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="pull-left">
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                         <ul>
+                            <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
          </div>
 
