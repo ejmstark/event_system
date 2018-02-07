@@ -66,7 +66,7 @@
                               foreach ($events as $event) {
                                    ?>
                                     <div style="padding:1%; margin-top: 2%;">
-                                      <input type="checkbox" checked="" class="evt" id="<?php echo key($events); ?>"  style="margin-bottom:2%;">
+                                      <input type="checkbox" checked="checked" class="evt" id="<?php echo key($events); ?>"  style="margin-bottom:2%;">
                                       <span class="h4">
                                         <strong>Event Name :<?php echo $event[0]->event_name;?></strong>
                                       </span>
@@ -78,7 +78,7 @@
                                       <input type="hidden" class="cartID" value="<?php echo $cart->cart_id;?>" >
                                        <div class="panel-heading">
 
-                                              <input type="checkbox" class="<?php echo 'tix'.key($events);?> indi" id="<?php echo $cart->ticket_type_id;?>" checked="">
+                                              <input type="checkbox" class="<?php echo 'tix'.key($events);?> indi" id="<?php echo $cart->ticket_type_id;?>" checked="checked">
                                               <span> Ticket Name:<strong><?php echo $cart->ticket_name;?></strong></span>
                                               <span class="pull-right"> Price:<?php echo $cart->price;?> </span>                       
                                         </div>
@@ -212,14 +212,30 @@
           $(document).find(".tix"+id).attr("checked",true);
 
           var classList = $(this).attr('class').split(/\s+/);
-          $.each(classList, function(index, item) {
-              var temp = item.replace('tix','');
-              if($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow").hasClass("checked")){
-                $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");  
-                $(document).find("#"+temp).attr("checked",true);
-              }
+          var temp = classList[0].replace('tix','');
+          // $.each(classList, function(index, item) {
+          //     var temp = item.replace('tix','');
+          //     console.log($(document).find(".tix"+temp));
+
+          //     // if($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow").hasClass("checked")){
+          //     //   $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");  
+          //     //   $(document).find("#"+temp).attr("checked",true);
+          //     // }
               
-          });
+          // });
+          var cnt =0;
+          var cnt1 =0;
+          $.each($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow"),function(index1,item1){cnt+=1;});
+          $.each($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow"),function(index1,item1){
+                if(item1.className.toString().includes("checked")){
+                  cnt1+=1;
+                }
+              });
+
+          if(cnt1+1 == cnt){
+            $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");  
+            $(document).find("#"+temp).attr("checked",true);
+          }
       });
       $('input').on('ifUnchecked', function (event) {
           $(this).closest("input").attr('checked', false);
