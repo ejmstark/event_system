@@ -61,12 +61,17 @@ class CEvent extends CI_Controller {
 					$arrObj->dateStart = $value->dateStart;
 					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
+<<<<<<< HEAD
+					$arrObj->event_picture = $value->event_picture;
+
+=======
 					$arrObj->event_venue = $value->event_venue;
 					//Location
 					$arrObj->location_name =$value->location_name;
 					$arrObj->region_code = $value->region_code;
 					
 					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+>>>>>>> cd8d6c60aa8667c5e01f16ff161ee9b172c3c20c
 					$array[] = $arrObj;
 			}
 		}

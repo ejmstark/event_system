@@ -115,7 +115,6 @@
                                     <!-- <label for="email">Location_code</label> -->
                                     <label for="municipal-name">CITY/MUNICIPAL</label>
                                         <select Class="form-control" id="municipal-name" name="municipal-name" required>
-                                            <option></option>
                                         </select>
                                 </div>
 
