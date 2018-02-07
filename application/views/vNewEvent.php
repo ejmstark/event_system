@@ -73,14 +73,12 @@
                                    <input type="file" name="userfile"  id="fileToUpload" accept="image/*">
                                 </div>
                                 <div class="form-group">
-
-                                    <!-- <label for="name">Event Title</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_TITLE ?></label>
+
                                     <input type="text" class="form-control" name="event_name" required="">
                                 </div>
 
                                 <div class="form-group">
-                                    <!-- <label for="name">Location</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_LOCATION ?></label>
                                     <input type="text" class="form-control" name="event_venue" required="">
                                 </div>
@@ -114,7 +112,6 @@
 
                                 <!-- Added a city group -->
                                 <div class="form-group">
-
                                     <!-- <label for="email">Location_code</label> -->
                                     <label for="municipal-name">CITY/MUNICIPAL</label>
                                         <select Class="form-control" id="municipal-name" name="municipal-name" required>
@@ -125,6 +122,7 @@
                                 <div class="form-group">
                                     <!-- <label for="name">STARTS</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_START ?></label>
+
                                     <input  class="form-control" type="text"  value="<?php if(!empty($start_date)){
                                         echo $start_date." ".$start_time;
                                     }else{
@@ -145,7 +143,6 @@
                                 </div>
 
                                 <div class="form-group">
-
                                     <!-- <label for="name">ENDS</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_END ?></label>
                                     <input  class="form-control" type="text" value="<?php if(!empty($end_date)){
@@ -162,7 +159,6 @@
 
 
                                 <div class="form-group">
-
                                     <!-- <label for="email">Category</label> -->
                                     <label for="email"><?php echo CustomizationManager::$strings->NEW_EVENT_PAGE_EVENT_CATEGORY ?></label>
                                         <select Class="form-control" name="event_category" required>
