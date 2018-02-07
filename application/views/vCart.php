@@ -78,8 +78,8 @@
                                       <input type="hidden" class="cartID" value="<?php echo $cart->cart_id;?>" >
                                        <div class="panel-heading">
 
-                                              <input type="checkbox" class="<?php echo 'tix'.key($events);?>" id="<?php echo $cart->ticket_type_id;?>" checked="">
-                                              <span> Ticket Name:<?php echo $cart->ticket_name;?></span>
+                                              <input type="checkbox" class="<?php echo 'tix'.key($events);?> indi" id="<?php echo $cart->ticket_type_id;?>" checked="">
+                                              <span> Ticket Name:<strong><?php echo $cart->ticket_name;?></strong></span>
                                               <span class="pull-right"> Price:<?php echo $cart->price;?> </span>                       
                                         </div>
                                        <div class="panel-body">
@@ -182,6 +182,7 @@
 <script type="text/javascript">
   var panel;
     $(document).ready(function() {
+      
       $(".delete").click(function(){
          panel= $(this).closest("div.panel");
         var id = panel.find("input.cartID").val();
@@ -203,11 +204,32 @@
           $(this).closest("input").attr('checked', true);          
           var id = $(this).closest("input").attr('id');
           $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").addClass("checked");
+          $(document).find(".tix"+id).attr("checked",true);
+
+          var classList = $(this).attr('class').split(/\s+/);
+          $.each(classList, function(index, item) {
+              var temp = item.replace('tix','');
+              if($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow").hasClass("checked")){
+                $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");  
+                $(document).find("#"+temp).attr("checked",true);
+              }
+              
+          });
       });
       $('input').on('ifUnchecked', function (event) {
           $(this).closest("input").attr('checked', false);
           var id = $(this).closest("input").attr('id');
           $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").removeClass("checked");
+          $(document).find(".tix"+id).removeAttr('checked');
+          
+          var classList = $(this).attr('class').split(/\s+/);
+          $.each(classList, function(index, item) {
+              var temp = item.replace('tix','');
+              $(document).find("input#"+temp).closest("div.icheckbox_square-yellow").removeClass("checked");
+              $(document).find("#"+temp).removeAttr('checked');
+
+          });
+
       });
 
       $(".minus").click(function(){
