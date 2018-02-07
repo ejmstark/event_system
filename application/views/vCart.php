@@ -100,7 +100,7 @@
                                                   </td>
                                                   <td> 
                                                     <form  method="POST" action="<?php echo site_url(); ?>/finance/cCart/deleteCartItem">
-                                                      <input name="id" value="<?php echo $cart->cart_id;?>">
+                                                      <input name="id" class="hidden" value="<?php echo $cart->cart_id;?>">
                                                       <button type="submit" class="btn btn-primary pull-right" type="button">
                                                       <span class="glyphicon glyphicon-trash delete"></span>
                                                       </button>
