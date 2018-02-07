@@ -20,7 +20,7 @@
 
                     <div class="panel-body">
                         <button class="btn btn-outline-primary" style="margin-bottom:25px;" type="button" name="button" data-toggle="modal" data-target="#addAdmin">Add Admin</button>
-                        <button class="btn btn-outline-primary" style="margin-bottom:25px;" type="button" name="button" data-toggle="modal" data-target="#updateAccount">Update Account</button>
+                        
 
                         <?php if ($this->session->flashdata('error_msg')): ?>
                                 <div class="alert alert-danger" style="margin-top: 15px;">
