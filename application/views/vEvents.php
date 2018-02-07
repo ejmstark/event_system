@@ -96,7 +96,7 @@
 
                                                 <div class="col-xs-12" id="some" hidden="">
                                                     <form action="<?php echo site_url(); ?>/user/cUser/redeemCode" method="post">
-                                                        <input type="text" class="form-control" name="ccode" placeholder="Enter code">
+                                                        <input type="text" pattern="[a-zA-Z]+" class="form-control" name="ccode" placeholder="Enter code">
                                                         <!-- <button type="submit" class="navbar-btn nav-button pull-right"   >Redeem Code</button> -->
                                                         <button type="submit" class="navbar-btn nav-button pull-right"   ><?php echo CustomizationManager::$strings->PROFILE_PAGE_REDEEM_CODE ?></button>
                                                     </form>
