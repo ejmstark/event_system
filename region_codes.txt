@@ -1,0 +1,17 @@
+NCR
+CAR
+MIMAROPA
+ARMM
+Region I
+Region II
+Region III
+Region IV-A
+Region V
+Region VI
+Region VII
+Region VIII
+Region IX
+Region X
+Region XI
+Region XII
+Region XIII

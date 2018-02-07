@@ -8,7 +8,6 @@
         <script src="<?php echo base_url('assets/nikkiAssets/js/owl.carousel.min.js')?>" rel="stylesheet" /> </script>
         
         <script src="<?php echo base_url('assets/nikkiAssets/js/wow.js')?>" rel="stylesheet" /> </script>
-        <script src="<?php echo base_url('assets/nikkiAssets/js/icheck.min.js')?>" rel="stylesheet" /> </script>
         <script src="<?php echo base_url('assets/nikkiAssets/js/price-range.js')?>" rel="stylesheet" /> </script>
         <script src="<?php echo base_url('assets/nikkiAssets/js/main.js')?>" rel="stylesheet" /> </script>
 

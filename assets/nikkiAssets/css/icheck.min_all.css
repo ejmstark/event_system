@@ -9,7 +9,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/square.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/square.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -52,7 +52,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square,
     .iradio_square {
-        background-image: url(../../assets/img/skin/square@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/square@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -68,7 +68,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/red.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/red.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -111,7 +111,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-red,
     .iradio_square-red {
-        background-image: url(../../assets/img/skin/red@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/red@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -127,7 +127,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/green.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/green.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -170,7 +170,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-green,
     .iradio_square-green {
-        background-image: url(../../assets/img/skin/green@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/green@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -186,7 +186,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/blue.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/blue.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -229,7 +229,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-blue,
     .iradio_square-blue {
-        background-image: url(../../assets/img/skin/blue@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/blue@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -245,7 +245,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/aero.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/aero.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -288,7 +288,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-aero,
     .iradio_square-aero {
-        background-image: url(../../assets/img/skin/aero@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/aero@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -304,7 +304,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/grey.png) no-repeat;
+    background: url(../../nikkiAssets/skin/grey.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -347,7 +347,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-grey,
     .iradio_square-grey {
-        background-image: url(../../assets/img/skin/grey@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/grey@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -363,7 +363,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/orange.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/orange.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -406,7 +406,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-orange,
     .iradio_square-orange {
-        background-image: url(../../assets/img/skin/orange@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/orange@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -422,7 +422,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/yellow.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/yellow.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -465,7 +465,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-yellow,
     .iradio_square-yellow {
-        background-image: url(../../assets/img/skin/yellow@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/yellow.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -481,7 +481,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/pink.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/pink.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -524,7 +524,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {
     .icheckbox_square-pink,
     .iradio_square-pink {
-        background-image: url(../../assets/img/skin/pink@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/pink@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
@@ -540,7 +540,7 @@
     padding: 0;
     width: 22px;
     height: 22px;
-    background: url(../../assets/img/skin/purple.png) no-repeat;
+    background: url(../../nikkiAssets/img/skin/purple.png) no-repeat;
     border: none;
     cursor: pointer;
 }
@@ -583,7 +583,7 @@
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi), (min-resolution: 1.25dppx) {
     .icheckbox_square-purple,
     .iradio_square-purple {
-        background-image: url(../../assets/img/skin/purple@2x.png);
+        background-image: url(../../nikkiAssets/img/skin/purple@2x.png);
         -webkit-background-size: 240px 24px;
         background-size: 240px 24px;
     }
