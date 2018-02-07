@@ -331,7 +331,11 @@ foreach($going as $g){
 
                                                  </form> -->
 
-                                                 <?php if(!$bought){?>
+                                                 <?php 
+                                                $now = new DateTime("now");
+                                                $end = new DateTime($e->event_date_end);
+
+                                                 if(!$bought && $now <= $end){?>
                                                    <a href="<?php echo site_url();?>/event/cEvent/buyTicket/<?php echo $t->ticket_type_id;?>/<?php echo $e->event_id;?>"><input hidden class="val" value="<?php echo $t->price;?>">
                                                 <button   class="buy navbar-btn nav-button wow bounceInRight login animated" >Buy</button></a>
                                                 <?php }?>
