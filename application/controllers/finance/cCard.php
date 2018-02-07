@@ -1,4 +1,4 @@
-<?php
+'<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class CCard extends CI_Controller {
@@ -17,6 +17,7 @@ class CCard extends CI_Controller {
 	}
 
 	public function card () {
+		echo 'hey';
 		$amount = array (100, 200, 500, 1000);
 		//$qty = array (1, 2, 3, 4, 5, 6);
 		$qty = array ( $this->input->post('qty1'),
@@ -82,9 +83,13 @@ class CCard extends CI_Controller {
 		$data = array('cardId' => null,
 					'cardCode' => $random,
 					'cardAmount' => $amount,
-					'cardCreatedOn' => null,
-					'cardStatus' => 1);
-
+					'cardStatus' => 1,
+					'addedBy' => 1,
+					'updateBy' => 1,
+					'addedAt' => null,
+					'updatedAt' => null);
+			
+		echo'hey';
 		$query = $card->insert($data);
 		///////////////////////////////////////
 		///////////////////////////////////////
