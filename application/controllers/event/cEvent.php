@@ -383,7 +383,6 @@ class CEvent extends CI_Controller {
 			$data['event_venue'] = $this->input->post('event_venue');
 			$data['addedAt'] = date('Y-m-d H:i:s');
 
-			$data['user_id'] = $this->session->userdata['userSession']->userID;
 
 			//Added location
 			$data['location_id'] = $this->input->post('municipal-name');
@@ -459,8 +458,9 @@ class CEvent extends CI_Controller {
 				';
 				header( "refresh:1; viewCreateEvent" );
 			}
+		  }
 
-		}
+	    }
 
 
 		public function deleteEvent($id){
