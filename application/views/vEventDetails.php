@@ -361,7 +361,7 @@ foreach($going as $g){
                                     <h3 class="panel-title">Ads here</h3>
                                 </div>
                                 <div class="panel-body recent-property-widget">
-                                    <img src="assets/img/ads.jpg">
+                                    <img src="<?php echo base_url("assets/nikkiAssets/img/ads.jpg"); ?>">
                                 </div>
                             </div>
 
