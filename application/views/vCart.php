@@ -98,9 +98,14 @@
                                                         </div>
                                                     </form>
                                                   </td>
-                                                  <td> <button class="btn btn-primary pull-right" type="button">
-                                                    <span class="glyphicon glyphicon-trash delete"></span>
-                                                  </button></td>     
+                                                  <td> 
+                                                    <form  method="POST" action="<?php echo site_url(); ?>/finance/cCart/deleteCartItem">
+                                                      <input name="id" value="<?php echo $cart->cart_id;?>">
+                                                      <button type="submit" class="btn btn-primary pull-right" type="button">
+                                                      <span class="glyphicon glyphicon-trash delete"></span>
+                                                      </button>
+                                                    </form>
+                                                  </td>     
                                                 </tr>
                                               </tbody>
                                             </table>                                           
@@ -183,23 +188,23 @@
   var panel;
     $(document).ready(function() {
       
-      $(".delete").click(function(){
-         panel= $(this).closest("div.panel");
-        var id = panel.find("input.cartID").val();
-        $(this).attr("disabled",true);
-        $.ajax({
-                url: "<?php echo site_url()?>/finance/cCart/deleteCartItem",
-                data: { "id":id},
-                type: "POST",
-                success: function(e){
-                  panel.remove();
-                },
-                error: function(e){
-                    // console.log(e);
-                    // alert(e.responseText);
-                }
-            });
-      });
+      // $(".delete").click(function(){
+      //    panel= $(this).closest("div.panel");
+      //   var id = panel.find("input.cartID").val();
+      //   $(this).attr("disabled",true);
+      //   $.ajax({
+      //           url: "<?php echo site_url()?>/finance/cCart/deleteCartItem",
+      //           data: { "id":id},
+      //           type: "POST",
+      //           success: function(e){
+      //             panel.remove();
+      //           },
+      //           error: function(e){
+      //               // console.log(e);
+      //               // alert(e.responseText);
+      //           }
+      //       });
+      // });
       $('input').on('ifChecked', function (event){
           $(this).closest("input").attr('checked', true);          
           var id = $(this).closest("input").attr('id');
@@ -221,7 +226,7 @@
           var id = $(this).closest("input").attr('id');
           $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").removeClass("checked");
           $(document).find(".tix"+id).removeAttr('checked');
-          
+
           var classList = $(this).attr('class').split(/\s+/);
           $.each(classList, function(index, item) {
               var temp = item.replace('tix','');

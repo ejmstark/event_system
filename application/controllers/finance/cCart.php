@@ -126,7 +126,7 @@ class CCart extends CI_Controller {
 		$where = array ('cart_id'=>$id);
 
 		if ($cart->update1($where, $affectedFields) > 0) {
-			echo 'Sucess!';
+			redirect("finance/cCart/viewCart");
 		} else {
 			echo 'Failed!';
 		}
