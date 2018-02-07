@@ -48,6 +48,7 @@
 			$this->db->from($this::DB_TABLE);
 			$this->db->join('event_info as e', $this::DB_TABLE.'.event_id = e.event_id');
 			$this->db->join('user_account as ua', $this::DB_TABLE.'.user_id = ua.account_id');
+			$this->db->join("location", "e.location_id = location.location_id");
 			$this->db->where( array($this::DB_TABLE.'.user_id' => $id, ));
 
 			$query = $this->db->get();
