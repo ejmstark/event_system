@@ -159,7 +159,7 @@
                                         <ul>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> JS Workshop </a></h6>
@@ -168,7 +168,7 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Music Concert </a></h6>
@@ -177,7 +177,7 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Some Party </a></h6>
@@ -186,7 +186,7 @@
                                         </li>
                                        <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Food Bazaar </a></h6>
@@ -253,16 +253,10 @@
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs" role="tablist">
-    <!-- <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
-    <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
-    <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
-
-    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_EVENTS ?></a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_REPORTS ?></a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_PAYMENT_HISTORY ?></a></li>
     <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_SETTINGS ?></a></li>
-
     <li role="presentation" class="tab"><a href="#editprofile" aria-controls="editprofile" role="tab" data-toggle="tab">Edit Profile</a></li>
 
   </ul>
@@ -271,12 +265,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
         <div class="col-md-12 clear">
-            <div class="row">
-                <div class="col-xs-12 layout-switcher pull-right">
-                    <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                    <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                </div>
-            </div>
+           
 
             <div id="list-type" class="proerty-th">
 
@@ -503,9 +492,9 @@
                         </table>
                     </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="settings">
+    <!-- <div role="tabpanel" class="tab-pane" id="settings">
     </div>
-
+ -->
      <div role="tabpanel" class="tab-pane" id="editprofile">
         <h2>Edit Profile</h2>
         <?php foreach($info as $in){ ?>

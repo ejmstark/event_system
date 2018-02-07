@@ -198,11 +198,15 @@ class cUser extends CI_Controller {
 	public function checkAllUsername()
 	{
 		$username = $this->input->post('username');
-		$check  = $this->MUser->checkAllUsers($username);
-		if($check == 0){
-			echo "<h4 style='color:green'>Username is available<h4>";
+		if($username == ''){
+			echo '';
 		}else{
-			echo "<h4 style='color:red'>Username is taken</h4>";
+			$check  = $this->MUser->checkAllUsers($username);
+			if($check == 0){
+				echo "<h4 style='color:green'>Username is available<h4>";
+			}else{
+				echo "<h4 style='color:red'>Username is taken</h4>";
+			}
 		}
 	}
 
