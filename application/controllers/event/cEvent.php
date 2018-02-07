@@ -460,7 +460,6 @@ class CEvent extends CI_Controller {
 			}
 		  }
 
-	    }
 
 
 		public function deleteEvent($id){
