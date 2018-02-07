@@ -29,7 +29,7 @@
                             <?php endif ?>
                         
 
-                        <button class="btn btn-outline-primary" style="margin-bottom:25px;" type="button" name="button" data-toggle="modal" data-target="#createAnnouncement">Create Announcement</button>
+                         <button class="btn btn-outline-primary" style="margin-bottom:25px;" type="button" name="button" data-toggle="modal" data-target="#createAnnouncement" data-backdrop="static" data-keyboard="false">Create Announcement</button>
 
               <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-hover" data-provide="data-table" id="toggle-column table-example">
                 <thead class="">
@@ -82,7 +82,7 @@
 
 
 
-<div id="createAnnouncement" class="modal fade" tabindex="-1" data-width="650">
+<div id="createAnnouncement" class="modal" tabindex="-1" data-width="650">
     <div class="modal-header bg-inverse bd-inverse-darken">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
                 <h1 class="modal-title" align="center">CREATE AN ANNOUNCEMENT</h1>

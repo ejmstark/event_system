@@ -46,7 +46,7 @@
                                                   </tr>";
                                             }else {
                                              echo "<td>
-                                                <button name='button' data-toggle='modal' data-target='#updateAccount' type='button' class='btn btn-info'>VIEW ATTENDEES </button>
+                                                <button name='button' data-toggle='modal' data-target='#updateAccount' type='button' class='btn btn-info' data-backdrop='static' data-keyboard='false'>VIEW ATTENDEES </button>
                                                 <input type = 'hidden' value = '".$object->event_id." id = 'pass' name = 'pass'>
                                                 </td>
                                             </tr>";  
