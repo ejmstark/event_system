@@ -10,7 +10,7 @@
 		private $updateAt; 
 
 		const DB_TABLE = "user_event_preference";
-    	const DB_TABLE_PK = "user_preference_id";
+    	const DB_TABLE_PK = "user_event_preference_id";
 
     	public function __construct(){
 
@@ -19,6 +19,14 @@
 		public function loadAllPrefEvents(){
 			$query = $this->read_all();
 			return $query;			             
+		}
+		public function checkIfInterestedAlready($user_id,$event_id){
+			$this->db->select('*');
+			$this->db->from($this::DB_TABLE);
+			$this->db->where( array("user_id"=>$user_id,"event_id"=>$event_id));
+			
+			$query = $this->db->get();
+			return $query->result();		             
 		}
 
 		public function viewAllPrefEvents($id)
@@ -35,9 +43,12 @@
 		public function joinEventPrefs($id)
 		{
 			$this->db->select('*');
+			$this->db->select("DATE_FORMAT(e.event_date_start,'%d-%b-%y %H:%m') as dateStart");
+			$this->db->select("DATE_FORMAT(e.event_date_end,'%d-%b-%y %H:%m') as dateEnd");
 			$this->db->from($this::DB_TABLE);
 			$this->db->join('event_info as e', $this::DB_TABLE.'.event_id = e.event_id');
 			$this->db->join('user_account as ua', $this::DB_TABLE.'.user_id = ua.account_id');
+			$this->db->join("location", "e.location_id = location.location_id");
 			$this->db->where( array($this::DB_TABLE.'.user_id' => $id, ));
 
 			$query = $this->db->get();

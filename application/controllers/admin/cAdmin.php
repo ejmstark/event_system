@@ -70,7 +70,7 @@ class CAdmin extends CI_Controller {
 		$event_module = new MEventInfo();
 
 		$data = array('event_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $event_module->read_where($data);
 
 		if($results){
 			$response = $event_module-> updateEventStatus($id, "Rejected");
@@ -164,6 +164,9 @@ class CAdmin extends CI_Controller {
 		$data = array('user_type !=' => 'Regular');
 		$result = $this->MUserInfo->read_where($data);
 		if($result){
+			// echo "<pre>";
+			// var_dump($result);
+			// die();
 			return $result;
 		}else{
 			return false;

@@ -31,7 +31,7 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/bootstrap-select.min.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/bootstrap/css/bootstrap.min.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/icheck.min_all.css')?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/nikkiAssets/css/price-range.css')?>" rel="stylesheet" />
+   <link href="<?php echo base_url('assets/nikkiAssets/css/price-range.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/owl.carousel.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/owl.theme.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/owl.transitions.css')?>" rel="stylesheet" />
@@ -40,6 +40,11 @@
     <link href="<?php echo base_url('assets/nikkiAssets/css/responsive.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/nikkiAssets/css/pushpin.css')?>" rel="stylesheet" />
 
+    <!--Customization module-->
+    <!--<link href="<?php echo base_url('assets/nikkiAssets/css/style.php')?>" rel="stylesheet" />-->
+    <link href="<?php echo base_url('assets/customization1Assets/css/notification.css')?>" rel="stylesheet" />
+    <script src="<?php echo base_url('assets/customization1Assets/js/notification.js')?>"></script>
+
     <style>
         .calendar-legend{ margin-top:5%; max-width: 50%; border-radius: 15px; border: 1px solid #ccc; padding: 5px;}
         .legend { list-style: none; margin-left:-35px;}
@@ -47,6 +52,15 @@
         .legend .expired{ background-color: #808080; }
         .legend .approved{ background-color: #ffae00; }
         .legend .pending { background-color: #337ab7; }
+
+        .table-borderless > tbody > tr > td,
+        .table-borderless > tbody > tr > th,
+        .table-borderless > tfoot > tr > td,
+        .table-borderless > tfoot > tr > th,
+        .table-borderless > thead > tr > td,
+        .table-borderless > thead > tr > th {
+            border: none;
+        }
         .ballons {
             float:right;
             margin:-20px 8px 0 0;
@@ -62,7 +76,78 @@
             -moz-box-shadow:    1px 1px 3px 3px #ccc;
             -webkit-box-shadow: 1px 1px 3px 3px #ccc;
             box-shadow:         1px 1px 3px 3px #ccc;
-        }
+        }        
+
+      .checkoutContainer {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        margin:0px !important;
+        color:white;
+      }
+
+                .details{
+                  display:inline-block;
+                  position: absolute;
+                  overflow:hidden;
+                }
+
+                .corner-ribbon{
+                  width: 200px;
+                  background: #e43; 
+                  display:inline-block;
+                  position: absolute;
+                  overflow:hidden; 
+                  top: 25px;
+                  left: -50px;
+                  text-align: center;
+                  line-height: 50px;
+                  letter-spacing: 1px;
+                  color: #f0f0f0;
+                  transform: rotate(-45deg);
+                  -webkit-transform: rotate(-45deg);
+                }
+
+                /* Custom styles */
+
+                .corner-ribbon.sticky{
+                   display:inline-block;
+                    position: relative;
+                    overflow:hidden; 
+                }
+
+                .corner-ribbon.shadow{
+                  box-shadow: 0 0 3px rgba(0,0,0,.3);
+                }
+
+                /* Different positions */
+                .corner-ribbon.top-right{
+                  top: 15px;
+                  right: -210px;
+                  left: auto;
+                  transform: rotate(45deg);
+                  -webkit-transform: rotate(45deg);
+                }
+
+                
+
+                /* Colors */
+
+                .corner-ribbon.white{background: #f0f0f0; color: #555;}
+                .corner-ribbon.black{background: #333;}
+                .corner-ribbon.grey{background: #999;}
+                .corner-ribbon.blue{background: #39d;}
+                .corner-ribbon.green{background: #2c7;}
+                .corner-ribbon.turquoise{background: #1b9;}
+                .corner-ribbon.purple{background: #95b;}
+                .corner-ribbon.red{background: #e43;}
+                .corner-ribbon.orange{background: #e82;}
+                .corner-ribbon.yellow{background: #ec0;}
+
+            
     </style>
 </head>
 

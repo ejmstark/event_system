@@ -81,7 +81,7 @@ IF(TIMESTAMPDIFF(Day,a.addedAt,NOW()) < 30 ,TIMESTAMPDIFF(Day,a.addedAt,NOW()), 
 			$this->db->where('notification_item.isViewed = "0"');
 			$this->db->where('notification_item.user = "'.$user.'"');
 			$this->db->where('a.announcementStatus = "OnGoing"');
-			$this->db->order_by('a.announcementID', 'DESC');
+			$this->db->order_by('a.announcementID', 'ASC');
 
 			$query = $this->db->get();
 

@@ -11,6 +11,7 @@ class cUser extends CI_Controller {
       $this->load->model('MCardLoad');
 	  $this->load->model('MAnnouncement'); //admin module functionality
 	  $this->load->model('MNotificationItem');
+	  $this->load->model('location/MLocation');
       $this->load->library('session');
       $this->data = null;
   	}
@@ -31,6 +32,12 @@ class cUser extends CI_Controller {
 					$arrObj->dateStart = $value->dateStart;
 					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
+					$arrObj->event_venue = $value->event_venue;
+					//Location
+					$arrObj->location_name =$value->location_name;
+					$arrObj->region_code = $value->region_code;
+					
+					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
 					$array[] = $arrObj;
 			}
 		}
@@ -39,8 +46,7 @@ class cUser extends CI_Controller {
 		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
 		$data['announcementCount'] = count($data['announcements']);
 		if(count($data['announcements']) == 0){
-			$data['announcements'] = $this->MAnnouncement->getViewedOfUser($this->session->userdata['userSession']->userID);
-			// die();
+			$data['announcements'] = NULL;
 		}
 		
 			$array1 = array();
@@ -85,6 +91,7 @@ class cUser extends CI_Controller {
 
 		$this->load->view('imports/vFooterLandingPage',$this->data);
 	}
+
   	public function redeemCode(){
 
 		$code = $this->input->post('ccode');
@@ -273,6 +280,7 @@ class cUser extends CI_Controller {
 
 	public function viewClickedAnnouncement($announcementID)
 	{
+		$this->updateAnnounce1($announcementID);
 		$data['announcements'] = $this->MAnnouncement->loadAllAnnouncementDetails();
 		$data['clickedAnnouncement'] = $announcementID;
 		$this->load->view('imports/vHeaderSignUpPage');
@@ -301,6 +309,13 @@ class cUser extends CI_Controller {
 		}
 		
 		echo $key->notifID;
+  }
+  public function updateAnnounce1($id)
+	{	
+		$where = array('isViewed' => 1);
+		$query = $this->MNotificationItem->update1(array("announcement"=>$id,"user"=>$this->session->userdata['userSession']->userID), $where);
+		// echo  $this->MNotificationItem->db->last_query();
+		// die();
   }
   public function viewRegistrationConfirmation() {
 		  $this->load->view('imports/vHeaderSignUpPage');
