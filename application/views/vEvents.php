@@ -508,61 +508,63 @@
 
      <div role="tabpanel" class="tab-pane" id="editprofile">
         <h2>Edit Profile</h2>
-        <?php
-            foreach($info as $in){ ?>
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="name">First Name</label>
-                 <input type="text" <?php  echo 'value="'.$in->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
-            </div>
+        <?php foreach($info as $in){ ?>
+            <form  method="POST" action="<?php echo site_url()?>/cEvent/updateProfile">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="first name">First Name</label>
+                    <input type="text" <?php  echo 'value="'.$in->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+                </div>
 
-             <div class="form-group">
-                 <label for="name">Middle Initial</label>
-                <input type="text"  <?php  echo 'value="'.$in->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
-            </div>
+                <div class="form-group">
+                    <label for="middle initial">Middle Initial</label>
+                    <input type="text"  <?php  echo 'value="'.$in->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="midname" id="name" required="">
+                </div>
 
-            <div class="form-group">
-                <label for="name">Last Name</label>
-                <input type="text"  <?php  echo 'value="'.$in->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
-            </div>
-
-           <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email"  <?php  echo 'value="'.$in->email.'"';?> class="form-control" name="email" id="email" required="">
-            </div>
-
-           <div class="form-group">
-                <label for="email">Birthdate</label>
-                <input type="date"  <?php  echo 'value="'.$in->birthdate.'"';?> name="bdate" required="">
-            </div>
+                <div class="form-group">
+                    <label for="last name">Last Name</label>
+                    <input type="text"  <?php  echo 'value="'.$in->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+                </div>
 
             <div class="form-group">
-                <label for="email">Gender</label>
-                <select class="form-control" name="gender">
-                    <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
-                    <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
-                    <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
-                </select>
-            </div>
+                    <label for="email">Email</label>
+                    <input type="email"  <?php  echo 'value="'.$in->email.'"';?> class="form-control" name="email" id="email" required="">
+                </div>
 
             <div class="form-group">
-                <label for="email">Contact Number</label>
-                <input type="text" <?php  echo 'value="'.$in->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
-            </div>
-            <div class="form-group">
-                <label for="email">Username</label>
-                <input type="text" minlength="6"<?php  echo 'value="'.$in->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" <?php  echo 'value="'.$in->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit Profile</button>
-            </div>
+                    <label for="birthdate">Birthdate</label>
+                    <input type="date"  <?php  echo 'value="'.$in->birthdate.'"';?> name="bdate" required="">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" name="gender">
+                        <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
+                        <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
+                        <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact no">Contact Number</label>
+                    <input type="text" <?php  echo 'value="'.$in->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" minlength="6"<?php  echo 'value="'.$in->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" <?php  echo 'value="'.$in->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cEvent/updateProfile"> -->Edit Profile</button>
+                </div>
 
 
-        </div>
+            </div>
+        </form>
+        
         <?php
             }
         ?>

@@ -517,6 +517,45 @@ class CEvent extends CI_Controller {
 
 	}
 
+	public function updateProfile(){
+		$user = new MUser();
+
+		/* $data = array('event_date_start'=>$event_date_start,
+					  'event_date_end'=>$event_date_end,
+					  'event_name'=>$event_name,
+					  'event_details'=>$event_details,
+					  'event_category'=>$event_category,
+					  'event_venue'=>$event_venue); */
+
+		$user->setAccount_id($this->input->post('$sessionData->userID'));
+		$user->setUser_name($this->input->post('uname'));
+		$user->setUser_password(hash('sha512',$this->input->post('password')));
+		$user->setFirst_name($this->input->post('fname'));
+		$user->setMiddle_initial($this->input->post('midname'));
+		$user->setLast_name($this->input->post('lname'));
+		$user->setEmail($this->input->post('email'));
+		$user->setBirthdate($this->input->post('bdate'));
+		$user->setGender($this->input->post('gender'));
+		$user->setContact_no($this->input->post('contact'));
+
+		if(isset($user)){
+			$user->updateUser();
+
+			//$this->load->view('imports/vHeaderLandingPage');
+			
+
+		}else{
+
+		}
+
+		$this->load->view('event/cEvent/viewEvents');
+
+
+
+	}
+
+
+
 
 		public function upcomingEvents(){
 			$this->load->model('events/mEvent','Event');
