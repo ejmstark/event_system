@@ -225,11 +225,11 @@
           // });
           var cnt =0;
           var cnt1 =0;
-          $.each($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow"),function(index1,item1){cnt+=1;});
           $.each($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow"),function(index1,item1){
                 if(item1.className.toString().includes("checked")){
                   cnt1+=1;
                 }
+                cnt+=1;
               });
 
           if(cnt1+1 == cnt){
