@@ -59,11 +59,25 @@
 			$query = $this->read_all();
 			return $query;			             
 		}
+		public function checkAllUsers($username){
+			$query= $this->db->get_where($this::DB_TABLE,array('user_name'=>$username));
+			return $query->num_rows();
+			         
+		}
+		
 
 		public function updateSpecificEvent($id, $data){
 			$this->db->where('event_id', $id);
 			return $this->db->update('event_info', $data);
 		}
+
+		public function updateUser(){
+			$this->db->where('account_id',$this->account_id);
+			return $this->db->update('user_account', $this); 
+
+		}
+
+		
 		public function getEventDetails($id){
 			$this->db->select('event_id, event_name, event_venue, event_date_start, event_date_end, event_category, event_details');
 			$this->db->from('event_info');
