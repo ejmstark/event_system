@@ -517,7 +517,7 @@
 
             <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email"  <?php  echo 'value="'.$in->email.'"';?> class="form-control" name="email" id="email" required="">
+                    <input type="email"  <?php  echo 'value="'.$in->email.'"';?> class="form-control" name="email" id="email" pattern="[^ @]*@[^ @]*" required="">
                 </div>
 
             <div class="form-group">
@@ -535,8 +535,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="contact no">Contact Number</label>
-                    <input type="text" <?php  echo 'value="'.$in->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                    <label for="contact no">Contact Number (09XXXXXXXXX) </label>
+                    <input type="text" <?php  echo 'value="'.$in->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" pattern="^(09)\d{9}$" required="">
                 </div>
                 <div class="form-group">
                     <label for="username">Username</label>
