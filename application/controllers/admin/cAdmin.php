@@ -70,7 +70,7 @@ class CAdmin extends CI_Controller {
 		$event_module = new MEventInfo();
 
 		$data = array('event_id' => $id);
-		$results = $this->MEventInfo->read_where($data);
+		$results = $event_module->read_where($data);
 
 		if($results){
 			$response = $event_module-> updateEventStatus($id, "Rejected");
@@ -660,4 +660,19 @@ class CAdmin extends CI_Controller {
 		$this->load->view('imports/admin_vFooter');
 	}
 
+public function updateAccount() {
+	$data2['admin']=$this->readAllAdmin();
+		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
+		////////////STOPS HERE///////////////////////////////////////////////////
+
+
+		$this->load->view('imports/admin_vHeader');
+		$this->load->view('admin/vUpdateAccount', $data2);
+		$this->load->view('imports/admin_vFooter');
+
+
+
+	}
 }
+
+

@@ -331,7 +331,11 @@ foreach($going as $g){
 
                                                  </form> -->
 
-                                                 <?php if(!$bought){?>
+                                                 <?php 
+                                                $now = new DateTime("now");
+                                                $end = new DateTime($e->event_date_end);
+
+                                                 if(!$bought && $now <= $end){?>
                                                    <a href="<?php echo site_url();?>/event/cEvent/buyTicket/<?php echo $t->ticket_type_id;?>/<?php echo $e->event_id;?>"><input hidden class="val" value="<?php echo $t->price;?>">
                                                 <button   class="buy navbar-btn nav-button wow bounceInRight login animated" >Buy</button></a>
                                                 <?php }?>
@@ -532,9 +536,7 @@ foreach($going as $g){
                         </div>
                         <div class="bottom-menu pull-right">
                             <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
                             </ul>
                         </div>
                     </div>

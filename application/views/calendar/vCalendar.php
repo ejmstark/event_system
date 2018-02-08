@@ -600,19 +600,19 @@
                   </div>
               </div>
 
-              <div class="footer-copy text-center">
-                  <div class="container">
-                      <div class="row">
-                          <div class="pull-left">
-                              <span> (C) UI Module , All rights reserved 2017  </span>
-                          </div>
-                          <div class="bottom-menu pull-right">
-                              <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+               <div class="footer-copy text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="pull-left">
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                         <ul>
+                            <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
           </div>

@@ -162,6 +162,22 @@ $sessionData = new stdClass;
 		}
 	}
 
+	public function forgotPassword()
+
+	{
+		if (isset($this->session->userdata['adminSession']) || isset($this->session->userdata['userSession'])) {
+			redirect('cLogin/viewDashBoard');
+		}else{
+			$this->load->view('imports/vHeaderSignUpPage');
+			$this->load->view('vForgotPassword');
+			$this->load->view('imports/vFooterLandingPage');
+		}
+		
+
+	}
+
+
+	
 
 
 
