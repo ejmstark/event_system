@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <!-- <label for="name">Middle Initial</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_MIDDLE_INITIAL ?></label>
-                                    <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+                                    <input type="text" minlength="1" maxlength="1" style="width: 40px" <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
                                 </div>
                                 <div class="form-group">
                                     <!-- <label for="name">Last Name</label> -->
@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="email"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_CONTACT_NUMBER ?> eg. (09XX-XXX-XXXX) | (XXX-XXXX)</label>
-                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
+                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
                                     <!-- <label for="email">Username</label> -->

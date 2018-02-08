@@ -188,11 +188,11 @@ foreach($going as $g){
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date Start</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_date_start; ?></span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start")); ?></span>
                                     </li>
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date End</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_date_end; ?></span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start"));  ?></span>
                                     </li>
 
                                     <!-- <li>
