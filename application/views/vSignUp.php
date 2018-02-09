@@ -23,13 +23,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-<<<<<<< HEAD
-                    <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
-=======
                     <div class="navbar-brand">
                         <img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>">
                     </div>
->>>>>>> 3a4ec3ee21ec5163c497c74e9f1da1822da5939d
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -79,7 +75,7 @@
                                 <div class="form-group">
                                     <!-- <label for="name">Middle Initial</label> -->
                                     <label for="name"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_MIDDLE_INITIAL ?></label>
-                                    <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
+                                    <input type="text" minlength="1" maxlength="1" style="width: 40px" <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
                                 </div>
                                 <div class="form-group">
                                     <!-- <label for="name">Last Name</label> -->
@@ -92,15 +88,10 @@
                                     <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
                                 </div>
                                 <div class="form-group">
-<<<<<<< HEAD
-                                    <label for="email">Birthdate</label>
-                                    <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" max="<?php echo date('Y-m-d'); ?>" required="">
-=======
                                     <!-- <label for="email">Birthdate</label> -->
                                     <label for="email"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_BIRTHDATE ?></label>
 
                                     <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
->>>>>>> 3a4ec3ee21ec5163c497c74e9f1da1822da5939d
 
 
 
@@ -117,13 +108,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-<<<<<<< HEAD
-                                    <label for="email">Contact Number</label>
-                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?> pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
-=======
                                     <label for="email"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_CONTACT_NUMBER ?> eg. (09XX-XXX-XXXX) | (XXX-XXXX)</label>
-                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
->>>>>>> 3a4ec3ee21ec5163c497c74e9f1da1822da5939d
+                                    <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{2}-\d{3}-\d{4}$|^\d{3}-\d{4}$" class="form-control" name="contact" id="email" required="">
                                 </div>
                                 <div class="form-group">
                                     <!-- <label for="email">Username</label> -->

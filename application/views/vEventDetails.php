@@ -188,11 +188,11 @@ foreach($going as $g){
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date Start</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_date_start; ?></span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start")); ?></span>
                                     </li>
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date End</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_date_end; ?></span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start"));  ?></span>
                                     </li>
 
                                     <!-- <li>
@@ -331,7 +331,11 @@ foreach($going as $g){
 
                                                  </form> -->
 
-                                                 <?php if(!$bought){?>
+                                                 <?php 
+                                                $now = new DateTime("now");
+                                                $end = new DateTime($e->event_date_end);
+
+                                                 if(!$bought && $now <= $end){?>
                                                    <a href="<?php echo site_url();?>/event/cEvent/buyTicket/<?php echo $t->ticket_type_id;?>/<?php echo $e->event_id;?>"><input hidden class="val" value="<?php echo $t->price;?>">
                                                 <button   class="buy navbar-btn nav-button wow bounceInRight login animated" >Buy</button></a>
                                                 <?php }?>
@@ -361,7 +365,7 @@ foreach($going as $g){
                                     <h3 class="panel-title">Ads here</h3>
                                 </div>
                                 <div class="panel-body recent-property-widget">
-                                    <img src="assets/img/ads.jpg">
+                                    <img src="<?php echo base_url("assets/nikkiAssets/img/ads.jpg"); ?>">
                                 </div>
                             </div>
 
@@ -532,9 +536,7 @@ foreach($going as $g){
                         </div>
                         <div class="bottom-menu pull-right">
                             <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
                             </ul>
                         </div>
                     </div>

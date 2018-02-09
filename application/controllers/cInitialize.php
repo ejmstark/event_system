@@ -46,6 +46,7 @@ class CInitialize extends CI_Controller {
 
 	public function viewAboutUs(){
 		$this->load->view('vAboutUs');
+		
 	}
 
 	public function viewEventsHomepage(){

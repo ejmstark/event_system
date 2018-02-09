@@ -19,7 +19,7 @@
 	 		<div class = "col-sm-10 div-content">
 				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/cInitialize"><?php echo CustomizationManager::$strings->WELCOME_PAGE_NAV_HOME ?></a></div>
 				<div class = "col-sm-2"><a href = "#"><?php echo CustomizationManager::$strings->WELCOME_PAGE_NAV_EVENTS ?></a> </div>
-				<div class = "col-sm-2"><a href = "#"><?php echo CustomizationManager::$strings->WELCOME_PAGE_NAV_ABOUT ?></a></div>
+				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/CInitialize/viewAboutUs"><?php echo CustomizationManager::$strings->WELCOME_PAGE_NAV_ABOUT ?></a></div>
 				<?php if (!$this->session->userdata('userSession')) { ?>
 				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/cLogin"><?php echo CustomizationManager::$strings->WELCOME_PAGE_NAV_LOGIN ?></a> </div><?php }?>
 				<div class = "col-sm-2"><a href = "<?php echo site_url();?>/user/cUser/viewSignUp"><?php echo CustomizationManager::$strings->WELCOME_PAGE_NAV_REGISTER ?></a> </div>

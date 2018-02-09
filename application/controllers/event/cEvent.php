@@ -415,29 +415,38 @@ class CEvent extends CI_Controller {
 				$totalNumTix += $data1['ticket_count'];
 				$this->MTicketType->insert($data1);
 
-				if($this->input->post('ticketType2')||$this->input->post('no_tickets_total2')||$this->input->post('no_tickets_total2')){
-					$data1['ticket_name'] = $this->input->post('ticketType2');
-					$data1['ticket_count'] = $this->input->post('no_tickets_total2');
-					$data1['price'] = $this->input->post('price_tickets_total2');
-
-					$data1['event_id'] = $evt_id;
-					$totalNumTix += $data1['ticket_count'];
-					$this->MTicketType->insert($data1);
+				$datetime1 = new DateTime($this->input->post('dateStart'));
+				$datetime2 = new DateTime($this->input->post('dateEnd'));
+				$interv = date_diff($datetime2, $datetime1);
+	
+				$no = $interv->format('%H:%I:%S');
+				if($no > 0){
+					if($this->input->post('ticketType2')||$this->input->post('no_tickets_total2')||$this->input->post('no_tickets_total2')){
+						$data1['ticket_name'] = $this->input->post('ticketType2');
+						$data1['ticket_count'] = $this->input->post('no_tickets_total2');
+						$data1['price'] = $this->input->post('price_tickets_total2');
+	
+						$data1['event_id'] = $evt_id;
+						$totalNumTix += $data1['ticket_count'];
+						$this->MTicketType->insert($data1);
+					}
+	
+					if($this->input->post('ticketType3')||$this->input->post('no_tickets_total3')||$this->input->post('no_tickets_total3')){
+						$data1['ticket_name'] = $this->input->post('ticketType3');
+						$data1['ticket_count'] = $this->input->post('no_tickets_total3');
+						$data1['price'] = $this->input->post('price_tickets_total3');
+	
+						$data1['event_id'] = $evt_id;
+						$totalNumTix += $data1['ticket_count'];
+						$this->MTicketType->insert($data1);
+					}
+	
+					$where =  array('no_tickets_total' => $totalNumTix );
+					$res = $this->MEvent->update($evt_id,$where);
+					$flag = $res;
+				}else{
+					$this->load->view('error_404');
 				}
-
-				if($this->input->post('ticketType3')||$this->input->post('no_tickets_total3')||$this->input->post('no_tickets_total3')){
-					$data1['ticket_name'] = $this->input->post('ticketType3');
-					$data1['ticket_count'] = $this->input->post('no_tickets_total3');
-					$data1['price'] = $this->input->post('price_tickets_total3');
-
-					$data1['event_id'] = $evt_id;
-					$totalNumTix += $data1['ticket_count'];
-					$this->MTicketType->insert($data1);
-				}
-
-				$where =  array('no_tickets_total' => $totalNumTix );
-				$res = $this->MEvent->update($evt_id,$where);
-				$flag = $res;
 			}
 			if($flag){
 				echo'
