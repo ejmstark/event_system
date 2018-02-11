@@ -15,7 +15,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -33,6 +33,7 @@
 
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                         <!--
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
@@ -54,7 +55,6 @@
         </div>
         <!-- End page header -->
  
-
         <?php
             if($announcements!=FALSE){
                 foreach ($announcements as $announcement) {
@@ -63,7 +63,7 @@
                         echo  "
                             <div class='box-container'>
                                 <div class='box-header'>
-                                    <div class='box-author--no-cover'  id='announcementID'>
+                                    <div class='box-author--no-cover'  id='".$announcement->announcementID."'>
                                         <h3>".$announcement->first_name." ".$announcement->last_name."</h3>
                                     </div>
                                   </div>
@@ -169,9 +169,8 @@
                         </div>
                         <div class="bottom-menu pull-right">
                             <ul>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -179,3 +178,10 @@
             </div>
 
         </div>
+
+<script>
+    $(document).ready(function() { 
+        $('html, body').animate({ scrollTop: $('#<?php echo $clickedAnnouncement; ?>').offset().top}, 'slow');
+    });
+</script>
+

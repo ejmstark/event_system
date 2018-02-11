@@ -1,7 +1,7 @@
 <?php 
 
     require('assets/CustomizationManager.php');
-    CustomizationManager::SetTheme("configurations 1");
+    CustomizationManager::SetTheme("configurations 0");
     
     class cError404 extends CI_Controller {
         

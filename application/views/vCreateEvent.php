@@ -2,7 +2,7 @@
 <!-- Add these lines below to pages with customizable elements -->
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 1");
+  CustomizationManager::SetTheme("configurations 0");
 ?>
 <!-- Up to here -->
 <html>
@@ -85,8 +85,8 @@
 
             <span>ENDS</span> <br>
             <div class="row container">
-                <div class="col-md-6 timeContainer">
-                    <div class="container">
+                <div class="col-md-6 ">
+                    <div class="container timeContainer">
                         <input type="text" value="<?php if(!empty($end_date)){
                             echo $end_date." ".$end_time;
                         }else{

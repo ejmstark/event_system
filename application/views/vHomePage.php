@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="col-md-12">
 				<div class="row">
-					<div class="list-of-events">
+					<div class="list-of-events"  id="targ2">
 						<?php
 	                    	$cnt =1;
 	                        if(isset($events)){
@@ -36,7 +36,7 @@
 													</div>
 													<div class = "event-location">
 														<div class="location-icon"></div>
-														<span>CIT University, Cebu City</span>
+														<span><?php echo $event->event_venue.', '.$event->location[0]->location_name.', '.$event->location[0]->region_code.'';?></span>
 													</div>
 												</div>
 											</div>

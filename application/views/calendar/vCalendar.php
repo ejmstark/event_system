@@ -1,7 +1,7 @@
 <!-- Add these lines below to pages with customizable elements -->
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 1");
+  CustomizationManager::SetTheme("configurations 0");
 ?>
 <!-- Up to here -->
 
@@ -23,8 +23,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a> -->
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
+
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -33,18 +33,14 @@
                       <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->PROFILE_PAGE_LOGOUT_BUTTON ?> </button></a>
                   </div>
                   <div class="button navbar-right">
-                      <!-- <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a> -->
                       <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->PROFILE_PAGE_CREATE_EVENT_BUTTON ?> </button></a>
                   </div>
 
                   <ul class="main-nav nav navbar-nav navbar-right">
-                      <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                      <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li> -->
                       <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_HOME ?></a></li>
-                      <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_PROFILE ?></a></li>
-                      <!--
-                      <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
-                      <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_PROFILE ?></a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -81,8 +77,6 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                          <!-- <p>Insufficient balance?
-                                               <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" >Load Now</a> -->
                                              <p><?php echo CustomizationManager::$strings->PROFILE_PAGE_INSUFFICIENT_BALANCE ?>
                                                   <a style=" color: #e2624b; cursor:pointer; border-bottom: 1.5px solid #e2624b;padding-bottom: 2px"  onMouseOver="this.style.color='#ffcec0';this.style.paddingBottom='8px';this.style.borderBottom='3px solid #e2624b';"    onMouseOut="this.style.color='#e2624b' ;this.style.paddingBottom='2px';" type="button" class="dbutton " id="load" ><?php echo CustomizationManager::$strings->PROFILE_PAGE_LOAD_NOW ?></a>
 
@@ -148,132 +142,6 @@
                                     </fieldset>
                                 </div>
                                 <br><br>
-                                <div class="panel-heading">
-                                  <!-- <h3 class="panel-title">Search</h3> -->
-                                  <h3 class="panel-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_HEADER ?></h3>
-                                </div>
-                                <div class="panel-body search-widget">
-                                    <form action="" class=" form-inline">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                    <input type="text" class="form-control" placeholder="Key word">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-xs-6">
-
-                                                    <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
-                                                        <option>Attraction</option>
-                                                        <option>Appearance</option>
-                                                        <option>Competition</option>
-                                                        <option>Concert</option>
-                                                        <option>Conference</option>
-                                                        <option>Convention</option>
-                                                        <option>Festival</option>
-                                                        <option>Gala</option>
-                                                        <option>Meeting</option>
-                                                        <option>Party</option>
-                                                        <option>Rally</option>
-                                                        <option>Retreat</option>
-                                                        <option>Screening</option>
-                                                        <option>Seminar</option>
-                                                        <option>Tour</option>
-                                                        <option>Others</option>
-                                                    </select>
-                                                </div>
-
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                  <!-- <label for="price-range">Price range (P):</label> -->
-                                                  <label for="price-range"><?php echo CustomizationManager::$strings->PROFILE_PAGE_PRICE_RANGE ?></label>
-                                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                                           data-slider-max="10000" data-slider-step="5"
-                                                           data-slider-value="[0,1000]" id="price-range" ><br />
-                                                    <b class="pull-left color">P0.00</b>
-                                                    <b class="pull-right color">P10,000.00</b>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Workshops</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox"> Parties</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Food Bazaar</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox" checked> Fashion Shows</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label><input type="checkbox"> Concerts </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label> <input type="checkbox"> Exhibits</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset class="padding-5">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox" checked> Sports Event </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="checkbox">
-                                                        <label>  <input type="checkbox"> Others </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-
-                                        <fieldset >
-                                            <div class="row">
-                                                <div class="col-xs-12">
-                                                  <!-- <input class="button btn largesearch-btn" value="Search" type="submit"> -->
-                                                  <input class="button btn largesearch-btn" value="<?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_BUTTON ?>" type="submit">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
                             </div>
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
@@ -732,24 +600,19 @@
                   </div>
               </div>
 
-              <div class="footer-copy text-center">
-                  <div class="container">
-                      <div class="row">
-                          <div class="pull-left">
-                              <span> (C) UI Module , All rights reserved 2017  </span>
-                          </div>
-                          <div class="bottom-menu pull-right">
-                              <ul>
-                                <!-- <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li> -->
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><?php echo CustomizationManager::$strings->FOOTER_NAV_EVENTS ?></a></li>
-                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><?php echo CustomizationManager::$strings->FOOTER_NAV_CONTACT ?></a></li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+               <div class="footer-copy text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="pull-left">
+                            <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                         <ul>
+                            <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                          </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
           </div>

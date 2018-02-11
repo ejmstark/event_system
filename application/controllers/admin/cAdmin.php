@@ -70,7 +70,7 @@ class CAdmin extends CI_Controller {
 		$event_module = new MEventInfo();
 
 		$data = array('event_id' => $id);
-		$results = $this->MUserInfo->read_where($data);
+		$results = $event_module->read_where($data);
 
 		if($results){
 			$response = $event_module-> updateEventStatus($id, "Rejected");
@@ -98,6 +98,14 @@ class CAdmin extends CI_Controller {
 	public function searchUsers(){
 		$user_module = new MUserInfo();
 		if(isset($_POST['search_val'])){
+			if (trim($_POST['search_val']) == ""){
+				$result = $this->readAllUsers();
+				if($result){
+					return $result;
+				}else{
+					return false;
+				}
+			}
 			$data = array('user_name' => $_POST['search_val']);
 			$result= $this->MUserInfo->read_where($data);
 			if($result){
@@ -156,6 +164,9 @@ class CAdmin extends CI_Controller {
 		$data = array('user_type !=' => 'Regular');
 		$result = $this->MUserInfo->read_where($data);
 		if($result){
+			// echo "<pre>";
+			// var_dump($result);
+			// die();
 			return $result;
 		}else{
 			return false;
@@ -352,6 +363,39 @@ class CAdmin extends CI_Controller {
 
 	}
 
+	public function adminSettings() {
+		$result_data = array();//
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					 $arrObj = new stdClass;
+					//Only interface filtering
+					// $arrObj->account_id = $value->account_id;
+					// $arrObj->user_name = $value->user_name;
+					// $arrObj->first_name = $value->first_name;
+					// $arrObj->middle_initial = $value->middle_initial;
+					// $arrObj->last_name = $value->last_name;
+					// $arrObj->email= $value->email;
+					// $arrObj->contact_no= $value->contact_no;
+					// $arrObj->birthdate= $value->birthdate;
+					// $arrObj->date_account_created = $value->date_account_created;
+					// $arrObj->gender = $value->gender;
+					// $arrObj->user_type = $value->user_type;
+					// $arrObj->user_status = $value->user_status;
+					// $arrObj->load_amt = $value->load_amt;
+					$array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$this->load->view('imports/admin_vHeader');
+		$this->load->view('admin/vSettings');
+		$this->load->view('imports/admin_vFooter');
+
+	}
+
 	public function generateCard() {
 		$this->load->view('imports/admin_vHeader');
 		$this->load->view('admin/vCards');
@@ -380,9 +424,15 @@ class CAdmin extends CI_Controller {
 		$result = $user->update($this->session->userdata['adminSession']->userID, $data);
 
 		if($result){
-			//$this->index();
-			redirect('admin/cAdmin/viewAdminAccountMgt');
+			$message = "Succesful update";
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			header('refresh:1;viewAdminAccountMgt');
+		}else{
+			$message = "Update fail";
+			echo "<script type='text/javascript'>alert('$message');</script>";
+			header('refresh:;viewAdminAccountMgt');
 		}
+
 	}
 
 	public function Delete($id,$frm){
@@ -540,18 +590,29 @@ class CAdmin extends CI_Controller {
 	public function createAnnouncement() {
 		$announcement = new MAnnouncement();
 
-		$now = NEW DateTime(NULL, new DateTimeZone('UTC'));
+		// $now = NEW DateTime(NULL, new DateTimeZone('UTC'));
 
 		$data = array('announcementDetails' => $this->input->post('announcementDetails'),
 					  'announcementStatus' => 'OnGoing',
 					  'addedBy' => $this->input->post('postedBy'),
-					  'addedAt' => $now->format('Y-m-d H:i:s')
+					  // 'addedAt' => $now->format('Y-m-d H:i:s')
 					);
 
 		$result = $announcement->insert($data);
-
+		 $id= $announcement->db->insert_id();
 		if($result){
 			//$this->index();
+			//$this->index();
+			$notif = new MNotificationItem();
+			$user = $this->MUser->getAllUsers();
+			foreach ($user as $key) {
+				$data = array('user' => $key->account_id,
+							  'announcement' => $id
+							);
+
+				$result = $notif->insert($data);	
+			}
+			
 			redirect('admin/cAdmin/viewAnnouncements');
 		}
 	}
@@ -599,4 +660,19 @@ class CAdmin extends CI_Controller {
 		$this->load->view('imports/admin_vFooter');
 	}
 
+public function updateAccount() {
+	$data2['admin']=$this->readAllAdmin();
+		$data2['ownAdminAccount']=$this->readOwnAdminAccount();
+		////////////STOPS HERE///////////////////////////////////////////////////
+
+
+		$this->load->view('imports/admin_vHeader');
+		$this->load->view('admin/vUpdateAccount', $data2);
+		$this->load->view('imports/admin_vFooter');
+
+
+
+	}
 }
+
+

@@ -1,7 +1,7 @@
 <!-- Add these lines below to pages with customizable elements -->
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 1");
+  CustomizationManager::SetTheme("configurations 0");
 ?>
 <!-- Up to here -->
 
@@ -22,8 +22,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <!-- <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a> -->
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -37,13 +36,11 @@
                     </div>
 
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li> -->
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_HOME ?></a></li>
                         <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents"><?php echo CustomizationManager::$strings->PROFILE_PAGE_NAV_PROFILE ?></a></li>
-                        <!--
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewPreferenceEvents">Interested Events</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -69,6 +66,7 @@
                 </div>
             </div>
         </div>
+
         <!-- End page header -->
 
         <!-- property area -->
@@ -158,132 +156,6 @@
                                 </fieldset>
                             </div>
                             <br><br>
-                            <div class="panel-heading">
-                                <!-- <h3 class="panel-title">Search</h3> -->
-                                <h3 class="panel-title"><?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_HEADER ?></h3>
-                            </div>
-                            <div class="panel-body search-widget">
-                                <form action="" class=" form-inline">
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Key word">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-
-                                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
-                                                    <option>Attraction</option>
-                                                    <option>Appearance</option>
-                                                    <option>Competition</option>
-                                                    <option>Concert</option>
-                                                    <option>Conference</option>
-                                                    <option>Convention</option>
-                                                    <option>Festival</option>
-                                                    <option>Gala</option>
-                                                    <option>Meeting</option>
-                                                    <option>Party</option>
-                                                    <option>Rally</option>
-                                                    <option>Retreat</option>
-                                                    <option>Screening</option>
-                                                    <option>Seminar</option>
-                                                    <option>Tour</option>
-                                                    <option>Others</option>
-                                                </select>
-                                            </div>
-
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <!-- <label for="price-range">Price range (P):</label> -->
-                                                <label for="price-range"><?php echo CustomizationManager::$strings->PROFILE_PAGE_PRICE_RANGE ?></label>
-                                                <input type="text" class="span2" value="" data-slider-min="0"
-                                                       data-slider-max="10000" data-slider-step="5"
-                                                       data-slider-value="[0,1000]" id="price-range" ><br />
-                                                <b class="pull-left color">P0.00</b>
-                                                <b class="pull-right color">P10,000.00</b>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Workshops</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Parties</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Food Bazaar</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked> Fashion Shows</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox"> Concerts </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox"> Exhibits</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox" checked> Sports Event </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label>  <input type="checkbox"> Others </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset >
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <!-- <input class="button btn largesearch-btn" value="Search" type="submit"> -->
-                                                <input class="button btn largesearch-btn" value="<?php echo CustomizationManager::$strings->PROFILE_PAGE_SEARCH_BUTTON ?>" type="submit">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
                         </div>
 
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
@@ -295,7 +167,7 @@
                                         <ul>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> JS Workshop </a></h6>
@@ -304,7 +176,7 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Music Concert </a></h6>
@@ -313,7 +185,7 @@
                                         </li>
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Some Party </a></h6>
@@ -322,7 +194,7 @@
                                         </li>
                                        <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                                <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                                                <a href="single.html"><img src="<?php echo base_url('assets/nikkiAssets/img/demo/small-property-2.jpg');?>"></a>
                                             </div>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
                                                 <h6> <a href="single.html"> Food Bazaar </a></h6>
@@ -338,15 +210,57 @@
 
                 <div class="col-md-9  pr0 padding-top-40 properties-page">
 
-<div>
+<div >
+    <div class="container">
+        <div class="row es-wrap">
+            <div class="event-search">
+                <div class="panel-body search-widget">
+                    <form action="" class=" form-inline">
+                        <fieldset>
+                            <div class="col-xs-4 col-lg-4">
+                                <input type="text" class="form-control" placeholder="Key word">
+                            </div>
+                            <div class="col-xs-4 col-lg-2">
+                                <select id="lunchBegins" class="selectpicker" data-live-search="true" data-live-search-style="begins" title="Category">
+                                    <option>Attraction</option>
+                                    <option>Appearance</option>
+                                    <option>Competition</option>
+                                    <option>Concert</option>
+                                    <option>Conference</option>
+                                    <option>Convention</option>
+                                    <option>Festival</option>
+                                    <option>Gala</option>
+                                    <option>Meeting</option>
+                                    <option>Party</option>
+                                    <option>Rally</option>
+                                    <option>Retreat</option>
+                                    <option>Screening</option>
+                                    <option>Seminar</option>
+                                    <option>Tour</option>
+                                    <option>Others</option>
+                                </select>
+                            </div>
+                            <div class="col-xs-2 col-lg-2">
+                                <div class="price-range-wrap">
+                                    <label for="price-range" style="color:#000">Price range (P):</label>
+                                        <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5"
+                                                        data-slider-value="[0,1000]" id="price-range" ><br />
+                                        <b class="pull-left color" style="color:#000">P0.00</b>
+                                        <b class="pull-right color" style="color:#000" >P10,000.00</b>
+                                </div>
+                            </div>
+                            <div class="col-xs-2 col-lg-2">
+                                <input class="button btn smallsearch-btn" value="Search" type="submit">
+                             </div>
+                        </fieldset>
+                    </form>
+                 </div>
+            </div>
+        </div>
+    </div>
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" id="myTabs" role="tablist">
-    <!-- <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">My Events</a></li>
-    <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reports</a></li>
-    <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Payment History</a></li>
-
-    <li role="presentation" class="tab"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li> -->
     <li role="presentation" class="tab active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_EVENTS ?></a></li>
     <li role="presentation" class="tab"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_REPORTS ?></a></li>
     <li role="presentation" class="tab"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><?php echo CustomizationManager::$strings->PROFILE_PAGE_TAB_PAYMENT_HISTORY ?></a></li>
@@ -360,12 +274,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
         <div class="col-md-12 clear">
-            <div class="row">
-                <div class="col-xs-12 layout-switcher pull-right">
-                    <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
-                    <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                </div>
-            </div>
+
 
             <div id="list-type" class="proerty-th">
 
@@ -380,7 +289,7 @@
                                         <a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"><img  style="max-height: 50px;" src="<?php echo base_url();?><?php echo $event->event_picture; ?>"></a>
                                     </div>
                                        <div class="item-entry overflow">
-                                        <h5><a href="<?php echo site_url();?>/cLogin/viewEventDetails"> <?php
+                                        <h5><a href="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $event->event_id;?>"> <?php
                                                 if(strlen($event->event_name)>=26){
                                                     echo substr($event->event_name,0,23)."...";
                                                 }else{
@@ -415,7 +324,23 @@
 
 
                                                 ?>
-
+                                             <table class="table-condensed table-responsive">
+                                                                <thead>
+                                                                    <th>Ticket Name</th>
+                                                                    <th>Ticket Price</th>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <?php
+                                                                    foreach ($event->tix as $key) {?>
+                                                                    <tr>
+                                                                        <td><?php echo$key->name;?></td>
+                                                                        <td><?php echo$key->price;?></td>
+                                                                    </tr>
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                </tbody>
+                                                            </table>
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b> Date: </b> <?php echo $event->dateStart;?>  </span>
                                             <span class="proerty-price pull-right"><?php echo $event->event_status;?> </span>
@@ -473,7 +398,7 @@
                                             <td><?php echo $e->event_name;?></td>
                                             <td><?php echo $e->dateStart;?></td>
                                             <td><?php echo $e->event_status;?></td>
-                                            <td><?php echo $e->event_venue;?></td>
+                                            <td><?php echo $e->event_venue.', '.$e->location[0]->location_name.', '.$e->location[0]->region_code.'';?></td>
                                             <td><?php echo $e->event_category;?></td>
                                             <td>
                                                 <div class="panel-body search-widget">
@@ -576,65 +501,71 @@
                         </table>
                     </div>
     </div>
-    <div role="tabpanel" class="tab-pane" id="settings">
+    <!-- <div role="tabpanel" class="tab-pane" id="settings">
     </div>
-
+ -->
      <div role="tabpanel" class="tab-pane" id="editprofile">
         <h2>Edit Profile</h2>
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="name">First Name</label>
-                 <input type="text" <?php  if(isset($first_name)){echo 'value="'.$first_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
-            </div>
+        <?php foreach($info as $in){ ?>
+            <form  method="POST" action="<?php echo site_url()?>/cEvent/updateProfile">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="first name">First Name</label>
+                    <input type="text" <?php  echo 'value="'.$in->first_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="fname" id="name" required="">
+                </div>
 
-             <div class="form-group">
-                 <label for="name">Middle Initial</label>
-                <input type="text"  <?php  if(isset($middle_initial)){echo 'value="'.$middle_initial.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="miname" id="name" required="">
-            </div>
+                <div class="form-group">
+                    <label for="middle initial">Middle Initial</label>
+                    <input type="text"  <?php  echo 'value="'.$in->middle_initial.'"';?> class="form-control" pattern="[a-zA-Z]+" name="midname" id="name" required="">
+                </div>
 
-            <div class="form-group">
-                <label for="name">Last Name</label>
-                <input type="text"  <?php  if(isset($last_name)){echo 'value="'.$last_name.'"';}?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
-            </div>
-
-           <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
-            </div>
-
-           <div class="form-group">
-                <label for="email">Birthdate</label>
-                <input type="date"  <?php  if(isset($birthdate)){echo 'value="'.$birthdate.'"';}?> name="bdate" required="">
-            </div>
+                <div class="form-group">
+                    <label for="last name">Last Name</label>
+                    <input type="text"  <?php  echo 'value="'.$in->last_name.'"';?> class="form-control" pattern="[a-zA-Z]+" name="lname" id="name" required="">
+                </div>
 
             <div class="form-group">
-                <label for="email">Gender</label>
-                <select class="form-control" name="gender">
-                    <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
-                    <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
-                    <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
-                </select>
-            </div>
+                    <label for="email">Email</label>
+                    <input type="email"  <?php  echo 'value="'.$in->email.'"';?> class="form-control" name="email" id="email" pattern="[^ @]*@[^ @]*" required="">
+                </div>
 
             <div class="form-group">
-                <label for="email">Contact Number</label>
-                <input type="text" <?php  if(isset($contact_no)){echo 'value="'.$contact_no.'"';}?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" required="">
-            </div>
-            <div class="form-group">
-                <label for="email">Username</label>
-                <input type="text" minlength="6" <?php  if(isset($user_name)){echo 'value="'.$user_name.'"';}?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="email">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" <?php  if(isset($password)){echo 'value="'.$password.'"';}?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit Profile</button>
-            </div>
+                    <label for="birthdate">Birthdate</label>
+                    <input type="date"  <?php  echo 'value="'.$in->birthdate.'"';?> name="bdate" required="">
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control" name="gender">
+                        <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
+                        <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
+                        <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact no">Contact Number (09XXXXXXXXX) </label>
+                    <input type="text" <?php  echo 'value="'.$in->contact_no.'"';?>  pattern="^(09)\d{9}$" class="form-control" name="contact" id="email" pattern="^(09)\d{9}$" required="">
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" minlength="6"<?php  echo 'value="'.$in->user_name.'"';?> required="" class="form-control" pattern="[a-zA-Z0-9]+" name="uname" id="uname">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" <?php  echo 'value="'.$in->password.'"';?> class="form-control" required="" minlength="8" pattern="[a-zA-Z0-9]+" name="password" id="password">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cEvent/updateProfile"> -->Edit Profile</button>
+                </div>
 
 
-        </div>
+            </div>
+        </form>
 
+        <?php
+            }
+        ?>
     </div>
 
 
@@ -643,59 +574,34 @@
 
   <script type="text/javascript">
 
-    $('.tab a').on('click', function (e) {
-      e.preventDefault();
-      console.log('clicked');
-      $(this).parent().addClass('active');
-      $(this).parent().siblings().removeClass('active');
+    /*
+    $(document).ready(function(){
+        var wrap = $(this).find('.es-wrap');
+        $('.tab a').on('click', function (e) {
+            e.preventDefault();
+            console.log('clicked');
+            $(this).parent().addClass('active');
+            $(this).parent().siblings().removeClass('active');
 
-      target = $(this).attr('href');
+            target = $(this).attr('href');
 
-      $('.tab-content > div').not(target).hide();
+            $('.tab-content > div').not(target).hide();
 
-      $(target).fadeIn(600);
+            $(target).fadeIn(600);
 
-});
+        });
+
+        $(this).scroll(function(e){
+            if($(this).scrollTop() > 225){
+                wrap.addClass("fix-search");
+            }else{
+                wrap.removeClass("fix-search");
+            }
+        });
+    });/*
 </script>
 
 </div>
-
-                    <div class="col-md-12 clear">
-                        <div class="col-xs-10 page-subheader sorting pl0">
-                            <!-- <ul class="sort-by-list">
-                                <li class="active">
-                                    <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
-                                        Event Date <i class="fa fa-sort-amount-asc"></i>
-                                    </a>
-                                </li>
-                                <li class="">
-                                    <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
-                                        Event Ticket Price <i class="fa fa-sort-numeric-desc"></i>
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <div class="items-per-page">
-                                <label for="items_per_page"><b>Events per page :</b></label>
-                                <div class="sel">
-                                    <select id="items_per_page" name="per_page">
-                                        <option value="3">3</option>
-                                        <option value="6">6</option>
-                                        <option value="9">9</option>
-                                        <option selected="selected" value="12">12</option>
-                                        <option value="15">15</option>
-                                        <option value="30">30</option>
-                                        <option value="45">45</option>
-                                        <option value="60">60</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>-->
-
-
-                    </div>
-
-
                 </div>
                 </div>
             </div>
@@ -718,21 +624,9 @@
 
                                <!-- <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" > -->
                                <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
-                                <!-- <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p> -->
                                 <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
 
                                 <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
-                                <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
-                                <ul class="footer-adress">
-                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
-                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
-                                </ul>
-
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
-                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-
-
                             </div>
                         </div>
 
@@ -741,32 +635,10 @@
                                 <!-- <h4>Contact Us</h4> -->
                                 <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
-
-                                <p>Lorem ipsum dolor sit amet, nulla  suscipit similique quisquam molestias. Vel unde, blanditiis.</p>
-
-                                <form>
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" placeholder="E-mail ... ">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
-                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </form>
-
-                                <div class="social pull-right">
-                                    <ul>
-                                        <li><a class="wow fadeInUp animated" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                        <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul>
-                                </div>
-
                                 <ul class="footer-adress">
-                                    <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
-                                    <li><i class="pe-7s-call strong"> </i> 253-2753</li>
+                                    <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
+                                    <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
+                                    <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
                                 </ul>
                             </div>
                         </div>
@@ -775,20 +647,15 @@
                 </div>
             </div>
 
-            <div class="footer-copy text-center">
+           <div class="footer-copy text-center">
                 <div class="container">
                     <div class="row">
                         <div class="pull-left">
                             <span> (C) UI Module , All rights reserved 2017  </span>
                         </div>
                         <div class="bottom-menu pull-right">
-                          <ul>
-                            <!-- <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li> -->
-                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
-                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s"><?php echo CustomizationManager::$strings->FOOTER_NAV_EVENTS ?></a></li>
-                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s"><?php echo CustomizationManager::$strings->FOOTER_NAV_CONTACT ?></a></li>
+                         <ul>
+                            <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
                           </ul>
                         </div>
                     </div>
