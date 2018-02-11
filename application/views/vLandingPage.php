@@ -1,7 +1,7 @@
 <!-- Add these lines below to pages with customizable elements -->
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations ");
+  CustomizationManager::SetTheme("configurations 1");
 ?>
 <!-- Up to here -->
 
@@ -20,7 +20,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
 
-                    </button>    
+                    </button>
                     <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
@@ -121,7 +121,7 @@
                                     ?>
 
                                 </div>
-                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
+                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </div>
@@ -162,12 +162,12 @@
                                             <option value="60">60</option>
                                         </select>
                                     </div><!--/ .sel-->
-                        <!--  </div> --><!--/ .items-per-page--> 
+                        <!--  </div> --><!--/ .items-per-page-->
                     </div>
                    <!--  <div class="col-xs-2 layout-switcher">
                             <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i>  </a>
                             <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                    </div><!--/ .layout-switcher--> 
+                    </div><!--/ .layout-switcher-->
                 </div>
 
                 <div class="col-md-12 ">
@@ -193,9 +193,9 @@
                                                                     }else{
                                                                         echo '<div class="corner-ribbon top-right sticky red">'.$interval->days;
                                                                         echo ' day/s left!';
-                                                                        echo '</div>';      
+                                                                        echo '</div>';
                                                                     }
-                                                                }   
+                                                                }
 
                                                                 echo '<h3 class="text-center"><a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"> ';
 
@@ -204,11 +204,11 @@
                                                                 }else{
                                                                     echo $event->event_name;
                                                                 }
-                                                
+
                                                                 echo '</a></h3>';
 
                                                                 echo '<div class="item-thumb">
-                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="clip: rect(0px,100px,100px,0px); height:100px;" src="'.base_url($event->event_picture).'"></a></div>'; 
+                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="clip: rect(0px,100px,100px,0px); height:100px;" src="'.base_url($event->event_picture).'"></a></div>';
 
                                                                 echo '<h5>Where: '.$event->event_venue.', '.$event->location_name.', '.$event->region_code.'</h5>';
 
@@ -216,13 +216,13 @@
                                                                 $dateE = date_create($event->dateEnd);
                                                                 echo '<h5>When: '.date_format($dateS, 'M d Y').' - '.date_format($dateE, 'M d Y').'</h5>';
 
-                                                                                                              
-                                                    
+
+
                                                                 $mintix = $event->tix;
                                                                 foreach ($event->tix as $key) {
                                                                     $mintix = ($key->price <= $mintix)? $key->price : $mintix;
                                                                 }
-                                                                echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';          
+                                                                echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';
                                                                 echo '<div class="dot-hr"></div>
                                                             </div>
                                                         </div>
@@ -233,7 +233,7 @@
                                                     echo '<div class="box-two proerty-item">';
                                                         echo '<div class="item-entry overflow" >';
                                                                 echo '<div class="corner-ribbon top-right sticky red">Happening now!</div>';
-                                                                    
+
 
                                                                 echo '<h3 class="text-center"><a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"> ';
 
@@ -242,11 +242,11 @@
                                                                 }else{
                                                                     echo $event->event_name;
                                                                 }
-                                                
+
                                                                 echo '</a></h3>';
 
                                                                 echo '<div class="item-thumb">
-                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="clip: rect(0px,100px,100px,0px); height:100px;" src="'.base_url($event->event_picture).'"></a></div>'; 
+                                                                <a href="'.site_url().'/event/cEvent/displayEventDetails/'.$event->event_id.'"><img style="clip: rect(0px,100px,100px,0px); height:100px;" src="'.base_url($event->event_picture).'"></a></div>';
 
                                                                 echo '<h5>Where: '.$event->event_venue.', '.$event->location_name.', '.$event->region_code.'</h5>';
 
@@ -300,7 +300,7 @@
                                     <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
                                     <li><i class="pe-7s-mail strong"> </i> email@yourcompany.com</li>
                                     <li><i class="pe-7s-call strong"> </i> +1 908 967 5906</li>
-                                </ul>        
+                                </ul>
                             </div>
                         </div>
 
@@ -338,7 +338,7 @@
                     var d=data.split('/');
                     $('#bdg').remove();
                     // alert(d[0].trim());
-                   
+
                 },
                 error: function(data){
                     alert("error");
@@ -346,7 +346,7 @@
             });
         });
     } );
-    
+
     $(document).ready(function(){
         <?php if(isset($announcements)){
         foreach ($announcements as $key) {
@@ -371,8 +371,8 @@
             });
             <?php
         }
-       
-       
+
+
     }?>
 <?php ?>
     });

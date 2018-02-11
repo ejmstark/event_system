@@ -1,6 +1,6 @@
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 0");
+  CustomizationManager::SetTheme("configurations 1");
 ?>
 
 <html>
@@ -22,7 +22,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-    
+
         <style>
             a{
                 color:	#D2691E;
@@ -34,7 +34,7 @@
                 width: 50%;
                 padding: 10px;
             }
-            span{ 
+            span{
                 padding-left: 3.8em;
                 font-size: 16px;
             }
@@ -43,7 +43,7 @@
             }
             .content{
                 padding: 3em;
-                background-color: rgba(255, 255, 255, 0.5); 
+                background-color: rgba(255, 255, 255, 0.5);
             }
         </style>
     </head>
@@ -71,11 +71,10 @@
                     </span>
                     <br>
                     <br>
-                    <span>Lastly, I would like to give credit to the people who have made this application possible no matter how small or big the contribution they have to this project, their laughs, their blessings, their perseverance, their ideas and even their time, understanding that the entire class still had other matters to work on such as their thesis, helped all of us no matter how of a burden or hardship it may be, yet they persevered through and through. 
+                    <span>Lastly, I would like to give credit to the people who have made this application possible no matter how small or big the contribution they have to this project, their laughs, their blessings, their perseverance, their ideas and even their time, understanding that the entire class still had other matters to work on such as their thesis, helped all of us no matter how of a burden or hardship it may be, yet they persevered through and through.
                     </span>
                 </div>
             </div>
         </div>
     </body>
 </html>
-

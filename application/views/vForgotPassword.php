@@ -1,7 +1,7 @@
 <!-- Add these lines below to pages with customizable elements -->
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 0");
+  CustomizationManager::SetTheme("configurations 1");
 ?>
 <!-- Up to here -->
 <body>
@@ -70,7 +70,7 @@
                                  <div class="form-group">
                                     <input type="email"  <?php  if(isset($email)){echo 'value="'.$email.'"';}?> class="form-control" name="email" id="email" required="">
                                 </div>
-                               
+
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-default"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Submit</button>
                                 </div>
@@ -130,4 +130,3 @@
                 </div>
             </div>
         </div>
-

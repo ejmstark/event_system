@@ -1,7 +1,7 @@
 <!-- Add these lines below to pages with customizable elements -->
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations ");
+  CustomizationManager::SetTheme("configurations 1");
 ?>
 <!-- Up to here -->
 
@@ -45,11 +45,11 @@
         </nav>
         <!-- End of nav bar -->
 
-        <div class="page-head"> 
+        <div class="page-head">
             <div class="container">
                 <div class="row">
                     <div class="page-head-content">
-                        <h1 class="page-title">View Cart</h1>               
+                        <h1 class="page-title">View Cart</h1>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                                       </span>
                                     </div>
                                    <?php
-                                   foreach ($event as $cart) {                     
+                                   foreach ($event as $cart) {
                                    ?>
                                       <div class="panel panel-default" style="margin-left:3%;">
                                       <input type="hidden" class="cartID" value="<?php echo $cart->cart_id;?>" >
@@ -80,7 +80,7 @@
 
                                               <input type="checkbox" class="<?php echo 'tix'.key($events);?> indi" id="<?php echo $cart->ticket_type_id;?>" checked="checked">
                                               <span> Ticket Name:<strong><?php echo $cart->ticket_name;?></strong></span>
-                                              <span class="pull-right"> Price:<?php echo $cart->price;?> </span>                       
+                                              <span class="pull-right"> Price:<?php echo $cart->price;?> </span>
                                         </div>
                                        <div class="panel-body">
                                           <table class="table table-sm table-borderless">
@@ -98,20 +98,20 @@
                                                         </div>
                                                     </form>
                                                   </td>
-                                                  <td> 
+                                                  <td>
                                                     <form  method="POST" action="<?php echo site_url(); ?>/finance/cCart/deleteCartItem">
                                                       <input name="id" class="hidden" value="<?php echo $cart->cart_id;?>">
                                                       <button type="submit" class="btn btn-primary pull-right" type="button">
                                                       <span class="glyphicon glyphicon-trash delete"></span>
                                                       </button>
                                                     </form>
-                                                  </td>     
+                                                  </td>
                                                 </tr>
                                               </tbody>
-                                            </table>                                           
+                                            </table>
                                        </div>
                                      </div>
-                                   
+
                                    <?php
                                    }?>
                                    </div>
@@ -132,7 +132,7 @@
              </div>
          </div>
      <!--- END OF CONTENT AREA-->
-      
+
         <!-- Footer area-->
         <div class="footer-area">
 
@@ -187,7 +187,7 @@
 <script type="text/javascript">
   var panel;
     $(document).ready(function() {
-      
+
       // $(".delete").click(function(){
       //    panel= $(this).closest("div.panel");
       //   var id = panel.find("input.cartID").val();
@@ -206,7 +206,7 @@
       //       });
       // });
       $('input').on('ifChecked', function (event){
-          $(this).closest("input").attr('checked', true);          
+          $(this).closest("input").attr('checked', true);
           var id = $(this).closest("input").attr('id');
           $(document).find(".tix"+id).closest("div.icheckbox_square-yellow").addClass("checked");
           $(document).find(".tix"+id).attr("checked",true);
@@ -218,10 +218,10 @@
           //     console.log($(document).find(".tix"+temp));
 
           //     // if($(document).find(".tix"+temp).closest("div.icheckbox_square-yellow").hasClass("checked")){
-          //     //   $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");  
+          //     //   $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");
           //     //   $(document).find("#"+temp).attr("checked",true);
           //     // }
-              
+
           // });
           var cnt =0;
           var cnt1 =0;
@@ -233,7 +233,7 @@
               });
 
           if(cnt1+1 == cnt){
-            $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");  
+            $(document).find("#"+temp).closest("div.icheckbox_square-yellow").addClass("checked");
             $(document).find("#"+temp).attr("checked",true);
           }
       });
@@ -303,7 +303,7 @@
                     var d=data.split('/');
                     $('#bdg').remove();
                     // alert(d[0].trim());
-                   
+
                 },
                 error: function(data){
                     alert("error");
@@ -311,13 +311,13 @@
             });
         });
     } );
-    
+
     $(document).ready(function(){
         <?php if(isset($announcements)){
         foreach ($announcements as $key) {
             ?>
              $.notify({
-              title: "<?php echo '<strong>'.$key->announcementDetails.'</strong><br>';?>",              
+              title: "<?php echo '<strong>'.$key->announcementDetails.'</strong><br>';?>",
               icon: 'glyphicon glyphicon-info-sign',
               message: '<?php echo $key->ago." ".$key->agoU;?><a href="<?php echo site_url();?>/user/cUser/viewClickedAnnouncement/<?php echo $key->announcementID; ?>" >Click here...</a> '
             },{
@@ -336,8 +336,8 @@
             });
             <?php
         }
-       
-       
+
+
     }?>
 <?php ?>
     });

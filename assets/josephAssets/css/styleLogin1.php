@@ -1,7 +1,7 @@
 <?php
 	header('Content-type: text/css');
   require("../../CustomizationManager.php");
-  CustomizationManager::SetTheme("configurations 0");
+  CustomizationManager::SetTheme("configurations 1");
   $colors = CustomizationManager::$colors;
 ?>
 
