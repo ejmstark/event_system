@@ -258,10 +258,12 @@ foreach($going as $g){
                             <?php
                             echo '<div class="dealer-widget" style="background-image: url('."http://localhost/event_system/images/events/3.jpg".'); background-size: 100%;">';
                             ?>
+                            <div class="corner-ribbon top-right sticky red">Shibal</div>
                             <div class="dealer-content">
                                     <div class="inner-wrapper" >
 
                                         <div class="clear" >
+                                        
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
                                                     <img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle')?>">

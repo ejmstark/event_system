@@ -181,7 +181,7 @@
                                     $end = new DateTime($event->dateEnd);
                                     $start = new DateTime($event->dateStart);
                                     $interval = date_diff($now, $start);
-
+                                    $ribbon = null;
                                     if($now < $start){
                                                 echo '<div class="col-sm-6 col-md-4 p0" >';
                                                     echo '<div class="box-two proerty-item">';
@@ -189,11 +189,13 @@
 
                                                                 if($now < $start){
                                                                     if($interval->days == 0){
+                                                                        $ribbon = '<div class="corner-ribbon top-right sticky red">Less than a day!</div>';
                                                                         echo '<div class="corner-ribbon top-right sticky red">Less than a day!</div>';
                                                                     }else{
-                                                                        echo '<div class="corner-ribbon top-right sticky red">'.$interval->days;
-                                                                        echo ' day/s left!';
-                                                                        echo '</div>';      
+                                                                        $ribbon = '<div class="corner-ribbon top-right sticky red">'.$interval->days.' day/s left!</div>';
+                                                                        echo '<div class="corner-ribbon top-right sticky red">'.$interval->days.' day/s left!</div>';
+                                                                       // echo ' day/s left!';
+                                                                       // echo '</div>';      
                                                                     }
                                                                 }   
 
@@ -224,14 +226,15 @@
                                                                 }
                                                                 echo '<h5>Event Tickets as low as Php '.$mintix.'!!!</h5>';          
                                                                 echo '<div class="dot-hr"></div>
-                                                            </div>
                                                         </div>
-                                                    </div>';
+                                                    </div>
+                                                </div>';
 
                                             }else if($now >= $start && $now <= $end){
                                                 echo ' <div class="col-sm-6 col-md-4 p0">';
                                                     echo '<div class="box-two proerty-item">';
                                                         echo '<div class="item-entry overflow" >';
+                                                                $ribbon = '<div class="corner-ribbon top-right sticky red">Happening now!</div>';
                                                                 echo '<div class="corner-ribbon top-right sticky red">Happening now!</div>';
                                                                     
 
