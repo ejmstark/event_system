@@ -126,6 +126,8 @@ class CEvent extends CI_Controller {
 		
 		$uid = null; //to get organize name
 		
+		//$test = $this->uri->segment(4);
+
 		$data1 ['events'] = $this->MEvent->loadEventDetails($id);
 		$gID = $this->MEvent->loadEventDetails($id);
 		foreach ($gID as $k) {

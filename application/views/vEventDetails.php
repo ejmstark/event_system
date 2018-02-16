@@ -192,7 +192,7 @@ foreach($going as $g){
                                     </li>
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date End</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start"));  ?></span>
+                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_end"));  ?></span>
                                     </li>
 
                                     <!-- <li>
@@ -258,8 +258,28 @@ foreach($going as $g){
                             <?php
                             echo '<div class="dealer-widget" style="background-image: url('."http://localhost/event_system/images/events/3.jpg".'); background-size: 100%;">';
                             ?>
-                            <div class="corner-ribbon top-right sticky red">Shibal</div>
+                            
                             <div class="dealer-content">
+                            
+                            <?php
+                            //<div class="corner-ribbon top-right sticky red">Shibal</div>
+                                 date_default_timezone_set('Asia/Manila');
+                                 $now = new DateTime("now");
+                                 $end = new DateTime($e->event_date_end);
+                                 $start = new DateTime($e->event_date_start);
+                                 $interval = date_diff($now, $start);
+
+                                 if($now < $start){
+                                    if($interval->days == 0){
+                                        echo "<div class='corner-ribbon top-right sticky red'>Less than a day!</div>";
+                                    }else{
+                                        echo "<div class='corner-ribbon top-right sticky red'>".$interval->days." day/s left!</div>";
+                                    }
+                                 }else if($now >= $start && $now <= $end){
+                                     echo "<div class='corner-ribbon top-right sticky red'>Happening now!</div>";
+                                 }
+                            ?>
+                                    
                                     <div class="inner-wrapper" >
 
                                         <div class="clear" >
