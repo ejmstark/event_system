@@ -11,6 +11,7 @@ class cUser extends CI_Controller {
       $this->load->model('MCardLoad');
 	  $this->load->model('MAnnouncement'); //admin module functionality
 	  $this->load->model('MNotificationItem');
+	  $this->load->model('location/MLocation');
       $this->load->library('session');
       $this->data = null;
   	}
@@ -31,6 +32,12 @@ class cUser extends CI_Controller {
 					$arrObj->dateStart = $value->dateStart;
 					$arrObj->dateEnd = $value->event_date_end;
 					$arrObj->event_category = $value->event_category;
+					$arrObj->event_venue = $value->event_venue;
+					//Location
+					$arrObj->location_name =$value->location_name;
+					$arrObj->region_code = $value->region_code;
+					
+					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
 					$array[] = $arrObj;
 			}
 		}
@@ -39,8 +46,6 @@ class cUser extends CI_Controller {
 		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
 		$data['announcementCount'] = count($data['announcements']);
 		if(count($data['announcements']) == 0){
-			// $data['announcements'] = $this->MAnnouncement->getViewedOfUser($this->session->userdata['userSession']->userID);
-			// die();
 			$data['announcements'] = NULL;
 		}
 		
@@ -134,7 +139,6 @@ class cUser extends CI_Controller {
 					  'gender' => $this->input->post('gender'),
 					  'contact_no' => $this->input->post('contact'),
 					  'user_type' => 'Regular'
-
 					);
 
 		if($this->checkIfEmptyFields($data)){
@@ -170,7 +174,6 @@ class cUser extends CI_Controller {
 					redirect('user/cUser/viewRegistrationConfirmation');
 				}	
 
-
 			}
 		}else{
 			$this->session->set_flashdata('error_msg','Do not leave the fields to be empty.');
@@ -193,11 +196,15 @@ class cUser extends CI_Controller {
 	public function checkAllUsername()
 	{
 		$username = $this->input->post('username');
-		$check  = $this->MUser->checkAllUsers($username);
-		if($check == 0){
-			echo "<h4 style='color:green'>Username is available<h4>";
+		if($username == ''){
+			echo '';
 		}else{
-			echo "<h4 style='color:red'>Username is taken</h4>";
+			$check  = $this->MUser->checkAllUsers($username);
+			if($check == 0){
+				echo "<h4 style='color:green'>Username is available<h4>";
+			}else{
+				echo "<h4 style='color:red'>Username is taken</h4>";
+			}
 		}
 	}
 

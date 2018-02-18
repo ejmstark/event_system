@@ -27,11 +27,7 @@ class CLogin extends CI_Controller {
 	}
 
 	public function index(){
-
-
-
 		$this->load->view('vLogin');
-
 	}
 
 
@@ -104,6 +100,7 @@ $sessionData = new stdClass;
 					$sessionData->userLogName =  $row->user_name;
 					$sessionData->userPassword =  $row->userPassword;
 					$sessionData->userFName =  $row->first_name;
+					$sessionData->userLName = $row->last_name;
 					$sessionData->userLevel =  $row->user_type;
 					$sessionData->userSuperior =  $row->upgradedBy;
         // $sessionData = array('userID' => $row->account_id,
@@ -149,7 +146,7 @@ $sessionData = new stdClass;
 		}else if(isset($this->session->userdata['userSession'])){
 			$this->session->unset_userdata('userSession');
 		}
-        $this->index();
+        redirect("cLogin");
 	}
 
 
@@ -165,6 +162,22 @@ $sessionData = new stdClass;
 		}
 	}
 
+	public function forgotPassword()
+
+	{
+		if (isset($this->session->userdata['adminSession']) || isset($this->session->userdata['userSession'])) {
+			redirect('cLogin/viewDashBoard');
+		}else{
+			$this->load->view('imports/vHeaderSignUpPage');
+			$this->load->view('vForgotPassword');
+			$this->load->view('imports/vFooterLandingPage');
+		}
+		
+
+	}
+
+
+	
 
 
 

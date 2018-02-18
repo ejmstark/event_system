@@ -1,7 +1,7 @@
 <div id="main">
 
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo site_url();?>/admin/cAdmin">Home</a></li>
         <li class="active">Generate Card</li>
     </ol>
       <!-- //breadcrumb-->
@@ -27,9 +27,8 @@
                             <tbody>
                                 <tr>
                                     <td>&#x20B1; 100</td>
-                                  <!-- <td class="col-2"><input class="form-control" type="number" name="quantity"> -->
                                     <td>
-                                        <span class="input-group-btn">
+                                        <span class="input-group-btn form-group">
                                            <button class="btn btn-secondary col-1 cardsbtn unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
                                            <input type="text" name="qty1" class="form-control col-sm-3 qtyinput" id="qty1" placeholder="Quantity" aria-label="Quantity">
                                            <button class="btn btn-secondary col-1 cardsbtn unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -40,7 +39,7 @@
                                 <tr>
                                     <td>&#x20B1; 200</td> 
                                     <td>
-                                        <span class="input-group-btn">
+                                        <span class="input-group-btn form-group">
                                            <button class="btn btn-secondary col-1 dosM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
                                            <input type="text" name="qty2" class="form-control col-sm-3 qtyinput" id="qty2" placeholder="Quantity" aria-label="Quantity">
                                            <button class="btn btn-secondary col-1 dosP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -51,7 +50,7 @@
                                 <tr>
                                     <td>&#x20B1; 500</td>
                                     <td>
-                                        <span class="input-group-btn">
+                                        <span class="input-group-btn form-group">
                                            <button class="btn btn-secondary col-1 tresM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
                                            <input type="text" name="qty3" class="form-control col-sm-3 qtyinput" id="qty3" placeholder="Quantity" aria-label="Quantity">
                                            <button class="btn btn-secondary col-1 tresP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -62,7 +61,7 @@
                                 <tr>
                                     <td>&#x20B1; 1000</td>
                                     <td>
-                                        <span class="input-group-btn">
+                                        <span class="input-group-btn form-group">
                                            <button class="btn btn-secondary col-1 kwatroM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
                                            <input type="text" name="qty4" class="form-control col-sm-3 qtyinput" id="qty4" placeholder="Quantity" aria-label="Quantity">
                                            <button class="btn btn-secondary col-1 kwatroP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>

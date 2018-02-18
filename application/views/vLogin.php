@@ -91,23 +91,45 @@
   
     </div>
   </div>
-  <!-- End of Error Modal -->
-  <!-- Error Modal Trigger -->
-  <?php
-    if(isset($errorTitle) && isset($errorMessage)){
-      echo "<script type = 'text/javascript'>
-              $(document).ready(function(){
-                $('#errorModal').modal('show');
-              });
-            </script>";
-    }
-  ?>
-  <!-- End of Error Modal Trigger -->
-  
-   <div style="position:fixed;top:15px;right:15px;"> <a href="<?php echo base_url()?>" style="color:#ffff;">⟵ Home</a></div>
-  </body>
-  </html>
-  <?php }else{
-    redirect('cLogin/viewDashboard');
-    }?>
-  
+
+<!-- Added by Ted -->
+<!-- Error Modal -->
+<div id="errorModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><?php echo $errorTitle ?></h4>
+      </div>
+      <div class="modal-body">
+        <p><?php echo $errorMessage ?></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- End of Error Modal -->
+<!-- Error Modal Trigger -->
+<?php
+  if(isset($errorTitle) && isset($errorMessage)){
+    echo "<script type = 'text/javascript'>
+            $(document).ready(function(){
+              $('#errorModal').modal('show');
+            });
+          </script>";
+  }
+?>
+<!-- End of Error Modal Trigger -->
+
+ <div style="position:fixed;top:15px;right:15px;"> <a href="<?php echo base_url()?>" style="color:#ffff;">⟵ Home</a></div>
+
+</body>
+</html>
+<?php }else{
+  redirect('cLogin/viewDashboard');
+  }?>

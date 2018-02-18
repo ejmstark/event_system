@@ -6,6 +6,7 @@ class CInitialize extends CI_Controller {
 		parent::__construct();
 	 	$this->load->library('session');
 	 	$this->load->model('user/MEvent');
+		$this->load->model('location/MLocation');
 	}
 
 	public function index()
@@ -13,28 +14,42 @@ class CInitialize extends CI_Controller {
 		if ($this->session->userdata('userSession')) {
 			redirect('cLogin/viewDashBoard');
 		} else {
-			$result_data = $this->MEvent->getAllApprovedEvents();
-			$array = array();
 			//////////////////////////////////////////////////////////////////////////////
-			//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+			//================INTERFACE MODULE - SPRINT 3 Implementation============//
 			/////////////////////////////////////////////////////////////////////////////
-			if($result_data){
-				foreach ($result_data as $value) {
-						$arrObj = new stdClass;
-						$arrObj->event_id = $value->event_id;
-						$arrObj->event_name = $value->event_name;
-						$arrObj->dateStart = $value->dateStart;
-						$arrObj->event_category = $value->event_category;
-						$array[] = $arrObj;
-				}
-			}
+			$stringSelect = "*, DATE_FORMAT(event_info.event_date_start,'%d-%b-%y %H:%m') as dateStart, DATE_FORMAT(event_info.event_date_end,'%d-%b-%y %H:%m') as dateEnd";
+			$stringWhere = "event_info.event_status = 'Approved'";
+			$result = $this->MEvent->select_certain_where_isDistinct_hasOrderBy_hasGroupBy_isArray($stringSelect,$stringWhere,false,false,false,false);
 			////////////STOPS HERE///////////////////////////////////////////////////
-			$data['events'] = $array;
-			$this->load->view('imports/vHeaderHomepage');
-			$this->load->view('vHomepage',$data);
-			$this->load->view('imports/vFooterHomepage');
+			$array = array();
+			foreach ($result as $value) {
+				$arrObj = new stdClass;
+				$arrObj->data = $value;
+				$arrObj->data->location = $this->MLocation->read_where("location_id = ".$value->location_id."");
+				$array[] = $arrObj;
+			}
+
+			$val = array();
+			foreach ($array as $key) {
+				$arrObj = new stdClass;
+				$arrObj = $key->data;
+				$val[] = $arrObj;
+			}
+			$data['events'] = $val;
+			$this->load->view('imports/vHeaderHomePage');
+			$this->load->view('vHomePage',$data);
+			$this->load->view('imports/vFooterHomePage');
 			// $this->load->view('vLogin');
 			//redirect('cInitialize');
 		}
+	}
+
+	public function viewAboutUs(){
+		$this->load->view('vAboutUs');
+		
+	}
+
+	public function viewEventsHomepage(){
+		$this->load->view('vEvents');
 	}
 }

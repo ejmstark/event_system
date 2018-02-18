@@ -8,10 +8,10 @@
 
 	$statement="SELECT    COUNT(*) as UserCount
 						FROM      user_account 
-						WHERE     YEAR(user_account.date_account_created) = '2017'
+						WHERE     YEAR(user_account.addedAt) = '2017'
 						AND user_account.user_status = 'Active' 
 						AND user_account.user_type = 'Regular'
-						GROUP BY  MONTH(user_account.date_account_created)";
+						GROUP BY  MONTH(user_account.addedAt)";
 	$res = mysqli_query($mysql,$statement);
 
 	if($res){

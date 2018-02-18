@@ -1,7 +1,7 @@
 <div id="main">
 
     <ol class="breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="<?php echo site_url();?>/admin/cAdmin">Home</a></li>
         <li class="active">User Account Management</li>
     </ol>
       <!-- //breadcrumb-->
@@ -54,7 +54,7 @@
                                           <td>".$object->gender."</td>
                                           <td>".$num."</td>
                                           <td>".$object->load_amt."</td>
-                                          <td>".$object->date_account_created."</td>
+                                          <td>".$object->addedAt."</td>
                                           <td>".$object->user_status."</td>
                                           <td>";                        
                                         if($object->user_status == "Active"){

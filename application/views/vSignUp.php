@@ -1,3 +1,9 @@
+<!-- Add these lines below to pages with customizable elements -->
+<?php
+  require('assets/CustomizationManager.php');
+  CustomizationManager::SetTheme("configurations 0");
+?>
+<!-- Up to here -->
 <body>
 <style>
     #example{
@@ -24,7 +30,8 @@
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <ul class="main-nav nav navbar-nav navbar-right">
-                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cInitialize">Home</a></li>
+                      <!-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cInitialize">Home</a></li> -->
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cInitialize"><?php echo CustomizationManager::$strings->SIGNUP_PAGE_NAV_HOME ?></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -90,9 +97,12 @@
                                     <label for="gender">Gender</label>
 
                                     <select class="form-control" name="gender">
-                                        <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
+                                        <!-- <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>>Male</option>
                                         <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>>Female</option>
-                                        <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option>
+                                        <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>>Other</option> -->
+                                        <option value="Male" <?php  if(isset($gender) && $gender=="Male"){echo 'selected';}?>><?php echo CustomizationManager::$strings->SIGNUP_PAGE_GENDER_MALE ?></option>
+                                        <option value="Female" <?php  if(isset($gender) && $gender=="Female"){echo 'selected';}?>><?php echo CustomizationManager::$strings->SIGNUP_PAGE_GENDER_FEMALE ?></option>
+                                        <option value="Other" <?php  if(isset($gender) && $gender=="Other"){echo 'selected';}?>><?php echo CustomizationManager::$strings->SIGNUP_PAGE_GENDER_OTHER ?></option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -133,7 +143,8 @@
 
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer">
-                                <h4>About us </h4>
+                                <!-- <h4>About us </h4> -->
+                                <h4><?php echo CustomizationManager::$strings->ABOUT_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
 
                                <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
@@ -144,7 +155,8 @@
 
                         <div class="col-md-3 col-sm-6 wow fadeInRight animated">
                             <div class="single-footer news-letter">
-                                <h4>Contact Us</h4>
+                                <!-- <h4>Contact Us</h4> -->
+                                <h4><?php echo CustomizationManager::$strings->CONTACT_US_HEADER ?></h4>
                                 <div class="footer-title-line"></div>
                                 <ul class="footer-adress">
                                     <li><i class="pe-7s-mail strong"> </i> dailyEvents@gmail.com</li>
@@ -163,6 +175,11 @@
                     <div class="row">
                         <div class="pull-left">
                             <span> (C) UI Module , All rights reserved 2017  </span>
+                        </div>
+                        <div class="bottom-menu pull-right">
+                            <ul>
+                                <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -200,4 +217,3 @@
     });
             
 </script>
-

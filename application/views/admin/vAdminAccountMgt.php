@@ -72,40 +72,39 @@
                                     if($object->user_type == "Admin"){
                                         //upgraded type to Superadmin
                                       echo "<a  href='".site_url()."/admin/cAdmin/SuperAdmin/".$object->account_id."'>
-                                        <button type='button' class='btn btn-info fa fa-user'></button></a>";
+                                        <button type='button' class='btn btn-info fa fa-user'>&nbspUpgrade</button></a>";
                                     }else{
-                                        if($this->session->userdata['adminSession']->userID == $object->upgraded_by){
+                                        if($this->session->userdata['adminSession']->userID == $object->upgradedBy){
                                             //upgrade type to Admin
                                               echo "<a  href='".site_url()."/admin/cAdmin/Admin/".$object->account_id."'>
-                                               <button  type='button' class='btn btn-warning fa fa-user'></button></a>";
+                                               <button  type='button' class='btn btn-warning fa fa-user'>&nbsp Demote</button></a>";
                                                //delete
                                                echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
-                                                 <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
+                                                 <button  type='button' class='btn btn-danger fa fa-trash-o'>&nbspDelete</button></a>";
                                           }
                                     }
 
                                     //delete
                                     if($object->user_type == "Admin"){
                                         echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
-                                          <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
+                                          <button  type='button' class='btn btn-danger fa fa-trash-o'>&nbspDelete</button></a>";
                                     }
-
-                                    if($this->session->userdata['adminSession']->userID == $object->upgraded_by || $object->user_type == "Admin") {
+                                    if($this->session->userdata['adminSession']->userID == $object->upgradedBy || $object->user_type == "Admin") {
                                         //update status
-
                                         if($object->user_status == "Active"){
-                                          echo "<a  href='".site_url()."/admin/cAdmin/Ban/".$object->account_id."/admin'>
-                                            <button  type='button' class='btn btn-success fa fa-credit-card'></button></a>";
+
+                                          echo "<a class='' href='".site_url()."/admin/cAdmin/Ban/".$object->account_id."/admin'><button  type='button' class='btn btn-success fa fa-credit-card BanToggle hidden'>Ban</button></a>
+                                            <button  type='button' class='btn btn-success fa fa-credit-card BanBtn'>&nbspBan</button>";
                                         }else{
-                                          echo "<a  href='".site_url()."/admin/cAdmin/Unban/".$object->account_id."/admin'>
-                                            <button  type='button' class='btn btn-inverse fa fa-credit-card'></button></a>";
+                                          echo "<a class='' href='".site_url()."/admin/cAdmin/Unban/".$object->account_id."/admin'>
+                                            <button  type='button' class='btn btn-inverse fa fa-credit-card UnbanToggle hidden'>Unban</button></a>
+                                            <button  type='button' class='btn btn-inverse fa fa-credit-card UnbanBtn'>&nbspUnban</button>";
                                         }
                                     }
-
                                   }else{
                                     //echo "Can't ban yourself.";
                                     echo "<a  href='".site_url()."/admin/cAdmin/Delete/".$object->account_id."/admin'>
-                                      <button  type='button' class='btn btn-danger fa fa-trash-o'></button></a>";
+                                      <button  type='button' class='btn btn-danger fa fa-trash-o'>&nbspDelete</button></a>";
                                   }
                                 echo "</td></tr>";
                             }
@@ -329,5 +328,24 @@
             </div>
         </div>
     </div>
+
+<script>
+
+  $(".BanBtn").click(function() {
+    var res = confirm("Are you sure you want to BAN this admin?");
+
+    if(res == true) {
+      $(this).parent().find(".BanToggle").click();
+    }
+  });
+
+  $(".UnbanBtn").click(function() {
+    var res = confirm("Are you sure you want to UNBAN this admin?");
+
+    if(res == true) {
+      $(this).parent().find(".UnbanToggle").click();
+    }
+  });
+</script>
 
 </div>

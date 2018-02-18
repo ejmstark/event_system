@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class cEvent extends CI_Controller {
+class CEvent extends CI_Controller {
 
 	public function __Construct(){
       parent::__Construct ();
@@ -11,7 +11,10 @@ class cEvent extends CI_Controller {
       $this->load->model('user/MPreference');
       $this->load->model('user/MTicketType');
       $this->load->model('user/MTicket');
-     	
+      $this->load->model('MAnnouncement'); //admin module functionality
+	  $this->load->model('MNotificationItem');
+	  $this->load->model('location/MLocation');
+	  $this->load->library('session');	
   	}
 
 
@@ -39,6 +42,88 @@ class cEvent extends CI_Controller {
 		$this->load->view('user/vListEvents.php', $data);
 		$this->load->view('imports/vFooter');
 		# code...
+	}
+
+	public function searchEvent()
+	{
+		$data['users'] = $this->MUser->getAllUsers();
+		$result_data = $this->MEvent->getSearchEvents($_POST['searchWord']);
+		//////////////////////////////////////////////////////////////////////////////
+		//================INTERFACE MODULE - DATA-LAYOUT FILTERING CODE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$array = array();
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->event_picture = $value->event_picture;
+					$arrObj->dateStart = $value->dateStart;
+					$arrObj->dateEnd = $value->event_date_end;
+					$arrObj->event_category = $value->event_category;
+<<<<<<< HEAD
+					$arrObj->event_picture = $value->event_picture;
+
+=======
+					$arrObj->event_venue = $value->event_venue;
+					//Location
+					$arrObj->location_name =$value->location_name;
+					$arrObj->region_code = $value->region_code;
+					
+					$arrObj->tix = $this->MEvent->getTicketsOfEvent($value->event_id);
+>>>>>>> cd8d6c60aa8667c5e01f16ff161ee9b172c3c20c
+					$array[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data['events'] = $array;
+		$data['announcements'] = $this->MAnnouncement->getUnviewedOfUser($this->session->userdata['userSession']->userID);
+		$data['announcementCount'] = count($data['announcements']);
+		if(count($data['announcements']) == 0){
+			$data['announcements'] = NULL;
+		}
+		
+			$array1 = array();
+			if($data['announcements']){
+				foreach ($data['announcements'] as $value) {
+						$arrObj = new stdClass;
+						$arrObj->announcementID = $value->announcementID;
+						$arrObj->announcementDetails = $value->announcementDetails;
+						$arrObj->first_name = $value->first_name;
+						$arrObj->last_name = $value->last_name;
+						if($value->sec){
+							$arrObj->ago =$value->sec;  
+							$arrObj->agoU ="seconds ago";  
+						}else if($value->min){
+							$arrObj->ago =$value->min; 
+							$arrObj->agoU ="minutes ago";   
+						}else if($value->hr){
+							$arrObj->ago =$value->hr;  
+							$arrObj->agoU ="hours ago";  
+						}else if($value->day){
+							$arrObj->ago =$value->day; 
+							$arrObj->agoU ="days ago";   
+						}
+						$array1[] = $arrObj;
+				}
+			}
+			$data['announcements'] = $array1;
+			
+		$this->data['custom_js']= '<script type="text/javascript">
+
+                              $(function(){
+
+                              	$("#dash").addClass("active");
+
+                              });
+
+                        </script>';
+
+		$this->load->view('imports/vHeaderLandingPage');
+
+		$this->load->view('vLandingPage',$data);
+
+		$this->load->view('imports/vFooterLandingPage',$this->data);
 	}
 
 	public function displayEventDetails($id)

@@ -16,26 +16,29 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                        <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
                     </div>
     
                     <div class="collapse navbar-collapse yamm" id="navigation">
                         <div class="button navbar-right">
-                            <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s">Logout </a></button>
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
                         </div>
     
                         <div class="button navbar-right">
-                            <button class="navbar-btn nav-button wow bounceInRight login"> <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s">Create Event </a></button>
+                            <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a>
                         </div>
                         
     
                         <ul class="main-nav nav navbar-nav navbar-right">
-                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
-                            
-                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li><!-- 
-                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
-                            <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
-                        </ul>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/cLogin/viewDashBoard">Home</a></li>
+
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/event/cEvent/viewEvents">Profile</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/user/cUser/viewAnnouncements">Announcements</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href="<?php echo site_url();?>/finance/cCart/viewCart">View Cart</a></li>
+                        <!--
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" >Contact</a></li>
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a href ="#" >Profile</a></li> -->
+                    </ul>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
@@ -122,7 +125,7 @@
     
                                     <div class="form-group">
                                         <label for="name">Event Description</label>
-                                        <input type="text" class="form-control" value="<?php echo $ev->event_details;?>" name="event_details" required="">
+                                        <textarea class="form-control" name="event_details" required="" rows="3"><?php echo $ev->event_details;?></textarea>
                                     </div>
     
         
@@ -139,11 +142,13 @@
     
     
                                     <br>
-                                    <?php $x = 1; ?>
+                                    <?php $x = 0; ?>
                                     <?php foreach($ti as $t) { ?>
-                                        
+
+                                    <input type="text" name="<?php echo 'ticketID'.$x;?>" value="<?php echo $t->ticket_type_id;?>" hidden>
                                      <div class="ticketContainer">
-                                        <span>TICKET TYPE </span> <br>
+                                        <span>TICKET TYPE </span>
+                                        <i>(e.g. Genral Admission, Gold, Silver, VIP)</i> <br>
                                         <div class="select-field">
                                              <input type="text" value="<?php echo $t->ticket_name;?>" class="form-control" required="" name="<?php echo 'ticketType'.$x; ?>" placeholder="Ticket type"> 
                                            <!--  <select name="ticketType">
@@ -168,11 +173,12 @@
                                     
                                     <br><br>
                                     <?php $x++; } ?>
+                                    <!-- <input type="text"  name="totalshit" value="<?php //echo $x; ?>"> -->
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-default" value="Create Event"><!-- <a href="<?php echo site_url();?>/cLogin/viewEvents"> -->Edit</button>
                                     </div>
-    
+                                        
                                     <br><br>
                                 </form>
                             </div>
@@ -223,9 +229,7 @@
                             </div> 
                             <div class="bottom-menu pull-right"> 
                                 <ul> 
-                                    <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s">Home</a></li>
-                                    <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.3s">Events</a></li>
-                                    <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.6s">Contact</a></li>
+                                    <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
                                 </ul> 
                             </div>
                         </div>
