@@ -1,15 +1,16 @@
+<!-- Add these lines below to pages with customizable elements -->
 <?php
-    require("application/customization/CustomizationManager.php");
-    CustomizationManager::SetTheme("configurations 2");
-    $images = CustomizationManager::$images;
+  require('assets/CustomizationManager.php');
+  CustomizationManager::SetTheme("configurations ");
 ?>
-    <body>
+<!-- Up to here -->
 
-        <div id="preloader">
-            <div id="status">&nbsp;</div>
-        </div>
+<body>
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
 
-        <nav class="navbar navbar-default ">
+    <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -18,14 +19,15 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
 
+                    </button>    
+                    <a class="navbar-brand" href="<?php echo site_url();?>/cLogin/viewDashBoard"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
                     <div class="button navbar-right">
-                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a>
+                        <!-- <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> Logout </button></a> -->
+                        <a href ="<?php echo site_url();?>/cLogin/userLogout" data-wow-delay="0.1s"><button class="navbar-btn nav-button wow bounceInRight login"> <?php echo CustomizationManager::$strings->LANDING_PAGE_LOGOUT_BUTTON ?> </button></a>
                     </div>
                     <div class="button navbar-right">
                         <!-- <a href ="<?php echo site_url();?>/event/cEvent/viewCreateEvent" data-wow-delay="0.4s"><button class="navbar-btn nav-button wow bounceInRight login"> Create Event </button></a> -->
@@ -45,31 +47,14 @@
      <div class="slider-area">
             <div class="slider">
                 <div id="bg-slider" class="owl-carousel owl-theme">
-                    <?php
-                        if(CustomizationManager::$currentConfigName == "configurations 1"){
 
-                        
-                    ?>
-                        <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/img/Slide1.jpg')?>" alt="EXO"></div>
--	+                   <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/img/Slide2.jpg')?>" alt="Paramore"></div>
-+                       <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/img/Slide3.jpg')?>" alt="Willie"></div>
-                    <?php
-                        }else if(CustomizationManager::$currentConfigName == "configurations 2"){
+                    <!-- <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>"></div>
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>"></div>
+                    <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>"></div> -->
 
-
-                    ?>
-                        <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/RobinAssets/elmekias pic 2.jpg')?>" alt="crowd"></div>
--	+                   <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/RobinAssets/elmekias pic 5.jpg')?>" alt="A Day to Remember"></div>
-+                       <div class="item"><img src= "<?php echo base_url('assets/customizationAssets/RobinAssets/generic concertPic.jpg')?>" alt="GEazy"></div>
-                    <?php
-                        }else{
-                    ?>
-                        <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-2.jpg')?>" alt="Mirror Edge"></div> 
-                        <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-5.jpg')?>" alt="The Last of us"></div> 
-                        <div class="item"><img src= "<?php echo base_url('assets/nikkiAssets/img/slide1/slider-image-3.jpg')?>" alt="GTA V"></div>   
-                    <?php
-                        }
-                    ?>
+                    <?php echo '<div class="item"><img src= "' . base_url(CustomizationManager::$images->LANDING_PAGE_CAROUSEL_BACKGROUND_1) . '"></div>'?>
+                    <?php echo '<div class="item"><img src= "' . base_url(CustomizationManager::$images->LANDING_PAGE_CAROUSEL_BACKGROUND_2) . '"></div>'?>
+                    <?php echo '<div class="item"><img src= "' . base_url(CustomizationManager::$images->LANDING_PAGE_CAROUSEL_BACKGROUND_3) . '"></div>'?>
 
                 </div>
             </div>
@@ -81,7 +66,7 @@
                         <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                             <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
-                                <span style="color: gray;">Search Event</span><span>aaa</span>
+                                <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?>
                                 <div class="form-group">
                                     <?php
                                     if(!isset($_POST['searchDateMonth'])){
@@ -134,6 +119,7 @@
                                         echo '<input name="searchWord" type="text" class="form-control" placeholder="Key word" value="'.$_POST['searchWord'].'" pattern="[\sa-zA-z0-9]+">';
                                     }
                                     ?>
+
                                 </div>
                                 <button class="btn search-btn" type="submit"><i class="fa fa-search"></i></button> 
                             </form>
@@ -162,29 +148,8 @@
                             </li>
                         </ul> <!-- END OF SORT BY LIST-->
 
-        <!-- property area -->
-        <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12  padding-top-40 properties-page">
-                        <div class="col-md-12 ">
-                            <div class="col-xs-10 page-subheader sorting pl0">
-
-                                <ul class="sort-by-list">
-                                    <li class="active">
-                                        <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date" data-order="ASC">
-                                            Sort By Date <i class="fa fa-sort-amount-asc"></i>
-                                        </a>
-                                    </li>
-                                    <li class="">
-                                        <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price" data-order="DESC">
-                                            Sort By Price <i class="fa fa-sort-numeric-desc"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-
-                                <div class="items-per-page">
-                                    <label for="items_per_page"><b>Events per page :</b></label>
+                        <!--  <div class="items-per-page">
+                                    <label for="items_per_page"><b><?php echo CustomizationManager::$strings->LANDING_PAGE_EVENTS_PER_PAGE ?></b></label>
                                     <div class="sel">
                                         <select id="items_per_page" name="per_page">
                                             <option value="3">3</option>
@@ -322,18 +287,7 @@
                                <img src= "<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p><?php echo CustomizationManager::$strings->ABOUT_MESSAGE ?></p>
 
-                               <img src= "<?php 
-                                    if(CustomizationManager::$currentConfigName == "configurations 1"){
-
-                                    }else if(CustomizationManager::$currentConfigName == "configurations 2"){
-                                        echo base_url('assets/dianeAssets/img/logoBlack.png');
-                                    }else{
-                                        echo base_url('assets/dianeAssets/img/logoBlack.png');
-                                    }
-                                ?>
-                               " alt="" class="wow pulse" data-wow-delay="1s" >
-                                <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
-
+                                <img src="assets/img/footer-logo.png" alt="" class="wow pulse" data-wow-delay="1s">
                             </div>
                         </div>
 
@@ -361,9 +315,9 @@
                             <span> (C) UI Module , All rights reserved 2017  </span>
                         </div>
                         <div class="bottom-menu pull-right">
-                            <ul>
-                                <li><a class="wow fadeInUp animated" href="<?php echo site_url();?>/cLogin/viewDashBoard" data-wow-delay="0.2s">Home</a></li>
-                            </ul>
+                         <ul>
+                            <li><a class="wow fadeInUp animated" href="#" data-wow-delay="0.2s"><?php echo CustomizationManager::$strings->FOOTER_NAV_HOME ?></a></li>
+                          </ul>
                         </div>
                     </div>
                 </div>
@@ -371,8 +325,7 @@
         </div> <!-END OF FOOTER -->
 </body>
 
-        </div>
-
+<!--START OF  SCRIPT-->
 <script type="text/javascript">
     $(document).ready(function() {
         $(document).on('click', '#aDropdown', function(){
@@ -423,6 +376,4 @@
     }?>
 <?php ?>
     });
-</script>
-
-
+</script> <!--END OF  SCRIPT-->
