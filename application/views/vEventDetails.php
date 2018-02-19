@@ -56,6 +56,12 @@ foreach($going as $g){
     text-decoration: none;
     cursor: pointer;
 }
+.star{
+    height: 32px;
+    width: 32px;
+    margin-top:5px;
+    margin-left:10px;
+}
 </style>
 </head>
     <body>
@@ -150,7 +156,7 @@ foreach($going as $g){
                         </div>
 
                         <div class="single-property-wrapper">
-                            <div class="single-property-header">
+                            <div class="single-property-header" style="margin-top:40px;">
                                 <h1 class="property-title pull-left"><?php echo $e->event_name; ?></h1>
                                 
                                 <?php if(isset($user_event_preference_id)){
