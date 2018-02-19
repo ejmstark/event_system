@@ -154,9 +154,9 @@ foreach($going as $g){
                                 <h1 class="property-title pull-left"><?php echo $e->event_name; ?></h1>
                                 
                                 <?php if(isset($user_event_preference_id)){
-                                    echo "<a href='".site_url()."/event/cEvent/interestedRemove/".$user_event_preference_id."'><img class='star' src='".'http://localhost/event_system/assets/neilAssets/img/star.png'."'></a>";
+                                    echo "<a href='".site_url()."/event/cEvent/interestedRemove/".$user_event_preference_id."'><img class='star' src='".site_url().'../../assets/neilAssets/img/star.png'."'></a>";
                                 }else{
-                                    echo "<a href='".site_url()."/event/cEvent/interested/".$e->event_id."'><img class='star' src='".'http://localhost/event_system/assets/neilAssets/img/white-star.png'."'></a>";
+                                    echo "<a href='".site_url()."/event/cEvent/interested/".$e->event_id."'><img class='star' src='".site_url().'../../assets/neilAssets/img/white-star.png'."'></a>";
                                 }
                                 ?>
                                 <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
