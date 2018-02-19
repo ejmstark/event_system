@@ -2023,11 +2023,12 @@ single property page
     right: 0px;
     border-bottom: 2px solid;
     line-height: 42px;
-} 
+}
 .clearfix {
     clear: both;
 }
 .s-property-title {
+    margin-top:40px;
     margin-bottom: 15px;
     color: #ffcec0;
     font-size: 18px;
@@ -3045,4 +3046,10 @@ padding: 10px;
 }
 #map {
     height: 300px;
+}
+.star{
+    height: 32px;
+    width: 32px;
+    margin-top:5px;
+    margin-left:10px;
 }

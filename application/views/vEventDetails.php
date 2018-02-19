@@ -152,9 +152,53 @@ foreach($going as $g){
                         <div class="single-property-wrapper">
                             <div class="single-property-header">
                                 <h1 class="property-title pull-left"><?php echo $e->event_name; ?></h1>
+                                
+                                <?php if(isset($user_event_preference_id)){
+                                    echo "<a href='".site_url()."/event/cEvent/interestedRemove/".$user_event_preference_id."'><img class='star' src='".'http://localhost/event_system/assets/neilAssets/img/star.png'."'></a>";
+                                }else{
+                                    echo "<a href='".site_url()."/event/cEvent/interested/".$e->event_id."'><img class='star' src='".'http://localhost/event_system/assets/neilAssets/img/white-star.png'."'></a>";
+                                }
+                                ?>
                                 <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
                                 <span class="property-price pull-right"><?php echo $e->event_status; ?></span>
                                 <?php } ?>
+                                    
+                                <div class="section additional-details">
+                                    
+                                    <h4 class="s-property-title">Additional Details</h4>
+
+                                    <ul class="additional-details-list clearfix">
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Location</span>
+                                            
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue.', '.$locate->location_name.', '.$locate->region_code; ?></span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date Start</span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start")); ?></span>
+                                        </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date End</span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start"));  ?></span>
+                                        </li>
+
+                                        <!-- <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Grade</span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Wan point jero</span>
+                                        </li>  -->
+
+                                    </ul>
+                                </div>
+                                <!-- End additional-details area  -->
+                                
+                                <div class="section">
+                                    <h4 class="s-property-title">Description</h4>
+                                    <div class="s-property-content">
+                                        <p><?php echo $e->event_details; ?></p>
+                                    </div>
+                                </div>
+                                <!-- End description area  -->
                             </div>
 
                             <div class="property-meta entry-meta clearfix ">
@@ -167,42 +211,7 @@ foreach($going as $g){
 
                             <!-- .property-meta -->
 
-                            <div class="section">
-                                <h4 class="s-property-title">Description</h4>
-                                <div class="s-property-content">
-                                    <p><?php echo $e->event_details; ?></p>
-                                </div>
-                            </div>
-                            <!-- End description area  -->
 
-                            <div class="section additional-details">
-
-                                <h4 class="s-property-title">Additional Details</h4>
-
-                                <ul class="additional-details-list clearfix">
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Location</span>
-                                        
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue.', '.$locate->location_name.', '.$locate->region_code; ?></span>
-                                    </li>
-
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date Start</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start")); ?></span>
-                                    </li>
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date End</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start"));  ?></span>
-                                    </li>
-
-                                    <!-- <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Grade</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Wan point jero</span>
-                                    </li>  -->
-
-                                </ul>
-                            </div>
-                            <!-- End additional-details area  -->
                         <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
                             <div class="section property-share">
                                 <h4 class="s-property-title">Users who are going:</h4>
