@@ -321,7 +321,6 @@ foreach($going as $g){
                                 </div>
                                 <div class="panel-body recent-property-widget">
                                     <ul>
-                                    <h2>Card Load: <span><?php echo $u->load_amt; ?></span></h2>
                                     <input  id="cLoad" hidden value="<?php echo $u->load_amt; ?>">
                                         <?php foreach ($types as $t) { ?>
                                         <li>
@@ -361,9 +360,9 @@ foreach($going as $g){
                                             </div>
                                         </li>
                                         <?php } ?>
-
                                     </ul>
                                 </div>
+                                <h1>Card Load: <span><?php echo $u->load_amt; ?></span></h1>
                             </div>
 
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
