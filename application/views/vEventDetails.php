@@ -271,7 +271,7 @@ foreach($going as $g){
                     <div class="col-md-4 p0" >
                         <aside class="sidebar sidebar-property blog-asside-right">
                             <?php
-                            echo '<div class="dealer-widget" style="background-image: url('."http://localhost/event_system/images/events/3.jpg".'); background-size: 100%;">';
+                            echo '<div class="dealer-widget">';
                             ?>
                             <div class="dealer-content">
                                     <div class="inner-wrapper" >
@@ -285,8 +285,10 @@ foreach($going as $g){
                                             <div class="col-xs-8 col-sm-8 ">
                                                 <h3 class="dealer-name">
                                                     <a href=""><?php echo $o->first_name." ".$o->middle_initial." ".$o->last_name;?></a>
-                                                    <span>Organizers</span>
                                                 </h3>
+                                                <h4 class="dealer-name">
+                                                    <span>Organizers</span>
+                                                </h4>
                                                 <div class="dealer-social-media">
                                                     <a class="twitter" target="_blank" href="">
                                                         <i class="fa fa-twitter"></i>
@@ -309,15 +311,7 @@ foreach($going as $g){
                                                 <li><i class="pe-7s-call strong"> </i> <?php echo $o->contact_no;?></li>
                                             </ul>
                                             <div class="text-center">
-                                            <?php if($e->event_status == "Approved"){?>
-                                                <!-- <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button> -->
-                                                <?php if(!$interested){?>
-                                                <a href="<?php echo site_url();?>/event/cEvent/interested/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" id="intrstd" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Interested</button></a>
-                                                <?php }else {?>
-                                                <a href="<?php echo site_url();?>/event/cEvent/interestedRemove/<?php echo $user_event_preference_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Remove Interested</button></a>
-                                                <?php }?>
-            <!-- <a href="<?php echo site_url();?>/user/cEvent/going/<?php echo $e->event_id;?>"><button>Going</button></a> -->
-                                                <!-- <a href="<?php echo site_url();?>/event/cEvent/going/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" >Going</button></a> -->                                            <?php }?>
+                                            
                                             </div>
 
                                         </div>
@@ -337,7 +331,7 @@ foreach($going as $g){
                                         <?php foreach ($types as $t) { ?>
                                         <li>
                                             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h4> <?php echo  $t->ticket_name;?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
+                                                <h4> <?php echo  $t->ticket_name." ".$t->ticket_count." left";?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
                                                 
                                                 <span class="property-price"><?php echo "P"." ".$t->price.".00";?></span>
                                                  <?php if($e->event_status == "Approved"){?>
