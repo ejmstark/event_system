@@ -270,8 +270,9 @@ foreach($going as $g){
 
                     <div class="col-md-4 p0">
                         <aside class="sidebar sidebar-property blog-asside-right" >
+                          <div style="position: -webkit-sticky; position: sticky; top: 0; z-index: 50;">
                             <?php
-                            echo '<div class="dealer-widget" style="position: -webkit-sticky; position: sticky; top: 0; z-index: 50;">';
+                            echo '<div class="dealer-widget" >';
                             ?>
                             <div class="dealer-content" >
                                     <div class="inner-wrapper" >
@@ -315,16 +316,16 @@ foreach($going as $g){
                                 </div>
                             </div>
 
-                            <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
-                                <div class="panel-heading">
+                            <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated" >
+                                <div class="panel-heading" >
                                     <h3 class="panel-title">Ticket Prices</h3>
                                 </div>
-                                <div class="panel-body recent-property-widget">
+                                <div class="panel-body recent-property-widget" >
                                     <ul>
                                     <input  id="cLoad" hidden value="<?php echo $u->load_amt; ?>">
                                         <?php foreach ($types as $t) { ?>
                                         <li>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry" >
                                                 <h4> <?php echo  $t->ticket_name." ".$t->ticket_count." left";?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
 
                                                 <span class="property-price"><?php echo "P"." ".$t->price.".00";?></span>
@@ -364,7 +365,7 @@ foreach($going as $g){
                                 </div>
                                 <h1>Card Load: <span><?php echo $u->load_amt; ?></span></h1>
                             </div>
-
+                          </div>
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Ads here</h3>
