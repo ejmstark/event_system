@@ -10,7 +10,7 @@ class CEvent extends CI_Controller {
     	$this->load->model('user/MUser');
     	$this->load->model('user/MTicketType');
     	$this->load->model('user/MTicket');
-    	$this->load->model('MNotification');
+    	$this->load->model('MNotification');   
 	  $this->load->model('MAnnouncement'); //admin module functionalit
     	$this->load->helper('date');
 		$this->load->model('MEventInfo');
@@ -332,13 +332,13 @@ class CEvent extends CI_Controller {
 					  'ticket_type_id' => $tId
 	 				  );
 					$res = $this->MTicket->insert($data);
-
+                    $asd = $this->MTicketType->updTicketCnt($tId, $res1[0]->ticket_count-1);
 					$result = $this->MUser->update1(array("account_id"=>$this->session->userdata['userSession']->userID),array("load_amt"=>$result));
 					// $this->success = "Bought ticket for ".$res1[0]->price;
 					// $this->displayEventDetails($eid);
 
 					$uid = $this->session->userdata['userSession']->userID;
-					$res = $this->MNotification->insertNotif($uid, $eid, NULL);
+					//$res = $this->MNotification->insertNotif($uid, $eid, NULL);
 
 					redirect('event/cEvent/displayEventDetails/'.$eid);
 				}else{
