@@ -71,7 +71,7 @@ class CReports extends CI_Controller {
 	}
 
 	public function eventsGraph(){
-			$year = "2017"
+			$year = "2017";
 			$data['events'] = $this->MReports->numEventPerMonth($year);
 			return $data['events'];
 	}
