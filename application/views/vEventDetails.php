@@ -18,6 +18,27 @@ foreach($going as $g){
     }?>
     <head>
 <style>
+/*Gallery */
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 90px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 3px;
+    text-align: center;
+}
 /* The Modal (background) */
 .modal1 {
     display: none; /* Hidden by default */
@@ -224,8 +245,17 @@ foreach($going as $g){
                                 <div class="roperty-social">
                                     <ul>
                                     <?php foreach($going as $g){?>
-                                        <li><?php echo $g->first_name." ".$g->middle_initial." ".$g->last_name;?></li><br>
-                                        <?php }?>
+                                        <li>
+                                        <div class="gallery">
+                                          <a target="_blank" href="img_fjords.jpg">
+                                            <img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle')?>" style ="height:30px; height:60px ">
+                                          </a>
+                                        </div>
+                                        <div class="desc">
+                                              <?php echo $g->first_name." ".$g->middle_initial." ".$g->last_name;?>
+                                          </div>
+                                        </li>
+                                    <?php }?>
                                     </ul>
                                 </div>
                             </div>
