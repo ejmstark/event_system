@@ -1,6 +1,5 @@
 <?php
 if(isset($events) ){
-<<<<<<< HEAD
     $bought = FALSE;
     // print_r($events);
 foreach ($events as $e) { } foreach ($organizer as $o) { }
@@ -49,10 +48,6 @@ foreach($going as $g){
 
         </style>
     </head>
-=======
-    foreach ($events as $e) { }
-}?>
->>>>>>> 2a371e00b08f3043e20e113839e78cc01e8f761f
     <body>
 
         <div id="preloader">
@@ -100,6 +95,7 @@ foreach($going as $g){
                 <div class="row">
                     <div class="page-head-content">
                         <h1 class="page-title">REVIEWS for <?php echo $e->event_name; ?></h1>
+                        <button class="navbar-btn nav-button login"> <a href ="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $e->event_id; ?>" style="color:white;"><span class="	fa fa-toggle-left"></span> Event Details </a></button>
                     </div>
                 </div>
             </div>

@@ -15,8 +15,8 @@
             $this->db->from("review as r");
             $this->db->join("ticket as t","r.ticket_id = t.ticket_id");
             $this->db->join("user_account as u","t.user_id = u.account_id");
-	        $this->db->join("ticket_type AS tt","t.ticket_type_id = t.ticket_type_id");
-	        $this->db->join("event_info AS e","e.event_id = tt.event_id");
+	        $this->db->join("ticket_type AS tt","t.ticket_type_id = tt.ticket_type_id");
+	        $this->db->join("event_info AS e","tt.event_id = e.event_id");
             $this->db->where("e.event_id = '$eventId'");
             $this->db->group_by("r.review_id");
 

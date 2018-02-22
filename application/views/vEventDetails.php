@@ -113,10 +113,6 @@ foreach($going as $g){
                         <h1 class="page-title">EVENT DETAILS</h1>
                     </div>
                 </div>
-                <div class="row" >
-                    <a href="<?php echo site_url();?>/event/cEvent/displayEventReviews/<?php echo $e->event_id; ?>">link to feedback</a>
-                        <!--<a id = "feedbackLink">link to feedback</a> -->
-                </div>
             </div>
         </div>
         <!-- End page header -->
@@ -158,11 +154,13 @@ foreach($going as $g){
                         <div class="single-property-wrapper">
                             <div class="single-property-header">
                                 <h1 class="property-title pull-left"><?php echo $e->event_name; ?></h1>
+                                
                                 <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
                                 <span class="property-price pull-right"><?php echo $e->event_status; ?></span>
                                 <?php } ?>
                             </div>
-
+                            <button class="navbar-btn nav-button login"> <a href="<?php echo site_url();?>/event/cEvent/displayEventReviews/<?php echo $e->event_id; ?>" style="color:white;">Reviews <span class="	fa fa-star"></span> </a></button>
+                
                             <div class="property-meta entry-meta clearfix ">
                                 <span class="property-info-entry">
                                     <span class="property-info-label">Ticket Sale Status</span>

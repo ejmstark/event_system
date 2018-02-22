@@ -742,6 +742,18 @@ class CEvent extends CI_Controller {
 		$data1 ['events']  = $array1;
 
 		$result_data = $this->MReview->loadEventReviews($eventId);
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->user_name = $value->user_name;
+					$arrObj->review_id = $value->review_id;
+					$arrObj->rating = $value->rating;
+					$arrObj->description = $value->description;
+					$arrObj->ticket_id = $value->ticket_id;
+					$array2[] = $arrObj;
+			}
+		}
+		$data2 ['reviews']  = $array2;
 		$location_id = null; //get location ID
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
@@ -808,7 +820,7 @@ class CEvent extends CI_Controller {
 			$data['interested']	= FALSE;
 		}
 		$this->load->view('imports/vHeaderLandingPage');
-		$this->load->view('vEventDetails',$data);
+		$this->load->view('vEventReview',$data);
 		$this->load->view('imports/vFooterLandingPage');
 
 	}
