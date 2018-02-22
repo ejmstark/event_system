@@ -8,8 +8,8 @@ class CEvent extends CI_Controller {
     	parent::__construct();
     	$this->load->model('user/MEvent');
     	$this->load->model('user/MUser');
-    	$this->load->model('user/MTicketType');
-    	$this->load->model('MReview');
+		$this->load->model('user/MTicketType');
+		$this->load->model('MReview');
     	$this->load->model('user/MTicket');
     	$this->load->model('MNotification');
 	  $this->load->model('MAnnouncement'); //admin module functionalit
@@ -166,7 +166,7 @@ class CEvent extends CI_Controller {
 
 		$uid = null; //to get organize name
 		$eid = null;
-
+		$location_id = null; //get location ID
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
@@ -176,7 +176,10 @@ class CEvent extends CI_Controller {
 		foreach ($gID as $k) {
 			$eid = $k->event_id;
 			$uid = $k->user_id; //retrieve
+			$location_id = $k->location_id;
 		}
+
+
 
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 INTERFACE MODULE============//
@@ -207,6 +210,7 @@ class CEvent extends CI_Controller {
 		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
 		$data['user'] = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID));
+		$data['location'] = $this->MLocation->read_where('location_id ='.$location_id.'');
 		////////////STOPS HERE////////////////////////////////////////////////////
 
 		//////////////////////////////////////////////////////////////////////////////
@@ -220,7 +224,14 @@ class CEvent extends CI_Controller {
 			$data['successMsg']= $this->success;
 		 // print_r($data);
 		}
-		
+		$result = $this->MPreference->checkIfInterestedAlready($this->session->userdata['userSession']->userID,$eid);
+
+		if($result){
+			$data['interested']	= TRUE;
+			$data['user_event_preference_id'] = $result[0]->user_event_preference_id;
+		}else{
+			$data['interested']	= FALSE;
+		}
 		$this->load->view('imports/vHeaderLandingPage');
 		$this->load->view('vEventDetails',$data);
 		$this->load->view('imports/vFooterLandingPage');
@@ -299,107 +310,6 @@ class CEvent extends CI_Controller {
 		echo $result;
 	}
 
-
-
-	public function displayEventReviews($eventId)
-	{
-		//GET ALL REVIEWS FROM EVENT//
-		//Insert data retrieval here//
-		$array1 = $array2 = array();
-		$result_data = $this->MEvent->loadEventDetails($eventId);
-		if($result_data){
-			foreach ($result_data as $value) {
-					$arrObj = new stdClass;
-					$arrObj->event_id = $value->event_id;
-					$arrObj->event_date_start = $value->event_date_start;
-					$arrObj->event_name = $value->event_name;
-					$arrObj->event_date_end = $value->event_date_end;
-					$arrObj->event_details = $value->event_details;
-					$arrObj->event_status = $value->event_status;
-					$arrObj->event_venue = $value->event_venue;
-					$arrObj->event_category = $value->event_category;
-					$arrObj->user_id = $value->user_id;
-					$array1[] = $arrObj;
-			}
-		}
-		////////////STOPS HERE///////////////////////////////////////////////////
-		$data1 ['events']  = $array1;
-
-		$result_data = $this->MReview->loadEventReviews($eventId);
-		$location_id = null; //get location ID
-		//////////////////////////////////////////////////////////////////////////////
-		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$gID = $data1 ['events']  = $this->MEvent->read_where('event_id = '.$id.'');
-		////////////STOPS HERE///////////////////////////////////////////////////
-
-		foreach ($gID as $k) {
-			$eid = $k->event_id;
-			$uid = $k->user_id; //retrieve
-			$location_id = $k->location_id;
-		}
-
-
-
-		//////////////////////////////////////////////////////////////////////////////
-		//================SPRINT 3 INTERFACE MODULE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$data2['organizer'] = $this->MUser->read_where('account_id = '.$uid.'');
-		////////////STOPS HERE////////////////////////////////////////////////////
-
-		//////////////////////////////////////////////////////////////////////////////
-		//================SPRINT 3 INTERFACE MODULE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$data3['types'] = $this->MTicketType->read_where('event_id = '.$eid.'');
-		////////////STOPS HERE////////////////////////////////////////////////////
-
-		// $data4['tixStat'] = $this->MTicketType->getTicketStatus($eid);
-		// if(isset($data4['tixStat'])){
-		// 	$data = array_merge($data1,$data2,$data3,$data4);
-		// }else{
-
-		// }
-		$data = array_merge($data1,$data2,$data3);
-		//////////////////////////////////////////////////////////////////////////////
-		//================SPRINT 3 INTERFACE MODULE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$data['going'] = $this->MEvent->getGoingToEvent($id);
-		////////////STOPS HERE////////////////////////////////////////////////////
-
-		//================SPRINT 3 INTERFACE MODULE============//
-		/////////////////////////////////////////////////////////////////////////////
-		$data['user'] = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID));
-		$data['location'] = $this->MLocation->read_where('location_id ='.$location_id.'');
-		////////////STOPS HERE////////////////////////////////////////////////////
-
-		//////////////////////////////////////////////////////////////////////////////
-		$data['id'] = $this->session->userdata['userSession']->userID;
-		if($this->error != ""){
-			$data['errorMsg']= $this->error;
-		 // print_r($data);
-		}
-
-		if($this->success != ""){
-			$data['successMsg']= $this->success;
-		 // print_r($data);
-		}
-		$result = $this->MPreference->checkIfInterestedAlready($this->session->userdata['userSession']->userID,$eid);
-
-		if($result){
-			$data['interested']	= TRUE;
-			$data['user_event_preference_id'] = $result[0]->user_event_preference_id;
-		}else{
-			$data['interested']	= FALSE;
-		}
-		$this->load->view('imports/vHeaderLandingPage');
-		$this->load->view('vEventDetails',$data);
-		$this->load->view('imports/vFooterLandingPage');
-
-
-		echo $result;
-	}
-
-	
 
 
 	public function buyTicket($tId,$eid)
@@ -806,5 +716,105 @@ class CEvent extends CI_Controller {
 			$this->load->view('imports/vFooterLandingPage');
 			# code...
 		}
+		
+	public function displayEventReviews($eventId)
+	{
+		//GET ALL REVIEWS FROM EVENT//
+		//Insert data retrieval here//
+		$array1 = $array2 = array();
+		$result_data = $this->MEvent->loadEventDetails($eventId);
+		if($result_data){
+			foreach ($result_data as $value) {
+					$arrObj = new stdClass;
+					$arrObj->event_id = $value->event_id;
+					$arrObj->event_date_start = $value->event_date_start;
+					$arrObj->event_name = $value->event_name;
+					$arrObj->event_date_end = $value->event_date_end;
+					$arrObj->event_details = $value->event_details;
+					$arrObj->event_status = $value->event_status;
+					$arrObj->event_venue = $value->event_venue;
+					$arrObj->event_category = $value->event_category;
+					$arrObj->user_id = $value->user_id;
+					$array1[] = $arrObj;
+			}
+		}
+		////////////STOPS HERE///////////////////////////////////////////////////
+		$data1 ['events']  = $array1;
+
+		$result_data = $this->MReview->loadEventReviews($eventId);
+		$location_id = null; //get location ID
+		//////////////////////////////////////////////////////////////////////////////
+		//================SPRINT 3 SPRINT 3 INTERFACE MODULE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$gID = $data1 ['events']  = $this->MEvent->read_where('event_id = '.$eventId.'');
+		////////////STOPS HERE///////////////////////////////////////////////////
+
+		foreach ($gID as $k) {
+			$eid = $k->event_id;
+			$uid = $k->user_id; //retrieve
+			$location_id = $k->location_id;
+		}
+
+
+
+		//////////////////////////////////////////////////////////////////////////////
+		//================SPRINT 3 INTERFACE MODULE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$data2['organizer'] = $this->MUser->read_where('account_id = '.$uid.'');
+		////////////STOPS HERE////////////////////////////////////////////////////
+
+		//////////////////////////////////////////////////////////////////////////////
+		//================SPRINT 3 INTERFACE MODULE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$data3['types'] = $this->MTicketType->read_where('event_id = '.$eid.'');
+		////////////STOPS HERE////////////////////////////////////////////////////
+
+		// $data4['tixStat'] = $this->MTicketType->getTicketStatus($eid);
+		// if(isset($data4['tixStat'])){
+		// 	$data = array_merge($data1,$data2,$data3,$data4);
+		// }else{
+
+		// }
+		$data = array_merge($data1,$data2,$data3);
+		//////////////////////////////////////////////////////////////////////////////
+		//================SPRINT 3 INTERFACE MODULE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$data['going'] = $this->MEvent->getGoingToEvent($eventId);
+		////////////STOPS HERE////////////////////////////////////////////////////
+
+		//================SPRINT 3 INTERFACE MODULE============//
+		/////////////////////////////////////////////////////////////////////////////
+		$data['user'] = $this->MUser->read_where( array('account_id' =>$this->session->userdata['userSession']->userID));
+		$data['location'] = $this->MLocation->read_where('location_id ='.$location_id.'');
+		////////////STOPS HERE////////////////////////////////////////////////////
+
+		//////////////////////////////////////////////////////////////////////////////
+		$data['id'] = $this->session->userdata['userSession']->userID;
+		if($this->error != ""){
+			$data['errorMsg']= $this->error;
+		 // print_r($data);
+		}
+
+		if($this->success != ""){
+			$data['successMsg']= $this->success;
+		 // print_r($data);
+		}
+		$result = $this->MPreference->checkIfInterestedAlready($this->session->userdata['userSession']->userID,$eid);
+
+		if($result){
+			$data['interested']	= TRUE;
+			$data['user_event_preference_id'] = $result[0]->user_event_preference_id;
+		}else{
+			$data['interested']	= FALSE;
+		}
+		$this->load->view('imports/vHeaderLandingPage');
+		$this->load->view('vEventDetails',$data);
+		$this->load->view('imports/vFooterLandingPage');
+
+	}
+
+	
+
+
 }
 ?>
