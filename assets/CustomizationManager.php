@@ -5,6 +5,9 @@
   require('configurations 1/Colors1.php');
   require('configurations 1/Images1.php');
   require('configurations 1/Strings1.php');
+  require('configurations 2/Images2.php');
+  require('configurations 2/Colors2.php');
+  require('configurations 2/Strings2.php');
   class CustomizationManager{
     public static $currentConfigName;   // saves the current configuration name
     public static $colors;  // an object that stores the color values
@@ -29,6 +32,7 @@
           self::$colors = new Colors1;
       }else if("configurations 2" == $configName){
           //config 2 color class instantiation
+          self::$colors = new Colors2;
       }else{
           //for default color class instantiation
           self::$colors = new Colors0;
@@ -40,7 +44,7 @@
       if($configName == "configurations 1"){
         self::$images = new Images1;
       }else if($configName == "configurations 2"){
-
+        self::$images = new Images2;
       }else{
         self::$images = new Images0;
       }
@@ -51,7 +55,7 @@
       if($configName == "configurations 1"){
         self::$strings = new Strings1;
       }else if($configName == "configurations 2"){
-
+        self::$strings = new Strings2;
       }else{
         self::$strings = new Strings0;
       }
