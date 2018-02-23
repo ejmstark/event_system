@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2018 at 03:53 PM
+-- Generation Time: Feb 23, 2018 at 01:25 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.5.38
 
@@ -246,7 +246,9 @@ CREATE TABLE `review` (
 --
 
 INSERT INTO `review` (`review_id`, `rating`, `description`, `ticket_id`) VALUES
-(1, 4, 'Nice', 2);
+(1, 4, 'Nice', 2),
+(10, 5, 'The best!', 10),
+(11, 4, 'It was good! :D', 11);
 
 -- --------------------------------------------------------
 
@@ -271,7 +273,9 @@ CREATE TABLE `ticket` (
 
 INSERT INTO `ticket` (`ticket_id`, `date_sold`, `user_id`, `ticket_type_id`, `addedBy`, `updatedBy`, `addedAt`, `updatedAt`) VALUES
 (1, '2018-01-27 13:11:25', 3, 2, 0, 0, '2018-01-27 21:11:25', '2018-01-27 21:11:25'),
-(2, '2018-02-22 21:49:42', 1, 38, 0, 0, '2018-02-22 21:49:42', '2018-02-22 21:49:42');
+(2, '2018-02-22 21:49:42', 1, 38, 0, 0, '2018-02-22 21:49:42', '2018-02-22 21:49:42'),
+(10, '2018-02-23 19:51:28', 1, 40, 0, 0, '2018-02-23 19:51:28', '2018-02-23 19:51:28'),
+(11, '2018-02-23 20:02:27', 3, 40, 0, 0, '2018-02-23 20:02:27', '2018-02-23 20:02:27');
 
 -- --------------------------------------------------------
 
@@ -495,12 +499,12 @@ ALTER TABLE `notification_item`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ticket_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `ticket_type`
 --
