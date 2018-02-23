@@ -137,7 +137,7 @@ foreach($going as $g){
                 <div class="row">
                     <div class="page-head-content">
                         <h1 class="page-title">REVIEWS for <?php echo $e->event_name; ?></h1>
-                        <div class='rating-stars'>
+                        <!--<div class='rating-stars'>
                         <ul id='stars'>
                           <li class='star' title='Poor' data-value='1'>
                             <i class='fa fa-star fa-fw'></i>
@@ -155,7 +155,7 @@ foreach($going as $g){
                             <i class='fa fa-star fa-fw'></i>
                           </li>
                         </ul>
-                      </div>
+                      </div>-->
                         <button class="navbar-btn nav-button login"> <a href ="<?php echo site_url();?>/event/cEvent/displayEventDetails/<?php echo $e->event_id; ?>" style="color:white;"><span class="	fa fa-toggle-left"></span> Event Details </a></button>
                     </div>
                 </div>
@@ -171,78 +171,24 @@ foreach($going as $g){
                             <h4 class="s-property-title">User Reviews</h4>
                                 <div class="s-property-content">
                                     <div class="clear">
-                                        <hr>
-                                        <div class="dealer-face">
-                                            <h3><img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle"')?>" style="height:50px;width=50px;" align="top">Neil Llenes</h3>
-                                            <p style="font-size:90%;">&emsp;This event is so rad like whut idk how to explain it well 8/8 would go at it again</p>
-                                            <div class='rating-stars'>
-                                            <ul id='stars'>&emsp;Rating
-                                              <li class='star' title='Poor' data-value='1'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Fair' data-value='2'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Good' data-value='3'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Excellent' data-value='4'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='WOW!!!' data-value='5'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                        <hr>
-                                        <div class="dealer-face">
-                                            <h3><img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle"')?>" style="height:50px;width=50px;" align="top">Dave Concepcion</h3>
-                                            <p style="font-size:90%;">&emsp;gr8 m8 i r8 8/8</p>
-                                            <div class='rating-stars'>
-                                            <ul id='stars'>&emsp;Rating
-                                              <li class='star' title='Poor' data-value='1'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Fair' data-value='2'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Good' data-value='3'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Excellent' data-value='4'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='WOW!!!' data-value='5'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
-                                        <hr>
-                                        <div class="dealer-face">
-                                            <h3><img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle"')?>" style="height:50px;width=50px;" align="top">Username</h3>
-                                            <p style="font-size:90%;">&emsp;Comments here</p>
-                                            <div class='rating-stars'>
-                                            <ul id='stars'>&emsp;Rating
-                                              <li class='star' title='Poor' data-value='1'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Fair' data-value='2'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Good' data-value='3'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='Excellent' data-value='4'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                              <li class='star' title='WOW!!!' data-value='5'>
-                                                <i class='fa fa-star fa-fw'></i>
-                                              </li>
-                                            </ul>
-                                          </div>
-                                        </div>
+                                        <?php 
+                                        if(isset($reviews)){
+                                            foreach($reviews as $r){ ?>
+                                            <hr>
+                                                <div class="dealer-face">
+                                                    <h3><img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle"')?>" style="height:50px;width=50px;" align="top"><?php echo $r->user_name;?></h3>
+                                                    <p style="font-size:90%;">&emsp;<?php echo $r->description;?></p>
+                                                    Rating
+                                                    <?php for($x=0; $x<5; $x++){
+                                                                if($r->rating>$x){?>
+                                                                    <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="height:32px; width:32px;">
+                                                            
+                                                            <?php }}?>
+                                                </div>
+                                                
+                                                <br>
+                                            <?php } ?>
+                                        <?php } ?>
                                         <hr>
                                     </div>
                                 </div>
