@@ -194,6 +194,7 @@ foreach($going as $g){
                                 </div>
                         </div>
                     </div>
+                    <!--
                     <div class="col-md-4 p0">
                         <aside class="sidebar sidebar-property blog-asside-right">
                             <div class="dealer-widget">
@@ -246,7 +247,7 @@ foreach($going as $g){
                             </div>
                         </aside>
                     </div>
-                </div>
+                </div>-->
 
             </div>
         </div>
