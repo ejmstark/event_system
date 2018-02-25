@@ -16,8 +16,8 @@
   <link href="<?php echo base_url('assets/josephAssets/css/styleLogin1.php')?>" rel="stylesheet" />
   <link href="<?php echo base_url('assets/josephAssets/css/bootstrap.css')?>" rel="stylesheet" />
   <link href="<?php echo base_url('assets/josephAssets/css/bootstrap.min.css')?>" rel="stylesheet" />
-  <script src="<?php echo base_url('assets/josephAssets/js/jquery-3.2.1.js')?>" /></script>
-  <script src="<?php echo base_url('assets/josephAssets/js/bootstrap.min.js')?>" /></script>
+  <script src="<?php echo base_url('assets/josephAssets/js/jquery-3.2.1.js')?>" ></script>
+  <script src="<?php echo base_url('assets/josephAssets/js/bootstrap.min.js')?>" ></script>
 </head>
 
 <body>
