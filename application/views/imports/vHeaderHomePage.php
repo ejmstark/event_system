@@ -1,6 +1,6 @@
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 0");
+  CustomizationManager::SetTheme("configurations 2");
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,7 +10,8 @@
     <link href="<?php echo base_url('assets/dianeAssets/css/bootstrap/bootstrap-themes.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/dianeAssets/css/font-awesome.min.css')?>" rel="stylesheet" />
     <!-- <link href="<?php echo base_url('assets/dianeAssets/css/style1.css')?>" rel="stylesheet" /> -->
-		<link href="<?php echo base_url('assets/dianeAssets/css/style1.php')?>" rel="stylesheet" />
+		<link href="<?php echo base_url('assets/dianeAssets/css/style2.php')?>" rel="stylesheet" />
+		<!--<link href="<?php echo base_url('assets/robinAssets/css/style1.php')?>" rel="stylesheet" />-->
 </head>
 <body>
 	<div class = "outer-header">
