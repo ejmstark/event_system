@@ -1,7 +1,7 @@
 <?php
 	class MNotification extends MY_Model{
-		const DB_TABLE = "notification";
-		const DB_TABLE_PK = "notif_id";
+		const DB_TABLE = "notification_item";
+		const DB_TABLE_PK = "notifId";
 
 		public function __construct(){
 		

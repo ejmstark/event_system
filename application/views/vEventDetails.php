@@ -18,6 +18,27 @@ foreach($going as $g){
     }?>
     <head>
 <style>
+/*Gallery */
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 90px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 3px;
+    text-align: center;
+}
 /* The Modal (background) */
 .modal1 {
     display: none; /* Hidden by default */
@@ -55,6 +76,12 @@ foreach($going as $g){
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+.star{
+    height: 32px;
+    width: 32px;
+    margin-top:5px;
+    margin-left:10px;
 }
 </style>
 </head>
@@ -152,12 +179,55 @@ foreach($going as $g){
                         </div>
 
                         <div class="single-property-wrapper">
-                            <div class="single-property-header">
+                            <div class="single-property-header" style="margin-top:40px;">
                                 <h1 class="property-title pull-left"><?php echo $e->event_name; ?></h1>
-                                
+
+                                <?php if(isset($user_event_preference_id)){
+                                    echo "<a href='".site_url()."/event/cEvent/interestedRemove/".$user_event_preference_id."'><img class='star' src='".site_url().'../../assets/neilAssets/img/star.png'."'></a>";
+                                }else{
+                                    echo "<a href='".site_url()."/event/cEvent/interested/".$e->event_id."'><img class='star' src='".site_url().'../../assets/neilAssets/img/white-star.png'."'></a>";
+                                }
+                                ?>
                                 <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
                                 <span class="property-price pull-right"><?php echo $e->event_status; ?></span>
                                 <?php } ?>
+
+                                <div class="section additional-details">
+
+                                    <h4 class="s-property-title">Additional Details</h4>
+
+                                    <ul class="additional-details-list clearfix">
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Location</span>
+
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue.', '.$locate->location_name.', '.$locate->region_code; ?></span>
+                                        </li>
+
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date Start</span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start")); ?></span>
+                                        </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date End</span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start"));  ?></span>
+                                        </li>
+
+                                        <!-- <li>
+                                            <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Grade</span>
+                                            <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Wan point jero</span>
+                                        </li>  -->
+
+                                    </ul>
+                                </div>
+                                <!-- End additional-details area  -->
+
+                                <div class="section">
+                                    <h4 class="s-property-title">Description</h4>
+                                    <div class="s-property-content">
+                                        <p><?php echo $e->event_details; ?></p>
+                                    </div>
+                                </div>
+                                <!-- End description area  -->
                             </div>
                             <button class="navbar-btn nav-button login"> <a href="<?php echo site_url();?>/event/cEvent/displayEventReviews/<?php echo $e->event_id; ?>" style="color:white;">Reviews <span class="	fa fa-star"></span> </a></button>
                 
@@ -171,57 +241,31 @@ foreach($going as $g){
 
                             <!-- .property-meta -->
 
-                            <div class="section">
-                                <h4 class="s-property-title">Description</h4>
-                                <div class="s-property-content">
-                                    <p><?php echo $e->event_details; ?></p>
-                                </div>
-                            </div>
-                            <!-- End description area  -->
 
-                            <div class="section additional-details">
-
-                                <h4 class="s-property-title">Additional Details</h4>
-
-                                <ul class="additional-details-list clearfix">
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Location</span>
-                                        
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo $e->event_venue.', '.$locate->location_name.', '.$locate->region_code; ?></span>
-                                    </li>
-
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date Start</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start")); ?></span>
-                                    </li>
-                                    <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Date End</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"><?php echo date('m/d/Y h:i:s a', strtotime("$e->event_date_start"));  ?></span>
-                                    </li>
-
-                                    <!-- <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Grade</span>
-                                        <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">Wan point jero</span>
-                                    </li>  -->
-
-                                </ul>
-                            </div>
-                            <!-- End additional-details area  -->
                         <?php if($this->session->userdata['userSession']->userID == $e->user_id){?>
                             <div class="section property-share">
                                 <h4 class="s-property-title">Users who are going:</h4>
                                 <div class="roperty-social">
                                     <ul>
                                     <?php foreach($going as $g){?>
-                                        <li><?php echo $g->first_name." ".$g->middle_initial." ".$g->last_name;?></li><br>
-                                        <?php }?>
+                                        <li>
+                                        <div class="gallery">
+                                          <a target="_blank" href="img_fjords.jpg">
+                                            <img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle')?>" style ="height:30px; height:60px ">
+                                          </a>
+                                        </div>
+                                        <div class="desc">
+                                              <?php echo $g->first_name." ".$g->middle_initial." ".$g->last_name;?>
+                                          </div>
+                                        </li>
+                                    <?php }?>
                                     </ul>
                                 </div>
                             </div>
                         <?php }?>
                             <!-- End video area  -->
                             <?php foreach($events as $x){ if($id == $x->user_id && $x->event_status != "Expired"){
-                                
+
                                 if($x->event_status == "Approved"){
                                     echo'
                                     <div class="button navbar-right">
@@ -258,74 +302,65 @@ foreach($going as $g){
                     </div>
 
                     <div class="col-md-4 p0">
-                        <aside class="sidebar sidebar-property blog-asside-right">
-                            <div class="dealer-widget">
-                                <div class="dealer-content">
-                                    <div class="inner-wrapper">
+                        <aside class="sidebar sidebar-property blog-asside-right" >
+                          <div style="position: -webkit-sticky; position: sticky; top: 0; z-index: 50;">
+                            <?php
+                            echo '<div class="dealer-widget" >';
+                            ?>
+                            <div class="dealer-content" >
+                                    <div class="inner-wrapper" >
 
-                                        <div class="clear">
+                                        <div class="clear" >
                                             <div class="col-xs-4 col-sm-4 dealer-face">
                                                 <a href="">
-                                                    <img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle')?>">
+                                                    <img src="<?php echo base_url('assets/nikkiAssets/img/client-face1.png" class="img-circle')?>" style ="height:100px; height:200px ">
                                                 </a>
                                             </div>
                                             <div class="col-xs-8 col-sm-8 ">
-                                                <h3 class="dealer-name">
-                                                    <a href=""><?php echo $o->first_name." ".$o->middle_initial." ".$o->last_name;?></a>
-                                                    <span>Organizers</span>
-                                                </h3>
-                                                <div class="dealer-social-media">
-                                                    <a class="twitter" target="_blank" href="">
-                                                        <i class="fa fa-twitter"></i>
-                                                    </a>
-                                                    <a class="facebook" target="_blank" href="">
-                                                        <i class="fa fa-facebook"></i>
-                                                    </a>
-                                                    <a class="instagram" target="_blank" href="">
-                                                        <i class="fa fa-instagram"></i>
-                                                    </a>
+
+                                                <div class="clear">
+                                                  <h3 class="dealer-name">
+                                                      <a href=""><?php echo $o->first_name." ".$o->middle_initial." ".$o->last_name;?></a>
+                                                  </h3>
+                                                  <h4 class="dealer-name">
+                                                      <span>Organizers</span>
+                                                  </h4>
+                                                    <ul class="dealer-contacts">
+                                                        <li><i class="pe-7s-map-marker strong"> </i> University of San Carlos</li>
+                                                        <li><i class="pe-7s-mail strong"> </i> <?php echo $o->email;?></li>
+                                                        <li><i class="pe-7s-call strong"> </i> <?php echo $o->contact_no;?></li>
+                                                    </ul>
                                                 </div>
 
+                                                <div class="dealer-social-media">
+                                                  <a class="twitter" target="_blank" href="">
+                                                      <i class="fa fa-twitter"></i>
+                                                  </a>
+                                                  <a class="facebook" target="_blank" href="">
+                                                      <i class="fa fa-facebook"></i>
+                                                  </a>
+                                                  <a class="instagram" target="_blank" href="">
+                                                      <i class="fa fa-instagram"></i>
+                                                  </a>
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="clear">
-                                            <ul class="dealer-contacts">
-                                                <li><i class="pe-7s-map-marker strong"> </i> University of San Carlos</li>
-                                                <li><i class="pe-7s-mail strong"> </i> <?php echo $o->email;?></li>
-                                                <li><i class="pe-7s-call strong"> </i> <?php echo $o->contact_no;?></li>
-                                            </ul>
-                                            <div class="text-center">
-                                            <?php if($e->event_status == "Approved"){?>
-                                                <!-- <button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Intrested</button> -->
-                                                <?php if(!$interested){?>
-                                                <a href="<?php echo site_url();?>/event/cEvent/interested/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" id="intrstd" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Interested</button></a>
-                                                <?php }else {?>
-                                                <a href="<?php echo site_url();?>/event/cEvent/interestedRemove/<?php echo $user_event_preference_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" onclick="#" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: bounceInRight;">Remove Interested</button></a>
-                                                <?php }?>
-            <!-- <a href="<?php echo site_url();?>/user/cEvent/going/<?php echo $e->event_id;?>"><button>Going</button></a> -->
-                                                <!-- <a href="<?php echo site_url();?>/event/cEvent/going/<?php echo $e->event_id;?>"><button class="navbar-btn nav-button wow bounceInRight login animated" >Going</button></a> -->                                            <?php }?>
-                                            </div>
-
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
-                                <div class="panel-heading">
+                            <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated" >
+                                <div class="panel-heading" >
                                     <h3 class="panel-title">Ticket Prices</h3>
                                 </div>
-                                <div class="panel-body recent-property-widget">
+                                <div class="panel-body recent-property-widget" >
                                     <ul>
-                                    <h2>Card Load: <span><?php echo $u->load_amt; ?></span></h2>
                                     <input  id="cLoad" hidden value="<?php echo $u->load_amt; ?>">
                                         <?php foreach ($types as $t) { ?>
                                         <li>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h4> <?php echo  $t->ticket_name;?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
-                                                
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry" >
+                                                <h4> <?php echo  $t->ticket_name." ".$t->ticket_count." left";?><button class="myBtn" data-id='<?php echo  $t->ticket_type_id;?>'>Buy More Tickets</button></h4>
+
                                                 <span class="property-price"><?php echo "P"." ".$t->price.".00";?></span>
                                                  <?php if($e->event_status == "Approved"){?>
                                                  <!-- <span>&nbsp; &nbsp; &nbsp;
@@ -335,7 +370,7 @@ foreach($going as $g){
 
                                                  </form> -->
 
-                                                 <?php 
+                                                 <?php
                                                 $now = new DateTime("now");
                                                 $end = new DateTime($e->event_date_end);
 
@@ -359,11 +394,11 @@ foreach($going as $g){
                                             </div>
                                         </li>
                                         <?php } ?>
-
                                     </ul>
                                 </div>
+                                <h1>Card Load: <span><?php echo $u->load_amt; ?></span></h1>
                             </div>
-
+                          </div>
                             <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Ads here</h3>
@@ -553,7 +588,7 @@ foreach($going as $g){
 <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -564,7 +599,7 @@ foreach($going as $g){
             <form method="POST" id="cartForm" action="<?php echo site_url('finance/cCart/addToCart'); ?>">
                 <div class="row">
                     <div class="col-md-4">
-                        <button class="btn" id="unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> 
+                        <button class="btn" id="unaM" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
                     </div>
                     <div class="col-md-4">
                         <input type="text" id="qty1" name="qty1" class="form-control" value="1" aria-label="Quantity">
@@ -573,9 +608,9 @@ foreach($going as $g){
                         <button class="btn" id="unaP" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
                     </div>
                 </div>
-                
-                
-                <input type="hidden" id="ticID" name="ticket" class="form-control col-8" placeholder="Quantity" aria-label="Quantity">            
+
+
+                <input type="hidden" id="ticID" name="ticket" class="form-control col-8" placeholder="Quantity" aria-label="Quantity">
         </div>
         <div class="modal-footer">
             <button class="btn btn-success" id="addToCart"  type="submit">Add to Cart</button>
@@ -583,7 +618,7 @@ foreach($going as $g){
         </form>
         </div>
       </div>
-      
+
     </div>
   </div>
 <script>
@@ -615,7 +650,7 @@ $(document).ready(function(){
 
   // btn.onclick = function() {
   //   modal.style.display = "block";
-    
+
   // }
   // span.onclick = function() {
   //   modal.style.display = "none";
@@ -655,7 +690,7 @@ $(document).ready(function(){
   //       data: $(this).serialize(),
   //       success: function(){
   //         alert('ok');
-  //         //$(':input').val(0);  
+  //         //$(':input').val(0);
   //       },
   //       error: function(){
 

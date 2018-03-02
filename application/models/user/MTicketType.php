@@ -18,7 +18,11 @@
 
 		}
 
-
+        public function updTicketCnt($id, $cnt){
+            $this->db->set('ticket_count', $cnt);
+            $this->db->where('ticket_type_id', $id);
+            $this->db->update($this::DB_TABLE);
+        }
 
 		public function loadType($id)
 		{
