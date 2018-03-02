@@ -1,7 +1,7 @@
 <?php
   class Images2{
-    public $LOGO_LIGHT = "assets/customization1Assets/img/DailyEvents.png";
-    public $LOGO_DARK = "assets/customization1Assets/img/DailyEventsDark.png";
+    public $LOGO_LIGHT = "assets/neilAssets/img/DailyEvents.png";
+    public $LOGO_DARK = "assets/neilAssets/img/DailyEventsDark.png";
     public $WELCOME_PAGE_BACKGROUND = "../../customization1Assets/img/homebg.png";
     public $LOGIN_PAGE_BACKGROUND = "../../customization1Assets/img/LoginBg.jpg";
     public $LANDING_PAGE_CAROUSEL_BACKGROUND_1 = "assets/customizationAssets/RobinAssets/elmekias pic 2.jpg";

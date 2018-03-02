@@ -7,7 +7,7 @@
 ?>
 <?php
   require('assets/CustomizationManager.php');
-  CustomizationManager::SetTheme("configurations 0");
+  CustomizationManager::SetTheme("configurations 2");
 ?>
 <!-- Up to here -->
 
@@ -167,7 +167,7 @@
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html">
                                                     <?php
-                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                        if(CustomizationManager::$currentConfigName == "configurations 0"){
                                                             echo '<img src="'.base_url($images->event1).'">';
                                                         }
                                                     ?>
@@ -182,7 +182,7 @@
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html">
                                                     <?php
-                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                        if(CustomizationManager::$currentConfigName == "configurations 0"){
                                                             echo '<img src="'.base_url($images->event3).'">';
                                                         }
                                                     ?>
@@ -197,7 +197,7 @@
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html">
                                                     <?php
-                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                        if(CustomizationManager::$currentConfigName == "configurations 0"){
                                                             echo '<img src="'.base_url($images->event4).'">';
                                                         }
                                                     ?>
@@ -212,7 +212,7 @@
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="single.html">
                                                     <?php
-                                                        if(CustomizationManager::$currentConfigName == "configurations 2"){
+                                                        if(CustomizationManager::$currentConfigName == "configurations 0"){
                                                             echo '<img src="'.base_url($images->event5).'">';
                                                         }
                                                     ?>

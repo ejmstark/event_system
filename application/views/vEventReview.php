@@ -1,4 +1,8 @@
 <?php
+  require('assets/CustomizationManager.php');
+  CustomizationManager::SetTheme("configurations 2");
+?>
+<?php
 if(isset($events) ){
     $bought = FALSE;
     // print_r($events);
@@ -107,7 +111,7 @@ foreach($going as $g){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>"></a>
+                    <a class="navbar-brand" href="index-5.html"><img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>"></a>
                 </div>
 
                 <div class="collapse navbar-collapse yamm" id="navigation">
@@ -264,7 +268,7 @@ foreach($going as $g){
                                 <h4>About us </h4>
                                 <div class="footer-title-line"></div>
 
-                               <img src= "<?php echo base_url('assets/dianeAssets/img/logoBlack.png')?>" alt="" class="wow pulse" data-wow-delay="1s" >
+                               <img src="<?php echo base_url(CustomizationManager::$images->LOGO_DARK)?>" alt="" class="wow pulse" data-wow-delay="1s" >
                                 <p>We help you reach out to the most interesting events anywhere they may be. The events you’ve always wanted to join and create will be in your hands with just a few clicks. Worry not because we’re here to help you discover the latest events this planet will ever have.</p>
                                 
                             </div>
