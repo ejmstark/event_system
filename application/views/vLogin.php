@@ -13,7 +13,7 @@
     <link href="<?php echo base_url('assets/josephAssets/"css/font-awesome.css')?>" rel="stylesheet">
       <link href="<?php echo base_url('assets/josephAssets/"css/font-awesome.min.css')?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/josephAssets/css/style.css')?>" rel="stylesheet" type="text/css" media="all" >
-    <link href="<?php echo base_url('assets/josephAssets/css/styleLogin1.php')?>" rel="stylesheet" />
+    <link href="<?php echo base_url('assets/josephAssets/css/styleLogin2.php')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/josephAssets/css/bootstrap.css')?>" rel="stylesheet" />
     <link href="<?php echo base_url('assets/josephAssets/css/bootstrap.min.css')?>" rel="stylesheet" />
     <script src="<?php echo base_url('assets/josephAssets/js/jquery-3.2.1.js')?>" /></script>
