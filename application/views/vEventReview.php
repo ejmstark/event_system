@@ -181,7 +181,7 @@ foreach($going as $g){
                                                     Rating
                                                     <?php for($x=0; $x<5; $x++){
                                                                 if($r->rating>$x){?>
-                                                                    <img src=" http://localhost/event_system/assets/gaiusAssets/star-full.png" style="height:32px; width:32px;">
+                                                                    <img src="<?php echo site_url();?>/../assets/gaiusAssets/star-full.png" style="height:32px; width:32px;">
                                                             
                                                             <?php }}?>
                                                 </div>
