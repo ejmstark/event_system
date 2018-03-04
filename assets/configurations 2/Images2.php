@@ -4,6 +4,7 @@
     public $LOGO_DARK = "assets/neilAssets/img/DailyEventsDark.png";
     //public $WELCOME_PAGE_BACKGROUND = "../../customizationAssets/RobinAssets/events_blogLoginBg.png";
     public $WELCOME_PAGE_BACKGROUND = "../../customizationAssets/RobinAssets/night_clubbg.jpg";
+    public $WELCOME_PAGE_LOGO = "../../neilAssets/img/DailyEvents.png";
     
     public $LOGIN_PAGE_BACKGROUND = "../../customizationAssets/RobinAssets/loginRobinBg.jpg";
     public $LANDING_PAGE_CAROUSEL_BACKGROUND_1 = "assets/customizationAssets/RobinAssets/elmekias pic 2.jpg";

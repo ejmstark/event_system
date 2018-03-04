@@ -48,7 +48,9 @@ body {
 }
 
 .inner-header {
-    content: url('../img/dailyEvents.png');
+    content: <?php
+      echo "url(" . CustomizationManager::$images->WELCOME_PAGE_LOGO. ");";
+    ?>
     width: 55%;
     height: 70%;
     top: 0px;
