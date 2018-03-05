@@ -37,8 +37,28 @@
 		$query = $this->db->get();
 		return $query->result();
 			# code...
-	}
+    }
+    
+    /*public function createEventReview($data){
+        $this->db->insert('review', $data);
+		//$this->db->query("INSERT INTO table (`rating`, `description`, `ticket_id`) VALUES('".$data['rating']."', '".$data['description']."', '".$data['ticket_id']."')");
+		
+		return $query->result();
+			# code...
+    }*/
 
+    public function getTicketIdFromEventId($eventId, $userId){
+        $this->db->select("t.ticket_id");
+		$this->db->from("ticket as t");
+		$this->db->join("ticket_type as tt","t.ticket_type_id = tt.ticket_type_id");
+		$this->db->join("event_info as e","tt.event_id = e.event_id");
+	    $this->db->where("tt.event_id = '$eventId' AND t.user_id = '$userId'");
+	
+		$query = $this->db->get();
+		return $query->result();
+			# code...
+    }
+    
 
         public function getReviewId(){
             return $this->review_id;
