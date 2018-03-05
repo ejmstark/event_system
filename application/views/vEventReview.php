@@ -173,6 +173,24 @@ foreach($going as $g){
                     <div class="col-md-8 single-property-content prp-style-1">
                         <div class="section">
                             <h4 class="s-property-title">User Reviews</h4>
+                             <?php 
+                                        if(isset($reviewAvg)){
+                                            foreach($reviewAvg as $avg){ ?>
+                                                <h3 ><strong>Average Rating: </strong><?php echo $avg->avg_rating?></h3>
+                                                <h3 style="float:left;">Stars: </h3><div>
+                                                <?php for($x=0; $x<5; $x++){
+                                                                if($avg->avg_rating>$x && $avg->avg_rating-$x>=1){?>
+                                                                    <img src="<?php echo site_url();?>/../assets/gaiusAssets/star-full.png" style="height:32px; width:32px;">
+                                                            
+                                                            <?php }else if($avg->avg_rating>$x && $avg->avg_rating-$x<1 && $avg->avg_rating-$x>0){?>
+                                                                    <img src="<?php echo site_url();?>/../assets/gaiusAssets/star-half.png" style="height:32px; width:32px;">
+                                                            
+                                                            <?php }?>
+                                                            
+                                                        <?php }?>
+                                                </div>
+                                            <?php } ?>
+                                        <?php } ?>
                                 <div class="s-property-content">
                                     <div class="clear">
                                         <?php 
