@@ -767,7 +767,7 @@ class CEvent extends CI_Controller {
 			$location_id = $k->location_id;
 		}
 
-
+		$data4 ['reviewAvg']  = $result_data = $this->MReview->loadEventReviewAverageRating($eventId);
 
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 INTERFACE MODULE============//
@@ -787,7 +787,7 @@ class CEvent extends CI_Controller {
 		// }else{
 
 		// }
-		$data = array_merge($data1,$data2,$data3);
+		$data = array_merge($data1,$data2,$data3, $data4);
 		//////////////////////////////////////////////////////////////////////////////
 		//================SPRINT 3 INTERFACE MODULE============//
 		/////////////////////////////////////////////////////////////////////////////
@@ -826,6 +826,24 @@ class CEvent extends CI_Controller {
 	}
 
 	
+/*	public function createEventReview($eventId){
+		// $this->load->model('events/mEvent','event');
+		$flag = true;
+		
+		$ticketId = $this->MReview->getTicketIdFromEventId($eventId, $this->session->userdata['userSession']->userID);
+
+		$event = new mReview();
+		$data = array(
+			'rating' => $this->input->post('rating'),
+			'description' => $this->input->post('description'),
+			'ticket_id' => $ticketId
+		);
+		
+		
+		$res = $this->MReview->createEventReview($data);
+	
+	  }
+	*/
 
 
 }
