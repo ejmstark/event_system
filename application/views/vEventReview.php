@@ -105,10 +105,9 @@ foreach($going as $g){
                            },
                     datatype: 'text',
                     success: function(data){
-                        location.reload();
                     }
                 });
-                
+                window.location.reload();
             }
         </script>
     </head>

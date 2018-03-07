@@ -838,12 +838,7 @@ class CEvent extends CI_Controller {
 			'ticket_id' => $ticketId[0]->ticket_id
 		);
 		
-        echo $data['rating'];
-        echo $data['description'];
-        echo $data['ticket_id'];
-		
-		//$res = $this->MReview->createEventReview($data);
-        
+		$res = $this->MReview->createEventReview($data);
 	  }
 	
 
