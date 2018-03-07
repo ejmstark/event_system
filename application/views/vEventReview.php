@@ -87,11 +87,28 @@ foreach($going as $g){
             });
 
             function myFunc(){
+                var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>',
+                    csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
                 var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
                 var msg = $("#desc").val();
-                alert(ratingValue+" "+msg);
-                $.post("addRating.php",{rating:ratingValue, desc:msg}, function(data){
+                var id = <?php echo $e->event_id;?>;
+                //alert('<?php echo $this->session->userdata['userSession']->userID;?>');
+                
+                $.ajax({
+                    url: "<?php echo site_url().'/event/cEvent/createEventReview';?>",
+                    type: "POST",
+                    data: {
+                            'csrfName':csrfHash,
+                            'event_id':id, 
+                            'rating':ratingValue,
+                            'desc'  :msg
+                           },
+                    datatype: 'text',
+                    success: function(data){
+                        location.reload();
+                    }
                 });
+                
             }
         </script>
     </head>
@@ -216,7 +233,7 @@ foreach($going as $g){
                                 </div>
                         </div>
                     </div>
-                    <!--
+                    
                     <div class="col-md-4 p0">
                         <aside class="sidebar sidebar-property blog-asside-right">
                             <div class="dealer-widget">
@@ -226,27 +243,27 @@ foreach($going as $g){
                                     </div>
                                 </div>
                             </div>
-
                             <div class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">Rating</h3>
                                 </div>
+                                
                                 <div class="panel-body recent-property-widget">
                                     <div class='rating-stars text-center'>
                                     <ul id='stars'>
-                                      <li class='star' title='Poor' data-value='1'>
+                                      <li class='star' title='Poor' data-value='1' value='1'>
                                         <i class='fa fa-star fa-fw'></i>
                                       </li>
-                                      <li class='star' title='Fair' data-value='2'>
+                                      <li class='star' title='Fair' data-value='2' value='2'>
                                         <i class='fa fa-star fa-fw'></i>
                                       </li>
-                                      <li class='star' title='Good' data-value='3'>
+                                      <li class='star' title='Good' data-value='3' value='3'>
                                         <i class='fa fa-star fa-fw'></i>
                                       </li>
-                                      <li class='star' title='Excellent' data-value='4'>
+                                      <li class='star' title='Excellent' data-value='4' value='4'>
                                         <i class='fa fa-star fa-fw'></i>
                                       </li>
-                                      <li class='star' title='WOW!!!' data-value='5'>
+                                      <li class='star' title='WOW!!!' data-value='5' value='5'>
                                         <i class='fa fa-star fa-fw'></i>
                                       </li>
                                     </ul>
@@ -269,7 +286,7 @@ foreach($going as $g){
                             </div>
                         </aside>
                     </div>
-                </div>-->
+                </div>
 
             </div>
         </div>
