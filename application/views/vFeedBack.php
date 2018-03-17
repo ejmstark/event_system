@@ -152,7 +152,7 @@
             var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
             var msg = $("#desc").val();
             alert(ratingValue+" "+msg);
-            $.post("addRating.php",{rating:ratingValue, desc:msg}, function(data){
+            $.post("<?php echo site_url();?>/event/cEvent/createEventReview",{rating:ratingValue, desc:msg}, function(data){
             });
         }
     </script>
