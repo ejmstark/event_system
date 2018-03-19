@@ -10,7 +10,7 @@
         <div id="status">&nbsp;</div>
     </div>
 
-    <nav class="navbar navbar-default" style="background-color:<?php echo CustomizationManager::$colors->LANDING_PAGE_NAVBAR_COLOR?>;">
+    <nav class="navbar navbar-default ">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -63,7 +63,7 @@
                     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                         <!-- <h2>See Events Near You</h2> -->
                         <h2><?php echo CustomizationManager::$strings->LANDING_PAGE_CAROUSEL_MESSAGE ?></h2>
-                        <div class="search-form wow pulse" data-wow-delay="0.8s" style="background-color:<?php echo CustomizationManager::$colors->LANDING_PAGE_BODY_COLOR?>;">
+                        <div class="search-form wow pulse" data-wow-delay="0.8s">
 
                             <form action="<?php echo site_url();?>/user/cEvent/searchEvent" class=" form-inline" method="POST">
                                 <span style="color: gray;"><?php echo CustomizationManager::$strings->LANDING_PAGE_SEARCH_BOX_LABEL ?>
@@ -130,7 +130,7 @@
         </div> <!-END OF SLIDER-->
 
      <!-- CONTENT AREA -->
-      <div class="content-area recent-property" style="padding-bottom: 60px; background-color:<?php echo CustomizationManager::$colors->LANDING_PAGE_BODY_COLOR?>;">
+      <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
          <div class="container">
              <div class="row">
                 <div class="col-md-12  padding-top-40 properties-page">
@@ -170,7 +170,7 @@
                     </div><!--/ .layout-switcher--> 
                 </div>
 
-                <div class="col-md-12">
+                <div class="col-md-12 ">
                     <div id="list-type" class="proerty-th">
                         <?php
                             $cnt =1;
@@ -183,7 +183,7 @@
                                     $interval = date_diff($now, $start);
 
                                     if($now < $start){
-                                                echo '<div class="col-sm-6 col-md-4 p0" style="background-color:'.CustomizationManager::$colors->LANDING_PAGE_EVENT_BACKGROUND_COLOR.';">';
+                                                echo '<div class="col-sm-6 col-md-4 p0" >';
                                                     echo '<div class="box-two proerty-item">';
                                                         echo '<div class="item-entry overflow" >';
 
@@ -229,8 +229,8 @@
                                                     </div>';
 
                                             }else if($now >= $start && $now <= $end){
-                                                echo ' <div class="col-sm-6 col-md-4 p0" style="background-color:'.CustomizationManager::$colors->LANDING_PAGE_EVENT_BORDER_COLOR.';">';
-                                                    echo '<div class="box-two proerty-item" style="background-color:'.CustomizationManager::$colors->LANDING_PAGE_EVENT_BACKGROUND_COLOR.';">';
+                                                echo ' <div class="col-sm-6 col-md-4 p0">';
+                                                    echo '<div class="box-two proerty-item">';
                                                         echo '<div class="item-entry overflow" >';
                                                                 echo '<div class="corner-ribbon top-right sticky red">Happening now!</div>';
                                                                     
@@ -275,7 +275,7 @@
 
      <div class="footer-area">
 
-            <div class=" footer"  style="background-color:<?php echo CustomizationManager::$colors->LANDING_PAGE_FOOTER_COLOR?>;">
+            <div class=" footer">
                 <div class="container">
                     <div class="row">
 
