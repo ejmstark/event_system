@@ -22,94 +22,41 @@ foreach($going as $g){
 <html>
     <head>
         <style>
-            .rating-stars ul {
-                list-style-type:none;
-                padding:0;
-  
-                -moz-user-select:none;
-                -webkit-user-select:none;
+           <style>
+            .rating {
+                overflow: hidden;
+                display: inline-block;
+                position: relative;
+                font-size:20px;
+                color: #FFCA00;
+            }
+            .rating-star {
+                padding: 0 5px;
+                margin: 0;
+                cursor: pointer;
+                display: inline-block;
+                text-align: center;
+                float: right;
+            }
+            .rating-star:after {
+                position: relative;
+                font-family: FontAwesome;
+                content:'\f006';
             }
             
-            .rating-stars ul > li.star {
-                display:inline-block;  
+            .rating-star.checked ~ .rating-star:after,
+            .rating-star.checked:after {
+                content:'\f005';
             }
-
-/* Idle State of the stars */
-            .rating-stars ul > li.star > i.fa {
-              font-size:1.5em; /* Change the size of the stars */
-              color:#ccc; /* Color on idle state */
-            }
-
-            /* Hover state of the stars */
-            .rating-stars ul > li.star.hover > i.fa {
-              color:#FFCC36;
-            }
-
-            /* Selected state of the stars */
-            .rating-stars ul > li.star.selected > i.fa {
-              color:#FF912C;
+            
+            .rating:hover .rating-star:after {content:'\f006';}
+            
+            .rating-star:hover ~ .rating-star:after, 
+            .rating-star:hover:after {
+                content:'\f005' !important;
             }
 
         </style>
-        <script>
-        $(document).ready(function(){
-            /* 1. Visualizing things on Hover - See next part for action on click */
-            $('#stars li').on('mouseover', function(){
-                var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
-                // Now highlight all the stars that's not after the current hovered star
-                $(this).parent().children('li.star').each(function(e){
-                    if (e < onStar) {
-                        $(this).addClass('hover');
-                    }else {
-                        $(this).removeClass('hover');
-                    }
-                });
-    
-            }).on('mouseout', function(){
-                $(this).parent().children('li.star').each(function(e){
-                    $(this).removeClass('hover');
-                });
-            });
-  
-            /* 2. Action to perform on click */
-            $('#stars li').on('click', function(){
-                var onStar = parseInt($(this).data('value'), 10); // The star currently selected
-                var stars = $(this).parent().children('li.star');
-    
-                for (i = 0; i < stars.length; i++) {
-                    $(stars[i]).removeClass('selected');
-                }
-    
-                for (i = 0; i < onStar; i++) {
-                    $(stars[i]).addClass('selected');
-                }
-                });
-            });
-
-            function myFunc(){
-                var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>',
-                    csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
-                var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
-                var msg = $("#desc").val();
-                var id = <?php echo $e->event_id;?>;
-                //alert('<?php echo $this->session->userdata['userSession']->userID;?>');
-                
-                $.ajax({
-                    url: "<?php echo site_url().'/event/cEvent/createEventReview';?>",
-                    type: "POST",
-                    data: {
-                            'csrfName':csrfHash,
-                            'event_id':id, 
-                            'rating':ratingValue,
-                            'desc'  :msg
-                           },
-                    datatype: 'text',
-                    success: function(data){
-                    }
-                });
-                window.location.reload();
-            }
-        </script>
     </head>
     <body>
 
@@ -248,25 +195,13 @@ foreach($going as $g){
                                 </div>
                                 
                                 <div class="panel-body recent-property-widget">
-                                    <div class='rating-stars text-center'>
-                                    <ul id='stars'>
-                                      <li class='star' title='Poor' data-value='1' value='1'>
-                                        <i class='fa fa-star fa-fw'></i>
-                                      </li>
-                                      <li class='star' title='Fair' data-value='2' value='2'>
-                                        <i class='fa fa-star fa-fw'></i>
-                                      </li>
-                                      <li class='star' title='Good' data-value='3' value='3'>
-                                        <i class='fa fa-star fa-fw'></i>
-                                      </li>
-                                      <li class='star' title='Excellent' data-value='4' value='4'>
-                                        <i class='fa fa-star fa-fw'></i>
-                                      </li>
-                                      <li class='star' title='WOW!!!' data-value='5' value='5'>
-                                        <i class='fa fa-star fa-fw'></i>
-                                      </li>
-                                    </ul>
-                                  </div>
+                                    <div class="rating text-center" style="display: inline-block;">
+                                        <span class="rating-star" data-value="5"></span>
+                                        <span class="rating-star" data-value="4"></span>
+                                        <span class="rating-star" data-value="3"></span>
+                                        <span class="rating-star" data-value="2"></span>
+                                        <span class="rating-star" data-value="1"></span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -342,4 +277,35 @@ foreach($going as $g){
             </div>
 
         </div>
+            <script>
+            var submitStars;
+            $('.rating-star').click(function() {
+                $(this).parents('.rating').find('.rating-star').removeClass('checked');
+                $(this).addClass('checked');
+
+                submitStars = $(this).attr('data-value');
+            });
+
+            function myFunc(){
+                var csrfName = '<?php echo $this->security->get_csrf_token_name(); ?>',
+                    csrfHash = '<?php echo $this->security->get_csrf_hash(); ?>';
+                var msg = $("#desc").val();
+                var id = <?php echo $e->event_id;?>;
+                //alert('<?php echo $this->session->userdata['userSession']->userID;?>');
+                $.ajax({
+                    url: "<?php echo site_url().'/event/cEvent/createEventReview';?>",
+                    type: "POST",
+                    data: {
+                            'csrfName':csrfHash,
+                            'event_id':id, 
+                            'rating':submitStars,
+                            'desc'  :msg
+                           },
+                    datatype: 'text',
+                    success: function(data){
+                    }
+                });
+                //window.location.reload();
+             }
+        </script>
 </html>
